@@ -98,10 +98,10 @@
   min-width: 0;
 }
 
-/* Divider */
+/* Divider — dashed, as per design */
 .divider {
-  height: 1px;
-  background: var(--color-surface-2);
+  height: 0;
+  border-top: 1px dashed var(--color-surface-2);
   width: 100%;
 }
 

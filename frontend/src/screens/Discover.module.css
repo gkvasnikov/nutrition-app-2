@@ -150,9 +150,17 @@
   padding: 8px 16px calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Solid separator between cards */
+.separator {
+  height: 1px;
+  background: var(--color-surface-2);
+  margin: 24px 0;
+  flex-shrink: 0;
 }
 
 .listExpanded {

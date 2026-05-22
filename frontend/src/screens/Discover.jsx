@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
@@ -336,8 +336,11 @@ export default function Discover({ activeTab, onTabChange }) {
           ref={listRef}
           className={`${styles.list} ${isExpanded ? styles.listExpanded : ''}`}
         >
-          {MOCK_MEALS.map(meal => (
-            <CardMeal key={meal.id} {...meal} />
+          {MOCK_MEALS.map((meal, i) => (
+            <Fragment key={meal.id}>
+              {i > 0 && <div className={styles.separator} />}
+              <CardMeal {...meal} />
+            </Fragment>
           ))}
         </div>
       </div>
