@@ -1,6 +1,6 @@
 .nav {
   position: absolute;
-  bottom: 16px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   left: 16px;
   right: 16px;
   z-index: 10;
