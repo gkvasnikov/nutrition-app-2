@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
-import { MapIcon, LocateIcon, LunchIcon } from '../components/atoms/icons'
+import { LocateIcon, LunchIcon } from '../components/atoms/icons'
 import styles from './Discover.module.css'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -345,7 +345,7 @@ export default function Discover({ activeTab, onTabChange }) {
       {/* Map button (expanded only) */}
       {isExpanded && (
         <button className={styles.mapToggleBtn} onClick={() => snapTo(false)}>
-          <MapIcon size={20} className={styles.mapToggleIcon} />
+          <img src="/Map.svg" width={16} height={16} alt="" />
           <span>Map</span>
         </button>
       )}
