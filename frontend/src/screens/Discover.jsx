@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
-import { MapIcon, LocateIcon } from '../components/atoms/icons'
+import { MapIcon, LocateIcon, LunchIcon } from '../components/atoms/icons'
 import styles from './Discover.module.css'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const CENTER = { lat: 52.521, lng: 13.398 }
-const PEEK_SHOW = 280 // px visible from bottom in collapsed state
+const PEEK_SHOW = 200 // px visible from bottom in collapsed state (was 280, -80)
 
 const MOCK_MEALS = [
   {
@@ -56,13 +56,19 @@ export default function Discover({ activeTab, onTabChange }) {
   const sheetRef = useRef(null)
   const listRef = useRef(null)
 
-  // Drag state (all in refs to avoid re-renders during drag)
+  // Drag state
   const dragging = useRef(false)
+  const isDraggingSheet = useRef(false) // vs scrolling the list
   const dragStartClientY = useRef(0)
   const dragStartTranslateY = useRef(0)
+  const dragStartScrollTop = useRef(0)
   const lastClientY = useRef(0)
   const lastClientYTime = useRef(0)
   const velocityY = useRef(0) // px/ms
+
+  // Keep a stable ref to isExpanded for use inside event handlers
+  const isExpandedRef = useRef(false)
+  isExpandedRef.current = isExpanded
 
   // ── Map ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -83,33 +89,22 @@ export default function Discover({ activeTab, onTabChange }) {
       const latLng = { lat: latitude, lng: longitude }
       const map = mapInstanceRef.current
       if (!map) return
-
       map.panTo(latLng)
       map.setZoom(16)
-
-      // Blue dot SVG — replicates native geolocation pin
-      const pinSvg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" fill="rgba(66,133,244,0.15)"/>
-          <circle cx="12" cy="12" r="6" fill="#4285F4" stroke="#fff" stroke-width="2"/>
-        </svg>`
-
+      const pinSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="rgba(66,133,244,0.15)"/>
+        <circle cx="12" cy="12" r="6" fill="#4285F4" stroke="#fff" stroke-width="2"/>
+      </svg>`
       const icon = {
         url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(pinSvg),
         scaledSize: new window.google.maps.Size(24, 24),
         anchor: new window.google.maps.Point(12, 12),
       }
-
       if (userMarkerRef.current) {
-        // Update existing marker position
         userMarkerRef.current.setPosition(latLng)
       } else {
         userMarkerRef.current = new window.google.maps.Marker({
-          position: latLng,
-          map,
-          icon,
-          title: 'You are here',
-          zIndex: 999,
+          position: latLng, map, icon, title: 'You are here', zIndex: 999,
         })
       }
     })
@@ -130,10 +125,16 @@ export default function Discover({ activeTab, onTabChange }) {
 
   // ── Sheet helpers ─────────────────────────────────────────────────
   function peekY() {
-    const h = sheetRef.current?.offsetHeight ?? window.innerHeight
-    return h - PEEK_SHOW
+    return (sheetRef.current?.offsetHeight ?? window.innerHeight) - PEEK_SHOW
   }
   function expandedY() { return 0 }
+
+  function getCurrentY() {
+    const sheet = sheetRef.current
+    if (!sheet) return peekY()
+    const matrix = new DOMMatrix(getComputedStyle(sheet).transform)
+    return matrix.m42
+  }
 
   function setTransform(y, animated) {
     const sheet = sheetRef.current
@@ -144,48 +145,59 @@ export default function Discover({ activeTab, onTabChange }) {
     sheet.style.transform = `translateY(${y}px)`
   }
 
-  function getCurrentY() {
-    const sheet = sheetRef.current
-    if (!sheet) return peekY()
-    const matrix = new DOMMatrix(getComputedStyle(sheet).transform)
-    return matrix.m42
-  }
-
   function snapTo(expand) {
     setTransform(expand ? expandedY() : peekY(), true)
     setIsExpanded(expand)
   }
 
-  // Initialise position without animation
-  useEffect(() => {
-    setTransform(peekY(), false)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setTransform(peekY(), false) }, []) // eslint-disable-line
 
-  // ── Touch on header (handle + summary) ───────────────────────────
+  // ── Touch handlers (attached to entire sheet) ─────────────────────
   function onTouchStart(e) {
-    // In expanded state, only start dragging if list is scrolled to top
-    if (isExpanded && listRef.current && listRef.current.scrollTop > 0) return
-
     const touch = e.touches[0]
     dragging.current = true
+    isDraggingSheet.current = false
     dragStartClientY.current = touch.clientY
-    dragStartTranslateY.current = getCurrentY()
+    dragStartScrollTop.current = listRef.current?.scrollTop ?? 0
     lastClientY.current = touch.clientY
     lastClientYTime.current = Date.now()
     velocityY.current = 0
 
-    const sheet = sheetRef.current
-    if (sheet) sheet.style.transition = 'none'
+    if (!isExpandedRef.current) {
+      // Collapsed: always drag sheet
+      isDraggingSheet.current = true
+      dragStartTranslateY.current = getCurrentY()
+      const sheet = sheetRef.current
+      if (sheet) sheet.style.transition = 'none'
+    }
+    // Expanded: wait for touchmove to decide (sheet drag vs list scroll)
   }
 
   function onTouchMove(e) {
     if (!dragging.current) return
-    e.preventDefault() // prevent scroll bubbling
 
     const touch = e.touches[0]
     const delta = touch.clientY - dragStartClientY.current
-    const newY = Math.max(expandedY(), Math.min(peekY(), dragStartTranslateY.current + delta))
-    if (sheetRef.current) sheetRef.current.style.transform = `translateY(${newY}px)`
+
+    if (isExpandedRef.current && !isDraggingSheet.current) {
+      // Expanded state: decide whether to drag sheet
+      if (dragStartScrollTop.current === 0 && delta > 8) {
+        // List was at top and user is pulling down → drag sheet
+        isDraggingSheet.current = true
+        dragStartTranslateY.current = getCurrentY()
+        const sheet = sheetRef.current
+        if (sheet) sheet.style.transition = 'none'
+      } else {
+        // Let list scroll naturally
+        return
+      }
+    }
+
+    if (isDraggingSheet.current) {
+      e.preventDefault() // prevent list scroll while dragging sheet
+      const newY = Math.max(expandedY(), Math.min(peekY(), dragStartTranslateY.current + delta))
+      if (sheetRef.current) sheetRef.current.style.transform = `translateY(${newY}px)`
+    }
 
     // Track velocity
     const now = Date.now()
@@ -198,36 +210,37 @@ export default function Discover({ activeTab, onTabChange }) {
   function onTouchEnd() {
     if (!dragging.current) return
     dragging.current = false
+    if (!isDraggingSheet.current) return
 
-    const v = velocityY.current // px/ms  (positive = downward)
+    const v = velocityY.current
     const currentY = getCurrentY()
     const mid = peekY() / 2
 
     let expand
-    if (v < -0.3)      expand = true  // fast swipe up
-    else if (v > 0.3)  expand = false // fast swipe down
-    else               expand = currentY < mid // snap to nearest
+    if (v < -0.3)      expand = true
+    else if (v > 0.3)  expand = false
+    else               expand = currentY < mid
 
     snapTo(expand)
   }
 
-  // Attach passive:false so preventDefault works on touch
-  const headerRef = useCallback(node => {
-    if (!node) return
-    node.addEventListener('touchstart', onTouchStart, { passive: true })
-    node.addEventListener('touchmove', onTouchMove, { passive: false })
-    node.addEventListener('touchend', onTouchEnd, { passive: true })
+  // Attach touch events to the entire sheet
+  useEffect(() => {
+    const sheet = sheetRef.current
+    if (!sheet) return
+    sheet.addEventListener('touchstart', onTouchStart, { passive: true })
+    sheet.addEventListener('touchmove', onTouchMove, { passive: false })
+    sheet.addEventListener('touchend', onTouchEnd, { passive: true })
     return () => {
-      node.removeEventListener('touchstart', onTouchStart)
-      node.removeEventListener('touchmove', onTouchMove)
-      node.removeEventListener('touchend', onTouchEnd)
+      sheet.removeEventListener('touchstart', onTouchStart)
+      sheet.removeEventListener('touchmove', onTouchMove)
+      sheet.removeEventListener('touchend', onTouchEnd)
     }
-  }, [isExpanded]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []) // eslint-disable-line
 
   // ── Render ────────────────────────────────────────────────────────
   return (
     <div className={styles.screen}>
-      {/* Map */}
       <div ref={mapRef} className={styles.map} />
 
       {/* Map controls */}
@@ -246,17 +259,20 @@ export default function Discover({ activeTab, onTabChange }) {
         </button>
       </div>
 
-      {/* TopBar */}
-      <TopBar title="Lunch" />
+      {/* TopBar with lunch icon + subtitle */}
+      <TopBar
+        title="Lunch"
+        subtitle="12:00 – 14:00"
+        icon={<LunchIcon size={18} />}
+      />
 
-      {/* White fill behind TopBar (visible when expanded) */}
+      {/* White fill behind TopBar when expanded */}
       {isExpanded && <div className={styles.topBarFill} />}
 
-      {/* Bottom sheet — transform managed entirely via JS */}
+      {/* Bottom sheet */}
       <div ref={sheetRef} className={styles.sheet}>
-
-        {/* Draggable header: handle pill + summary */}
-        <div ref={headerRef} className={`${styles.header} ${isExpanded ? styles.headerExpanded : ''}`}>
+        {/* Handle + summary */}
+        <div className={`${styles.header} ${isExpanded ? styles.headerExpanded : ''}`}>
           <div className={styles.handlePill} onClick={() => snapTo(!isExpanded)} />
 
           {!isExpanded && (

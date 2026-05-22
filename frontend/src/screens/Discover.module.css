@@ -81,7 +81,7 @@
   display: flex;
   flex-direction: column;
   /* transform set by JS, initial fallback: */
-  transform: translateY(calc(100% - 280px));
+  transform: translateY(calc(100% - 200px));
   will-change: transform;
 }
 
@@ -120,7 +120,7 @@
 
 /* Summary (peek state) */
 .summary {
-  padding: 4px 16px 16px;
+  padding: 2px 16px 8px;
   text-align: center;
 }
 
@@ -142,7 +142,7 @@
 .list {
   flex: 1;
   overflow-y: hidden; /* no scroll in peek */
-  padding: 16px 16px calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
+  padding: 8px 16px calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
   display: flex;
   flex-direction: column;
   gap: 24px;
