@@ -95,6 +95,8 @@ export default function Discover({ activeTab, onTabChange }) {
       if (!map) return
       map.panTo(latLng)
       map.setZoom(16)
+      // Shift center 50px upward so the pin clears the bottom sheet
+      map.panBy(0, 50)
       const pinSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="10" fill="rgba(66,133,244,0.15)"/>
         <circle cx="12" cy="12" r="6" fill="#4285F4" stroke="#fff" stroke-width="2"/>
