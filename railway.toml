@@ -3,3 +3,6 @@ buildCommand = "cd frontend && npm ci && npm run build"
 
 [deploy]
 startCommand = "npx serve@14 frontend/dist -s -l $PORT"
+
+[environment]
+NODE_VERSION = "20"
