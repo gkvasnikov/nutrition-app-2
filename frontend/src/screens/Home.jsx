@@ -92,7 +92,7 @@ export default function Home() {
 
   return (
     <div className={styles.screen}>
-      <TopBar title="Meal Time" subtitle="High Protein" />
+      <TopBar title="Meal Time" />
 
       <div className={styles.content}>
         <HeroCarousel />
