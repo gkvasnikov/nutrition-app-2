@@ -266,8 +266,8 @@ export default function Discover({ activeTab, onTabChange }) {
         icon={<LunchIcon size={18} />}
       />
 
-      {/* White fill behind TopBar when expanded */}
-      {isExpanded && <div className={styles.topBarFill} />}
+      {/* White fill behind TopBar — always rendered, animates in/out */}
+      <div className={`${styles.topBarFill} ${isExpanded ? styles.topBarFillVisible : ''}`} />
 
       {/* Bottom sheet */}
       <div ref={sheetRef} className={styles.sheet}>

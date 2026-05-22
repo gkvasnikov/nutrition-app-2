@@ -48,8 +48,17 @@ export function LocationIcon({ size = 16, className = '' }) {
 
 export function LunchIcon({ size = 20, className = '' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <path d="M11 21V14H6V7C6 5.9 6.39 4.96 7.17 4.18C7.96 3.39 8.9 3 10 3H14C15.1 3 16.04 3.39 16.83 4.18C17.61 4.96 18 5.9 18 7V21H16V14H13V21H11ZM13 12V7C13 6.72 12.9 6.48 12.71 6.29C12.52 6.1 12.28 6 12 6C11.72 6 11.48 6.1 11.29 6.29C11.1 6.48 11 6.72 11 7V12H13Z" fill="currentColor"/>
+    <svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      {/* Chopsticks */}
+      <line x1="6" y1="1.5" x2="6" y2="5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="12" y1="1.5" x2="12" y2="5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Bowl rim */}
+      <line x1="3" y1="6" x2="15" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Noodle stripes inside bowl */}
+      <line x1="4.5" y1="8.5" x2="13.5" y2="8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="5.5" y1="10.5" x2="12.5" y2="10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Bowl arc */}
+      <path d="M3 6 A6 6 0 0 1 15 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
     </svg>
   )
 }
