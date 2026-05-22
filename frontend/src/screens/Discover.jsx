@@ -263,7 +263,7 @@ export default function Discover({ activeTab, onTabChange }) {
       <TopBar
         title="Lunch"
         subtitle="High Protein"
-        icon={<LunchIcon size={18} />}
+        icon={<LunchIcon size={32} />}
       />
 
       {/* White fill behind TopBar — always rendered, animates in/out */}
