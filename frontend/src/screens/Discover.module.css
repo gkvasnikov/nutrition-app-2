@@ -18,22 +18,33 @@
 .mapControls {
   position: absolute;
   right: 16px;
-  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 24px);
+  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
   z-index: 5;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .mapBtn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: var(--color-white);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-float);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-text);
+  transition: background 0.15s;
+}
+
+.mapBtn:active {
+  background: var(--color-surface);
+}
+
+/* Extra gap between zoom group and locate button */
+.mapBtnLocate {
+  margin-top: 4px;
 }
 
 .mapBtnText {
@@ -41,6 +52,7 @@
   font-weight: 300;
   color: var(--color-text);
   line-height: 1;
+  margin-top: -1px; /* optical alignment */
 }
 
 /* White fill behind TopBar — shown when sheet is expanded */
@@ -109,6 +121,7 @@
 /* Summary (peek state) */
 .summary {
   padding: 4px 16px 16px;
+  text-align: center;
 }
 
 .mealCount {

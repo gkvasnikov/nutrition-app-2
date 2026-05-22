@@ -46,6 +46,14 @@ export function LocationIcon({ size = 16, className = '' }) {
   )
 }
 
+export function LocateIcon({ size = 20, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M12 2C11.4477 2 11 2.44772 11 3V4.07089C7.60771 4.5094 4.90937 7.20773 4.47091 10.6H3C2.44772 10.6 2 11.0477 2 11.6V12.4C2 12.9523 2.44772 13.4 3 13.4H4.47091C4.90937 16.7923 7.60771 19.4906 11 19.9291V21C11 21.5523 11.4477 22 12 22C12.5523 22 13 21.5523 13 21V19.9291C16.3923 19.4906 19.0906 16.7923 19.5291 13.4H21C21.5523 13.4 22 12.9523 22 12.4V11.6C22 11.0477 21.5523 10.6 21 10.6H19.5291C19.0906 7.20773 16.3923 4.5094 13 4.07089V3C13 2.44772 12.5523 2 12 2ZM12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17ZM12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
 export function ProfileIcon({ size = 24, className = '' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>

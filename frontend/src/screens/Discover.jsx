@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
-import { MapIcon } from '../components/atoms/icons'
+import { MapIcon, LocateIcon } from '../components/atoms/icons'
 import styles from './Discover.module.css'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -74,6 +74,15 @@ export default function Discover({ activeTab, onTabChange }) {
     script.onload = initMap
     document.head.appendChild(script)
   }, [])
+
+  function locateMe() {
+    if (!navigator.geolocation) return
+    navigator.geolocation.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords
+      mapInstanceRef.current?.panTo({ lat: latitude, lng: longitude })
+      mapInstanceRef.current?.setZoom(16)
+    })
+  }
 
   function initMap() {
     if (!mapRef.current || mapInstanceRef.current) return
@@ -192,11 +201,17 @@ export default function Discover({ activeTab, onTabChange }) {
 
       {/* Map controls */}
       <div className={styles.mapControls}>
-        <button className={styles.mapBtn} onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) + 1)}>
+        <button className={styles.mapBtn} aria-label="Zoom in"
+          onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) + 1)}>
           <span className={styles.mapBtnText}>+</span>
         </button>
-        <button className={styles.mapBtn} onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) - 1)}>
+        <button className={styles.mapBtn} aria-label="Zoom out"
+          onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) - 1)}>
           <span className={styles.mapBtnText}>−</span>
+        </button>
+        <button className={`${styles.mapBtn} ${styles.mapBtnLocate}`} aria-label="My location"
+          onClick={locateMe}>
+          <LocateIcon size={20} />
         </button>
       </div>
 
