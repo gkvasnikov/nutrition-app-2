@@ -73,7 +73,7 @@
 .rating {
   font-size: var(--font-size-secondary);
   font-weight: var(--font-weight-regular);
-  color: var(--color-text-2);
+  color: var(--color-rating-star);
   flex-shrink: 0;
   line-height: 1;
 }
