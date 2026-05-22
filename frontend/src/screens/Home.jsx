@@ -13,6 +13,7 @@ const SECTIONS = [
       {
         id: 1,
         name: "Martin's Crêperie",
+        photo: '/restaurants/2025-12-04.png',
         rating: 4.3,
         reviewCount: 1513,
         address: 'Eisenbahnstraße 42–43, 10997 Berlin, Deutschland',
@@ -24,6 +25,7 @@ const SECTIONS = [
       {
         id: 2,
         name: 'Mani in Pasta (Markthalle)',
+        photo: '/restaurants/2020-11-07.jpg',
         rating: 4.5,
         reviewCount: 2963,
         address: 'Eisenbahnstraße 42–43, 10997 Berlin, Deutschland',
@@ -35,6 +37,7 @@ const SECTIONS = [
       {
         id: 3,
         name: 'Green & Protein',
+        photo: '/restaurants/aron-marinelli-k8P2074WvzM-unsplash.jpg',
         rating: 4.6,
         reviewCount: 874,
         address: 'Skalitzer Str. 104, 10997 Berlin, Deutschland',
@@ -52,6 +55,7 @@ const SECTIONS = [
       {
         id: 4,
         name: 'Classic San Sebastian Kreuzberg',
+        photo: '/restaurants/unnamed (1).jpg',
         rating: 4.3,
         reviewCount: 1513,
         address: 'Skalitzer Str. 97, 10997 Berlin, Deutschland',
@@ -63,6 +67,7 @@ const SECTIONS = [
       {
         id: 5,
         name: 'Cafe Frida',
+        photo: '/restaurants/2024-08-06.jpg',
         rating: 4.5,
         reviewCount: 2963,
         address: 'Schlesische Str. 28, 10997 Berlin, Deutschland',
@@ -74,6 +79,7 @@ const SECTIONS = [
       {
         id: 6,
         name: 'Five Elephant',
+        photo: '/restaurants/2025-09-08.jpg',
         rating: 4.7,
         reviewCount: 3210,
         address: 'Reichenberger Str. 101, 10999 Berlin, Deutschland',
