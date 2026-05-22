@@ -52,6 +52,7 @@ export default function Discover({ activeTab, onTabChange }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const mapRef = useRef(null)
   const mapInstanceRef = useRef(null)
+  const userMarkerRef = useRef(null)
   const sheetRef = useRef(null)
   const listRef = useRef(null)
 
@@ -79,8 +80,38 @@ export default function Discover({ activeTab, onTabChange }) {
     if (!navigator.geolocation) return
     navigator.geolocation.getCurrentPosition(pos => {
       const { latitude, longitude } = pos.coords
-      mapInstanceRef.current?.panTo({ lat: latitude, lng: longitude })
-      mapInstanceRef.current?.setZoom(16)
+      const latLng = { lat: latitude, lng: longitude }
+      const map = mapInstanceRef.current
+      if (!map) return
+
+      map.panTo(latLng)
+      map.setZoom(16)
+
+      // Blue dot SVG — replicates native geolocation pin
+      const pinSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="rgba(66,133,244,0.15)"/>
+          <circle cx="12" cy="12" r="6" fill="#4285F4" stroke="#fff" stroke-width="2"/>
+        </svg>`
+
+      const icon = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(pinSvg),
+        scaledSize: new window.google.maps.Size(24, 24),
+        anchor: new window.google.maps.Point(12, 12),
+      }
+
+      if (userMarkerRef.current) {
+        // Update existing marker position
+        userMarkerRef.current.setPosition(latLng)
+      } else {
+        userMarkerRef.current = new window.google.maps.Marker({
+          position: latLng,
+          map,
+          icon,
+          title: 'You are here',
+          zIndex: 999,
+        })
+      }
     })
   }
 
