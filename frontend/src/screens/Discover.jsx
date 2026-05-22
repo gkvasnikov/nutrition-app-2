@@ -125,6 +125,8 @@ export default function Discover({ activeTab, onTabChange }) {
         { featureType: 'transit', stylers: [{ visibility: 'off' }] },
       ],
     })
+    // Center on user location immediately on load
+    locateMe()
   }
 
   // ── Sheet helpers ─────────────────────────────────────────────────
