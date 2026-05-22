@@ -12,6 +12,7 @@ const PEEK_SHOW = 200 // px visible from bottom in collapsed state (was 280, -80
 const MOCK_MEALS = [
   {
     id: 1,
+    photo: '/meals/bowl-pollo-asado.avif',
     name: 'Bowl Pollo Asado',
     price: '€6.00',
     description: 'Gurke, Knoblauch, Essig, Sojasauce, Sichuan-Pfeffer, Sesam und Chiliöl',
@@ -21,6 +22,7 @@ const MOCK_MEALS = [
   },
   {
     id: 2,
+    photo: '/meals/karisik-izgara.avif',
     name: 'Karisik Izgara',
     price: '€29.90',
     description: 'gemischte Grillplatte (Köfte, Lammkotelett, Lammrippchen, Lammspieß)',
@@ -30,6 +32,7 @@ const MOCK_MEALS = [
   },
   {
     id: 3,
+    photo: '/meals/halbes-hahnchen.avif',
     name: 'Halbes Hähnchen',
     price: '€12.00',
     description: 'mit Auberginen, veganem Hackfleisch, Wencheng-Soße, Knoblauch, Chili',
@@ -39,6 +42,7 @@ const MOCK_MEALS = [
   },
   {
     id: 4,
+    photo: '/meals/schnitzel-bowl.avif',
     name: 'Schnitzel Bowl',
     price: '€16.00',
     description: 'Doppelte Schnitzel mit paniertem Hähnchenbrustfilet und eine Auswahl mit Beilagen',
