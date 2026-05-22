@@ -1,0 +1,8 @@
+{
+  "name": "nutrition-app-2-root",
+  "private": true,
+  "scripts": {
+    "build": "cd frontend && npm ci && npm run build",
+    "start": "npx serve@14 frontend/dist -s -l ${PORT:-3000}"
+  }
+}

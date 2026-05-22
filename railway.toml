@@ -1,7 +1,5 @@
-rootDirectory = "frontend"
-
 [build]
-buildCommand = "npm ci && npm run build"
+buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npx serve@14 dist -s -l $PORT"
+startCommand = "npm start"
