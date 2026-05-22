@@ -262,7 +262,7 @@ export default function Discover({ activeTab, onTabChange }) {
       {/* TopBar with lunch icon + subtitle */}
       <TopBar
         title="Lunch"
-        subtitle="12:00 – 14:00"
+        subtitle="High Protein"
         icon={<LunchIcon size={18} />}
       />
 

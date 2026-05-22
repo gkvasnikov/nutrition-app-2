@@ -48,17 +48,8 @@ export function LocationIcon({ size = 16, className = '' }) {
 
 export function LunchIcon({ size = 20, className = '' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      {/* Chopsticks */}
-      <line x1="6" y1="1.5" x2="6" y2="5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="12" y1="1.5" x2="12" y2="5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Bowl rim */}
-      <line x1="3" y1="6" x2="15" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Noodle stripes inside bowl */}
-      <line x1="4.5" y1="8.5" x2="13.5" y2="8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="5.5" y1="10.5" x2="12.5" y2="10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Bowl arc */}
-      <path d="M3 6 A6 6 0 0 1 15 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M16 24.3333C14.8472 24.3333 13.7639 24.1145 12.75 23.677C11.7361 23.2395 10.8542 22.6458 10.1042 21.8958C9.35419 21.1458 8.76044 20.2638 8.32294 19.25C7.88544 18.2361 7.66669 17.1527 7.66669 16H9.33335V9.33329L24.3334 7.66663V8.91663L14.75 9.99996V11.4166H24.3334V12.6666H14.75V16H24.3334C24.3334 17.1527 24.1146 18.2361 23.6771 19.25C23.2396 20.2638 22.6459 21.1458 21.8959 21.8958C21.1459 22.6458 20.2639 23.2395 19.25 23.677C18.2361 24.1145 17.1528 24.3333 16 24.3333ZM10.5834 16H11.4167V12.6666H10.5834V16ZM10.5834 11.4166H11.4167V10.375L10.5834 10.4583V11.4166ZM12.6667 16H13.5V12.6666H12.6667V16ZM12.6667 11.4166H13.5V10.125L12.6667 10.2291V11.4166ZM9.85419 18.5H22.1459C22.2014 18.3611 22.25 18.2257 22.2917 18.0937C22.3334 17.9618 22.375 17.8194 22.4167 17.6666H9.56252C9.60419 17.8194 9.64933 17.9618 9.69794 18.0937C9.74655 18.2257 9.79863 18.3611 9.85419 18.5ZM16 22.6666C17.0417 22.6666 18.007 22.4409 18.8959 21.9895C19.7847 21.5382 20.5417 20.9305 21.1667 20.1666H10.8334C11.4584 20.9305 12.2153 21.5382 13.1042 21.9895C13.9931 22.4409 14.9584 22.6666 16 22.6666Z" fill="currentColor"/>
     </svg>
   )
 }
