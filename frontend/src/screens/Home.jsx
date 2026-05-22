@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardRestaurant from '../components/molecules/CardRestaurant'
@@ -87,8 +86,7 @@ const SECTIONS = [
   },
 ]
 
-export default function Home() {
-  const [activeTab, setActiveTab] = useState('home')
+export default function Home({ activeTab = 'home', onTabChange }) {
 
   return (
     <div className={styles.screen}>
@@ -113,7 +111,7 @@ export default function Home() {
       </div>
 
       <div className={styles.gradient} />
-      <MainNavigation active={activeTab} onChange={setActiveTab} />
+      <MainNavigation active={activeTab} onChange={onTabChange} />
     </div>
   )
 }

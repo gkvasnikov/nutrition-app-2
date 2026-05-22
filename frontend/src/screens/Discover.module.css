@@ -1,0 +1,155 @@
+.screen {
+  width: 100%;
+  height: 100dvh;
+  background: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Map fills entire screen */
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--color-surface);
+}
+
+/* Map controls */
+.mapControls {
+  position: absolute;
+  right: 16px;
+  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 24px);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mapBtn {
+  width: 40px;
+  height: 40px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapBtnText {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+/* Bottom sheet */
+.sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100dvh;
+  background: var(--color-white);
+  border-radius: 24px 24px 0 0;
+  z-index: 8;
+  transform: translateY(calc(100% - 280px));
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sheetExpanded {
+  transform: translateY(calc(max(12px, env(safe-area-inset-top, 0px)) + 75px));
+}
+
+/* Drag handle */
+.handle {
+  width: 100%;
+  padding: 12px 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.handle::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+}
+
+/* Summary (peek state) */
+.summary {
+  padding: 8px 16px 16px;
+  flex-shrink: 0;
+}
+
+.mealCount {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.mealSubtitle {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-2);
+  margin-top: 4px;
+}
+
+/* Scrollable list */
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient fade at bottom */
+.gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 85%);
+  pointer-events: none;
+  z-index: 9;
+}
+
+/* Map toggle button (visible in expanded state) */
+.mapToggleBtn {
+  position: absolute;
+  bottom: calc(max(8px, env(safe-area-inset-bottom, 0px)) + 70px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  background: var(--color-text);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.mapToggleIcon {
+  color: var(--color-white);
+}
