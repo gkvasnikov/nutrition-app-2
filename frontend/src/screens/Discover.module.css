@@ -159,7 +159,7 @@
 .separator {
   height: 1px;
   background: var(--color-surface-2);
-  margin: 24px 0;
+  margin: 16px 0;
   flex-shrink: 0;
 }
 
