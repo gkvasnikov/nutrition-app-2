@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+:root {
+
+  /* ── Colors: Text ─────────────────────────────────────── */
+  --color-text:   #212121;
+  --color-text-2: #717171;
+  --color-white:  #ffffff;
+
+  /* ── Colors: Background & Surface ────────────────────── */
+  --color-bg:        #ffffff;
+  --color-surface:   #f8f8f8;
+  --color-surface-2: #eaeaea;
+
+  /* ── Colors: Strokes & Borders ────────────────────────── */
+  --color-border:         #ebebeb;
+  --color-stroke-primary: #212121;
+  --color-stroke-green:   #52eb00;
+
+  /* ── Colors: Semantic ─────────────────────────────────── */
+  --color-accent:          #52eb00;
+  --color-accent-tint:     rgba(82, 235, 0, 0.1);
+  --color-semantic-green:        #f3fdf5;
+  --color-semantic-green-medium: #e3fbe8;
+  --color-semantic-yellow:       #fefbed;
+  --color-semantic-blue:         #f1f6fe;
+  --color-rating-star:           #ff4d00;
+
+  /* ── Radius ───────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   32px;
+  --radius-2xl:  40px;
+  --radius-full: 100px;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --spacing-2:  2px;
+  --spacing-4:  4px;
+  --spacing-8:  8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+
+  /* ── Shadows ──────────────────────────────────────────── */
+  --shadow-float:  0 1px 20px rgba(0, 0, 0, 0.10);
+  --shadow-subtle: 0 4px 4px  rgba(0, 0, 0, 0.05);
+  --shadow-marker: 0 2px 4px  rgba(0, 0, 0, 0.15);
+
+  /* ── Typography: Font family ──────────────────────────── */
+  --font-family: 'Inter', sans-serif;
+
+  /* ── Typography: Font sizes ───────────────────────────── */
+  --font-size-display:     25px;
+  --font-size-map-counter: 23px;
+  --font-size-heading:     20px;
+  --font-size-subheading:  19px;
+  --font-size-title:       17px;
+  --font-size-section:     15px;
+  --font-size-body:        15px;
+  --font-size-secondary:   13px;
+  --font-size-caption:     12px;
+  --font-size-micro:       11px;
+
+  /* ── Typography: Font weights ─────────────────────────── */
+  --font-weight-light:   300;
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+
+  /* ── Typography: Composite text styles ───────────────── */
+  /* Usage: font-size: var(--font-size-display); font-weight: var(--font-weight-bold); */
+  /* Display/Bold    → font-size-display     + font-weight-bold    */
+  /* Map/Counter     → font-size-map-counter + font-weight-light   */
+  /* Heading/Bold    → font-size-heading     + font-weight-bold    */
+  /* Subheading/Med  → font-size-subheading  + font-weight-medium  */
+  /* Title/Bold      → font-size-title       + font-weight-bold    */
+  /* Title/Medium    → font-size-title       + font-weight-medium  */
+  /* Section/Bold    → font-size-section     + font-weight-bold    */
+  /* Body/Regular    → font-size-body        + font-weight-regular */
+  /* Body/Medium     → font-size-body        + font-weight-medium  */
+  /* Secondary/Reg   → font-size-secondary   + font-weight-regular */
+  /* Secondary/Med   → font-size-secondary   + font-weight-medium  */
+  /* Caption/Regular → font-size-caption     + font-weight-regular */
+  /* Micro/Regular   → font-size-micro       + font-weight-regular */
+  /* Micro/Bold      → font-size-micro       + font-weight-bold    */
+}
