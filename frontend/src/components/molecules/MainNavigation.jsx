@@ -1,11 +1,11 @@
-import Icon from '../atoms/Icon'
+import { HomeIcon, MapIcon, FavouriteIcon, ProfileIcon } from '../atoms/icons'
 import styles from './MainNavigation.module.css'
 
 const TABS = [
-  { id: 'home',       label: 'Home',       icon: 'home' },
-  { id: 'discover',   label: 'Discover',   icon: 'map' },
-  { id: 'favourites', label: 'Favourites', icon: 'favorite' },
-  { id: 'profile',    label: 'Profile',    icon: 'person' },
+  { id: 'home',       label: 'Home',       Icon: HomeIcon },
+  { id: 'discover',   label: 'Discover',   Icon: MapIcon },
+  { id: 'favourites', label: 'Favourites', Icon: FavouriteIcon },
+  { id: 'profile',    label: 'Profile',    Icon: ProfileIcon },
 ]
 
 export default function MainNavigation({ active = 'home', onChange }) {
@@ -19,7 +19,7 @@ export default function MainNavigation({ active = 'home', onChange }) {
             onClick={() => onChange?.(tab.id)}
             aria-label={tab.label}
           >
-            <Icon name={tab.icon} size={24} />
+            <tab.Icon size={24} />
             <span className={styles.label}>{tab.label}</span>
           </button>
         ))}
