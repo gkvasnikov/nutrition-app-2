@@ -19,6 +19,8 @@ const MOCK_MEALS = [
     calories: 85, protein: 2.5, fat: 6, carbs: 7,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 2,
@@ -29,6 +31,8 @@ const MOCK_MEALS = [
     calories: 520, protein: 28.5, fat: 18, carbs: 62,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 3,
@@ -39,6 +43,8 @@ const MOCK_MEALS = [
     calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 4,
@@ -49,6 +55,8 @@ const MOCK_MEALS = [
     calories: 680, protein: 24, fat: 24, carbs: 38.5,
     restaurantName: 'Green & Protein',
     priceRange: '€10–20', distance: '5m', rating: 4.6, reviewCount: 874,
+    restaurantAddress: 'Skalitzer Str. 85, 10997 Berlin',
+    restaurantPhoto: '/restaurants/aron-marinelli-k8P2074WvzM-unsplash.jpg',
   },
   {
     id: 5,
@@ -59,6 +67,8 @@ const MOCK_MEALS = [
     calories: 85, protein: 2.5, fat: 6, carbs: 7,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 6,
@@ -69,6 +79,8 @@ const MOCK_MEALS = [
     calories: 520, protein: 28.5, fat: 18, carbs: 62,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 7,
@@ -79,6 +91,8 @@ const MOCK_MEALS = [
     calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 8,
@@ -89,10 +103,12 @@ const MOCK_MEALS = [
     calories: 680, protein: 24, fat: 24, carbs: 38.5,
     restaurantName: 'Green & Protein',
     priceRange: '€10–20', distance: '5m', rating: 4.6, reviewCount: 874,
+    restaurantAddress: 'Skalitzer Str. 85, 10997 Berlin',
+    restaurantPhoto: '/restaurants/aron-marinelli-k8P2074WvzM-unsplash.jpg',
   },
 ]
 
-export default function Discover({ activeTab, onTabChange }) {
+export default function Discover({ activeTab, onTabChange, onMealSelect }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const mapRef = useRef(null)
   const mapInstanceRef = useRef(null)
@@ -339,7 +355,7 @@ export default function Discover({ activeTab, onTabChange }) {
           {MOCK_MEALS.map((meal, i) => (
             <Fragment key={meal.id}>
               {i > 0 && <div className={styles.separator} />}
-              <CardMeal {...meal} />
+              <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
             </Fragment>
           ))}
         </div>

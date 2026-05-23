@@ -13,6 +13,8 @@ const FAV_MEALS = [
     calories: 85, protein: 2.5, fat: 6, carbs: 7,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 2,
@@ -23,6 +25,8 @@ const FAV_MEALS = [
     calories: 520, protein: 28.5, fat: 18, carbs: 62,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
     id: 3,
@@ -33,10 +37,12 @@ const FAV_MEALS = [
     calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantPhoto: '/restaurants/2025-12-04.png',
   },
 ]
 
-export default function Favourites({ activeTab, onTabChange }) {
+export default function Favourites({ activeTab, onTabChange, onMealSelect }) {
   return (
     <div className={styles.screen}>
       <div className={styles.titleBar}>
@@ -47,7 +53,7 @@ export default function Favourites({ activeTab, onTabChange }) {
         {FAV_MEALS.map((meal, i) => (
           <Fragment key={meal.id}>
             {i > 0 && <div className={styles.separator} />}
-            <CardMeal {...meal} />
+            <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
           </Fragment>
         ))}
       </div>
