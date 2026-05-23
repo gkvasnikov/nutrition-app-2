@@ -3,110 +3,12 @@ import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
 import { LocateIcon, LunchIcon, MapFloatIcon } from '../components/atoms/icons'
+import { MOCK_MEALS } from '../data/mockMeals'
 import styles from './Discover.module.css'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const CENTER = { lat: 52.521, lng: 13.398 }
-const PEEK_SHOW = 200 // px visible from bottom in collapsed state (was 280, -80)
-
-const MOCK_MEALS = [
-  {
-    id: 1,
-    photo: '/meals/bowl-pollo-asado.avif',
-    name: 'Bowl Pollo Asado',
-    price: '€6.00',
-    description: 'Gurke, Knoblauch, Essig, Sojasauce, Sichuan-Pfeffer, Sesam und Chiliöl',
-    calories: 85, protein: 2.5, fat: 6, carbs: 7,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 2,
-    photo: '/meals/karisik-izgara.avif',
-    name: 'Karisik Izgara',
-    price: '€29.90',
-    description: 'gemischte Grillplatte (Köfte, Lammkotelett, Lammrippchen, Lammspieß)',
-    calories: 520, protein: 28.5, fat: 18, carbs: 62,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 3,
-    photo: '/meals/halbes-hahnchen.avif',
-    name: 'Halbes Hähnchen',
-    price: '€12.00',
-    description: 'mit Auberginen, veganem Hackfleisch, Wencheng-Soße, Knoblauch, Chili',
-    calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 4,
-    photo: '/meals/schnitzel-bowl.avif',
-    name: 'Schnitzel Bowl',
-    price: '€16.00',
-    description: 'Doppelte Schnitzel mit paniertem Hähnchenbrustfilet und eine Auswahl mit Beilagen',
-    calories: 680, protein: 24, fat: 24, carbs: 38.5,
-    restaurantName: 'Green & Protein',
-    priceRange: '€10–20', distance: '5m', rating: 4.6, reviewCount: 874,
-    restaurantAddress: 'Skalitzer Str. 85, 10997 Berlin',
-    restaurantPhoto: '/restaurants/aron-marinelli-k8P2074WvzM-unsplash.jpg',
-  },
-  {
-    id: 5,
-    photo: '/meals/bowl-pollo-asado.avif',
-    name: 'Bowl Pollo Asado',
-    price: '€6.00',
-    description: 'Gurke, Knoblauch, Essig, Sojasauce, Sichuan-Pfeffer, Sesam und Chiliöl',
-    calories: 85, protein: 2.5, fat: 6, carbs: 7,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 6,
-    photo: '/meals/karisik-izgara.avif',
-    name: 'Karisik Izgara',
-    price: '€29.90',
-    description: 'gemischte Grillplatte (Köfte, Lammkotelett, Lammrippchen, Lammspieß)',
-    calories: 520, protein: 28.5, fat: 18, carbs: 62,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 7,
-    photo: '/meals/halbes-hahnchen.avif',
-    name: 'Halbes Hähnchen',
-    price: '€12.00',
-    description: 'mit Auberginen, veganem Hackfleisch, Wencheng-Soße, Knoblauch, Chili',
-    calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
-    restaurantName: 'Wen Cheng Görlitzer',
-    priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
-    restaurantPhoto: '/restaurants/2025-12-04.png',
-  },
-  {
-    id: 8,
-    photo: '/meals/schnitzel-bowl.avif',
-    name: 'Schnitzel Bowl',
-    price: '€16.00',
-    description: 'Doppelte Schnitzel mit paniertem Hähnchenbrustfilet und eine Auswahl mit Beilagen',
-    calories: 680, protein: 24, fat: 24, carbs: 38.5,
-    restaurantName: 'Green & Protein',
-    priceRange: '€10–20', distance: '5m', rating: 4.6, reviewCount: 874,
-    restaurantAddress: 'Skalitzer Str. 85, 10997 Berlin',
-    restaurantPhoto: '/restaurants/aron-marinelli-k8P2074WvzM-unsplash.jpg',
-  },
-]
+const PEEK_SHOW = 200 // px visible from bottom in collapsed state
 
 export default function Discover({ activeTab, onTabChange, onMealSelect }) {
   const [isExpanded, setIsExpanded] = useState(false)

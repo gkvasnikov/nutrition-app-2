@@ -9,7 +9,7 @@ const MACRO_BG = {
   carbs:    'var(--color-semantic-blue)',
 }
 
-export default function MealDescriptionOverlay({ meal, onClose }) {
+export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSelect }) {
   const backdropRef    = useRef(null)
   const sheetRef       = useRef(null)
   const onCloseRef     = useRef(onClose)
@@ -177,7 +177,19 @@ export default function MealDescriptionOverlay({ meal, onClose }) {
           {/* Restaurant */}
           <h3 className={styles.restaurantHeading}>Restaurant</h3>
 
-          <div className={styles.restaurantCard}>
+          <div
+            className={styles.restaurantCard}
+            style={{ cursor: 'pointer' }}
+            onClick={() => onRestaurantSelect?.({
+              name:        meal.restaurantName,
+              photo:       meal.restaurantPhoto,
+              address:     meal.restaurantAddress,
+              priceRange:  meal.priceRange,
+              distance:    meal.distance,
+              rating:      meal.rating,
+              reviewCount: meal.reviewCount,
+            })}
+          >
             <div className={styles.restaurantPhotoWrap}>
               {meal.restaurantPhoto
                 ? <img src={meal.restaurantPhoto} alt={meal.restaurantName} className={styles.restaurantPhoto} />
