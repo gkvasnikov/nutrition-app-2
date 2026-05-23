@@ -164,5 +164,11 @@
 }
 
 .chevron {
-  opacity: 0.35;
+  flex-shrink: 0;
+}
+
+.macrosRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
 }

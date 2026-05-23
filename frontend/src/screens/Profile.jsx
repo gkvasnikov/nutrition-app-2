@@ -39,7 +39,10 @@ export default function Profile({ activeTab, onTabChange }) {
               <img src="/Pie.svg" width={24} height={24} alt="" />
               <span className={styles.macrosLabel}>Macros settings</span>
             </div>
-            <span className={styles.macrosGoal}>Muscle gain</span>
+            <div className={styles.macrosRight}>
+              <span className={styles.macrosGoal}>Muscle gain</span>
+              <img src="/Chevron-right.svg" width={24} height={24} alt="" />
+            </div>
           </div>
           <div className={styles.macrosRow}>
             {MACROS.map(m => (
