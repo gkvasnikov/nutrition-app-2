@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Home from './screens/Home'
 import Discover from './screens/Discover'
 import Favourites from './screens/Favourites'
+import Profile from './screens/Profile'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home')
@@ -12,6 +13,10 @@ export default function App() {
 
   if (activeTab === 'favourites') {
     return <Favourites activeTab={activeTab} onTabChange={setActiveTab} />
+  }
+
+  if (activeTab === 'profile') {
+    return <Profile activeTab={activeTab} onTabChange={setActiveTab} />
   }
 
   return <Home activeTab={activeTab} onTabChange={setActiveTab} />
