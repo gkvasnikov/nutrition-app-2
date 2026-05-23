@@ -1,15 +1,16 @@
 import { useEffect, useRef, Fragment } from 'react'
-import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon } from '../atoms/icons'
+import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, meals = [], onClose, onMealSelect }) {
-  const backdropRef    = useRef(null)
-  const sheetRef       = useRef(null)
-  const onCloseRef     = useRef(onClose)
-  const animatingRef   = useRef(false)
-  const animateCloseRef = useRef(null)
-  onCloseRef.current   = onClose
+  const backdropRef      = useRef(null)
+  const sheetRef         = useRef(null)
+  const scrollContentRef = useRef(null)
+  const onCloseRef       = useRef(onClose)
+  const animatingRef     = useRef(false)
+  const animateCloseRef  = useRef(null)
+  onCloseRef.current     = onClose
 
   // Lock body scroll + open animation
   useEffect(() => {
@@ -53,8 +54,9 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
 
   // ── Swipe-to-dismiss ─────────────────────────────────
   useEffect(() => {
-    const backdrop = backdropRef.current
-    const sheet    = sheetRef.current
+    const backdrop      = backdropRef.current
+    const sheet         = sheetRef.current
+    const scrollContent = scrollContentRef.current
     if (!backdrop || !sheet) return
 
     let startY = 0, startScroll = 0, couldDrag = false
@@ -62,9 +64,9 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
 
     function onTouchStart(e) {
       if (animatingRef.current) return
-      const t   = e.touches[0]
+      const t     = e.touches[0]
       startY      = t.clientY
-      startScroll = sheet.scrollTop
+      startScroll = scrollContent?.scrollTop ?? 0
       couldDrag   = startScroll === 0
       dragging    = false
       lastY = t.clientY; lastT = Date.now(); vel = 0
@@ -115,7 +117,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
     <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
       <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
 
-        {/* ── Photo area — full rectangle, no gradient ── */}
+        {/* ── Photo area — sticky, not scrollable ── */}
         <div className={styles.photoArea}>
           <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
             <CloseIcon size={16} />
@@ -126,61 +128,66 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
         </div>
 
         {/* ── Scrollable content ── */}
-        <div className={styles.content}>
+        <div ref={scrollContentRef} className={styles.scrollContent}>
+          <div className={styles.content}>
 
-          <div className={styles.infoGroup}>
-            <h2 className={styles.name}>{restaurant.name}</h2>
+            <div className={styles.infoGroup}>
+              <h2 className={styles.name}>{restaurant.name}</h2>
 
-            {restaurant.address && (
-              <p className={styles.address}>{restaurant.address}</p>
-            )}
+              {restaurant.address && (
+                <p className={styles.address}>{restaurant.address}</p>
+              )}
 
-            {/* Meta row */}
-            <div className={styles.meta}>
-              <span className={styles.openNow}>Open now</span>
-              {restaurant.priceRange && (
-                <>
-                  <span className={styles.dot} />
-                  <span className={styles.metaText}>{restaurant.priceRange}</span>
-                </>
-              )}
-              {restaurant.distance && (
-                <>
-                  <span className={styles.dot} />
-                  <span className={styles.metaText}>{restaurant.distance}</span>
-                </>
-              )}
-              {restaurant.rating != null && (
-                <>
-                  <span className={styles.dot} />
-                  <span className={styles.metaStar}>★{restaurant.rating}</span>
-                  <span className={styles.metaText}>({restaurant.reviewCount?.toLocaleString('de-DE')})</span>
-                </>
-              )}
+              {/* Meta row */}
+              <div className={styles.meta}>
+                <span className={styles.openNow}>Open now</span>
+                {restaurant.priceRange && (
+                  <>
+                    <span className={styles.dot} />
+                    <span className={styles.metaText}>{restaurant.priceRange}</span>
+                  </>
+                )}
+                {restaurant.distance && (
+                  <>
+                    <span className={styles.dot} />
+                    <span className={styles.distanceGroup}>
+                      <WalkIcon size={16} />
+                      <span className={styles.metaText}>{restaurant.distance}</span>
+                    </span>
+                  </>
+                )}
+                {restaurant.rating != null && (
+                  <>
+                    <span className={styles.dot} />
+                    <span className={styles.metaStar}>★{restaurant.rating}</span>
+                    <span className={styles.metaText}>({restaurant.reviewCount?.toLocaleString('de-DE')})</span>
+                  </>
+                )}
+              </div>
+
+              {/* 3 action buttons */}
+              <div className={styles.actions}>
+                <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
+                <button className={styles.actionBtn}><WoltIcon /></button>
+                <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
+              </div>
             </div>
 
-            {/* 3 action buttons */}
-            <div className={styles.actions}>
-              <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
-              <button className={styles.actionBtn}><WoltIcon /></button>
-              <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
+            <div className={styles.divider} />
+
+            <div className={styles.mealsSection}>
+              <h3 className={styles.mealsHeading}>Meals</h3>
+              <div className={styles.mealsList}>
+                {meals.map((meal, i) => (
+                  <Fragment key={meal.id}>
+                    {i > 0 && <div className={styles.separator} />}
+                    <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
+                  </Fragment>
+                ))}
+              </div>
             </div>
+
           </div>
-
-          <div className={styles.divider} />
-
-          <div className={styles.mealsSection}>
-            <h3 className={styles.mealsHeading}>Meals</h3>
-            <div className={styles.mealsList}>
-              {meals.map((meal, i) => (
-                <Fragment key={meal.id}>
-                  {i > 0 && <div className={styles.separator} />}
-                  <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
-                </Fragment>
-              ))}
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
