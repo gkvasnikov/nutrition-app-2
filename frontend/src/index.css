@@ -13,7 +13,7 @@ html, body {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
   color: var(--color-text);
-  background: var(--color-bg);
+  background: #e8e0d8; /* Google Maps default tile bg — avoids white flash */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

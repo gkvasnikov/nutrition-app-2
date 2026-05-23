@@ -1,7 +1,7 @@
 .screen {
   width: 100%;
   height: 100dvh;
-  background: var(--color-bg);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -42,10 +42,6 @@
   background: var(--color-surface);
 }
 
-/* Extra gap between zoom group and locate button */
-.mapBtnLocate {
-  margin-top: var(--spacing-4);
-}
 
 .mapBtnText {
   font-size: 22px;
@@ -108,7 +104,7 @@
 /* Drag handle pill */
 .handlePill {
   width: 100%;
-  padding: var(--spacing-12) 0 var(--spacing-8);
+  padding: var(--spacing-16) 0 var(--spacing-8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,14 +126,14 @@
 }
 
 .mealCount {
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-section);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   line-height: 1;
 }
 
 .mealSubtitle {
-  font-size: var(--font-size-caption);
+  font-size: var(--font-size-micro);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-2);
   margin-top: var(--spacing-4);
