@@ -1,3 +1,4 @@
+import { WalkIcon } from '../atoms/icons'
 import styles from './CardRestaurant.module.css'
 
 export default function CardRestaurant({
@@ -62,7 +63,10 @@ export default function CardRestaurant({
           {distance && (
             <>
               <span className={styles.dot} />
-              <span className={styles.metaText}>{distance}</span>
+              <span className={styles.distanceGroup}>
+                <WalkIcon size={14} />
+                <span className={styles.metaText}>{distance}</span>
+              </span>
             </>
           )}
         </div>

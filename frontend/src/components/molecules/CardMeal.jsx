@@ -1,4 +1,4 @@
-import { LocationIcon } from '../atoms/icons'
+import { LocationIcon, WalkIcon } from '../atoms/icons'
 import PillMacro from '../atoms/PillMacro'
 import styles from './CardMeal.module.css'
 
@@ -63,7 +63,10 @@ export default function CardMeal({
         {distance && (
           <>
             <span className={styles.dot} />
-            <span className={styles.meta}>{distance}</span>
+            <span className={styles.distanceGroup}>
+              <WalkIcon size={14} />
+              <span className={styles.meta}>{distance}</span>
+            </span>
           </>
         )}
         {rating != null && (

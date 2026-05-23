@@ -153,7 +153,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
                   <>
                     <span className={styles.dot} />
                     <span className={styles.distanceGroup}>
-                      <WalkIcon size={16} />
+                      <WalkIcon size={14} />
                       <span className={styles.metaText}>{restaurant.distance}</span>
                     </span>
                   </>

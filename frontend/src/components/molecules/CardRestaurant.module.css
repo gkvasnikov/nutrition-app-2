@@ -141,3 +141,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.distanceGroup {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--color-text-2);
+  flex-shrink: 0;
+}

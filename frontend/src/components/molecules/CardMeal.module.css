@@ -152,6 +152,14 @@
   flex-shrink: 0;
 }
 
+.distanceGroup {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--color-text-2);
+  flex-shrink: 0;
+}
+
 .rating {
   display: flex;
   align-items: center;
