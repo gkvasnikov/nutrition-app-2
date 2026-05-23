@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { CloseIcon, HeartOutlineIcon, ShareUpIcon, DirectionIcon } from '../atoms/icons'
+import { CloseIcon, HeartOutlineIcon, ShareUpIcon, DirectionIcon, WoltIcon } from '../atoms/icons'
 import styles from './MealDescriptionOverlay.module.css'
 
 const MACRO_BG = {
@@ -124,7 +124,6 @@ export default function MealDescriptionOverlay({ meal, onClose }) {
           </button>
           <div className={styles.photoCircle}>
             {meal.photo && <img src={meal.photo} alt={meal.name} className={styles.photo} />}
-            <div className={styles.photoGradient} />
           </div>
         </div>
 
@@ -160,16 +159,16 @@ export default function MealDescriptionOverlay({ meal, onClose }) {
           {/* Action buttons */}
           <div className={styles.actions}>
             <button className={styles.actionBtn}>
-              <DirectionIcon size={22} />
+              <DirectionIcon size={24} />
             </button>
             <button className={styles.actionBtn}>
-              <img src="/Wolt.svg" height={17} alt="Wolt" style={{ display: 'block' }} />
+              <WoltIcon />
             </button>
             <button className={styles.actionBtn}>
-              <HeartOutlineIcon size={22} />
+              <HeartOutlineIcon size={24} />
             </button>
             <button className={styles.actionBtn}>
-              <ShareUpIcon size={22} />
+              <ShareUpIcon size={24} />
             </button>
           </div>
 
