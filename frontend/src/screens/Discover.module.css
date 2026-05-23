@@ -101,11 +101,6 @@
 
 .header:active { cursor: grabbing; }
 
-/* Extra bottom padding when expanded — 16px below the bar before first card */
-.handlePillExpanded {
-  padding-bottom: var(--spacing-16);
-}
-
 /* Drag handle pill */
 .handlePill {
   width: 100%;
@@ -113,6 +108,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Extra bottom padding when expanded — must come AFTER .handlePill to override */
+.handlePillExpanded {
+  padding-bottom: var(--spacing-16);
 }
 
 .handlePill::before {
