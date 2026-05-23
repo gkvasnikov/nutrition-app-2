@@ -74,36 +74,114 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
     })
   }
 
-  function makePinSvg(type, count) {
+  // ── Pin SVG helpers ──────────────────────────────────────
+  // PAD = extra canvas space so shadow + badge never clip at viewBox edges
+  const PIN_PAD = 10
+
+  function makePinSvg(type, count, size) {
+    // size = current diameter of the main circle (animates between 40–48)
+    const pad = PIN_PAD
+    const r   = size / 2 - 0.5          // radius (1px stroke on edge)
+    const cc  = pad + size / 2           // circle center in padded canvas
+
+    const shadow =
+      `<defs><filter id="sh" x="-60%" y="-60%" width="220%" height="220%">` +
+      `<feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>` +
+      `</filter></defs>`
+
+    const circle =
+      `<circle cx="${cc}" cy="${cc}" r="${r}" fill="#D7E5C1" stroke="white" stroke-width="1" filter="url(#sh)"/>`
+
     if (type === 'group') {
-      return `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="22" cy="26" r="18" fill="#D7E5C1" stroke="white" stroke-width="4"/>
-        <circle cx="36" cy="12" r="11" fill="#212121"/>
-        <text x="36" y="16.5" text-anchor="middle" fill="white" font-size="12" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="600">${count}</text>
-      </svg>`
+      // Badge: r=11, overlaps top-right of main circle
+      // From Figma: badge center at (size-1, 9) in component space
+      const BR      = 11
+      const badgeCx = pad + (size - 1)    // from Figma exact coords
+      const badgeCy = pad + 9             // constant regardless of circle size
+      const svgW    = Math.ceil(badgeCx + BR + pad)
+      const svgH    = Math.ceil(cc + r + pad)
+      return (
+        `<svg width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}" fill="none" xmlns="http://www.w3.org/2000/svg">` +
+        shadow + circle +
+        `<circle cx="${badgeCx}" cy="${badgeCy}" r="${BR}" fill="#212121"/>` +
+        `<text x="${badgeCx}" y="${badgeCy + 4.5}" text-anchor="middle" fill="white" font-size="11"` +
+        ` font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="600">${count}</text>` +
+        `</svg>`
+      )
     }
-    return `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="18" fill="#D7E5C1" stroke="white" stroke-width="4"/>
-    </svg>`
+
+    const svgS = Math.ceil(size + 2 * pad)
+    return (
+      `<svg width="${svgS}" height="${svgS}" viewBox="0 0 ${svgS} ${svgS}" fill="none" xmlns="http://www.w3.org/2000/svg">` +
+      shadow + circle +
+      `</svg>`
+    )
+  }
+
+  function pinIcon(type, count, size) {
+    const pad  = PIN_PAD
+    const svg  = makePinSvg(type, count, size)
+    const cc   = pad + size / 2   // circle center in canvas
+    const r    = size / 2 - 0.5
+
+    let svgW, svgH
+    if (type === 'group') {
+      const BR      = 11
+      const badgeCx = pad + (size - 1)
+      svgW = Math.ceil(badgeCx + BR + pad)
+      svgH = Math.ceil(cc + r + pad)
+    } else {
+      svgW = Math.ceil(size + 2 * pad)
+      svgH = svgW
+    }
+    return {
+      url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+      scaledSize: new window.google.maps.Size(svgW, svgH),
+      anchor: new window.google.maps.Point(cc, cc),
+    }
+  }
+
+  // Animate a marker's icon from fromSize → toSize over ~220ms (ease-out)
+  function animatePin(marker, cfg, fromSize, toSize) {
+    const DURATION = 220
+    const t0 = performance.now()
+    function step(now) {
+      const p      = Math.min((now - t0) / DURATION, 1)
+      const eased  = 1 - Math.pow(1 - p, 3)  // ease-out cubic
+      const size   = fromSize + (toSize - fromSize) * eased
+      marker.setIcon(pinIcon(cfg.type, cfg.count, size))
+      if (p < 1) requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
   }
 
   function addMealPins(map) {
-    const pins = [
+    const PIN_DATA = [
       { lat: 52.5000, lng: 13.4390, type: 'single' },
       { lat: 52.4985, lng: 13.4415, type: 'single' },
       { lat: 52.5012, lng: 13.4375, type: 'single' },
       { lat: 52.4972, lng: 13.4400, type: 'group', count: 3 },
     ]
-    pins.forEach(({ lat, lng, type, count }) => {
-      const svg = makePinSvg(type, count)
-      const size = type === 'group' ? 48 : 40
-      const anchor = type === 'group' ? 22 : 20
-      const icon = {
-        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-        scaledSize: new window.google.maps.Size(size, size),
-        anchor: new window.google.maps.Point(anchor, anchor),
-      }
-      new window.google.maps.Marker({ position: { lat, lng }, map, icon })
+
+    let activeMarker = null
+
+    PIN_DATA.forEach(cfg => {
+      const marker = new window.google.maps.Marker({
+        position: { lat: cfg.lat, lng: cfg.lng },
+        map,
+        icon: pinIcon(cfg.type, cfg.count, 40),
+      })
+
+      marker.addListener('click', () => {
+        if (activeMarker && activeMarker !== marker) {
+          animatePin(activeMarker, activeMarker._cfg, 48, 40)
+        }
+        const selecting = activeMarker !== marker
+        animatePin(marker, cfg, selecting ? 40 : 48, selecting ? 48 : 40)
+        activeMarker = selecting ? marker : null
+      })
+
+      marker._cfg = cfg
     })
   }
 

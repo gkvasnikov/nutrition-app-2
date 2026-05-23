@@ -4,27 +4,50 @@ import styles from './HeroCarousel.module.css'
 const COUNT   = 3
 const AUTO_MS = 3000
 
-// Extended slide order: [clone_of_last, 0, 1, 2, clone_of_first]
-// Positions 1..COUNT are the real slides; 0 and COUNT+1 are clones.
-// dotIndex = pos - 1 (clamped to 0..COUNT-1)
+// Extended order: [clone_last, real_0, real_1, real_2, clone_first]
+// pos=1 → real_0, pos=2 → real_1, pos=3 → real_2
+// pos=0 → clone_last (jumps to pos=COUNT after animation)
+// pos=4 → clone_first (jumps to pos=1 after animation)
+
+const SLIDE_INDICES = [COUNT - 1, 0, 1, 2, 0] // content index for each slot
 
 export default function HeroCarousel() {
-  const [pos, setPos]         = useState(1)      // start at first real slide
-  const [animated, setAnimated] = useState(true)
-  const timerRef    = useRef(null)
-  const touchStartX = useRef(0)
+  const [pos, setPos]     = useState(1)
+  const sliderRef         = useRef(null)
+  const timerRef          = useRef(null)
+  const touchStartX       = useRef(0)
+  const jumping           = useRef(false)
 
-  // dot to highlight — clones map to their real counterpart
   const dotIndex = pos === 0 ? COUNT - 1
                  : pos === COUNT + 1 ? 0
                  : pos - 1
 
-  // ── auto-advance ────────────────────────────────────────
+  // ── disable / re-enable transition via DOM ref ──────────
+  function disableTransition() {
+    if (sliderRef.current) sliderRef.current.style.transition = 'none'
+  }
+  function enableTransition() {
+    // double rAF ensures the browser commits the no-transition frame first
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (sliderRef.current) sliderRef.current.style.transition = ''
+      jumping.current = false
+    }))
+  }
+
+  // ── navigation ───────────────────────────────────────────
+  function moveTo(newPos) {
+    if (jumping.current) return
+    setPos(newPos)
+  }
+
+  function advance() { moveTo(pos + 1) }  // captured at call time via closure
+  function retreat() { moveTo(pos - 1) }
+
+  // ── auto-advance ─────────────────────────────────────────
   function startTimer() {
     clearInterval(timerRef.current)
     timerRef.current = setInterval(() => {
-      setAnimated(true)
-      setPos(p => p + 1)
+      if (!jumping.current) setPos(p => p + 1)
     }, AUTO_MS)
   }
 
@@ -33,28 +56,25 @@ export default function HeroCarousel() {
     return () => clearInterval(timerRef.current)
   }, []) // eslint-disable-line
 
-  // ── after clone animation → jump to real counterpart ───
+  // ── clone jump: after animation lands on a clone → instant jump to real ──
   useEffect(() => {
-    if (pos === 0) {
-      // showed clone of last → jump to real last
-      const t = setTimeout(() => { setAnimated(false); setPos(COUNT) }, 400)
-      return () => clearTimeout(t)
-    }
-    if (pos === COUNT + 1) {
-      // showed clone of first → jump to real first
-      const t = setTimeout(() => { setAnimated(false); setPos(1) }, 400)
-      return () => clearTimeout(t)
-    }
-  }, [pos])
+    if (pos !== 0 && pos !== COUNT + 1) return
+    jumping.current = true
+    const realPos = pos === 0 ? COUNT : 1
+    const t = setTimeout(() => {
+      disableTransition()
+      setPos(realPos)
+      enableTransition()
+    }, 420) // just after 0.4s transition ends
+    return () => clearTimeout(t)
+  }, [pos]) // eslint-disable-line
 
   // ── swipe ────────────────────────────────────────────────
   function onTouchStart(e) { touchStartX.current = e.touches[0].clientX }
-
   function onTouchEnd(e) {
     const dx = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(dx) < 30) return
-    setAnimated(true)
-    setPos(p => p + (dx < 0 ? 1 : -1))
+    if (dx < 0) advance(); else retreat()
     startTimer()
   }
 
@@ -66,20 +86,15 @@ export default function HeroCarousel() {
         onTouchEnd={onTouchEnd}
       >
         <div
+          ref={sliderRef}
           className={styles.slider}
-          style={{
-            transform:  `translateX(${-pos * 100}%)`,
-            transition: animated ? 'transform 0.4s cubic-bezier(0.32,0.72,0,1)' : 'none',
-          }}
+          style={{ transform: `translateX(${-pos * 100}%)` }}
         >
-          {/* Clone of last real card */}
-          <div className={styles.card} />
-          {/* Real cards 0..COUNT-1 */}
-          {Array.from({ length: COUNT }).map((_, i) => (
-            <div key={i} className={styles.card} />
+          {SLIDE_INDICES.map((slideIdx, slot) => (
+            <div key={slot} className={styles.card}>
+              <span className={styles.cardNum}>{slideIdx + 1}</span>
+            </div>
           ))}
-          {/* Clone of first real card */}
-          <div className={styles.card} />
         </div>
       </div>
 

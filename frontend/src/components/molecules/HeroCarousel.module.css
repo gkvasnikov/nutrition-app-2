@@ -6,26 +6,38 @@
   width: 100%;
 }
 
-/* Clipping container — full width, rounded corners */
+/* Clipping container */
 .track {
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-xl);
 }
 
-/* Sliding row — moves via translateX */
+/* Sliding row — transition lives here in CSS so DOM ref can toggle it */
 .slider {
   display: flex;
-  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
   will-change: transform;
 }
 
-/* Each card fills the full track width */
+/* Each card fills full track width */
 .card {
   flex-shrink: 0;
   width: 100%;
   height: 184px;
   background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slide number — visible placeholder so animation is clearly seen */
+.cardNum {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-surface-2);
+  line-height: 1;
+  user-select: none;
 }
 
 /* Dot indicators */
