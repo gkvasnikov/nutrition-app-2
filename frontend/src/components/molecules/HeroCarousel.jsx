@@ -1,52 +1,67 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import styles from './HeroCarousel.module.css'
 
 const COUNT = 3
+const AUTO_MS = 3000
 
 export default function HeroCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const trackRef = useRef(null)
+  const [active, setActive] = useState(0)
+  const timerRef   = useRef(null)
+  const startXRef  = useRef(0)
+  const draggingRef = useRef(false)
+
+  const goTo = useCallback((idx) => {
+    setActive(((idx % COUNT) + COUNT) % COUNT)
+  }, [])
+
+  // Auto-advance
+  function startTimer() {
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => setActive(i => (i + 1) % COUNT), AUTO_MS)
+  }
 
   useEffect(() => {
-    const el = trackRef.current
-    if (!el) return
+    startTimer()
+    return () => clearInterval(timerRef.current)
+  }, []) // eslint-disable-line
 
-    let rafId
-    function onScroll() {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => {
-        const children = Array.from(el.children)
-        const containerCenter = el.scrollLeft + el.offsetWidth / 2
-        let closestIdx = 0
-        let minDist = Infinity
-        children.forEach((child, i) => {
-          const childCenter = child.offsetLeft + child.offsetWidth / 2
-          const dist = Math.abs(containerCenter - childCenter)
-          if (dist < minDist) { minDist = dist; closestIdx = i }
-        })
-        setActiveIndex(closestIdx)
-      })
-    }
+  // Touch swipe
+  function onTouchStart(e) {
+    startXRef.current  = e.touches[0].clientX
+    draggingRef.current = true
+  }
 
-    el.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      el.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(rafId)
-    }
-  }, [])
+  function onTouchEnd(e) {
+    if (!draggingRef.current) return
+    draggingRef.current = false
+    const dx = e.changedTouches[0].clientX - startXRef.current
+    if (Math.abs(dx) < 30) return
+    goTo(active + (dx < 0 ? 1 : -1))
+    startTimer() // reset auto-advance after manual swipe
+  }
 
   return (
     <div className={styles.wrap}>
-      <div ref={trackRef} className={styles.track}>
-        {Array.from({ length: COUNT }).map((_, i) => (
-          <div key={i} className={styles.card} />
-        ))}
+      <div
+        className={styles.track}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className={styles.slider}
+          style={{ transform: `translateX(${-active * 100}%)` }}
+        >
+          {Array.from({ length: COUNT }).map((_, i) => (
+            <div key={i} className={styles.card} />
+          ))}
+        </div>
       </div>
+
       <div className={styles.dots}>
         {Array.from({ length: COUNT }).map((_, i) => (
           <span
             key={i}
-            className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+            className={`${styles.dot} ${i === active ? styles.dotActive : ''}`}
           />
         ))}
       </div>
