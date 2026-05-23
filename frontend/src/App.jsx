@@ -13,20 +13,26 @@ export default function App() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
   function handleRestaurantSelect(restaurant) {
-    setSelectedMeal(null)
+    // Open restaurant overlay on top — don't close meal overlay
     setSelectedRestaurant(restaurant)
   }
 
+  function handleMealSelect(meal) {
+    setSelectedMeal(meal)
+  }
+
+  const screenProps = {
+    activeTab,
+    onTabChange:       setActiveTab,
+    onMealSelect:      handleMealSelect,
+    onRestaurantSelect: handleRestaurantSelect,
+  }
+
   function renderScreen() {
-    const props = {
-      activeTab,
-      onTabChange: setActiveTab,
-      onMealSelect: setSelectedMeal,
-    }
-    if (activeTab === 'discover')    return <Discover {...props} />
-    if (activeTab === 'favourites')  return <Favourites {...props} />
-    if (activeTab === 'profile')     return <Profile activeTab={activeTab} onTabChange={setActiveTab} />
-    return <Home {...props} />
+    if (activeTab === 'discover')   return <Discover {...screenProps} />
+    if (activeTab === 'favourites') return <Favourites {...screenProps} />
+    if (activeTab === 'profile')    return <Profile activeTab={activeTab} onTabChange={setActiveTab} />
+    return <Home {...screenProps} />
   }
 
   const restaurantMeals = selectedRestaurant
@@ -36,6 +42,7 @@ export default function App() {
   return (
     <>
       {renderScreen()}
+
       {selectedMeal && (
         <MealDescriptionOverlay
           meal={selectedMeal}
@@ -43,12 +50,13 @@ export default function App() {
           onRestaurantSelect={handleRestaurantSelect}
         />
       )}
+
       {selectedRestaurant && (
         <RestaurantDescriptionOverlay
           restaurant={selectedRestaurant}
           meals={restaurantMeals}
           onClose={() => setSelectedRestaurant(null)}
-          onMealSelect={setSelectedMeal}
+          onMealSelect={handleMealSelect}
         />
       )}
     </>

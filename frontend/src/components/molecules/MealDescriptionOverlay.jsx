@@ -17,67 +17,76 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
   const animateCloseRef = useRef(null)
   onCloseRef.current   = onClose
 
-  // Lock body scroll
+  // Lock body scroll + open animation
   useEffect(() => {
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+
+    const sheet   = sheetRef.current
+    const backdrop = backdropRef.current
+    if (sheet && backdrop) {
+      // Set initial off-screen state
+      sheet.style.transform   = 'translateY(100%)'
+      backdrop.style.background = 'rgba(0,0,0,0)'
+      // Double rAF ensures browser applies initial state before transition
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        sheet.style.transition    = 'transform 0.35s cubic-bezier(0.32,0.72,0,1)'
+        sheet.style.transform     = 'translateY(0)'
+        backdrop.style.transition = 'background 0.35s ease'
+        backdrop.style.background = 'rgba(0,0,0,0.45)'
+      }))
+    }
+
     return () => { document.body.style.overflow = prev }
   }, [])
 
-  // ── Animate close (JS-driven, no opacity change) ─────────────────
+  // ── Animate close ────────────────────────────────────
   function animateClose() {
     if (animatingRef.current) return
     animatingRef.current = true
-    const sheet = sheetRef.current
+    const sheet   = sheetRef.current
+    const backdrop = backdropRef.current
+
     if (sheet) {
-      sheet.style.transition = 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)'
+      sheet.style.transition = 'transform 0.4s cubic-bezier(0.4,0,1,1)'
       sheet.style.transform  = 'translateY(100%)'
     }
-    setTimeout(() => onCloseRef.current?.(), 340)
+    if (backdrop) {
+      backdrop.style.transition = 'background 0.35s ease'
+      backdrop.style.background = 'rgba(0,0,0,0)'
+    }
+    setTimeout(() => onCloseRef.current?.(), 400)
   }
-  // Keep ref always fresh so touch handler can call it
   animateCloseRef.current = animateClose
 
-  // ── Swipe-to-dismiss ─────────────────────────────────────────────
-  // Listeners on backdrop (non-scrollable) so e.preventDefault() works
-  // before iOS decides the touch belongs to the inner scroll container.
+  // ── Swipe-to-dismiss ─────────────────────────────────
   useEffect(() => {
     const backdrop = backdropRef.current
     const sheet    = sheetRef.current
     if (!backdrop || !sheet) return
 
-    let startY      = 0
-    let startScroll = 0
-    let couldDrag   = false
-    let dragging    = false
-    let lastY       = 0
-    let lastT       = 0
-    let vel         = 0
+    let startY = 0, startScroll = 0, couldDrag = false
+    let dragging = false, lastY = 0, lastT = 0, vel = 0
 
     function onTouchStart(e) {
       if (animatingRef.current) return
       const t   = e.touches[0]
       startY      = t.clientY
       startScroll = sheet.scrollTop
-      couldDrag   = startScroll === 0   // arm drag only when at scroll top
+      couldDrag   = startScroll === 0
       dragging    = false
-      lastY       = t.clientY
-      lastT       = Date.now()
-      vel         = 0
+      lastY = t.clientY; lastT = Date.now(); vel = 0
     }
 
     function onTouchMove(e) {
       if (animatingRef.current) return
       const t     = e.touches[0]
       const delta = t.clientY - startY
-      const now   = Date.now()
-      const dt    = now - lastT
+      const now   = Date.now(); const dt = now - lastT
       if (dt > 0) vel = (t.clientY - lastY) / dt
-      lastY = t.clientY
-      lastT = now
+      lastY = t.clientY; lastT = now
 
       if (couldDrag && delta > 0) {
-        // Call preventDefault EARLY — before iOS locks scroll mode
         e.preventDefault()
         dragging = true
         sheet.style.transition = 'none'
@@ -92,7 +101,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
       if (ty > 100 || vel > 0.5) {
         animateCloseRef.current?.()
       } else {
-        sheet.style.transition = 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)'
+        sheet.style.transition = 'transform 0.3s cubic-bezier(0.32,0.72,0,1)'
         sheet.style.transform  = 'translateY(0)'
       }
       dragging = false
@@ -114,7 +123,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
     <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
       <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
 
-        {/* ── Photo area — full rectangle, gradient overlay ── */}
+        {/* ── Photo area ── */}
         <div className={styles.photoArea}>
           <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
             <CloseIcon size={16} />
@@ -122,11 +131,10 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
           {meal.photo && (
             <img src={meal.photo} alt={meal.name} className={styles.photo} />
           )}
-          {/* White gradient: bottom 40% of photo, bottom→top */}
           <div className={styles.photoGradient} />
         </div>
 
-        {/* ── Scrollable content ──────────────────────────── */}
+        {/* ── Scrollable content ── */}
         <div className={styles.content}>
 
           <h2 className={styles.name}>{meal.name}</h2>
@@ -157,18 +165,10 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
 
           {/* Action buttons */}
           <div className={styles.actions}>
-            <button className={styles.actionBtn}>
-              <DirectionIcon size={24} />
-            </button>
-            <button className={styles.actionBtn}>
-              <WoltIcon />
-            </button>
-            <button className={styles.actionBtn}>
-              <HeartOutlineIcon size={24} />
-            </button>
-            <button className={styles.actionBtn}>
-              <ShareUpIcon size={24} />
-            </button>
+            <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
+            <button className={styles.actionBtn}><WoltIcon /></button>
+            <button className={styles.actionBtn}><HeartOutlineIcon size={24} /></button>
+            <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
           </div>
 
           {/* Divider */}

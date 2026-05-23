@@ -11,10 +11,24 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
   const animateCloseRef = useRef(null)
   onCloseRef.current   = onClose
 
-  // Lock body scroll
+  // Lock body scroll + open animation
   useEffect(() => {
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+
+    const sheet    = sheetRef.current
+    const backdrop = backdropRef.current
+    if (sheet && backdrop) {
+      sheet.style.transform     = 'translateY(100%)'
+      backdrop.style.background = 'rgba(0,0,0,0)'
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        sheet.style.transition    = 'transform 0.35s cubic-bezier(0.32,0.72,0,1)'
+        sheet.style.transform     = 'translateY(0)'
+        backdrop.style.transition = 'background 0.35s ease'
+        backdrop.style.background = 'rgba(0,0,0,0.45)'
+      }))
+    }
+
     return () => { document.body.style.overflow = prev }
   }, [])
 
@@ -22,12 +36,18 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
   function animateClose() {
     if (animatingRef.current) return
     animatingRef.current = true
-    const sheet = sheetRef.current
+    const sheet    = sheetRef.current
+    const backdrop = backdropRef.current
+
     if (sheet) {
-      sheet.style.transition = 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)'
+      sheet.style.transition = 'transform 0.4s cubic-bezier(0.4,0,1,1)'
       sheet.style.transform  = 'translateY(100%)'
     }
-    setTimeout(() => onCloseRef.current?.(), 340)
+    if (backdrop) {
+      backdrop.style.transition = 'background 0.35s ease'
+      backdrop.style.background = 'rgba(0,0,0,0)'
+    }
+    setTimeout(() => onCloseRef.current?.(), 400)
   }
   animateCloseRef.current = animateClose
 
@@ -42,7 +62,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
 
     function onTouchStart(e) {
       if (animatingRef.current) return
-      const t = e.touches[0]
+      const t   = e.touches[0]
       startY      = t.clientY
       startScroll = sheet.scrollTop
       couldDrag   = startScroll === 0
@@ -52,9 +72,9 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
 
     function onTouchMove(e) {
       if (animatingRef.current) return
-      const t = e.touches[0]
+      const t     = e.touches[0]
       const delta = t.clientY - startY
-      const now = Date.now(); const dt = now - lastT
+      const now   = Date.now(); const dt = now - lastT
       if (dt > 0) vel = (t.clientY - lastY) / dt
       lastY = t.clientY; lastT = now
 
@@ -69,11 +89,11 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
     function onTouchEnd() {
       if (!dragging || animatingRef.current) return
       const matrix = new DOMMatrix(getComputedStyle(sheet).transform)
-      const ty = matrix.m42
+      const ty     = matrix.m42
       if (ty > 100 || vel > 0.5) {
         animateCloseRef.current?.()
       } else {
-        sheet.style.transition = 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)'
+        sheet.style.transition = 'transform 0.3s cubic-bezier(0.32,0.72,0,1)'
         sheet.style.transform  = 'translateY(0)'
       }
       dragging = false
@@ -105,10 +125,9 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
           )}
         </div>
 
-        {/* ── Scrollable content ──────────────────────── */}
+        {/* ── Scrollable content ── */}
         <div className={styles.content}>
 
-          {/* Info group: name + address + meta + actions */}
           <div className={styles.infoGroup}>
             <h2 className={styles.name}>{restaurant.name}</h2>
 
@@ -142,22 +161,14 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
 
             {/* 3 action buttons */}
             <div className={styles.actions}>
-              <button className={styles.actionBtn}>
-                <DirectionIcon size={24} />
-              </button>
-              <button className={styles.actionBtn}>
-                <WoltIcon />
-              </button>
-              <button className={styles.actionBtn}>
-                <ShareUpIcon size={24} />
-              </button>
+              <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
+              <button className={styles.actionBtn}><WoltIcon /></button>
+              <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
             </div>
           </div>
 
-          {/* Divider */}
           <div className={styles.divider} />
 
-          {/* Meals section */}
           <div className={styles.mealsSection}>
             <h3 className={styles.mealsHeading}>Meals</h3>
             <div className={styles.mealsList}>

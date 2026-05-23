@@ -92,8 +92,7 @@ const SECTIONS = [
   },
 ]
 
-export default function Home({ activeTab = 'home', onTabChange }) {
-
+export default function Home({ activeTab = 'home', onTabChange, onRestaurantSelect }) {
   return (
     <div className={styles.screen}>
       <TopBar title="Meal Time" />
@@ -109,7 +108,19 @@ export default function Home({ activeTab = 'home', onTabChange }) {
             </div>
             <div className={styles.scrollRow}>
               {section.restaurants.map(r => (
-                <CardRestaurant key={r.id} {...r} />
+                <CardRestaurant
+                  key={r.id}
+                  {...r}
+                  onClick={() => onRestaurantSelect?.({
+                    name:        r.name,
+                    photo:       r.photo,
+                    address:     r.address,
+                    priceRange:  r.priceRange,
+                    distance:    r.distance,
+                    rating:      r.rating,
+                    reviewCount: r.reviewCount,
+                  })}
+                />
               ))}
             </div>
           </div>
