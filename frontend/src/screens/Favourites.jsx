@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
 import styles from './Favourites.module.css'
@@ -40,7 +39,9 @@ const FAV_MEALS = [
 export default function Favourites({ activeTab, onTabChange }) {
   return (
     <div className={styles.screen}>
-      <TopBar title="Favourites" />
+      <div className={styles.titleBar}>
+        <span className={styles.title}>Favourites</span>
+      </div>
 
       <div className={styles.content}>
         {FAV_MEALS.map((meal, i) => (

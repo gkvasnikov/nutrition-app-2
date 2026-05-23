@@ -1,11 +1,33 @@
 .screen {
   width: 100%;
   height: 100dvh;
-  background: var(--color-surface);
+  background: var(--color-bg);
   position: relative;
   overflow: hidden;
 }
 
+/* ── Title bar ──────────────────────────────────────────── */
+.titleBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: max(12px, calc(env(safe-area-inset-top, 0px) + 8px));
+  height: calc(max(12px, calc(env(safe-area-inset-top, 0px) + 8px)) + 59px);
+}
+
+.title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+/* ── Scrollable content ─────────────────────────────────── */
 .content {
   position: absolute;
   top: 0;
@@ -25,129 +47,121 @@
   display: none;
 }
 
-/* ── Avatar ───────────────────────────────────────────── */
-.avatarSection {
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: var(--spacing-16);
 }
 
 .avatarWrap {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: var(--radius-full);
   background: var(--color-surface-2);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  overflow: hidden;
-}
-
-.avatarInfo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
 }
 
 .userName {
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-display);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   line-height: 1;
+  text-align: center;
 }
 
-.userSub {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-2);
-  line-height: 1;
-}
-
-/* ── Section ──────────────────────────────────────────── */
-.section {
+/* ── Macros card ────────────────────────────────────────── */
+.card {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
 }
 
-.sectionTitle {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-2);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  padding: 0 var(--spacing-4);
-}
-
-/* ── Menu card ────────────────────────────────────────── */
-.menuCard {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.menuItem {
+.macrosHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-16);
-  cursor: pointer;
-  transition: background 0.15s;
 }
 
-.menuItem:active {
-  background: var(--color-surface);
-}
-
-.menuLeft {
+.macrosLeft {
   display: flex;
   align-items: center;
-  gap: var(--spacing-12);
+  gap: var(--spacing-8);
 }
 
-.menuIconWrap {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.menuLabel {
+.macrosLabel {
   font-size: var(--font-size-section);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   color: var(--color-text);
   line-height: 1;
 }
 
-.menuLabelDanger {
-  color: #e53935;
+.macrosGoal {
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-2);
+  line-height: 1;
+}
+
+.macrosRow {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+.macroCell {
+  flex: 1;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.macroCellValue {
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.macroCellLabel {
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-2);
+  line-height: 1;
+}
+
+/* ── Divider ────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--color-surface-2);
+}
+
+/* ── Row ────────────────────────────────────────────────── */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.rowLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.rowLabel {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  line-height: 1;
 }
 
 .chevron {
   opacity: 0.35;
-  flex-shrink: 0;
-}
-
-.divider {
-  height: 1px;
-  background: var(--color-surface-2);
-  margin: 0 var(--spacing-16);
-}
-
-/* ── Gradient ─────────────────────────────────────────── */
-.gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 124px;
-  background: linear-gradient(to bottom, rgba(248,248,248,0) 0%, var(--color-surface) 85%);
-  pointer-events: none;
-  z-index: 5;
 }
