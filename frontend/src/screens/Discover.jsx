@@ -273,7 +273,10 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
       <div ref={sheetRef} className={styles.sheet}>
         {/* Handle + summary */}
         <div className={`${styles.header} ${isExpanded ? styles.headerExpanded : ''}`}>
-          <div className={styles.handlePill} onClick={() => snapTo(!isExpanded)} />
+          <div
+            className={`${styles.handlePill} ${isExpanded ? styles.handlePillExpanded : ''}`}
+            onClick={() => snapTo(!isExpanded)}
+          />
 
           {!isExpanded && (
             <div className={styles.summary}>
