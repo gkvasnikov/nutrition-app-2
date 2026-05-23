@@ -120,7 +120,7 @@
   width: 36px;
   height: 4px;
   border-radius: var(--radius-full);
-  background: var(--color-surface-2);
+  background: var(--color-text-2);
 }
 
 /* Summary (peek state) */
@@ -159,7 +159,7 @@
 .separator {
   height: 1px;
   background: var(--color-surface-2);
-  margin: var(--spacing-8) 0;
+  margin: var(--spacing-16) 0;
   flex-shrink: 0;
 }
 
