@@ -70,6 +70,7 @@
 }
 
 .photoCircle {
+  position: relative;
   width: 190px;
   height: 190px;
   border-radius: var(--radius-full);
@@ -81,6 +82,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* White gradient on the bottom 40% of the circular photo */
+.photoGradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
 }
 
 /* ── Content ─────────────────────────────────────────── */
@@ -114,7 +126,7 @@
   margin: 0;
 }
 
-/* ── Macros ──────────────────────────────────────────── */
+/* ── Macros — no border-radius ───────────────────────── */
 .macros {
   display: flex;
   gap: var(--spacing-4);
@@ -122,7 +134,7 @@
 
 .macroCell {
   flex: 1;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   padding: var(--spacing-8);
   display: flex;
   flex-direction: column;
@@ -144,36 +156,23 @@
   line-height: 1;
 }
 
-/* ── Actions ─────────────────────────────────────────── */
+/* ── Action buttons — individual pill cards, gap 8 ──── */
 .actions {
   display: flex;
-  border: 1px solid var(--color-surface-2);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  gap: var(--spacing-8);
 }
 
 .actionBtn {
   flex: 1;
   height: 44px;
-  border: none;
-  border-right: 1px solid var(--color-surface-2);
-  background: transparent;
+  border: 1px solid var(--color-surface-2);
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-text);
-}
-
-.actionBtn:last-child {
-  border-right: none;
-}
-
-.woltBtn {
-  font-size: var(--font-size-section);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
-  font-style: italic;
 }
 
 /* ── Divider ─────────────────────────────────────────── */
@@ -194,15 +193,14 @@
 .restaurantCard {
   display: flex;
   gap: var(--spacing-16);
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .restaurantPhotoWrap {
   width: 96px;
-  height: 96px;
+  flex-shrink: 0;
   border-radius: var(--radius-md);
   background: var(--color-surface);
-  flex-shrink: 0;
   overflow: hidden;
   position: relative;
 }
@@ -232,12 +230,13 @@
   white-space: nowrap;
 }
 
+/* Right column — stretches full height of the photo */
 .restaurantInfo {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
+  justify-content: space-between;
 }
 
 .restaurantNameWrap {

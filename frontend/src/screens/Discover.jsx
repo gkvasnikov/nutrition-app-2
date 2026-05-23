@@ -19,7 +19,7 @@ const MOCK_MEALS = [
     calories: 85, protein: 2.5, fat: 6, carbs: 7,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
@@ -31,7 +31,7 @@ const MOCK_MEALS = [
     calories: 520, protein: 28.5, fat: 18, carbs: 62,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
@@ -43,7 +43,7 @@ const MOCK_MEALS = [
     calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
@@ -67,7 +67,7 @@ const MOCK_MEALS = [
     calories: 85, protein: 2.5, fat: 6, carbs: 7,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
@@ -79,7 +79,7 @@ const MOCK_MEALS = [
     calories: 520, protein: 28.5, fat: 18, carbs: 62,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
@@ -91,7 +91,7 @@ const MOCK_MEALS = [
     calories: 420, protein: 12.5, fat: 18.5, carbs: 52,
     restaurantName: 'Wen Cheng Görlitzer',
     priceRange: '€10–20', distance: '30m', rating: 4.7, reviewCount: 852,
-    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin',
+    restaurantAddress: 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland',
     restaurantPhoto: '/restaurants/2025-12-04.png',
   },
   {
