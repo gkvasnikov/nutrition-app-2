@@ -6,7 +6,7 @@
   background: rgba(0, 0, 0, 0);
 }
 
-/* ── Sheet — flex column so photo is sticky ──────────── */
+/* ── Sheet ───────────────────────────────────────────── */
 .sheet {
   position: fixed;
   bottom: 0;
@@ -16,37 +16,10 @@
   background: var(--color-bg);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   max-height: calc(100dvh - 24px);
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
-/* ── Scrollable inner ────────────────────────────────── */
-.scrollContent {
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
-  scrollbar-width: none;
-  flex: 1;
-  min-height: 0;
-  padding-bottom: max(var(--spacing-24), env(safe-area-inset-bottom, 0px));
-}
-
-.scrollContent::-webkit-scrollbar {
-  display: none;
-}
-
-/* ── Photo area — sticky at top ──────────────────────── */
-.photoArea {
-  position: relative;
-  height: 220px;
-  background: var(--color-surface);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
+/* ── Close button — absolute on sheet, never scrolls ─── */
 .closeBtn {
   position: absolute;
   top: var(--spacing-16);
@@ -62,8 +35,32 @@
   justify-content: center;
   color: var(--color-text);
   box-shadow: var(--shadow-subtle);
-  z-index: 1;
+  z-index: 10;
   flex-shrink: 0;
+}
+
+/* ── Scrollable inner ────────────────────────────────── */
+.scrollContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+  max-height: calc(100dvh - 24px);
+  padding-bottom: max(var(--spacing-24), env(safe-area-inset-bottom, 0px));
+}
+
+.scrollContent::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Photo area — scrolls with content ───────────────── */
+.photoArea {
+  position: relative;
+  height: 220px;
+  background: var(--color-surface);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  overflow: hidden;
 }
 
 .photo {
@@ -299,4 +296,10 @@
   align-items: center;
   gap: 4px;
   color: var(--color-text-2);
+}
+
+.ratingGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }

@@ -74,6 +74,39 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
     })
   }
 
+  function makePinSvg(type, count) {
+    if (type === 'group') {
+      return `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="26" r="18" fill="#D7E5C1" stroke="white" stroke-width="4"/>
+        <circle cx="36" cy="12" r="11" fill="#212121"/>
+        <text x="36" y="16.5" text-anchor="middle" fill="white" font-size="12" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="600">${count}</text>
+      </svg>`
+    }
+    return `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="18" fill="#D7E5C1" stroke="white" stroke-width="4"/>
+    </svg>`
+  }
+
+  function addMealPins(map) {
+    const pins = [
+      { lat: 52.5000, lng: 13.4390, type: 'single' },
+      { lat: 52.4985, lng: 13.4415, type: 'single' },
+      { lat: 52.5012, lng: 13.4375, type: 'single' },
+      { lat: 52.4972, lng: 13.4400, type: 'group', count: 3 },
+    ]
+    pins.forEach(({ lat, lng, type, count }) => {
+      const svg = makePinSvg(type, count)
+      const size = type === 'group' ? 48 : 40
+      const anchor = type === 'group' ? 22 : 20
+      const icon = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+        scaledSize: new window.google.maps.Size(size, size),
+        anchor: new window.google.maps.Point(anchor, anchor),
+      }
+      new window.google.maps.Marker({ position: { lat, lng }, map, icon })
+    })
+  }
+
   function initMap() {
     if (!mapRef.current || mapInstanceRef.current) return
     mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
@@ -85,6 +118,7 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
         { featureType: 'transit', stylers: [{ visibility: 'off' }] },
       ],
     })
+    addMealPins(mapInstanceRef.current)
     // Center on user location immediately on load
     locateMe()
   }

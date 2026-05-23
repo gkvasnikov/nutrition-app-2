@@ -39,13 +39,11 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
     return () => { document.body.style.overflow = prev }
   }, [])
 
-  // ── Animate close ────────────────────────────────────
   function animateClose() {
     if (animatingRef.current) return
     animatingRef.current = true
     const sheet    = sheetRef.current
     const backdrop = backdropRef.current
-
     if (sheet) {
       sheet.style.transition = 'transform 0.4s cubic-bezier(0.4,0,1,1)'
       sheet.style.transform  = 'translateY(100%)'
@@ -58,10 +56,10 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
   }
   animateCloseRef.current = animateClose
 
-  // ── Swipe-to-dismiss ─────────────────────────────────
+  // Swipe-to-dismiss — listeners on backdrop
   useEffect(() => {
-    const backdrop     = backdropRef.current
-    const sheet        = sheetRef.current
+    const backdrop      = backdropRef.current
+    const sheet         = sheetRef.current
     const scrollContent = scrollContentRef.current
     if (!backdrop || !sheet) return
 
@@ -85,7 +83,6 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
       const now   = Date.now(); const dt = now - lastT
       if (dt > 0) vel = (t.clientY - lastY) / dt
       lastY = t.clientY; lastT = now
-
       if (couldDrag && delta > 0) {
         e.preventDefault()
         dragging = true
@@ -96,8 +93,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
 
     function onTouchEnd() {
       if (!dragging || animatingRef.current) return
-      const matrix = new DOMMatrix(getComputedStyle(sheet).transform)
-      const ty     = matrix.m42
+      const ty = new DOMMatrix(getComputedStyle(sheet).transform).m42
       if (ty > 100 || vel > 0.5) {
         animateCloseRef.current?.()
       } else {
@@ -123,25 +119,26 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
     <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
       <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
 
-        {/* ── Photo area — sticky, not scrollable ── */}
-        <div className={styles.photoArea}>
-          <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
-            <CloseIcon size={16} />
-          </button>
-          {meal.photo && (
-            <img src={meal.photo} alt={meal.name} className={styles.photo} />
-          )}
-          <div className={styles.photoGradient} />
-        </div>
+        {/* ── Close button — sits above scrollContent, never scrolls ── */}
+        <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
+          <CloseIcon size={16} />
+        </button>
 
-        {/* ── Scrollable content ── */}
+        {/* ── Scrollable content — photo scrolls too ── */}
         <div ref={scrollContentRef} className={styles.scrollContent}>
+
+          {/* Photo area — scrolls with content */}
+          <div className={styles.photoArea}>
+            {meal.photo && (
+              <img src={meal.photo} alt={meal.name} className={styles.photo} />
+            )}
+            <div className={styles.photoGradient} />
+          </div>
+
           <div className={styles.content}>
 
             <h2 className={styles.name}>{meal.name}</h2>
-
             {meal.description && <p className={styles.description}>{meal.description}</p>}
-
             {meal.price && <p className={styles.price}>{meal.price}</p>}
 
             {/* Macros */}
@@ -164,7 +161,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
               </div>
             </div>
 
-            {/* Action buttons */}
+            {/* Actions */}
             <div className={styles.actions}>
               <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
               <button className={styles.actionBtn}><WoltIcon /></button>
@@ -172,10 +169,8 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
               <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
             </div>
 
-            {/* Divider */}
             <div className={styles.divider} />
 
-            {/* Restaurant */}
             <h3 className={styles.restaurantHeading}>Restaurant</h3>
 
             <div
@@ -196,9 +191,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
                   ? <img src={meal.restaurantPhoto} alt={meal.restaurantName} className={styles.restaurantPhoto} />
                   : <div className={styles.restaurantPhotoPlaceholder} />
                 }
-                {meal.priceRange && (
-                  <span className={styles.priceBadge}>{meal.priceRange}</span>
-                )}
+                {meal.priceRange && <span className={styles.priceBadge}>{meal.priceRange}</span>}
               </div>
               <div className={styles.restaurantInfo}>
                 <div className={styles.restaurantNameWrap}>
@@ -227,8 +220,10 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
                   {meal.rating != null && (
                     <>
                       <span className={styles.dot} />
-                      <span className={styles.metaStar}>★{meal.rating}</span>
-                      <span className={styles.metaText}>({meal.reviewCount?.toLocaleString('de-DE')})</span>
+                      <span className={styles.ratingGroup}>
+                        <span className={styles.metaStar}>★{meal.rating}</span>
+                        <span className={styles.metaText}>({meal.reviewCount?.toLocaleString('de-DE')})</span>
+                      </span>
                     </>
                   )}
                 </div>

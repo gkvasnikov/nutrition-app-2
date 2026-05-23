@@ -125,6 +125,24 @@ export function WalkIcon({ size = 16, className = '' }) {
   )
 }
 
+export function MealPinIcon({ size = 40, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <circle cx="20" cy="20" r="18" fill="#D7E5C1" stroke="white" strokeWidth="4"/>
+    </svg>
+  )
+}
+
+export function MealPinGroupIcon({ count = 3, className = '' }) {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <circle cx="22" cy="26" r="18" fill="#D7E5C1" stroke="white" strokeWidth="4"/>
+      <circle cx="36" cy="12" r="11" fill="#212121"/>
+      <text x="36" y="16.5" textAnchor="middle" fill="white" fontSize="12" fontFamily="-apple-system, BlinkMacSystemFont, sans-serif" fontWeight="600">{count}</text>
+    </svg>
+  )
+}
+
 export function ProfileIcon({ size = 24, className = '' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>

@@ -117,18 +117,20 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
     <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
       <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
 
-        {/* ── Photo area — sticky, not scrollable ── */}
-        <div className={styles.photoArea}>
-          <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
-            <CloseIcon size={16} />
-          </button>
-          {restaurant.photo && (
-            <img src={restaurant.photo} alt={restaurant.name} className={styles.photo} />
-          )}
-        </div>
+        {/* ── Close button — absolute on sheet, never scrolls ── */}
+        <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
+          <CloseIcon size={16} />
+        </button>
 
-        {/* ── Scrollable content ── */}
+        {/* ── Scrollable content — photo scrolls too ── */}
         <div ref={scrollContentRef} className={styles.scrollContent}>
+
+          {/* Photo area — scrolls with content */}
+          <div className={styles.photoArea}>
+            {restaurant.photo && (
+              <img src={restaurant.photo} alt={restaurant.name} className={styles.photo} />
+            )}
+          </div>
           <div className={styles.content}>
 
             <div className={styles.infoGroup}>
@@ -159,8 +161,10 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
                 {restaurant.rating != null && (
                   <>
                     <span className={styles.dot} />
-                    <span className={styles.metaStar}>★{restaurant.rating}</span>
-                    <span className={styles.metaText}>({restaurant.reviewCount?.toLocaleString('de-DE')})</span>
+                    <span className={styles.ratingGroup}>
+                      <span className={styles.metaStar}>★{restaurant.rating}</span>
+                      <span className={styles.metaText}>({restaurant.reviewCount?.toLocaleString('de-DE')})</span>
+                    </span>
                   </>
                 )}
               </div>
