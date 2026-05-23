@@ -104,7 +104,7 @@
 /* Drag handle pill */
 .handlePill {
   width: 100%;
-  padding: var(--spacing-16) 0 var(--spacing-8);
+  padding: var(--spacing-16) 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,7 +113,7 @@
 .handlePill::before {
   content: '';
   display: block;
-  width: 36px;
+  width: 32px;
   height: 4px;
   border-radius: var(--radius-full);
   background: var(--color-text-2);
@@ -121,7 +121,7 @@
 
 /* Summary (peek state) */
 .summary {
-  padding: var(--spacing-2) var(--spacing-16) var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-16) var(--spacing-8);
   text-align: center;
 }
 
