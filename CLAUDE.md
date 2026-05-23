@@ -33,8 +33,14 @@ src/
       TopBar.jsx         — white pill with icon left + title/subtitle center + filter icon right
       MainNavigation.jsx — frosted glass bottom nav (Home/Discover/Favourites/Profile)
       CardMeal.jsx       — meal card: photo + macros + dashed divider + restaurant row
+                           accepts `hideRestaurant` prop to hide divider + restaurant row
+                           (used inside RestaurantDescriptionOverlay)
       CardRestaurant.jsx — restaurant card: photo + rating + hours + distance
-      HeroCarousel.jsx
+      HeroCarousel.jsx   — infinite-loop carousel, 3 slides, auto-advance 3s, swipe support
+                           clone technique: 5 slots [clone_last, 0, 1, 2, clone_first]
+                           DOM ref for transition control (avoids React batching issues)
+      MealDescriptionOverlay.jsx        — full-screen overlay for a single meal
+      RestaurantDescriptionOverlay.jsx  — full-screen overlay for a restaurant + its meals
   screens/
     Home.jsx / Home.module.css
     Discover.jsx / Discover.module.css
@@ -44,7 +50,15 @@ src/
 
 **Design tokens** are in `frontend/tokens.css` and imported globally via `src/index.css`. Always use token variables — never hard-code colors, spacing, radii, or font sizes. Key token categories: `--color-*`, `--spacing-*`, `--radius-*`, `--shadow-*`, `--font-size-*`, `--font-weight-*`.
 
-**Discover screen** has a JS-driven bottom sheet:
+Key radius values: `--radius-sm` 4px · `--radius-md` 8px · `--radius-lg` 16px · `--radius-xl` 32px · `--radius-full` 100px.
+
+---
+
+## Discover screen
+
+Full-screen Google Map with a draggable bottom sheet and MealPin markers.
+
+### Bottom sheet
 - Two snap states: peek (`PEEK_SHOW = 200px` visible) and expanded (full height)
 - `sheetRef` transform is set entirely via JS (`setTransform()`); CSS only provides the initial fallback
 - Touch events attached to the entire sheet; `isDraggingSheet` ref distinguishes sheet drag from list scroll
@@ -53,10 +67,60 @@ src/
 - `topBarFill` is always rendered and animates in/out via a CSS class toggle (`translateY(-100%)` → `translateY(0)`)
 - Floating "Map" button uses `MapFloatIcon` (inlined SVG component, not `<img>`) to avoid render delay
 
-**Google Maps** loads via script tag in `Discover.jsx` using `VITE_GOOGLE_MAPS_API_KEY`. Map auto-centers on user geolocation with `map.panBy(0, 50)` (50px downward offset so pin clears bottom sheet). Map controls (zoom ±, locate) are custom SVG buttons — Google's default UI is disabled.
+### MealPin markers (Google Maps)
+- Rendered via `<canvas>` (not SVG): circular photo crop + white border + drop shadow
+- `createPinIcon(img, size, type, count)` → returns Google Maps icon object (url, scaledSize, anchor)
+- Default size 40px, selected size 48px; animated with rAF ease-out cubic over 220ms (`animatePin`)
+- Group pins have a black badge (r=11) at top-right; badge position from Figma: `cx = PAD + (size-1)`, `cy = PAD + 9` (constant y)
+- `PIN_PAD = 10` — canvas breathing room so shadow never clips
+- `activeMarkerRef` tracks the currently selected marker (stable ref, safe in map event handlers)
 
-**Static assets:**
-- `public/meals/` — dish photos (avif)
+### Pin selection mechanic (MealPin → floating card)
+- Clicking a pin hides the bottom sheet (slides fully off-screen) and shows a floating `pinCardWrap` at the bottom
+- `selectedPin` state: `null | { type: 'single'|'group', meals: Meal[], img, ... }`
+- `selectPin(cfg)` — selects (hides sheet) or deselects (restores sheet to peek) based on `cfg` being truthy/null
+- `deselectPin()` — animates active marker back to 40px, then calls `selectPin(null)`
+- `selectPinRef` — stable ref so map event handlers always call the latest `selectPin`
+- Clicking empty map area triggers deselect (map `'click'` listener in `addMealPins`)
+
+**Enter animation:** `pinCardSlideUp` — translateY(20px)→0, opacity 0→1, 350ms
+**Exit animation:** `pinCardSlideDown` — translateY(0)→20px, opacity 1→0, 300ms
+- `pinExiting` state gates exit: card stays mounted during animation, unmounts after 300ms
+- `lastSelectedPinRef` keeps card content visible during exit animation (selectedPin is still set)
+- Gradient and "Map" button hidden while pin is selected; gradient reappears immediately on exit start (`!selectedPin || pinExiting`)
+
+**Single pin:** one `CardMeal` in `.pinCardSingle` (margin 16px, `radius-lg` 16px, `shadow-float`)
+**Group pin:** horizontal CSS scroll-snap carousel (`.pinCardCarousel`); card width `calc(100% - 48px)` → 32px peek of next card; `scroll-padding-left: 8px`; direction + close buttons above in `.pinControls`
+
+### Pin data
+Located near Wrangelstrasse 18, Berlin (52.4957–52.4978, 13.4293–13.4337). Each pin has a `meals[]` array referencing `MOCK_MEALS` entries.
+
+### Google Maps setup
+- Script tag loaded in `Discover.jsx` using `VITE_GOOGLE_MAPS_API_KEY`
+- `CENTER = { lat: 52.4965, lng: 13.4315 }` — Wrangelstrasse 18
+- Map auto-centers on user geolocation with `map.panBy(0, 50)` (50px offset so pin clears bottom sheet)
+- Map controls (zoom ±, locate) are custom SVG buttons — Google's default UI is disabled
+- `addMealPins` is async (pre-loads all images before creating markers)
+
+---
+
+## Overlay components
+
+### MealDescriptionOverlay
+- Close button: `position: absolute` on `.sheet` (never scrolls)
+- Photo scrolls inside `scrollContentRef`
+- Restaurant meta row: WalkIcon (14px) + distance, ★rating + (reviewCount)
+- `ratingGroup` wraps star + count tightly (gap: 2px)
+
+### RestaurantDescriptionOverlay
+- Same scroll structure as MealDescriptionOverlay
+- Meals list uses `<CardMeal hideRestaurant />` — hides dashed divider + restaurant row (redundant inside restaurant context)
+- z-index: backdrop 200, sheet 201
+
+---
+
+## Static assets
+- `public/meals/` — dish photos (avif): `bowl-pollo-asado`, `karisik-izgara`, `halbes-hahnchen`, `schnitzel-bowl`
 - `public/restaurants/` — restaurant photos (jpg/png)
 - `public/` root — SVG icons used as `<img>` tags: `Map.svg`, `User.svg`, `Pie.svg`, `Door.svg`, `Chevron-right.svg`
 - All files in `public/` are served at the root path (`/filename`)
@@ -64,15 +128,19 @@ src/
 
 **iOS safe areas:** All screens use `env(safe-area-inset-top, 0px)` and `env(safe-area-inset-bottom, 0px)` for TopBar padding and bottom navigation positioning. The viewport meta has `viewport-fit=cover`.
 
+---
+
 ## Screen-specific notes
 
 **Home** — TopBar pill + HeroCarousel + horizontal-scroll restaurant sections (`CardRestaurant`).
 
-**Discover** — Full-screen Google Map with draggable bottom sheet containing vertical `CardMeal` list. Sheet has peek (200px) and expanded states.
+**Discover** — Full-screen Google Map with draggable bottom sheet (peek/expanded) + MealPin markers with floating card mechanic on selection. See full details above.
 
 **Favourites** — Simple centered plain title (not TopBar pill) + vertical `CardMeal` list with solid separators.
 
-**Profile** — Simple centered plain title + avatar + name + macros card (4 semantic cells) + divider + Log out row. Uses `public/` SVG assets as `<img>` tags.
+**Profile** — Simple centered plain title + avatar + name + macros card (4 cells, no border-radius) + divider + Log out row. Uses `public/` SVG assets as `<img>` tags.
+
+---
 
 ## Design conventions
 
@@ -85,4 +153,5 @@ src/
 - `MainNavigation` background: `rgba(229, 229, 229, 0.3)` + `backdrop-filter: blur(6px)`
 - All icons in `icons.jsx` use `fill="currentColor"` and accept `size` + `className` props
 - Exception: `MapFloatIcon` has `fill="white"` hardcoded (white icon on dark button)
+- WalkIcon (14×14) appears before distance values in CardMeal, CardRestaurant, and both overlays
 - Figma file: `bfjUFyA4zVJVp0JaMrGoC7` (accessible via Figma MCP)

@@ -206,3 +206,74 @@
 .mapToggleIcon {
   color: var(--color-white);
 }
+
+/* ── Pin card(s) shown when a MealPin is selected ── */
+@keyframes pinCardSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes pinCardSlideDown {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(20px); opacity: 0; }
+}
+
+.pinCardWrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  animation: pinCardSlideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.pinCardWrapExiting {
+  animation: pinCardSlideDown 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Direction + Close buttons row */
+.pinControls {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: var(--spacing-16);
+  gap: var(--spacing-8);
+}
+
+/* Single meal card */
+.pinCardSingle {
+  margin: 0 var(--spacing-16);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  padding: var(--spacing-12);
+}
+
+/* Group carousel */
+.pinCardCarousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-8);
+  scroll-padding-left: var(--spacing-8);
+  scrollbar-width: none;
+}
+
+.pinCardCarousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card in carousel — 354px on 402px screen, 32px peek of next */
+.pinCardSlide {
+  flex-shrink: 0;
+  width: calc(100% - 48px);
+  scroll-snap-align: start;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  padding: var(--spacing-12);
+}

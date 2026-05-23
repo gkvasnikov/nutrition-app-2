@@ -16,6 +16,7 @@ export default function CardMeal({
   distance,
   rating,
   reviewCount,
+  hideRestaurant = false,
   onClick,
 }) {
   return (
@@ -45,11 +46,10 @@ export default function CardMeal({
         </div>
       </div>
 
-      {/* Divider */}
-      <div className={styles.divider} />
+      {/* Divider + Restaurant row — hidden when inside restaurant overlay */}
+      {!hideRestaurant && <div className={styles.divider} />}
 
-      {/* Restaurant row */}
-      <div className={styles.restaurantRow}>
+      {!hideRestaurant && <div className={styles.restaurantRow}>
         <div className={styles.restaurant}>
           <LocationIcon size={16} className={styles.locationIcon} />
           <span className={styles.restaurantName}>{restaurantName}</span>
@@ -79,7 +79,7 @@ export default function CardMeal({
             </span>
           </>
         )}
-      </div>
+      </div>}
 
     </div>
   )

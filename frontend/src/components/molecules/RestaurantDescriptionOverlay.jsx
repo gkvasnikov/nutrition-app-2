@@ -185,7 +185,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
                 {meals.map((meal, i) => (
                   <Fragment key={meal.id}>
                     {i > 0 && <div className={styles.separator} />}
-                    <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
+                    <CardMeal {...meal} hideRestaurant onClick={() => onMealSelect?.(meal)} />
                   </Fragment>
                 ))}
               </div>
