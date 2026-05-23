@@ -202,12 +202,6 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
                 </div>
                 <div className={styles.restaurantMeta}>
                   <span className={styles.openNow}>Open now</span>
-                  {meal.priceRange && (
-                    <>
-                      <span className={styles.dot} />
-                      <span className={styles.metaText}>{meal.priceRange}</span>
-                    </>
-                  )}
                   {meal.distance && (
                     <>
                       <span className={styles.dot} />

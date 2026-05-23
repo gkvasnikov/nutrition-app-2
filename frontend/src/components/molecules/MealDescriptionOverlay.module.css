@@ -165,14 +165,17 @@
 .divider {
   height: 1px;
   background: var(--color-surface-2);
+  /* 24px above and below: content gap=12 + extra 12 each side */
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 /* ── Restaurant ──────────────────────────────────────── */
 .restaurantHeading {
-  font-size: var(--font-size-section);
-  font-weight: var(--font-weight-bold);
+  font-size: 19px;
+  font-weight: var(--font-weight-medium);
   color: var(--color-text);
-  margin: 0;
+  margin: 0 0 4px; /* heading→card = content gap 12 + 4 = 16px */
   line-height: 1;
 }
 
