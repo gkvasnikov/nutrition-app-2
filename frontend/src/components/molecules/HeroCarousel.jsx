@@ -1,23 +1,31 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './HeroCarousel.module.css'
 
-const COUNT = 3
+const COUNT   = 3
 const AUTO_MS = 3000
 
+// Extended slide order: [clone_of_last, 0, 1, 2, clone_of_first]
+// Positions 1..COUNT are the real slides; 0 and COUNT+1 are clones.
+// dotIndex = pos - 1 (clamped to 0..COUNT-1)
+
 export default function HeroCarousel() {
-  const [active, setActive] = useState(0)
-  const timerRef   = useRef(null)
-  const startXRef  = useRef(0)
-  const draggingRef = useRef(false)
+  const [pos, setPos]         = useState(1)      // start at first real slide
+  const [animated, setAnimated] = useState(true)
+  const timerRef    = useRef(null)
+  const touchStartX = useRef(0)
 
-  const goTo = useCallback((idx) => {
-    setActive(((idx % COUNT) + COUNT) % COUNT)
-  }, [])
+  // dot to highlight — clones map to their real counterpart
+  const dotIndex = pos === 0 ? COUNT - 1
+                 : pos === COUNT + 1 ? 0
+                 : pos - 1
 
-  // Auto-advance
+  // ── auto-advance ────────────────────────────────────────
   function startTimer() {
     clearInterval(timerRef.current)
-    timerRef.current = setInterval(() => setActive(i => (i + 1) % COUNT), AUTO_MS)
+    timerRef.current = setInterval(() => {
+      setAnimated(true)
+      setPos(p => p + 1)
+    }, AUTO_MS)
   }
 
   useEffect(() => {
@@ -25,19 +33,29 @@ export default function HeroCarousel() {
     return () => clearInterval(timerRef.current)
   }, []) // eslint-disable-line
 
-  // Touch swipe
-  function onTouchStart(e) {
-    startXRef.current  = e.touches[0].clientX
-    draggingRef.current = true
-  }
+  // ── after clone animation → jump to real counterpart ───
+  useEffect(() => {
+    if (pos === 0) {
+      // showed clone of last → jump to real last
+      const t = setTimeout(() => { setAnimated(false); setPos(COUNT) }, 400)
+      return () => clearTimeout(t)
+    }
+    if (pos === COUNT + 1) {
+      // showed clone of first → jump to real first
+      const t = setTimeout(() => { setAnimated(false); setPos(1) }, 400)
+      return () => clearTimeout(t)
+    }
+  }, [pos])
+
+  // ── swipe ────────────────────────────────────────────────
+  function onTouchStart(e) { touchStartX.current = e.touches[0].clientX }
 
   function onTouchEnd(e) {
-    if (!draggingRef.current) return
-    draggingRef.current = false
-    const dx = e.changedTouches[0].clientX - startXRef.current
+    const dx = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(dx) < 30) return
-    goTo(active + (dx < 0 ? 1 : -1))
-    startTimer() // reset auto-advance after manual swipe
+    setAnimated(true)
+    setPos(p => p + (dx < 0 ? 1 : -1))
+    startTimer()
   }
 
   return (
@@ -49,11 +67,19 @@ export default function HeroCarousel() {
       >
         <div
           className={styles.slider}
-          style={{ transform: `translateX(${-active * 100}%)` }}
+          style={{
+            transform:  `translateX(${-pos * 100}%)`,
+            transition: animated ? 'transform 0.4s cubic-bezier(0.32,0.72,0,1)' : 'none',
+          }}
         >
+          {/* Clone of last real card */}
+          <div className={styles.card} />
+          {/* Real cards 0..COUNT-1 */}
           {Array.from({ length: COUNT }).map((_, i) => (
             <div key={i} className={styles.card} />
           ))}
+          {/* Clone of first real card */}
+          <div className={styles.card} />
         </div>
       </div>
 
@@ -61,7 +87,7 @@ export default function HeroCarousel() {
         {Array.from({ length: COUNT }).map((_, i) => (
           <span
             key={i}
-            className={`${styles.dot} ${i === active ? styles.dotActive : ''}`}
+            className={`${styles.dot} ${i === dotIndex ? styles.dotActive : ''}`}
           />
         ))}
       </div>
