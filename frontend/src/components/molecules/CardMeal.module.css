@@ -9,7 +9,7 @@
 /* Dish */
 .dish {
   display: flex;
-  gap: 16px;
+  gap: var(--spacing-16);
   align-items: flex-start;
   overflow: hidden;
 }

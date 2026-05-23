@@ -17,12 +17,12 @@
 /* Map controls */
 .mapControls {
   position: absolute;
-  right: 16px;
-  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
+  right: var(--spacing-16);
+  top: calc(max(var(--spacing-12), env(safe-area-inset-top, 0px)) + var(--spacing-8) + 59px + var(--spacing-16));
   z-index: 5;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-8);
 }
 
 .mapBtn {
@@ -44,7 +44,7 @@
 
 /* Extra gap between zoom group and locate button */
 .mapBtnLocate {
-  margin-top: 4px;
+  margin-top: var(--spacing-4);
 }
 
 .mapBtnText {
@@ -108,7 +108,7 @@
 /* Drag handle pill */
 .handlePill {
   width: 100%;
-  padding: 12px 0 8px;
+  padding: var(--spacing-12) 0 var(--spacing-8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,7 +125,7 @@
 
 /* Summary (peek state) */
 .summary {
-  padding: 2px 16px 8px;
+  padding: var(--spacing-2) var(--spacing-16) var(--spacing-8);
   text-align: center;
 }
 
@@ -140,14 +140,14 @@
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-2);
-  margin-top: 4px;
+  margin-top: var(--spacing-4);
 }
 
 /* Scrollable list */
 .list {
   flex: 1;
   overflow-y: hidden; /* no scroll in peek */
-  padding: 8px 16px calc(max(8px, env(safe-area-inset-bottom, 0px)) + 80px);
+  padding: var(--spacing-8) var(--spacing-16) calc(max(var(--spacing-8), env(safe-area-inset-bottom, 0px)) + 80px);
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -159,7 +159,7 @@
 .separator {
   height: 1px;
   background: var(--color-surface-2);
-  margin: 16px 0;
+  margin: var(--spacing-8) 0;
   flex-shrink: 0;
 }
 
@@ -193,10 +193,10 @@
   background: var(--color-text);
   color: var(--color-white);
   border-radius: var(--radius-full);
-  padding: 12px 20px;
+  padding: var(--spacing-12) 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-8);
   font-size: var(--font-size-section);
   font-weight: var(--font-weight-bold);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);

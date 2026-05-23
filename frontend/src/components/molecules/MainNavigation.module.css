@@ -1,8 +1,8 @@
 .nav {
   position: absolute;
   bottom: max(8px, env(safe-area-inset-bottom, 0px));
-  left: 16px;
-  right: 16px;
+  left: var(--spacing-16);
+  right: var(--spacing-16);
   z-index: 10;
 }
 
@@ -22,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  padding: 4px var(--spacing-4);
+  padding: var(--spacing-4);
   border-radius: var(--radius-2xl);
   color: var(--color-text);
   transition: background 0.15s;
