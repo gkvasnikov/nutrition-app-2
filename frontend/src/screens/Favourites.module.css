@@ -16,38 +16,12 @@
   padding: calc(max(12px, calc(env(safe-area-inset-top, 0px) + 8px)) + 75px) var(--spacing-16) 120px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 
 .content::-webkit-scrollbar {
   display: none;
-}
-
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-}
-
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.sectionTitle {
-  font-size: var(--font-size-subheading);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text);
-  line-height: 1;
-}
-
-/* Vertical meal list */
-.mealList {
-  display: flex;
-  flex-direction: column;
 }
 
 .separator {
@@ -57,22 +31,6 @@
   flex-shrink: 0;
 }
 
-/* Horizontal restaurant scroll */
-.scrollRow {
-  display: flex;
-  gap: var(--spacing-16);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 calc(-1 * var(--spacing-16));
-  padding: 0 var(--spacing-16);
-}
-
-.scrollRow::-webkit-scrollbar {
-  display: none;
-}
-
-/* Gradient fade at bottom */
 .gradient {
   position: absolute;
   bottom: 0;
