@@ -136,7 +136,7 @@
 .macroLabel {
   font-size: 13px;
   font-weight: var(--font-weight-regular);
-  color: var(--color-text-2);
+  color: var(--color-text);
   line-height: 1;
 }
 
