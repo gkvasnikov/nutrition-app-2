@@ -2,9 +2,18 @@ import { useState, useEffect, useRef, Fragment } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
+import FiltersPanel from '../components/molecules/FiltersPanel'
 import { LocateIcon, LunchIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { MOCK_MEALS } from '../data/mockMeals'
 import styles from './Discover.module.css'
+
+const DEFAULT_FILTERS = {
+  macrosConfidence: ['high', 'medium'], // multi-select
+  measure: 'per_meal',                  // single-select
+  sortBy: 'nearest',                    // single-select
+  openNow: false,                       // toggle
+  topRanked: false,                     // toggle
+}
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const CENTER = { lat: 52.4965, lng: 13.4315 } // Wrangelstrasse 18, Berlin
@@ -15,6 +24,9 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
   const [selectedPin, setSelectedPin] = useState(null) // null | { type, meals[] }
   const [pinExiting, setPinExiting] = useState(false)
   const [visibleMeals, setVisibleMeals] = useState([]) // meals from pins in current viewport
+  const [showFilters, setShowFilters] = useState(false)
+  const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const [pendingFilters, setPendingFilters] = useState(DEFAULT_FILTERS)
   const lastSelectedPinRef = useRef(null) // keeps content visible during exit anim
   const pinDataRef = useRef([])           // all PIN_DATA, populated after image load
   const mapRef = useRef(null)
@@ -94,6 +106,17 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
   }
 
   selectPinRef.current = selectPin
+
+  // ── Filters ───────────────────────────────────────────────────────
+  function openFilters() {
+    setPendingFilters(filters) // reset pending to current applied filters
+    setShowFilters(true)
+  }
+  function closeFilters() { setShowFilters(false) }
+  function applyFilters() {
+    setFilters(pendingFilters)
+    setShowFilters(false)
+  }
 
   // ── Map ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -439,6 +462,18 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
         title="Lunch"
         subtitle="High Protein"
         icon={<LunchIcon size={32} />}
+        filterActive={showFilters}
+        onFilterClick={openFilters}
+      />
+
+      {/* Filters panel + backdrop */}
+      <FiltersPanel
+        show={showFilters}
+        pending={pendingFilters}
+        onChange={setPendingFilters}
+        onReset={() => setPendingFilters(DEFAULT_FILTERS)}
+        onApply={applyFilters}
+        onClose={closeFilters}
       />
 
       {/* White fill behind TopBar — always rendered, animates in/out */}

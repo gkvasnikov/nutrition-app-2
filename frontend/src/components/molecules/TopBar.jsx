@@ -1,7 +1,7 @@
 import { SearchIcon, TuneIcon } from '../atoms/icons'
 import styles from './TopBar.module.css'
 
-export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchClick, onFilterClick }) {
+export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchClick, onFilterClick, filterActive = false }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.pill}>
@@ -14,7 +14,11 @@ export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchCl
           {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
         </div>
 
-        <button className={styles.iconBtn} onClick={onFilterClick} aria-label="Filters">
+        <button
+          className={`${styles.iconBtn} ${filterActive ? styles.iconBtnActive : ''}`}
+          onClick={onFilterClick}
+          aria-label="Filters"
+        >
           <TuneIcon size={15} />
         </button>
       </div>

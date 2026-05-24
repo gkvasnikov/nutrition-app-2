@@ -1,0 +1,116 @@
+/* ── Backdrop ──────────────────────────────────────────────── */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+
+.backdropVisible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Panel ─────────────────────────────────────────────────── */
+/* Starts at top:0, white bg covers the TopBar area via padding-top */
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 21;
+  background: var(--color-white);
+
+  /* Push content below the TopBar pill */
+  padding-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
+  padding-bottom: var(--spacing-24);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+
+  /* Hidden above screen */
+  transform: translateY(-105%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.panelVisible {
+  transform: translateY(0);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Section ───────────────────────────────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+}
+
+.label {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+/* Pill row — standalone (not inside .section) */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-16);
+}
+
+/* ── Divider ───────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--color-surface-2);
+  margin: 0 var(--spacing-16);
+}
+
+/* ── Actions ───────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-16);
+}
+
+.resetBtn {
+  height: 50px;
+  padding: 0 var(--spacing-16);
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-surface-2);
+  background: var(--color-white);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.resetIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.applyBtn {
+  height: 50px;
+  padding: 0 28px;
+  border-radius: var(--radius-full);
+  background: var(--color-text);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.applyBtn:active {
+  opacity: 0.8;
+}
