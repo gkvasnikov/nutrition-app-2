@@ -6,7 +6,7 @@
   background: rgba(0, 0, 0, 0.2);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s;
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .backdropVisible {
@@ -15,7 +15,6 @@
 }
 
 /* ── Panel ─────────────────────────────────────────────────── */
-/* Starts at top:0, white bg covers the TopBar area via padding-top */
 .panel {
   position: absolute;
   top: 0;
@@ -26,7 +25,7 @@
 
   /* Push content below the TopBar pill */
   padding-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
-  padding-bottom: var(--spacing-24);
+  padding-bottom: var(--spacing-16);
 
   display: flex;
   flex-direction: column;
@@ -34,7 +33,7 @@
 
   /* Hidden above screen */
   transform: translateY(-105%);
-  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .panelVisible {
@@ -57,12 +56,11 @@
   line-height: 1;
 }
 
-/* Pill row — standalone (not inside .section) */
+/* Pills row — no extra padding, section handles it */
 .pills {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-8);
-  padding: 0 var(--spacing-16);
 }
 
 /* ── Divider ───────────────────────────────────────────────── */
@@ -70,47 +68,4 @@
   height: 1px;
   background: var(--color-surface-2);
   margin: 0 var(--spacing-16);
-}
-
-/* ── Actions ───────────────────────────────────────────────── */
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--spacing-16);
-}
-
-.resetBtn {
-  height: 50px;
-  padding: 0 var(--spacing-16);
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--color-surface-2);
-  background: var(--color-white);
-  font-size: var(--font-size-section);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-8);
-}
-
-.resetIcon {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.applyBtn {
-  height: 50px;
-  padding: 0 28px;
-  border-radius: var(--radius-full);
-  background: var(--color-text);
-  font-size: var(--font-size-section);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-white);
-  cursor: pointer;
-}
-
-.applyBtn:active {
-  opacity: 0.8;
 }

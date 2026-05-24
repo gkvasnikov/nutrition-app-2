@@ -463,7 +463,7 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
         subtitle="High Protein"
         icon={<LunchIcon size={32} />}
         filterActive={showFilters}
-        onFilterClick={openFilters}
+        onFilterClick={showFilters ? closeFilters : openFilters}
       />
 
       {/* Filters panel + backdrop */}

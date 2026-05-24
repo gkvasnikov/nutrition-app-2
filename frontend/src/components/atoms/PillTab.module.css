@@ -9,7 +9,7 @@
   color: var(--color-text);
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: border-color 0.15s, border-width 0.15s, font-weight 0.15s;
   line-height: 1;
 }
 
@@ -17,8 +17,8 @@
   opacity: 0.7;
 }
 
+/* Selected: thick dark border, white background */
 .selected {
-  background: var(--color-text);
-  color: var(--color-white);
-  border-color: var(--color-text);
+  border: 2px solid var(--color-text);
+  font-weight: var(--font-weight-medium);
 }

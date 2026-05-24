@@ -1,4 +1,5 @@
 import PillTab from '../atoms/PillTab'
+import ButtonFilterActions from './ButtonFilterActions'
 import styles from './FiltersPanel.module.css'
 
 export default function FiltersPanel({ show, pending, onChange, onReset, onApply, onClose }) {
@@ -92,29 +93,23 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
         <div className={styles.divider} />
 
         {/* Open now + Top ranked — independent toggles */}
-        <div className={styles.pills}>
-          <PillTab
-            label="Open now"
-            selected={pending.openNow}
-            onClick={() => toggleBool('openNow')}
-          />
-          <PillTab
-            label="Top ranked"
-            selected={pending.topRanked}
-            onClick={() => toggleBool('topRanked')}
-          />
+        <div className={styles.section}>
+          <div className={styles.pills}>
+            <PillTab
+              label="Open now"
+              selected={pending.openNow}
+              onClick={() => toggleBool('openNow')}
+            />
+            <PillTab
+              label="Top ranked"
+              selected={pending.topRanked}
+              onClick={() => toggleBool('topRanked')}
+            />
+          </div>
         </div>
 
-        {/* Actions */}
-        <div className={styles.actions}>
-          <button className={styles.resetBtn} onClick={onReset} type="button">
-            <span className={styles.resetIcon}>↺</span>
-            Reset
-          </button>
-          <button className={styles.applyBtn} onClick={onApply} type="button">
-            Apply
-          </button>
-        </div>
+        {/* Reset + Apply */}
+        <ButtonFilterActions onReset={onReset} onApply={onApply} />
 
       </div>
     </>
