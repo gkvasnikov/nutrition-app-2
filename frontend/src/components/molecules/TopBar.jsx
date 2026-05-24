@@ -1,7 +1,7 @@
 import { SearchIcon, TuneIcon } from '../atoms/icons'
 import styles from './TopBar.module.css'
 
-export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchClick, onFilterClick, filterActive = false }) {
+export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchClick, onFilterClick, filterActive = false, onPillClick }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.pill}>
@@ -9,10 +9,15 @@ export default function TopBar({ title = 'Meal Time', subtitle, icon, onSearchCl
           {icon ?? <SearchIcon size={15} />}
         </button>
 
-        <div className={styles.center}>
+        <button
+          type="button"
+          className={`${styles.center} ${onPillClick ? styles.centerClickable : ''}`}
+          onClick={onPillClick}
+          tabIndex={onPillClick ? 0 : -1}
+        >
           <span className={styles.title}>{title}</span>
           {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
-        </div>
+        </button>
 
         <button
           className={`${styles.iconBtn} ${filterActive ? styles.iconBtnActive : ''}`}

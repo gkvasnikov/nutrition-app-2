@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardRestaurant from '../components/molecules/CardRestaurant'
 import HeroCarousel from '../components/molecules/HeroCarousel'
 import ButtonSeeAll from '../components/atoms/ButtonSeeAll'
+import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import styles from './Home.module.css'
 
 const SECTIONS = [
@@ -92,10 +94,42 @@ const SECTIONS = [
   },
 ]
 
+function buildSubtitle(filters) {
+  if (!filters) return null
+  const parts = []
+  if (filters.mealTime) {
+    parts.push(filters.mealTime.charAt(0).toUpperCase() + filters.mealTime.slice(1))
+  }
+  if (filters.diet) {
+    const labels = {
+      high_protein: 'High Protein',
+      high_carb:    'High Carb',
+      balanced:     'Balanced',
+      keto:         'Keto',
+      custom:       'Custom',
+    }
+    parts.push(labels[filters.diet] ?? filters.diet)
+  }
+  return parts.length ? parts.join(' · ') : null
+}
+
 export default function Home({ activeTab = 'home', onTabChange, onRestaurantSelect }) {
+  const [showMealFilter, setShowMealFilter]   = useState(false)
+  const [activeFilters,  setActiveFilters]    = useState(null)
+
+  function handleApplyFilters(filters) {
+    setActiveFilters(filters)
+  }
+
+  const subtitle = buildSubtitle(activeFilters)
+
   return (
     <div className={styles.screen}>
-      <TopBar title="Meal Time" />
+      <TopBar
+        title="Meal Time"
+        subtitle={subtitle}
+        onPillClick={() => setShowMealFilter(true)}
+      />
 
       <div className={styles.content}>
         <HeroCarousel />
@@ -129,6 +163,12 @@ export default function Home({ activeTab = 'home', onTabChange, onRestaurantSele
 
       <div className={styles.gradient} />
       <MainNavigation active={activeTab} onChange={onTabChange} />
+
+      <MealFilterOverlay
+        show={showMealFilter}
+        onClose={() => setShowMealFilter(false)}
+        onApply={handleApplyFilters}
+      />
     </div>
   )
 }
