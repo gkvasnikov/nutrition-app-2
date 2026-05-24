@@ -53,6 +53,7 @@ src/
                            wraps ButtonFilterActions in <div className={styles.actions}> with padding: 0 var(--spacing-16)
                            Available on both Home and Discover screens
       MealFilterOverlay.jsx — "Главные фильтры" (main filters). 3-card accordion overlay, z-index 35.
+                           panelWrap horizontal padding: 8px (cards sit 8px from screen edges)
                            Cards: Meal Time (morphs from 59px pill to full card via max-height 0.55s),
                            Macros (slides in with stagger 0.1s), Profile (slides in with stagger 0.18s)
                            Accordion: CSS grid-template-rows 0fr→1fr for proportional simultaneous animation
