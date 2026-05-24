@@ -20,13 +20,16 @@
   pointer-events: auto;
 }
 
-/* ── Panel wrapper — same padding/position as TopBar ───────────────────── */
+/* ── Cards stack wrapper ────────────────────────────────────────────────── */
 .panelWrap {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   padding: max(12px, calc(env(safe-area-inset-top, 0px) + 8px)) 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease;
@@ -37,58 +40,40 @@
   pointer-events: auto;
 }
 
-/* ── Panel card — morphs from pill to accordion ─────────────────────────── */
-.panel {
+/* ── Card 1 — Meal Time: morphs from pill to card ───────────────────────── */
+.cardMain {
   background: var(--color-white);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-float);
   overflow: hidden;
   max-height: 59px;
-  transition:
-    max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    border-radius 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.panelExpanded {
-  max-height: min(800px, calc(100dvh - max(12px, env(safe-area-inset-top, 0px) + 8px) - 16px));
+.cardMainExpanded {
+  max-height: 700px;
+}
+
+/* ── Cards 2 & 3 — secondary cards ─────────────────────────────────────── */
+.card {
+  background: var(--color-white);
   border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
-/* ── First header — matches TopBar pill visually ─────────────────────────── */
-.firstHeader {
-  height: 59px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-8);
-  padding: var(--spacing-12) var(--spacing-16);
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.firstHeaderIcon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--color-text);
-}
-
-.firstHeaderTitle {
-  flex: 1;
-  text-align: center;
-  font-size: var(--font-size-title);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
-  line-height: 1;
-}
-
-/* ── Accordion header (macros, profile) ─────────────────────────────────── */
-.accordionHeader {
+/* ── Card header row ────────────────────────────────────────────────────── */
+.cardHeader {
   height: 59px;
   width: 100%;
   display: flex;
@@ -100,14 +85,14 @@
   cursor: pointer;
 }
 
-.accordionTitle {
-  font-size: var(--font-size-section);
+.cardTitle {
+  font-size: var(--font-size-title);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   line-height: 1;
 }
 
-/* ── Chevron button ─────────────────────────────────────────────────────── */
+/* ── Chevron ────────────────────────────────────────────────────────────── */
 .chevronBtn {
   width: 32px;
   height: 32px;
@@ -123,29 +108,48 @@
   transform: rotate(180deg);
 }
 
-/* ── Accordion body — max-height animation ──────────────────────────────── */
+/* ── Accordion body ─────────────────────────────────────────────────────── */
 .body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .bodyOpen {
-  max-height: 500px;
+  grid-template-rows: 1fr;
 }
 
 .bodyInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.bodyContent {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
   padding: var(--spacing-4) var(--spacing-16) var(--spacing-16);
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
-/* ── Divider ────────────────────────────────────────────────────────────── */
+/* Main card: visible only when overlay is expanded AND section is open */
+.cardMainExpanded .bodyOpen .bodyInner .bodyContent {
+  opacity: 1;
+  transition: opacity 0.28s ease 0.1s;
+}
+
+/* Secondary cards: visible when card itself is visible AND section is open */
+.cardVisible .bodyOpen .bodyInner .bodyContent {
+  opacity: 1;
+  transition: opacity 0.28s ease 0.1s;
+}
+
+/* ── Divider (inside bodyContent) ──────────────────────────────────────── */
 .divider {
   height: 1px;
   background: var(--color-surface-2);
-  margin: 0 var(--spacing-16);
+  margin: 0 calc(-1 * var(--spacing-16));
 }
 
 /* ── Pills row ──────────────────────────────────────────────────────────── */
@@ -390,10 +394,9 @@
 
 /* ── Reset + Apply buttons ──────────────────────────────────────────────── */
 .actions {
-  padding: var(--spacing-8) 0 var(--spacing-4);
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.3s ease 0.18s, transform 0.3s ease 0.18s;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
 

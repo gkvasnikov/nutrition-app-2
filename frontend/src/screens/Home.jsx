@@ -5,7 +5,16 @@ import CardRestaurant from '../components/molecules/CardRestaurant'
 import HeroCarousel from '../components/molecules/HeroCarousel'
 import ButtonSeeAll from '../components/atoms/ButtonSeeAll'
 import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
+import FiltersPanel from '../components/molecules/FiltersPanel'
 import styles from './Home.module.css'
+
+const DEFAULT_SECONDARY_FILTERS = {
+  macrosConfidence: ['high', 'medium'],
+  measure: 'per_meal',
+  sortBy: 'nearest',
+  openNow: false,
+  topRanked: false,
+}
 
 const SECTIONS = [
   {
@@ -114,12 +123,16 @@ function buildSubtitle(filters) {
 }
 
 export default function Home({ activeTab = 'home', onTabChange, onRestaurantSelect }) {
-  const [showMealFilter, setShowMealFilter]   = useState(false)
-  const [activeFilters,  setActiveFilters]    = useState(null)
+  const [showMealFilter,    setShowMealFilter]    = useState(false)
+  const [activeFilters,     setActiveFilters]     = useState(null)
+  const [showFilters,       setShowFilters]       = useState(false)
+  const [filters,           setFilters]           = useState(DEFAULT_SECONDARY_FILTERS)
+  const [pendingFilters,    setPendingFilters]    = useState(DEFAULT_SECONDARY_FILTERS)
 
-  function handleApplyFilters(filters) {
-    setActiveFilters(filters)
-  }
+  function handleApplyFilters(f) { setActiveFilters(f) }
+  function openFilters()  { setPendingFilters(filters); setShowFilters(true) }
+  function closeFilters() { setShowFilters(false) }
+  function applyFilters() { setFilters(pendingFilters); setShowFilters(false) }
 
   const subtitle = buildSubtitle(activeFilters)
 
@@ -128,7 +141,9 @@ export default function Home({ activeTab = 'home', onTabChange, onRestaurantSele
       <TopBar
         title="Meal Time"
         subtitle={subtitle}
+        filterActive={showFilters}
         onPillClick={() => setShowMealFilter(true)}
+        onFilterClick={showFilters ? closeFilters : openFilters}
       />
 
       <div className={styles.content}>
@@ -163,6 +178,15 @@ export default function Home({ activeTab = 'home', onTabChange, onRestaurantSele
 
       <div className={styles.gradient} />
       <MainNavigation active={activeTab} onChange={onTabChange} />
+
+      <FiltersPanel
+        show={showFilters}
+        pending={pendingFilters}
+        onChange={setPendingFilters}
+        onReset={() => setPendingFilters(DEFAULT_SECONDARY_FILTERS)}
+        onApply={applyFilters}
+        onClose={closeFilters}
+      />
 
       <MealFilterOverlay
         show={showMealFilter}

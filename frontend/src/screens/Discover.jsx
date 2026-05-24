@@ -3,9 +3,29 @@ import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
 import FiltersPanel from '../components/molecules/FiltersPanel'
+import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, LunchIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { MOCK_MEALS } from '../data/mockMeals'
 import styles from './Discover.module.css'
+
+function buildMainSubtitle(filters) {
+  if (!filters) return null
+  const parts = []
+  if (filters.mealTime) {
+    parts.push(filters.mealTime.charAt(0).toUpperCase() + filters.mealTime.slice(1))
+  }
+  if (filters.diet) {
+    const labels = {
+      high_protein: 'High Protein',
+      high_carb:    'High Carb',
+      balanced:     'Balanced',
+      keto:         'Keto',
+      custom:       'Custom',
+    }
+    parts.push(labels[filters.diet] ?? filters.diet)
+  }
+  return parts.length ? parts.join(' · ') : null
+}
 
 const DEFAULT_FILTERS = {
   macrosConfidence: ['high', 'medium'], // multi-select
@@ -27,6 +47,8 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
   const [pendingFilters, setPendingFilters] = useState(DEFAULT_FILTERS)
+  const [showMealFilter, setShowMealFilter] = useState(false)
+  const [activeMainFilters, setActiveMainFilters] = useState(null)
   const lastSelectedPinRef = useRef(null) // keeps content visible during exit anim
   const pinDataRef = useRef([])           // all PIN_DATA, populated after image load
   const mapRef = useRef(null)
@@ -117,6 +139,7 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
     setFilters(pendingFilters)
     setShowFilters(false)
   }
+  function handleApplyMainFilters(f) { setActiveMainFilters(f) }
 
   // ── Map ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -459,14 +482,22 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
 
       {/* TopBar with lunch icon + subtitle */}
       <TopBar
-        title="Lunch"
-        subtitle="High Protein"
+        title="Discover"
+        subtitle={buildMainSubtitle(activeMainFilters)}
         icon={<LunchIcon size={32} />}
         filterActive={showFilters}
+        onPillClick={() => setShowMealFilter(true)}
         onFilterClick={showFilters ? closeFilters : openFilters}
       />
 
-      {/* Filters panel + backdrop */}
+      {/* Main filters overlay */}
+      <MealFilterOverlay
+        show={showMealFilter}
+        onClose={() => setShowMealFilter(false)}
+        onApply={handleApplyMainFilters}
+      />
+
+      {/* Secondary filters panel + backdrop */}
       <FiltersPanel
         show={showFilters}
         pending={pendingFilters}

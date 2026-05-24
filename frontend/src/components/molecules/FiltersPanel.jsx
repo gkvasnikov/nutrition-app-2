@@ -109,7 +109,9 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
         </div>
 
         {/* Reset + Apply */}
-        <ButtonFilterActions onReset={onReset} onApply={onApply} />
+        <div className={styles.actions}>
+          <ButtonFilterActions onReset={onReset} onApply={onApply} />
+        </div>
 
       </div>
     </>

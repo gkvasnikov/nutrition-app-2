@@ -28,9 +28,12 @@ src/
     atoms/
       icons.jsx          — all SVG icons as React components (fill="currentColor", size prop)
       PillMacro.jsx      — calorie/protein/fat/carbs pill with semantic background colors
+      PillTab.jsx        — filter/tab pill; border 1px surface-2 (unselected) / text (selected); Body/regular 15px both states
       ButtonSeeAll.jsx
     molecules/
       TopBar.jsx         — white pill with icon left + title/subtitle center + filter icon right
+                           accepts `filterActive` prop → highlights filter icon (surface-2 bg)
+                           z-index: 30 (above FiltersPanel)
       MainNavigation.jsx — frosted glass bottom nav (Home/Discover/Favourites/Profile)
       CardMeal.jsx       — meal card: photo + macros + dashed divider + restaurant row
                            accepts `hideRestaurant` prop to hide divider + restaurant row
@@ -39,6 +42,30 @@ src/
       HeroCarousel.jsx   — infinite-loop carousel, 3 slides, auto-advance 3s, swipe support
                            clone technique: 5 slots [clone_last, 0, 1, 2, clone_first]
                            DOM ref for transition control (avoids React batching issues)
+      FiltersPanel.jsx   — "Второстепенные фильтры" (secondary filters). Slides down from top;
+                           backdrop (z-index 20) + panel (z-index 21)
+                           border-radius 0 0 --radius-xl --radius-xl on panel
+                           sections: Macros confidence (multi-select), Measure (single), Sort by (single),
+                           Open now + Top ranked (independent bool toggles)
+                           pendingFilters pattern: edits isolated until Apply; opening resets pending to current
+                           filter icon click toggles open/close without applying on close
+                           animation: 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+                           wraps ButtonFilterActions in <div className={styles.actions}> with padding: 0 var(--spacing-16)
+                           Available on both Home and Discover screens
+      MealFilterOverlay.jsx — "Главные фильтры" (main filters). 3-card accordion overlay, z-index 35.
+                           Cards: Meal Time (morphs from 59px pill to full card via max-height 0.55s),
+                           Macros (slides in with stagger 0.1s), Profile (slides in with stagger 0.18s)
+                           Accordion: CSS grid-template-rows 0fr→1fr for proportional simultaneous animation
+                           Body structure: .body > .bodyInner (overflow:hidden, min-height:0) > .bodyContent (padding)
+                           Opacity gating via CSS descendant selectors:
+                             .cardMainExpanded .bodyOpen .bodyInner .bodyContent { opacity: 1 }
+                             .cardVisible .bodyOpen .bodyInner .bodyContent { opacity: 1 }
+                           toggleSection rule: cannot close without opening another (prev === key ? prev : key)
+                           panelWrapVisible controlled by isVisible state (mount first, then expand)
+                           Unmount timer: 520ms; actions row stagger: 0.25s delay
+                           Available on both Home and Discover screens
+      ButtonFilterActions.jsx — Reset (no border, shadow-float) + Apply (shadow-float); NO padding on .wrap
+                           (padding is provided by the parent context: FiltersPanel .actions or MealFilterOverlay bodyContent)
       MealDescriptionOverlay.jsx        — full-screen overlay for a single meal
       RestaurantDescriptionOverlay.jsx  — full-screen overlay for a restaurant + its meals
   screens/
@@ -133,8 +160,11 @@ Located near Wrangelstrasse 18, Berlin (52.4957–52.4978, 13.4293–13.4337). E
 ## Screen-specific notes
 
 **Home** — TopBar pill + HeroCarousel + horizontal-scroll restaurant sections (`CardRestaurant`).
+TopBar `onPillClick` → opens главные фильтры (MealFilterOverlay); `onFilterClick` → toggles второстепенные фильтры (FiltersPanel).
 
 **Discover** — Full-screen Google Map with draggable bottom sheet (peek/expanded) + MealPin markers with floating card mechanic on selection. See full details above.
+TopBar `onPillClick` → opens главные фильтры (MealFilterOverlay); `onFilterClick` → toggles второстепенные фильтры (FiltersPanel).
+TopBar title: "Discover"; subtitle built from `buildMainSubtitle(activeMainFilters)` (mealTime + diet label).
 
 **Favourites** — Simple centered plain title (not TopBar pill) + vertical `CardMeal` list with solid separators.
 

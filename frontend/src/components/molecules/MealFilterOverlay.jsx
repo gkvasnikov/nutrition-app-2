@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
-import { ChevronIcon, SearchIcon } from '../atoms/icons'
+import { SearchIcon } from '../atoms/icons'
 import styles from './MealFilterOverlay.module.css'
 
 // ─── Presets ─────────────────────────────────────────────────────────────────
@@ -44,6 +44,13 @@ const DIET_TYPES = [
   { key: 'keto',         label: 'Keto' },
   { key: 'custom',       label: 'Custom' },
 ]
+
+const DIET_CELL_BG = {
+  Kcal:    'transparent',
+  Protein: '#e3fbe8',
+  Fat:     '#fefbed',
+  Carbs:   '#f1f6fe',
+}
 
 // ─── RangeSlider ─────────────────────────────────────────────────────────────
 
@@ -123,7 +130,7 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
   // ── Helpers ──────────────────────────────────────────────────────────────
 
   function toggleSection(key) {
-    setOpenSection(prev => prev === key ? null : key)
+    setOpenSection(prev => prev === key ? prev : key)
   }
 
   function computeMacros(mealTimeVal, dietVal) {
@@ -169,111 +176,107 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
   return (
     <div className={styles.overlay}>
 
-      {/* Backdrop — click to dismiss without applying */}
+      {/* Backdrop — click to dismiss */}
       <div
         className={`${styles.backdrop} ${isExpanded ? styles.backdropVisible : ''}`}
         onClick={onClose}
       />
 
-      {/* Panel wrapper — same position as TopBar */}
+      {/* Cards stack */}
       <div className={`${styles.panelWrap} ${isVisible ? styles.panelWrapVisible : ''}`}>
-        <div className={`${styles.panel} ${isExpanded ? styles.panelExpanded : ''}`}>
 
-          {/* ── 1. Meal Time accordion ────────────────────────────── */}
+        {/* ── Card 1: Meal Time — morphs from pill ───────────────────── */}
+        <div className={`${styles.cardMain} ${isExpanded ? styles.cardMainExpanded : ''}`}>
           <button
             type="button"
-            className={styles.firstHeader}
+            className={styles.cardHeader}
             onClick={() => toggleSection('mealtime')}
           >
-            <SearchIcon size={15} className={styles.firstHeaderIcon} />
-            <span className={styles.firstHeaderTitle}>Meal Time</span>
-            <div className={`${styles.chevronBtn} ${openSection === 'mealtime' ? styles.chevronOpen : ''}`}>
-              <ChevronIcon size={16} />
-            </div>
+            <span className={styles.cardTitle}>Meal Time</span>
           </button>
 
           <div className={`${styles.body} ${openSection === 'mealtime' ? styles.bodyOpen : ''}`}>
             <div className={styles.bodyInner}>
-              {/* Meal time pills */}
-              <div className={styles.pillRow}>
-                {MEAL_TIMES.map(({ key, label }) => (
-                  <PillTab key={key} label={label} selected={mealTime === key} onClick={() => selectMealTime(key)} />
-                ))}
-              </div>
-              {/* Diet type pills */}
-              <div className={styles.pillRow}>
-                {DIET_TYPES.map(({ key, label }) => (
-                  <PillTab key={key} label={label} selected={diet === key} onClick={() => selectDiet(key)} />
-                ))}
-              </div>
-              {/* Search */}
-              <div className={styles.searchWrap}>
-                <SearchIcon size={14} className={styles.searchIcon} />
-                <input
-                  type="text"
-                  className={styles.searchInput}
-                  placeholder="Search"
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                />
+              <div className={styles.bodyContent}>
+                <div className={styles.pillRow}>
+                  {MEAL_TIMES.map(({ key, label }) => (
+                    <PillTab key={key} label={label} selected={mealTime === key} onClick={() => selectMealTime(key)} />
+                  ))}
+                </div>
+                <div className={styles.divider} />
+                <div className={styles.pillRow}>
+                  {DIET_TYPES.map(({ key, label }) => (
+                    <PillTab key={key} label={label} selected={diet === key} onClick={() => selectDiet(key)} />
+                  ))}
+                </div>
+                <div className={styles.divider} />
+                <div className={styles.searchWrap}>
+                  <SearchIcon size={14} className={styles.searchIcon} />
+                  <input
+                    type="text"
+                    className={styles.searchInput}
+                    placeholder="Search"
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* ── Divider ───────────────────────────────────────────── */}
-          <div className={styles.divider} />
-
-          {/* ── 2. Adjust macros accordion ────────────────────────── */}
+        {/* ── Card 2: Adjust macros ──────────────────────────────────── */}
+        <div
+          className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.1s' : '0s' }}
+        >
           <button
             type="button"
-            className={styles.accordionHeader}
+            className={styles.cardHeader}
             onClick={() => toggleSection('macros')}
           >
-            <span className={styles.accordionTitle}>Adjust macros</span>
-            <div className={`${styles.chevronBtn} ${openSection === 'macros' ? styles.chevronOpen : ''}`}>
-              <ChevronIcon size={16} />
-            </div>
+            <span className={styles.cardTitle}>Adjust macros</span>
           </button>
 
           <div className={`${styles.body} ${openSection === 'macros' ? styles.bodyOpen : ''}`}>
             <div className={styles.bodyInner}>
-              {SLIDER_CONFIG.map(cfg => (
-                <RangeSlider
-                  key={cfg.key}
-                  label={cfg.label}
-                  min={cfg.min}
-                  max={cfg.max}
-                  value={macros[cfg.key]}
-                  onChange={v => setMacros(prev => ({ ...prev, [cfg.key]: v }))}
-                />
-              ))}
-              {/* Dietary restriction tags */}
-              <div className={styles.pillRow}>
-                <PillTab label="Plant-based"      selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
-                <PillTab label="Gluten-free"       selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
-                <PillTab label="Diabetes friendly" selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
+              <div className={styles.bodyContent}>
+                {SLIDER_CONFIG.map(cfg => (
+                  <RangeSlider
+                    key={cfg.key}
+                    label={cfg.label}
+                    min={cfg.min}
+                    max={cfg.max}
+                    value={macros[cfg.key]}
+                    onChange={v => setMacros(prev => ({ ...prev, [cfg.key]: v }))}
+                  />
+                ))}
+                <div className={styles.pillRow}>
+                  <PillTab label="Plant-based"       selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
+                  <PillTab label="Gluten-free"        selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
+                  <PillTab label="Diabetes friendly"  selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* ── Divider ───────────────────────────────────────────── */}
-          <div className={styles.divider} />
-
-          {/* ── 3. Profile accordion ──────────────────────────────── */}
+        {/* ── Card 3: Profile ───────────────────────────────────────── */}
+        <div
+          className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.18s' : '0s' }}
+        >
           <button
             type="button"
-            className={styles.accordionHeader}
+            className={styles.cardHeader}
             onClick={() => toggleSection('profile')}
           >
-            <span className={styles.accordionTitle}>Profile</span>
-            <div className={`${styles.chevronBtn} ${openSection === 'profile' ? styles.chevronOpen : ''}`}>
-              <ChevronIcon size={16} />
-            </div>
+            <span className={styles.cardTitle}>Profile</span>
           </button>
 
           <div className={`${styles.body} ${openSection === 'profile' ? styles.bodyOpen : ''}`}>
             <div className={styles.bodyInner}>
-              {/* User info row */}
+              <div className={styles.bodyContent}>
               <div className={styles.profileRow}>
                 <div className={styles.avatar}>M</div>
                 <div className={styles.profileInfo}>
@@ -283,34 +286,40 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
                 <button type="button" className={styles.editBtn}>✎ Edit Profile</button>
               </div>
 
-              {/* Your diet row */}
               <div className={styles.dietSection}>
                 <span className={styles.dietLabel}>Your diet</span>
                 <div className={styles.dietCells}>
                   {[
-                    { value: '2500', unit: 'Kcal' },
+                    { value: '2500', unit: 'Kcal'    },
                     { value: '156g', unit: 'Protein' },
-                    { value: '83g',  unit: 'Fat' },
-                    { value: '281g', unit: 'Carbs' },
+                    { value: '83g',  unit: 'Fat'     },
+                    { value: '281g', unit: 'Carbs'   },
                   ].map(({ value, unit }) => (
-                    <div key={unit} className={styles.dietCell}>
+                    <div
+                      key={unit}
+                      className={styles.dietCell}
+                      style={{ background: DIET_CELL_BG[unit] }}
+                    >
                       <span className={styles.dietCellValue}>{value}</span>
                       <span className={styles.dietCellUnit}>{unit}</span>
                     </div>
                   ))}
                 </div>
               </div>
+              </div>
             </div>
           </div>
-
-          {/* ── Reset + Apply ─────────────────────────────────────── */}
-          <div className={`${styles.actions} ${isExpanded ? styles.actionsVisible : ''}`}>
-            <ButtonFilterActions onReset={handleReset} onApply={handleApply} />
-          </div>
-
         </div>
-      </div>
 
+        {/* ── Reset + Apply ─────────────────────────────────────────── */}
+        <div
+          className={`${styles.actions} ${isExpanded ? styles.actionsVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.25s' : '0s' }}
+        >
+          <ButtonFilterActions onReset={handleReset} onApply={handleApply} />
+        </div>
+
+      </div>
     </div>
   )
 }
