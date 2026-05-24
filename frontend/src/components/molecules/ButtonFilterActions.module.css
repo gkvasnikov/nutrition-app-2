@@ -2,18 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-16);
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-float);
+  padding: 0 var(--spacing-16);
 }
 
 .reset {
   height: 50px;
   padding: 0 var(--spacing-16);
   border-radius: var(--radius-full);
-  border: 1.5px solid var(--color-surface-2);
+  border: none;
   background: var(--color-white);
+  box-shadow: var(--shadow-float);
   font-size: var(--font-size-section);
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
@@ -32,6 +30,7 @@
   padding: 0 28px;
   border-radius: var(--radius-full);
   background: var(--color-text);
+  box-shadow: var(--shadow-float);
   font-size: var(--font-size-section);
   font-weight: var(--font-weight-bold);
   color: var(--color-white);
