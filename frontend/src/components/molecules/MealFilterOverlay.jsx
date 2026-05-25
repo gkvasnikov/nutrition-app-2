@@ -8,21 +8,21 @@ import styles from './MealFilterOverlay.module.css'
 // ─── Presets ─────────────────────────────────────────────────────────────────
 
 const MEAL_PRESETS = {
-  breakfast: { kcal: [250, 600],  protein: [15, 50], fat: [5,  25], carbs: [30,  80] },
-  lunch:     { kcal: [400, 900],  protein: [25, 65], fat: [10, 35], carbs: [50, 120] },
-  dinner:    { kcal: [350, 850],  protein: [25, 65], fat: [8,  35], carbs: [40, 100] },
-  snack:     { kcal: [100, 300],  protein: [5,  25], fat: [2,  15], carbs: [10,  50] },
+  breakfast: { kcal: [250, 700],  protein: [10, 50], fat: [5,  30], carbs: [20, 100] },
+  lunch:     { kcal: [350, 850],  protein: [20, 65], fat: [8,  45], carbs: [20, 120] },
+  dinner:    { kcal: [350, 900],  protein: [20, 65], fat: [8,  45], carbs: [10, 120] },
+  snack:     { kcal: [100, 500],  protein: [5,  35], fat: [2,  25], carbs: [5,   80] },
 }
 
 const DIET_PRESETS = {
-  high_protein: { kcal: [400, 1000], protein: [50, 150], fat: [10,  40], carbs: [20,  80] },
-  high_carb:    { kcal: [400, 1000], protein: [20,  60], fat: [5,   25], carbs: [80, 200] },
-  balanced:     { kcal: [300,  900], protein: [25,  75], fat: [10,  35], carbs: [40, 120] },
-  keto:         { kcal: [300,  900], protein: [30,  80], fat: [40, 100], carbs: [0,   25] },
+  high_protein: { kcal: [300,  900], protein: [25, 150], fat: [5,   55], carbs: [0,  150] },
+  high_carb:    { kcal: [350, 1000], protein: [10,  60], fat: [5,   30], carbs: [60, 250] },
+  balanced:     { kcal: [300,  800], protein: [15,  60], fat: [8,   40], carbs: [30, 120] },
+  keto:         { kcal: [300,  900], protein: [20,  80], fat: [30, 100], carbs: [0,   25] },
   custom:       null,
 }
 
-const DEFAULT_MACROS = { kcal: [250, 1000], protein: [55, 200], fat: [0, 43], carbs: [0, 100] }
+const DEFAULT_MACROS = { kcal: [100, 1200], protein: [0, 200], fat: [0, 100], carbs: [0, 250] }
 
 const SLIDER_CONFIG = [
   { key: 'kcal',    label: 'Kcal',    min: 0, max: 2000 },

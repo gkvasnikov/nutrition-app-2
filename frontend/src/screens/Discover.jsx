@@ -29,12 +29,19 @@ export default function Discover({
   const [showMealFilter, setShowMealFilter] = useState(false)
   const lastSelectedPinRef = useRef(null) // keeps content visible during exit anim
   const pinDataRef = useRef([])           // all PIN_DATA, populated after image load
+  const markersRef = useRef([])           // [{ marker, cfg }] for filter-driven updates
   const mapRef = useRef(null)
   const mapInstanceRef = useRef(null)
   const userMarkerRef = useRef(null)
   const sheetRef = useRef(null)
   const listRef = useRef(null)
   const activeMarkerRef = useRef(null) // currently selected map marker
+
+  // Stable refs for filter state — safe to read inside map event handlers
+  const activeMainFiltersRef = useRef(activeMainFilters)
+  activeMainFiltersRef.current = activeMainFilters
+  const secondaryFiltersRef = useRef(secondaryFilters)
+  secondaryFiltersRef.current = secondaryFilters
 
   // Drag state
   const dragging = useRef(false)
@@ -53,6 +60,47 @@ export default function Discover({
   // Stable ref so map event handlers can call latest selectPin without stale closure
   const selectPinRef = useRef(null)
 
+  // ── Filter helpers ────────────────────────────────────────────────
+  function applyFiltersToMeals(meals) {
+    const mf = activeMainFiltersRef.current
+    const sf = secondaryFiltersRef.current
+    const { kcal, protein, fat, carbs } = mf.macros ?? {}
+
+    let result = meals.filter(meal => {
+      if (kcal    && meal.calories != null && (meal.calories < kcal[0]    || meal.calories > kcal[1]))    return false
+      if (protein && meal.protein  != null && (meal.protein  < protein[0] || meal.protein  > protein[1])) return false
+      if (fat     && meal.fat      != null && (meal.fat      < fat[0]     || meal.fat      > fat[1]))     return false
+      if (carbs   && meal.carbs    != null && (meal.carbs    < carbs[0]   || meal.carbs    > carbs[1]))   return false
+      if (sf.openNow) {
+        const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+        if (!r?.isOpen) return false
+      }
+      if (sf.topRanked && (meal.rating == null || meal.rating < 4.5)) return false
+      return true
+    })
+
+    if (sf.sortBy === 'a_z') result.sort((a, b) => a.name.localeCompare(b.name))
+    return result
+  }
+
+  function updatePinFilters() {
+    for (const { marker, cfg } of markersRef.current) {
+      const filtered = applyFiltersToMeals(cfg.allMeals)
+      cfg.meals = filtered
+      cfg.count = filtered.length
+      cfg.type  = filtered.length <= 1 ? 'single' : 'group'
+      if (filtered.length === 0) {
+        marker.setVisible(false)
+      } else {
+        marker.setVisible(true)
+        marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count))
+      }
+    }
+    updateVisibleMealsRef.current()
+  }
+  const updatePinFiltersRef = useRef(null)
+  updatePinFiltersRef.current = updatePinFilters
+
   // ── Visible meals ─────────────────────────────────────────────────
   function updateVisibleMeals() {
     const map = mapInstanceRef.current
@@ -62,13 +110,19 @@ export default function Discover({
     const meals = []
     for (const cfg of pinDataRef.current) {
       if (bounds.contains({ lat: cfg.lat, lng: cfg.lng })) {
-        meals.push(...cfg.meals)
+        meals.push(...cfg.meals) // cfg.meals is always the filtered subset
       }
     }
     setVisibleMeals(meals)
   }
   const updateVisibleMealsRef = useRef(null)
   updateVisibleMealsRef.current = updateVisibleMeals
+
+  // Re-filter pins whenever active filters change
+  useEffect(() => {
+    if (!markersRef.current.length) return
+    updatePinFiltersRef.current()
+  }, [activeMainFilters, secondaryFilters]) // eslint-disable-line
 
   // ── Pin selection ─────────────────────────────────────────────────
   function selectPin(cfg) {
@@ -274,6 +328,7 @@ export default function Discover({
       photo: pin.pinPhoto || null,  // base64 data URI — no CORS issues with canvas
       count: pin.meals.length,
       meals: pin.meals,
+      allMeals: pin.meals, // immutable original — meals is mutated by filter updates
     }))
 
     // Register map-level listeners before image preload — map fires idle/bounds_changed
@@ -316,7 +371,11 @@ export default function Discover({
       })
 
       marker._cfg = cfg
+      markersRef.current.push({ marker, cfg })
     })
+
+    // Apply initial filters (default filters are set at startup)
+    updatePinFiltersRef.current()
   }
 
   async function initMap() {

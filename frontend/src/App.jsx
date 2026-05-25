@@ -21,7 +21,7 @@ function getInitialMainFilters() {
   return {
     mealTime,
     diet: 'high_protein',
-    macros: { kcal: [250, 1000], protein: [55, 200], fat: [0, 43], carbs: [0, 100] },
+    macros: { kcal: [300, 900], protein: [25, 150], fat: [5, 55], carbs: [0, 150] },
     dietTags: { plantBased: false, glutenFree: false, diabetesFriendly: false },
     search: '',
   }
