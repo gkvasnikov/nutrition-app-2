@@ -2,7 +2,7 @@ import { HomeIcon, MapIcon, FavouriteIcon, ProfileIcon } from '../atoms/icons'
 import styles from './MainNavigation.module.css'
 
 const TABS = [
-  { id: 'home',       label: 'Home',       Icon: HomeIcon },
+  // { id: 'home',       label: 'Home',       Icon: HomeIcon },  // temporarily hidden
   { id: 'discover',   label: 'Discover',   Icon: MapIcon },
   { id: 'favourites', label: 'Favourites', Icon: FavouriteIcon },
   { id: 'profile',    label: 'Profile',    Icon: ProfileIcon },

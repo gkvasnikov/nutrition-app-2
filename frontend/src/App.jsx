@@ -28,7 +28,7 @@ function getInitialMainFilters() {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home')
+  const [activeTab, setActiveTab] = useState('discover') // 'home' temporarily hidden
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
