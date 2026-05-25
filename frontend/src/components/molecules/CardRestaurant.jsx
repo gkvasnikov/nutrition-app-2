@@ -1,4 +1,5 @@
 import { WalkIcon } from '../atoms/icons'
+import { withKey } from '../../utils/photoUrl'
 import styles from './CardRestaurant.module.css'
 
 export default function CardRestaurant({
@@ -19,7 +20,7 @@ export default function CardRestaurant({
       {/* Photo */}
       <div className={styles.photoWrap}>
         {photo
-          ? <img src={photo} alt={name} className={styles.photo} />
+          ? <img src={withKey(photo)} alt={name} className={styles.photo} />
           : null
         }
         {priceRange && (

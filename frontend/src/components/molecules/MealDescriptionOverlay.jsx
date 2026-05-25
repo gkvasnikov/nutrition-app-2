@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { CloseIcon, HeartOutlineIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
+import { withKey } from '../../utils/photoUrl'
 import styles from './MealDescriptionOverlay.module.css'
 
 const MACRO_BG = {
@@ -188,7 +189,7 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
             >
               <div className={styles.restaurantPhotoWrap}>
                 {meal.restaurantPhoto
-                  ? <img src={meal.restaurantPhoto} alt={meal.restaurantName} className={styles.restaurantPhoto} />
+                  ? <img src={withKey(meal.restaurantPhoto)} alt={meal.restaurantName} className={styles.restaurantPhoto} />
                   : <div className={styles.restaurantPhotoPlaceholder} />
                 }
                 {meal.priceRange && <span className={styles.priceBadge}>{meal.priceRange}</span>}

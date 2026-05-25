@@ -1,6 +1,7 @@
 import { useEffect, useRef, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
+import { withKey } from '../../utils/photoUrl'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, meals = [], onClose, onMealSelect }) {
@@ -128,7 +129,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
           {/* Photo area — scrolls with content */}
           <div className={styles.photoArea}>
             {restaurant.photo && (
-              <img src={restaurant.photo} alt={restaurant.name} className={styles.photo} />
+              <img src={withKey(restaurant.photo)} alt={restaurant.name} className={styles.photo} />
             )}
           </div>
           <div className={styles.content}>
