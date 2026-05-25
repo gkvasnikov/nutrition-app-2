@@ -1,10 +1,29 @@
 import { useEffect, useRef, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
+import { MOCK_RESTAURANTS } from '../../data/mockData'
 import { withKey } from '../../utils/photoUrl'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, meals = [], zIndex = 200, onClose, onMealSelect }) {
+  function handleDirection() {
+    const r = MOCK_RESTAURANTS.find(r => r.name === restaurant.name)
+    if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
+  }
+
+  function handleWolt() {
+    const r = MOCK_RESTAURANTS.find(r => r.name === restaurant.name)
+    if (r?.woltSlug) window.open(`https://wolt.com/de/deu/berlin/restaurant/${r.woltSlug}`, '_blank')
+  }
+
+  function handleShare() {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: restaurant.name, url }).catch(() => {})
+    } else {
+      navigator.clipboard?.writeText(`${restaurant.name} — ${url}`)
+    }
+  }
   const backdropRef      = useRef(null)
   const sheetRef         = useRef(null)
   const scrollContentRef = useRef(null)
@@ -172,9 +191,9 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
 
               {/* 3 action buttons */}
               <div className={styles.actions}>
-                <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
-                <button className={styles.actionBtn}><WoltIcon /></button>
-                <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
+                <button className={styles.actionBtn} onClick={handleDirection}><DirectionIcon size={24} /></button>
+                <button className={styles.actionBtn} onClick={handleWolt}><WoltIcon /></button>
+                <button className={styles.actionBtn} onClick={handleShare}><ShareUpIcon size={24} /></button>
               </div>
             </div>
 

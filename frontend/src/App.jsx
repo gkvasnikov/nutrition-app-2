@@ -8,6 +8,11 @@ import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescr
 import { getTimedMealTime } from './utils/filterPill'
 import { MOCK_MEALS } from './data/mockMeals'
 
+function loadFavourites() {
+  try { return JSON.parse(localStorage.getItem('favourites') ?? '[]') }
+  catch { return [] }
+}
+
 const DEFAULT_SECONDARY_FILTERS = {
   macrosConfidence: ['high', 'medium'],
   measure: 'per_meal',
@@ -34,6 +39,17 @@ export default function App() {
   const [selectedMealZIndex,       setSelectedMealZIndex]       = useState(200)
   const [selectedRestaurantZIndex, setSelectedRestaurantZIndex] = useState(200)
   const zIndexCounterRef = useRef(200)
+  const [favourites, setFavourites] = useState(loadFavourites)
+
+  function toggleFavourite(meal) {
+    setFavourites(prev => {
+      const next = prev.some(f => f.id === meal.id)
+        ? prev.filter(f => f.id !== meal.id)
+        : [...prev, meal]
+      localStorage.setItem('favourites', JSON.stringify(next))
+      return next
+    })
+  }
 
   // ── Global filters — shared across Home + Discover ────────────────────────
   const [activeMainFilters,  setActiveMainFilters]  = useState(getInitialMainFilters)
@@ -64,6 +80,8 @@ export default function App() {
     onTabChange:        setActiveTab,
     onMealSelect:       handleMealSelect,
     onRestaurantSelect: handleRestaurantSelect,
+    favourites,
+    onToggleFavourite:  toggleFavourite,
     ...filterProps,
   }
 
@@ -89,6 +107,8 @@ export default function App() {
           zIndex={selectedMealZIndex}
           onClose={() => setSelectedMeal(null)}
           onRestaurantSelect={handleRestaurantSelect}
+          isFavourite={favourites.some(f => f.id === selectedMeal?.id)}
+          onToggleFavourite={toggleFavourite}
         />
       )}
 

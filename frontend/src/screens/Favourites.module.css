@@ -61,3 +61,36 @@
   pointer-events: none;
   z-index: 5;
 }
+
+/* ── Empty state ─────────────────────────────────────── */
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding-bottom: 80px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: var(--spacing-4);
+}
+
+.emptyTitle {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin: 0;
+  text-align: center;
+}
+
+.emptySubtitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-2);
+  margin: 0;
+  text-align: center;
+}

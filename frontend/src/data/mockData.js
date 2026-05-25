@@ -15,7 +15,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–23:00",
     "distance": "380m",
     "lat": 52.4998562,
-    "lng": 13.4320874
+    "lng": 13.4320874,
+    "woltSlug": "hhnerhaus36"
   },
   {
     "id": "ChIJlV40EExOqEcRw-LRQsb4aos",
@@ -30,7 +31,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "07:00–02:00",
     "distance": "560m",
     "lat": 52.500632,
-    "lng": 13.436241
+    "lng": 13.436241,
+    "woltSlug": "mcdonalds-am-ostbahnhof"
   },
   {
     "id": "ChIJtYhDQExOqEcRDwX2Fcy5raY",
@@ -45,7 +47,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–22:30",
     "distance": "530m",
     "lat": 52.4998741,
-    "lng": 13.4370962
+    "lng": 13.4370962,
+    "woltSlug": "ta-cabron-taqueria"
   },
   {
     "id": "ChIJQbhd9F1PqEcR0lizKRUEH84",
@@ -60,7 +63,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "16:00–22:00",
     "distance": "610m",
     "lat": 52.4985312,
-    "lng": 13.4399323
+    "lng": 13.4399323,
+    "woltSlug": "el-taco-loco"
   },
   {
     "id": "ChIJD4cEy01OqEcR43EXs3nDWOc",
@@ -75,7 +79,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–22:00",
     "distance": "610m",
     "lat": 52.4996813,
-    "lng": 13.438852
+    "lng": 13.438852,
+    "woltSlug": "tunas-gemuse-kebap"
   },
   {
     "id": "ChIJyQ9ZNEtOqEcRPQbOwPVFLEk",
@@ -90,7 +95,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–00:00",
     "distance": "40m",
     "lat": 52.4968,
-    "lng": 13.43108
+    "lng": 13.43108,
+    "woltSlug": "nachtigall-libanesische-kche-berlin"
   },
   {
     "id": "ChIJa-T4zuNPqEcR-8trMvqPOvc",
@@ -105,7 +111,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "16:00–23:00",
     "distance": "360m",
     "lat": 52.498253,
-    "lng": 13.4359537
+    "lng": 13.4359537,
+    "woltSlug": "sadhu-kreuzberg"
   },
   {
     "id": "ChIJoaQbXwBPqEcRzefq86tUa3s",
@@ -120,7 +127,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "17:00–22:00",
     "distance": "240m",
     "lat": 52.4986621,
-    "lng": 13.4315182
+    "lng": 13.4315182,
+    "woltSlug": "wen-cheng-4-hand-pulled-noodles"
   },
   {
     "id": "ChIJfeorv01OqEcRIGW238pursw",
@@ -135,7 +143,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "08:00–19:00",
     "distance": "650m",
     "lat": 52.49924370000001,
-    "lng": 13.4400475
+    "lng": 13.4400475,
+    "woltSlug": "sumak-berlin"
   },
   {
     "id": "ChIJVQ7GhCpPqEcRfDHzqLYtHSk",
@@ -150,7 +159,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–22:00",
     "distance": "630m",
     "lat": 52.4995227,
-    "lng": 13.4393982
+    "lng": 13.4393982,
+    "woltSlug": "slava-berlin"
   },
   {
     "id": "ChIJuywQOkpOqEcRUJ2FMo5Ue20",
@@ -165,7 +175,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:30–23:00",
     "distance": "510m",
     "lat": 52.5010257,
-    "lng": 13.4307872
+    "lng": 13.4307872,
+    "woltSlug": "rocco-und-seine-brder"
   },
   {
     "id": "ChIJJR4w8CtPqEcRjw-iv12RBUU",
@@ -180,7 +191,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–00:00",
     "distance": "630m",
     "lat": 52.4998565,
-    "lng": 13.4239766
+    "lng": 13.4239766,
+    "woltSlug": "maiyarap-berlin"
   },
   {
     "id": "ChIJfX618KFPqEcRWFbbnPnsboY",
@@ -195,7 +207,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–22:00",
     "distance": "140m",
     "lat": 52.4962837,
-    "lng": 13.433466
+    "lng": 13.433466,
+    "woltSlug": "mmaah-korean-bbq-express-friedrichshain"
   },
   {
     "id": "ChIJk3b3IwNPqEcRaEM2c3uKmRs",
@@ -210,7 +223,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "17:00–23:00",
     "distance": "440m",
     "lat": 52.5004147,
-    "lng": 13.4318634
+    "lng": 13.4318634,
+    "woltSlug": "zerostress-pizza-kreuzberg"
   },
   {
     "id": "ChIJCa695RhPqEcRz7miYlwqCmM",
@@ -225,7 +239,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "14:00–23:00",
     "distance": "160m",
     "lat": 52.4952797,
-    "lng": 13.4302616
+    "lng": 13.4302616,
+    "woltSlug": "lalibela-berlin"
   },
   {
     "id": "ChIJ6fiyKitSqEcRVVsBRRLlVIQ",
@@ -240,7 +255,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "17:00–23:00",
     "distance": "670m",
     "lat": 52.49958729999999,
-    "lng": 13.4399707
+    "lng": 13.4399707,
+    "woltSlug": "parma-di-vinibenedetti"
   },
   {
     "id": "ChIJ4wSH3qxRqEcRLyJVpH8CDPU",
@@ -255,7 +271,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–00:00",
     "distance": "190m",
     "lat": 52.4981648,
-    "lng": 13.4307215
+    "lng": 13.4307215,
+    "woltSlug": "sidhu-berlin"
   },
   {
     "id": "ChIJlQ0yd2JQqEcREMf7Y-d-Nco",
@@ -270,7 +287,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "Geschlossen",
     "distance": "320m",
     "lat": 52.4986185,
-    "lng": 13.4347454
+    "lng": 13.4347454,
+    "woltSlug": "pan-africa-bln"
   },
   {
     "id": "ChIJr3Z6ZbNPqEcR-3vvqisF7IE",
@@ -285,7 +303,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "Geschlossen",
     "distance": "270m",
     "lat": 52.49441789999999,
-    "lng": 13.4335997
+    "lng": 13.4335997,
+    "woltSlug": "senegambia-berlin"
   },
   {
     "id": "ChIJ1ekxOAFPqEcRIAFyUzIGFJ4",
@@ -300,7 +319,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–23:00",
     "distance": "580m",
     "lat": 52.5016521,
-    "lng": 13.4325053
+    "lng": 13.4325053,
+    "woltSlug": "restaurant-dumplings-nian"
   },
   {
     "id": "ChIJbcqAmaIjZUERaMFeY4pV7VI",
@@ -315,7 +335,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "12:00–22:00",
     "distance": "510m",
     "lat": 52.5010319,
-    "lng": 13.4305052
+    "lng": 13.4305052,
+    "woltSlug": "chi-chu"
   },
   {
     "id": "ChIJtYlLhklOqEcR--8WWqY2eVk",
@@ -330,7 +351,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–17:00",
     "distance": "630m",
     "lat": 52.5021335,
-    "lng": 13.4316207
+    "lng": 13.4316207,
+    "woltSlug": "mani-in-pasta"
   },
   {
     "id": "ChIJpVvpUNxPqEcRU1Y96nAcls0",
@@ -345,7 +367,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "08:00–19:00",
     "distance": "90m",
     "lat": 52.497312,
-    "lng": 13.4315284
+    "lng": 13.4315284,
+    "woltSlug": "the-visit-coffee-wiener-strasse"
   },
   {
     "id": "ChIJWxowgylPqEcRd3oxONDXh1Q",
@@ -360,7 +383,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:30–22:00",
     "distance": "370m",
     "lat": 52.4998131,
-    "lng": 13.4321782
+    "lng": 13.4321782,
+    "woltSlug": "ngoc-chau-restaurant"
   },
   {
     "id": "ChIJWXlm6f1PqEcRIs3P07oGCi8",
@@ -375,7 +399,8 @@ export const MOCK_RESTAURANTS = [
     "hours": "11:00–00:00",
     "distance": "160m",
     "lat": 52.4952675,
-    "lng": 13.4302499
+    "lng": 13.4302499,
+    "woltSlug": "wunderlampe"
   }
 ];
 

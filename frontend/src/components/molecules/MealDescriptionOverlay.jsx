@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { CloseIcon, HeartOutlineIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
+import { CloseIcon, HeartOutlineIcon, HeartFilledIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
+import { MOCK_RESTAURANTS } from '../../data/mockData'
 import { withKey } from '../../utils/photoUrl'
 import styles from './MealDescriptionOverlay.module.css'
 
@@ -17,7 +18,25 @@ const RATING_COLOR = {
   Excellent: '#16a34a',
 }
 
-export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect }) {
+export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect, isFavourite = false, onToggleFavourite }) {
+  function handleDirection() {
+    const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+    if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
+  }
+
+  function handleWolt() {
+    const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+    if (r?.woltSlug) window.open(`https://wolt.com/de/deu/berlin/restaurant/${r.woltSlug}`, '_blank')
+  }
+
+  function handleShare() {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: meal.name, url }).catch(() => {})
+    } else {
+      navigator.clipboard?.writeText(`${meal.name} — ${url}`)
+    }
+  }
   const [advice, setAdvice] = useState(null)   // { score, rating, advice }
   const [adviceLoading, setAdviceLoading] = useState(true)
   const backdropRef      = useRef(null)
@@ -195,10 +214,15 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
 
             {/* Actions */}
             <div className={styles.actions}>
-              <button className={styles.actionBtn}><DirectionIcon size={24} /></button>
-              <button className={styles.actionBtn}><WoltIcon /></button>
-              <button className={styles.actionBtn}><HeartOutlineIcon size={24} /></button>
-              <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
+              <button className={styles.actionBtn} onClick={handleDirection}><DirectionIcon size={24} /></button>
+              <button className={styles.actionBtn} onClick={handleWolt}><WoltIcon /></button>
+              <button
+                className={`${styles.actionBtn} ${isFavourite ? styles.actionBtnActive : ''}`}
+                onClick={() => onToggleFavourite?.(meal)}
+              >
+                {isFavourite ? <HeartFilledIcon size={24} /> : <HeartOutlineIcon size={24} />}
+              </button>
+              <button className={styles.actionBtn} onClick={handleShare}><ShareUpIcon size={24} /></button>
             </div>
 
             {/* ── AI Advisor ─────────────────────────── */}

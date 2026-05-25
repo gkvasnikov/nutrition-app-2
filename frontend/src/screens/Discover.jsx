@@ -661,7 +661,16 @@ export default function Discover({
           <div className={`${styles.pinCardWrap} ${pinExiting ? styles.pinCardWrapExiting : ''}`}>
             {/* Direction + Close buttons */}
             <div className={styles.pinControls}>
-              <button className={styles.mapBtn} aria-label="Directions">
+              <button
+                className={styles.mapBtn}
+                aria-label="Directions"
+                onClick={() => {
+                  const pin = selectedPin ?? lastSelectedPinRef.current
+                  if (pin?.lat && pin?.lng) {
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${pin.lat},${pin.lng}`, '_blank')
+                  }
+                }}
+              >
                 <DirectionIcon size={20} />
               </button>
               <button className={styles.mapBtn} aria-label="Close" onClick={deselectPin}>

@@ -1,12 +1,9 @@
 import { Fragment } from 'react'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
-import { MOCK_MEALS } from '../data/mockMeals'
 import styles from './Favourites.module.css'
 
-const FAV_MEALS = MOCK_MEALS.slice(0, 3)
-
-export default function Favourites({ activeTab, onTabChange, onMealSelect }) {
+export default function Favourites({ activeTab, onTabChange, onMealSelect, favourites = [] }) {
   return (
     <div className={styles.screen}>
       <div className={styles.titleBar}>
@@ -14,12 +11,20 @@ export default function Favourites({ activeTab, onTabChange, onMealSelect }) {
       </div>
 
       <div className={styles.content}>
-        {FAV_MEALS.map((meal, i) => (
-          <Fragment key={meal.id}>
-            {i > 0 && <div className={styles.separator} />}
-            <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
-          </Fragment>
-        ))}
+        {favourites.length === 0 ? (
+          <div className={styles.empty}>
+            <span className={styles.emptyIcon}>🤍</span>
+            <p className={styles.emptyTitle}>No favourites saved yet</p>
+            <p className={styles.emptySubtitle}>Tap the heart on any meal to save it here</p>
+          </div>
+        ) : (
+          favourites.map((meal, i) => (
+            <Fragment key={meal.id}>
+              {i > 0 && <div className={styles.separator} />}
+              <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
+            </Fragment>
+          ))
+        )}
       </div>
 
       <div className={styles.gradient} />
