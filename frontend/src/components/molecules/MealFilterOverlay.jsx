@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import { SearchIcon } from '../atoms/icons'
@@ -105,24 +105,29 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
   const [openSection, setOpenSection] = useState('mealtime')
 
   // Animation state
-  const [isVisible,  setIsVisible]  = useState(false)
+  const panelRef   = useRef(null)
   const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
-    let raf1, raf2, timer
+    const el = panelRef.current
+    if (!el) return
+    let raf1, timer
+
     if (show) {
       setOpenSection('mealtime')
-      setIsVisible(true)
-      raf1 = requestAnimationFrame(() => {
-        raf2 = requestAnimationFrame(() => setIsExpanded(true))
-      })
+      setIsExpanded(false)
+      // Show panelWrap instantly (no fade-in transition) so cardMain covers the TopBar pill immediately
+      el.classList.remove(styles.panelWrapVisible)
+      void el.offsetHeight                          // force reflow so opacity:0 is committed
+      el.classList.add(styles.panelWrapVisible)     // instant appearance (transition: opacity 0s)
+      raf1 = requestAnimationFrame(() => setIsExpanded(true))  // then cardMain morphs
     } else {
       setIsExpanded(false)
-      timer = setTimeout(() => setIsVisible(false), 520)
+      el.classList.remove(styles.panelWrapVisible)  // fades out over 0.3s (base transition)
+      timer = setTimeout(() => {/* element stays hidden via CSS opacity:0 */}, 350)
     }
     return () => {
       if (raf1) cancelAnimationFrame(raf1)
-      if (raf2) cancelAnimationFrame(raf2)
       if (timer) clearTimeout(timer)
     }
   }, [show])
@@ -169,8 +174,6 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
     onClose()
   }
 
-  if (!isVisible) return null
-
   // ── Render ───────────────────────────────────────────────────────────────
 
   return (
@@ -182,8 +185,8 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
         onClick={onClose}
       />
 
-      {/* Cards stack */}
-      <div className={`${styles.panelWrap} ${isVisible ? styles.panelWrapVisible : ''}`}>
+      {/* Cards stack — visibility managed via ref to guarantee CSS transition */}
+      <div ref={panelRef} className={styles.panelWrap}>
 
         {/* ── Card 1: Meal Time — morphs from pill ───────────────────── */}
         <div className={`${styles.cardMain} ${isExpanded ? styles.cardMainExpanded : ''}`}>

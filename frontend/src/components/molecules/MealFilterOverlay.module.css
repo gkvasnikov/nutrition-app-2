@@ -3,6 +3,7 @@
   position: absolute;
   inset: 0;
   z-index: 35;
+  pointer-events: none; /* children control their own pointer-events */
 }
 
 /* ── Backdrop ───────────────────────────────────────────────────────────── */
@@ -12,7 +13,7 @@
   background: rgba(0, 0, 0, 0.25);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .backdropVisible {
@@ -32,26 +33,33 @@
   gap: var(--spacing-8);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s ease;
+  transition: opacity 0.3s ease;
 }
 
 .panelWrapVisible {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0s;
 }
 
 /* ── Card 1 — Meal Time: morphs from pill to card ───────────────────────── */
 .cardMain {
   background: var(--color-white);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-full);
   box-shadow: var(--shadow-float);
   overflow: hidden;
   max-height: 59px;
-  transition: max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin: 0 8px;
+  transition:
+    max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-radius 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    margin 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cardMainExpanded {
   max-height: 700px;
+  border-radius: var(--radius-xl);
+  margin: 0;
 }
 
 /* ── Cards 2 & 3 — secondary cards ─────────────────────────────────────── */
