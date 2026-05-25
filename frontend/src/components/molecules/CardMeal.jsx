@@ -1,5 +1,8 @@
 import { LocationIcon, WalkIcon } from '../atoms/icons'
 import PillMacro from '../atoms/PillMacro'
+import { useLocation } from '../../contexts/LocationContext'
+import { RESTAURANT_BY_ID } from '../../data/restaurantLookup'
+import { distanceTo } from '../../utils/distance'
 import styles from './CardMeal.module.css'
 
 export default function CardMeal({
@@ -11,6 +14,7 @@ export default function CardMeal({
   protein,
   fat,
   carbs,
+  restaurantId,
   restaurantName,
   priceRange,
   distance,
@@ -20,6 +24,11 @@ export default function CardMeal({
   onClick,
   onRestaurantClick,
 }) {
+  const { userLat, userLng } = useLocation()
+  const restaurant = restaurantId ? RESTAURANT_BY_ID[restaurantId] : null
+  const computedDistance = distance ?? (
+    restaurant ? distanceTo(userLat, userLng, restaurant.lat, restaurant.lng) : null
+  )
   return (
     <div className={styles.card} onClick={onClick}>
 
@@ -61,12 +70,12 @@ export default function CardMeal({
             <span className={styles.meta}>{priceRange}</span>
           </>
         )}
-        {distance && (
+        {computedDistance && (
           <>
             <span className={styles.dot} />
             <span className={styles.distanceGroup}>
               <WalkIcon size={14} />
-              <span className={styles.meta}>{distance}</span>
+              <span className={styles.meta}>{computedDistance}</span>
             </span>
           </>
         )}

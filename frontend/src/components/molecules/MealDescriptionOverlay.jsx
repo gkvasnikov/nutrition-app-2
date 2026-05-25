@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { CloseIcon, HeartOutlineIcon, HeartFilledIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
 import { MOCK_RESTAURANTS } from '../../data/mockData'
 import { withKey } from '../../utils/photoUrl'
+import { useLocation } from '../../contexts/LocationContext'
+import { distanceTo } from '../../utils/distance'
 import styles from './MealDescriptionOverlay.module.css'
 
 const MACRO_BG = {
@@ -19,6 +21,10 @@ const RATING_COLOR = {
 }
 
 export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect, isFavourite = false, onToggleFavourite }) {
+  const { userLat, userLng } = useLocation()
+  const mealRestaurant = meal ? MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId) : null
+  const liveDistance = distanceTo(userLat, userLng, mealRestaurant?.lat, mealRestaurant?.lng)
+
   function handleDirection() {
     const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
     if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
@@ -276,7 +282,7 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                 photo:       meal.restaurantPhoto,
                 address:     meal.restaurantAddress,
                 priceRange:  meal.priceRange,
-                distance:    meal.distance,
+                distance:    liveDistance,
                 rating:      meal.rating,
                 reviewCount: meal.reviewCount,
               })}
@@ -297,12 +303,12 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                 </div>
                 <div className={styles.restaurantMeta}>
                   <span className={styles.openNow}>Open now</span>
-                  {meal.distance && (
+                  {liveDistance && (
                     <>
                       <span className={styles.dot} />
                       <span className={styles.distanceGroup}>
                         <WalkIcon size={14} />
-                        <span className={styles.metaText}>{meal.distance}</span>
+                        <span className={styles.metaText}>{liveDistance}</span>
                       </span>
                     </>
                   )}

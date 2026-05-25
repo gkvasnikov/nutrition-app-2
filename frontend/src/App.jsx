@@ -7,6 +7,7 @@ import MealDescriptionOverlay from './components/molecules/MealDescriptionOverla
 import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescriptionOverlay'
 import { getTimedMealTime } from './utils/filterPill'
 import { MOCK_MEALS } from './data/mockMeals'
+import { LocationProvider } from './contexts/LocationContext'
 
 function loadFavourites() {
   try { return JSON.parse(localStorage.getItem('favourites') ?? '[]') }
@@ -97,7 +98,7 @@ export default function App() {
     : []
 
   return (
-    <>
+    <LocationProvider>
       {renderScreen()}
 
       {selectedMeal && (
@@ -122,6 +123,6 @@ export default function App() {
           onMealSelect={handleMealSelect}
         />
       )}
-    </>
+    </LocationProvider>
   )
 }

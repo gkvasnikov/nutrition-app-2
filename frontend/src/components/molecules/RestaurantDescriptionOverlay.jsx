@@ -3,9 +3,16 @@ import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../at
 import CardMeal from './CardMeal'
 import { MOCK_RESTAURANTS } from '../../data/mockData'
 import { withKey } from '../../utils/photoUrl'
+import { useLocation } from '../../contexts/LocationContext'
+import { RESTAURANT_BY_NAME } from '../../data/restaurantLookup'
+import { distanceTo } from '../../utils/distance'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, meals = [], zIndex = 200, onClose, onMealSelect }) {
+  const { userLat, userLng } = useLocation()
+  const restData = restaurant ? RESTAURANT_BY_NAME[restaurant.name] : null
+  const liveDistance = distanceTo(userLat, userLng, restData?.lat, restData?.lng)
+
   function handleDirection() {
     const r = MOCK_RESTAURANTS.find(r => r.name === restaurant.name)
     if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
@@ -169,12 +176,12 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
                     <span className={styles.metaText}>{restaurant.priceRange}</span>
                   </>
                 )}
-                {restaurant.distance && (
+                {liveDistance && (
                   <>
                     <span className={styles.dot} />
                     <span className={styles.distanceGroup}>
                       <WalkIcon size={14} />
-                      <span className={styles.metaText}>{restaurant.distance}</span>
+                      <span className={styles.metaText}>{liveDistance}</span>
                     </span>
                   </>
                 )}
