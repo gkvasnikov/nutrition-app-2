@@ -11,7 +11,7 @@ import { MOCK_MEALS } from './data/mockMeals'
 const DEFAULT_SECONDARY_FILTERS = {
   macrosConfidence: ['high', 'medium'],
   measure: 'per_meal',
-  sortBy: 'nearest',
+  sortBy: 'best_match',
   openNow: false,
   topRanked: false,
 }

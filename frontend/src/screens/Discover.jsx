@@ -79,7 +79,22 @@ export default function Discover({
       return true
     })
 
-    if (sf.sortBy === 'a_z') result.sort((a, b) => a.name.localeCompare(b.name))
+    if (sf.sortBy === 'a_z') {
+      result.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sf.sortBy === 'nearest') {
+      // original extraction order — already sorted by distance, no-op
+    } else {
+      // best_match: score based on active diet
+      const diet = mf.diet
+      const score = meal => {
+        if (diet === 'high_protein') return (meal.protein ?? 0) / (meal.calories || 1) * 100
+        if (diet === 'keto')         return (meal.fat ?? 0) - (meal.carbs ?? 0)
+        if (diet === 'high_carb')    return meal.carbs ?? 0
+        if (diet === 'balanced')     return meal.rating ?? 0
+        return meal.rating ?? 0
+      }
+      result.sort((a, b) => score(b) - score(a))
+    }
     return result
   }
 

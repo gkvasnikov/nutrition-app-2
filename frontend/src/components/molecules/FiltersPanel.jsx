@@ -74,14 +74,14 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
           <span className={styles.label}>Sort by</span>
           <div className={styles.pills}>
             <PillTab
-              label="Nearest"
-              selected={pending.sortBy === 'nearest'}
-              onClick={() => toggle('sortBy', 'nearest')}
-            />
-            <PillTab
               label="Best match"
               selected={pending.sortBy === 'best_match'}
               onClick={() => toggle('sortBy', 'best_match')}
+            />
+            <PillTab
+              label="Nearest"
+              selected={pending.sortBy === 'nearest'}
+              onClick={() => toggle('sortBy', 'nearest')}
             />
             <PillTab
               label="A-Z"
