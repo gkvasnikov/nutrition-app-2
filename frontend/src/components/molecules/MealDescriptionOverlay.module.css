@@ -2,7 +2,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 300;
   background: rgba(0, 0, 0, 0);
 }
 
@@ -12,7 +12,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 101;
+  z-index: 301;
   background: var(--color-bg);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   max-height: calc(100dvh - 24px);
