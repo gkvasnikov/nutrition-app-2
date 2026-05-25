@@ -7,6 +7,7 @@ import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
 import { MOCK_MEALS } from '../data/mockMeals'
+import { MOCK_RESTAURANTS } from '../data/mockData'
 import styles from './Discover.module.css'
 
 
@@ -256,29 +257,46 @@ export default function Discover({
   }
 
   async function addMealPins(map) {
-    // Wrangelstrasse 18, Berlin (~2 intersections radius)
-    // Each pin = one restaurant; group pin = 3 meals from Green & Protein
-    const PIN_DATA = [
-      { lat: 52.4965, lng: 13.4315, type: 'single', photo: '/meals/bowl-pollo-asado.avif',
-        meals: [MOCK_MEALS[0]] },                              // Martin's Crêperie
-      { lat: 52.4971, lng: 13.4337, type: 'single', photo: '/meals/karisik-izgara.avif',
-        meals: [MOCK_MEALS[1]] },                              // Mani in Pasta
-      { lat: 52.4957, lng: 13.4293, type: 'single', photo: '/meals/halbes-hahnchen.avif',
-        meals: [MOCK_MEALS[2]] },                              // Classic San Sebastian
-      { lat: 52.4978, lng: 13.4308, type: 'group',  count: 3, photo: '/meals/schnitzel-bowl.avif',
-        meals: [MOCK_MEALS[3], MOCK_MEALS[4], MOCK_MEALS[5]] }, // Green & Protein (3 meals)
-    ]
+    // Group meals by restaurant, build one pin per restaurant
+    const restaurantMap = {}
+    for (const meal of MOCK_MEALS) {
+      if (!restaurantMap[meal.restaurantId]) {
+        const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+        if (!r) continue
+        restaurantMap[meal.restaurantId] = { lat: r.lat, lng: r.lng, pinPhoto: r.pinPhoto, meals: [] }
+      }
+      restaurantMap[meal.restaurantId].meals.push(meal)
+    }
+    const PIN_DATA = Object.values(restaurantMap).map(pin => ({
+      lat: pin.lat,
+      lng: pin.lng,
+      type: pin.meals.length === 1 ? 'single' : 'group',
+      photo: pin.pinPhoto || null,  // base64 data URI — no CORS issues with canvas
+      count: pin.meals.length,
+      meals: pin.meals,
+    }))
 
-    // Pre-load all images before creating markers
+    // Register map-level listeners before image preload — map fires idle/bounds_changed
+    // during preload and we need pinDataRef ready to handle those events correctly
+    pinDataRef.current = PIN_DATA
+
+    map.addListener('idle', () => updateVisibleMealsRef.current())
+
+    map.addListener('click', () => {
+      if (activeMarkerRef.current) {
+        animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
+        activeMarkerRef.current = null
+        selectPinRef.current(null)
+      }
+    })
+
+    // Pre-load all images, then place markers on map
     await Promise.all(PIN_DATA.map(cfg => new Promise(resolve => {
       const img    = new Image()
       img.onload   = () => { cfg.img = img; resolve() }
       img.onerror  = () => { cfg.img = null; resolve() }
       img.src      = cfg.photo
     })))
-
-    // Make PIN_DATA available for bounds filtering
-    pinDataRef.current = PIN_DATA
 
     PIN_DATA.forEach(cfg => {
       const marker = new window.google.maps.Marker({
@@ -299,18 +317,6 @@ export default function Discover({
 
       marker._cfg = cfg
     })
-
-    // Click on empty map → deselect
-    map.addListener('click', () => {
-      if (activeMarkerRef.current) {
-        animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
-        activeMarkerRef.current = null
-        selectPinRef.current(null)
-      }
-    })
-
-    // Update meal list whenever map stops moving
-    map.addListener('idle', () => updateVisibleMealsRef.current())
   }
 
   async function initMap() {
