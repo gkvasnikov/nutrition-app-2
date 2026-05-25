@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CloseIcon, HeartOutlineIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
 import { withKey } from '../../utils/photoUrl'
 import styles from './MealDescriptionOverlay.module.css'
@@ -10,7 +10,16 @@ const MACRO_BG = {
   carbs:    'var(--color-semantic-blue)',
 }
 
+const RATING_COLOR = {
+  Poor:      '#ef4444',
+  Fair:      '#f97316',
+  Good:      '#34a853',
+  Excellent: '#16a34a',
+}
+
 export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect }) {
+  const [advice, setAdvice] = useState(null)   // { score, rating, advice }
+  const [adviceLoading, setAdviceLoading] = useState(true)
   const backdropRef      = useRef(null)
   const sheetRef         = useRef(null)
   const scrollContentRef = useRef(null)
@@ -114,6 +123,28 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
     }
   }, []) // eslint-disable-line
 
+  useEffect(() => {
+    if (!meal) return
+    setAdviceLoading(true)
+    setAdvice(null)
+    fetch('/api/advice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:        meal.name,
+        description: meal.description,
+        calories:    meal.calories,
+        protein:     meal.protein,
+        fat:         meal.fat,
+        carbs:       meal.carbs,
+      }),
+    })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => setAdvice(data))
+      .catch(() => setAdvice(null))
+      .finally(() => setAdviceLoading(false))
+  }, [meal])
+
   if (!meal) return null
 
   return (
@@ -169,6 +200,45 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
               <button className={styles.actionBtn}><HeartOutlineIcon size={24} /></button>
               <button className={styles.actionBtn}><ShareUpIcon size={24} /></button>
             </div>
+
+            {/* ── AI Advisor ─────────────────────────── */}
+            {(adviceLoading || advice) && (
+              <>
+                <div className={styles.divider} />
+                <h3 className={styles.advisorHeading}>AI Advisor</h3>
+
+                {adviceLoading ? (
+                  <div className={styles.advisorSkeleton}>
+                    <div className={styles.skeletonLine} style={{ width: '60%' }} />
+                    <div className={styles.skeletonBar} />
+                    <div className={styles.skeletonLine} />
+                    <div className={styles.skeletonLine} style={{ width: '80%' }} />
+                  </div>
+                ) : (
+                  <div className={styles.advisorContent}>
+                    <div className={styles.advisorScoreRow}>
+                      <span className={styles.advisorScoreLabel}>Nutritional value</span>
+                      <span
+                        className={styles.advisorScoreValue}
+                        style={{ color: RATING_COLOR[advice.rating] ?? '#34a853' }}
+                      >
+                        {advice.score}% ({advice.rating})
+                      </span>
+                    </div>
+                    <div className={styles.advisorTrack}>
+                      <div
+                        className={styles.advisorFill}
+                        style={{
+                          width: `${advice.score}%`,
+                          background: RATING_COLOR[advice.rating] ?? '#34a853',
+                        }}
+                      />
+                    </div>
+                    <p className={styles.advisorText}>{advice.advice}</p>
+                  </div>
+                )}
+              </>
+            )}
 
             <div className={styles.divider} />
 

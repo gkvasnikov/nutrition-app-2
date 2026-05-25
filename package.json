@@ -1,8 +1,15 @@
 {
   "name": "nutrition-app-2-root",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "cd frontend && npm ci && npm run build",
-    "start": "npx serve@14 frontend/dist -s -l ${PORT:-3000}"
+    "build": "npm ci && cd frontend && npm ci && npm run build",
+    "start": "node server.js",
+    "dev:server": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2"
   }
 }

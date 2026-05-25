@@ -170,6 +170,89 @@
   margin-bottom: 12px;
 }
 
+/* ── AI Advisor ──────────────────────────────────────── */
+.advisorHeading {
+  font-size: 19px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1;
+}
+
+.advisorContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.advisorScoreRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.advisorScoreLabel {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.advisorScoreValue {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-bold);
+}
+
+.advisorTrack {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.advisorFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.advisorText {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Skeleton */
+.advisorSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.skeletonLine {
+  height: 14px;
+  width: 100%;
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeletonBar {
+  height: 8px;
+  width: 100%;
+  background: var(--color-surface);
+  border-radius: 999px;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
 /* ── Restaurant ──────────────────────────────────────── */
 .restaurantHeading {
   font-size: 19px;
