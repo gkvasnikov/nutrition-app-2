@@ -33,6 +33,7 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
 
       {/* Filter panel — slides down from top */}
       <div className={`${styles.panel} ${show ? styles.panelVisible : ''}`}>
+      <div className={styles.panelContent}>
 
         {/* Macros confidence — multi-select */}
         <div className={styles.section}>
@@ -113,6 +114,7 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
           <ButtonFilterActions onReset={onReset} onApply={onApply} />
         </div>
 
+      </div>
       </div>
     </>
   )

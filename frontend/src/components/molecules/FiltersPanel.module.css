@@ -26,11 +26,9 @@
 
   /* Push content below the TopBar pill */
   padding-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
-  padding-bottom: var(--spacing-16);
 
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24);
 
   /* Hidden above screen */
   transform: translateY(-105%);
@@ -40,6 +38,21 @@
 .panelVisible {
   transform: translateY(0);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Panel content — fades in after panel slides down ──────── */
+.panelContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  padding-bottom: var(--spacing-16);
+  opacity: 0;
+  transition: opacity 0.15s ease 0s;
+}
+
+.panelVisible .panelContent {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.35s;
 }
 
 /* ── Section ───────────────────────────────────────────────── */
