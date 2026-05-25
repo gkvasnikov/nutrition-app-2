@@ -6,15 +6,8 @@ import HeroCarousel from '../components/molecules/HeroCarousel'
 import ButtonSeeAll from '../components/atoms/ButtonSeeAll'
 import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import FiltersPanel from '../components/molecules/FiltersPanel'
+import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
 import styles from './Home.module.css'
-
-const DEFAULT_SECONDARY_FILTERS = {
-  macrosConfidence: ['high', 'medium'],
-  measure: 'per_meal',
-  sortBy: 'nearest',
-  openNow: false,
-  topRanked: false,
-}
 
 const SECTIONS = [
   {
@@ -103,46 +96,37 @@ const SECTIONS = [
   },
 ]
 
-function buildSubtitle(filters) {
-  if (!filters) return null
-  const parts = []
-  if (filters.mealTime) {
-    parts.push(filters.mealTime.charAt(0).toUpperCase() + filters.mealTime.slice(1))
-  }
-  if (filters.diet) {
-    const labels = {
-      high_protein: 'High Protein',
-      high_carb:    'High Carb',
-      balanced:     'Balanced',
-      keto:         'Keto',
-      custom:       'Custom',
-    }
-    parts.push(labels[filters.diet] ?? filters.diet)
-  }
-  return parts.length ? parts.join(' · ') : null
-}
 
-export default function Home({ activeTab = 'home', onTabChange, onRestaurantSelect }) {
-  const [showMealFilter,    setShowMealFilter]    = useState(false)
-  const [activeFilters,     setActiveFilters]     = useState(null)
-  const [showFilters,       setShowFilters]       = useState(false)
-  const [filters,           setFilters]           = useState(DEFAULT_SECONDARY_FILTERS)
-  const [pendingFilters,    setPendingFilters]    = useState(DEFAULT_SECONDARY_FILTERS)
+export default function Home({
+  activeTab = 'home', onTabChange, onRestaurantSelect,
+  activeMainFilters, onApplyMainFilters,
+  secondaryFilters, onApplySecondaryFilters, defaultSecondaryFilters,
+}) {
+  const [showMealFilter, setShowMealFilter] = useState(false)
+  const [showFilters,    setShowFilters]    = useState(false)
+  const [pendingFilters, setPendingFilters] = useState(secondaryFilters)
 
-  function handleApplyFilters(f) { setActiveFilters(f) }
-  function openFilters()  { setPendingFilters(filters); setShowFilters(true) }
+  function openFilters()  { setPendingFilters(secondaryFilters); setShowFilters(true) }
   function closeFilters() { setShowFilters(false) }
-  function applyFilters() { setFilters(pendingFilters); setShowFilters(false) }
+  function applyFilters() { onApplySecondaryFilters(pendingFilters); setShowFilters(false) }
 
-  const subtitle = buildSubtitle(activeFilters)
+  function handlePillClick() {
+    if (showFilters) {
+      closeFilters()
+      setTimeout(() => setShowMealFilter(true), 550)
+    } else {
+      setShowMealFilter(true)
+    }
+  }
 
   return (
     <div className={styles.screen}>
       <TopBar
-        title="Meal Time"
-        subtitle={subtitle}
+        title={buildPillTitle(activeMainFilters)}
+        icon={buildPillIcon(activeMainFilters)}
+        subtitle={buildPillSubtitle(activeMainFilters)}
         filterActive={showFilters}
-        onPillClick={() => setShowMealFilter(true)}
+        onPillClick={handlePillClick}
         onFilterClick={showFilters ? closeFilters : openFilters}
       />
 
@@ -183,7 +167,7 @@ export default function Home({ activeTab = 'home', onTabChange, onRestaurantSele
         show={showFilters}
         pending={pendingFilters}
         onChange={setPendingFilters}
-        onReset={() => setPendingFilters(DEFAULT_SECONDARY_FILTERS)}
+        onReset={() => setPendingFilters(defaultSecondaryFilters)}
         onApply={applyFilters}
         onClose={closeFilters}
       />
@@ -191,7 +175,8 @@ export default function Home({ activeTab = 'home', onTabChange, onRestaurantSele
       <MealFilterOverlay
         show={showMealFilter}
         onClose={() => setShowMealFilter(false)}
-        onApply={handleApplyFilters}
+        onApply={onApplyMainFilters}
+        initialFilters={activeMainFilters}
       />
     </div>
   )

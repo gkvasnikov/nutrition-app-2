@@ -5,15 +5,38 @@ import Favourites from './screens/Favourites'
 import Profile from './screens/Profile'
 import MealDescriptionOverlay from './components/molecules/MealDescriptionOverlay'
 import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescriptionOverlay'
+import { getTimedMealTime } from './utils/filterPill'
 import { MOCK_MEALS } from './data/mockMeals'
+
+const DEFAULT_SECONDARY_FILTERS = {
+  macrosConfidence: ['high', 'medium'],
+  measure: 'per_meal',
+  sortBy: 'nearest',
+  openNow: false,
+  topRanked: false,
+}
+
+function getInitialMainFilters() {
+  const mealTime = getTimedMealTime()
+  return {
+    mealTime,
+    diet: 'high_protein',
+    macros: { kcal: [250, 1000], protein: [55, 200], fat: [0, 43], carbs: [0, 100] },
+    dietTags: { plantBased: false, glutenFree: false, diabetesFriendly: false },
+    search: '',
+  }
+}
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home')
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
+  // ── Global filters — shared across Home + Discover ────────────────────────
+  const [activeMainFilters,  setActiveMainFilters]  = useState(getInitialMainFilters)
+  const [secondaryFilters,   setSecondaryFilters]   = useState(DEFAULT_SECONDARY_FILTERS)
+
   function handleRestaurantSelect(restaurant) {
-    // Open restaurant overlay on top — don't close meal overlay
     setSelectedRestaurant(restaurant)
   }
 
@@ -21,11 +44,20 @@ export default function App() {
     setSelectedMeal(meal)
   }
 
+  const filterProps = {
+    activeMainFilters,
+    onApplyMainFilters:      setActiveMainFilters,
+    secondaryFilters,
+    onApplySecondaryFilters: setSecondaryFilters,
+    defaultSecondaryFilters: DEFAULT_SECONDARY_FILTERS,
+  }
+
   const screenProps = {
     activeTab,
-    onTabChange:       setActiveTab,
-    onMealSelect:      handleMealSelect,
+    onTabChange:        setActiveTab,
+    onMealSelect:       handleMealSelect,
     onRestaurantSelect: handleRestaurantSelect,
+    ...filterProps,
   }
 
   function renderScreen() {

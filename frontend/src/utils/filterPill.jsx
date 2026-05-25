@@ -22,16 +22,26 @@ const DIET_LABELS = {
   custom:       'Custom',
 }
 
-/** TopBar pill title: selected meal time, or default "Meal Time" */
-export function buildPillTitle(filters) {
-  return MEAL_TIME_LABELS[filters?.mealTime] ?? 'Meal Time'
+/** Meal time based on current hour (Snack is never auto-selected by time) */
+export function getTimedMealTime() {
+  const h = new Date().getHours()
+  if (h >= 5  && h < 11) return 'breakfast'
+  if (h >= 11 && h < 16) return 'lunch'
+  if (h >= 16 && h < 23) return 'dinner'
+  return 'breakfast' // very late / early morning → next breakfast
 }
 
-/** TopBar pill icon: meal-time SVG <img>, or null (TopBar shows SearchIcon) */
+/** TopBar pill title: selected meal time, or time-based default (never "Meal Time") */
+export function buildPillTitle(filters) {
+  return MEAL_TIME_LABELS[filters?.mealTime] ?? MEAL_TIME_LABELS[getTimedMealTime()]
+}
+
+/** TopBar pill icon: meal-time SVG <img>, always shown (falls back to time-based) */
 export function buildPillIcon(filters) {
-  const src = MEAL_TIME_ICONS[filters?.mealTime]
+  const key = filters?.mealTime ?? getTimedMealTime()
+  const src = MEAL_TIME_ICONS[key]
   if (!src) return null
-  return <img src={src} width={32} height={32} alt={MEAL_TIME_LABELS[filters.mealTime]} />
+  return <img src={src} width={32} height={32} alt={MEAL_TIME_LABELS[key]} />
 }
 
 /** TopBar pill subtitle: selected diet label, or null */

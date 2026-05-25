@@ -4,51 +4,28 @@ import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
 import FiltersPanel from '../components/molecules/FiltersPanel'
 import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
-import { LocateIcon, LunchIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
+import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
+import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
 import { MOCK_MEALS } from '../data/mockMeals'
 import styles from './Discover.module.css'
 
-function buildMainSubtitle(filters) {
-  if (!filters) return null
-  const parts = []
-  if (filters.mealTime) {
-    parts.push(filters.mealTime.charAt(0).toUpperCase() + filters.mealTime.slice(1))
-  }
-  if (filters.diet) {
-    const labels = {
-      high_protein: 'High Protein',
-      high_carb:    'High Carb',
-      balanced:     'Balanced',
-      keto:         'Keto',
-      custom:       'Custom',
-    }
-    parts.push(labels[filters.diet] ?? filters.diet)
-  }
-  return parts.length ? parts.join(' · ') : null
-}
-
-const DEFAULT_FILTERS = {
-  macrosConfidence: ['high', 'medium'], // multi-select
-  measure: 'per_meal',                  // single-select
-  sortBy: 'nearest',                    // single-select
-  openNow: false,                       // toggle
-  topRanked: false,                     // toggle
-}
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const CENTER = { lat: 52.4965, lng: 13.4315 } // Wrangelstrasse 18, Berlin
 const PEEK_SHOW = 200 // px visible from bottom in collapsed state
 
-export default function Discover({ activeTab, onTabChange, onMealSelect }) {
+export default function Discover({
+  activeTab, onTabChange, onMealSelect,
+  activeMainFilters, onApplyMainFilters,
+  secondaryFilters, onApplySecondaryFilters, defaultSecondaryFilters,
+}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedPin, setSelectedPin] = useState(null) // null | { type, meals[] }
   const [pinExiting, setPinExiting] = useState(false)
   const [visibleMeals, setVisibleMeals] = useState([]) // meals from pins in current viewport
   const [showFilters, setShowFilters] = useState(false)
-  const [filters, setFilters] = useState(DEFAULT_FILTERS)
-  const [pendingFilters, setPendingFilters] = useState(DEFAULT_FILTERS)
+  const [pendingFilters, setPendingFilters] = useState(secondaryFilters)
   const [showMealFilter, setShowMealFilter] = useState(false)
-  const [activeMainFilters, setActiveMainFilters] = useState(null)
   const lastSelectedPinRef = useRef(null) // keeps content visible during exit anim
   const pinDataRef = useRef([])           // all PIN_DATA, populated after image load
   const mapRef = useRef(null)
@@ -131,15 +108,23 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
 
   // ── Filters ───────────────────────────────────────────────────────
   function openFilters() {
-    setPendingFilters(filters) // reset pending to current applied filters
+    setPendingFilters(secondaryFilters) // reset pending to current applied filters
     setShowFilters(true)
   }
   function closeFilters() { setShowFilters(false) }
+
+  function handlePillClick() {
+    if (showFilters) {
+      closeFilters()
+      setTimeout(() => setShowMealFilter(true), 550)
+    } else {
+      setShowMealFilter(true)
+    }
+  }
   function applyFilters() {
-    setFilters(pendingFilters)
+    onApplySecondaryFilters(pendingFilters)
     setShowFilters(false)
   }
-  function handleApplyMainFilters(f) { setActiveMainFilters(f) }
 
   // ── Map ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -480,13 +465,13 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
         </button>
       </div>
 
-      {/* TopBar with lunch icon + subtitle */}
+      {/* TopBar — title/icon/subtitle driven by active main filters */}
       <TopBar
-        title="Discover"
-        subtitle={buildMainSubtitle(activeMainFilters)}
-        icon={<LunchIcon size={32} />}
+        title={buildPillTitle(activeMainFilters)}
+        icon={buildPillIcon(activeMainFilters)}
+        subtitle={buildPillSubtitle(activeMainFilters)}
         filterActive={showFilters}
-        onPillClick={() => setShowMealFilter(true)}
+        onPillClick={handlePillClick}
         onFilterClick={showFilters ? closeFilters : openFilters}
       />
 
@@ -494,7 +479,8 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
       <MealFilterOverlay
         show={showMealFilter}
         onClose={() => setShowMealFilter(false)}
-        onApply={handleApplyMainFilters}
+        onApply={onApplyMainFilters}
+        initialFilters={activeMainFilters}
       />
 
       {/* Secondary filters panel + backdrop */}
@@ -502,7 +488,7 @@ export default function Discover({ activeTab, onTabChange, onMealSelect }) {
         show={showFilters}
         pending={pendingFilters}
         onChange={setPendingFilters}
-        onReset={() => setPendingFilters(DEFAULT_FILTERS)}
+        onReset={() => setPendingFilters(defaultSecondaryFilters)}
         onApply={applyFilters}
         onClose={closeFilters}
       />

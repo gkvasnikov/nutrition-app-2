@@ -52,7 +52,7 @@
 
 .panelVisible .panelContent {
   opacity: 1;
-  transition: opacity 0.2s ease 0.35s;
+  transition: opacity 0.3s ease 0.1s;
 }
 
 /* ── Section ───────────────────────────────────────────────── */

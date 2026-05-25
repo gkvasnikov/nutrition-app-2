@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import { SearchIcon } from '../atoms/icons'
+import { getTimedMealTime } from '../../utils/filterPill'
 import styles from './MealFilterOverlay.module.css'
 
 // ─── Presets ─────────────────────────────────────────────────────────────────
@@ -93,13 +94,13 @@ function RangeSlider({ label, min, max, value, onChange }) {
 
 // ─── MealFilterOverlay ───────────────────────────────────────────────────────
 
-export default function MealFilterOverlay({ show, onClose, onApply }) {
-  // Filter state
-  const [mealTime, setMealTime] = useState(null)
-  const [diet,     setDiet]     = useState(null)
-  const [macros,   setMacros]   = useState(DEFAULT_MACROS)
-  const [search,   setSearch]   = useState('')
-  const [dietTags, setDietTags] = useState({ plantBased: false, glutenFree: false, diabetesFriendly: false })
+export default function MealFilterOverlay({ show, onClose, onApply, initialFilters }) {
+  // Filter state — initialized from current applied filters (or time-based defaults)
+  const [mealTime, setMealTime] = useState(() => initialFilters?.mealTime ?? getTimedMealTime())
+  const [diet,     setDiet]     = useState(() => initialFilters?.diet     ?? 'high_protein')
+  const [macros,   setMacros]   = useState(() => initialFilters?.macros   ?? DEFAULT_MACROS)
+  const [search,   setSearch]   = useState(() => initialFilters?.search   ?? '')
+  const [dietTags, setDietTags] = useState(() => initialFilters?.dietTags ?? { plantBased: false, glutenFree: false, diabetesFriendly: false })
 
   // Which accordion is open (only one at a time)
   const [openSection, setOpenSection] = useState('mealtime')
@@ -142,7 +143,13 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
   function selectMealTime(t) {
     const next = mealTime === t ? null : t
     setMealTime(next)
-    setMacros(computeMacros(next, diet))
+    // Auto-select High Protein when choosing a meal time (if no diet set yet)
+    if (next && !diet) {
+      setDiet('high_protein')
+      setMacros(computeMacros(next, 'high_protein'))
+    } else {
+      setMacros(computeMacros(next, diet))
+    }
   }
 
   function selectDiet(d) {
@@ -156,9 +163,10 @@ export default function MealFilterOverlay({ show, onClose, onApply }) {
   }
 
   function handleReset() {
-    setMealTime(null)
-    setDiet(null)
-    setMacros(DEFAULT_MACROS)
+    const defaultMeal = getTimedMealTime()
+    setMealTime(defaultMeal)
+    setDiet('high_protein')
+    setMacros(computeMacros(defaultMeal, 'high_protein'))
     setDietTags({ plantBased: false, glutenFree: false, diabetesFriendly: false })
     setSearch('')
     onClose()
