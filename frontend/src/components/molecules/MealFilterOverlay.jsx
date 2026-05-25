@@ -169,7 +169,6 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
     setMacros(computeMacros(defaultMeal, 'high_protein'))
     setDietTags({ plantBased: false, glutenFree: false, diabetesFriendly: false })
     setSearch('')
-    onClose()
   }
 
   function handleApply() {
