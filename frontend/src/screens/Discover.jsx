@@ -183,9 +183,9 @@ export default function Discover({
     }
 
     if (isExpandedRef.current) {
-      // First collapse the sheet, then focus the pin after animation finishes
-      snapTo(false)
-      setTimeout(doSelect, 420) // matches sheet transition 0.4s
+      // Sheet slides fully off-screen via selectPin inside doSelect (0.35s),
+      // wait for it to clear before map pan so the animation is visible
+      setTimeout(doSelect, 350)
     } else {
       doSelect()
     }
