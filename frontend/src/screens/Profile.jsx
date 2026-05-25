@@ -27,7 +27,7 @@ export default function Profile({ activeTab, onTabChange }) {
         {/* Avatar + Name */}
         <div className={styles.hero}>
           <div className={styles.avatarWrap}>
-            <img src="/User.svg" width={40} height={40} alt="Avatar" />
+            <img src="/icons/User.svg" width={40} height={40} alt="Avatar" />
           </div>
           <span className={styles.userName}>George Kvasnikov</span>
         </div>
@@ -36,12 +36,12 @@ export default function Profile({ activeTab, onTabChange }) {
         <div className={styles.card}>
           <div className={styles.macrosHeader}>
             <div className={styles.macrosLeft}>
-              <img src="/Pie.svg" width={24} height={24} alt="" />
+              <img src="/icons/Pie.svg" width={24} height={24} alt="" />
               <span className={styles.macrosLabel}>Macros settings</span>
             </div>
             <div className={styles.macrosRight}>
               <span className={styles.macrosGoal}>Muscle gain</span>
-              <img src="/Chevron-right.svg" width={24} height={24} alt="" />
+              <img src="/icons/Chevron-right.svg" width={24} height={24} alt="" />
             </div>
           </div>
           <div className={styles.macrosRow}>
@@ -60,10 +60,10 @@ export default function Profile({ activeTab, onTabChange }) {
         {/* Log out */}
         <div className={styles.row}>
           <div className={styles.rowLeft}>
-            <img src="/Door.svg" width={24} height={24} alt="" />
+            <img src="/icons/Door.svg" width={24} height={24} alt="" />
             <span className={styles.rowLabel}>Log out</span>
           </div>
-          <img src="/Chevron-right.svg" width={24} height={24} alt="" className={styles.chevron} />
+          <img src="/icons/Chevron-right.svg" width={24} height={24} alt="" className={styles.chevron} />
         </div>
 
       </div>
