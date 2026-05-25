@@ -10,7 +10,7 @@ const MACRO_BG = {
   carbs:    'var(--color-semantic-blue)',
 }
 
-export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSelect }) {
+export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect }) {
   const backdropRef      = useRef(null)
   const sheetRef         = useRef(null)
   const scrollContentRef = useRef(null)
@@ -117,8 +117,8 @@ export default function MealDescriptionOverlay({ meal, onClose, onRestaurantSele
   if (!meal) return null
 
   return (
-    <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
-      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
+    <div ref={backdropRef} className={styles.backdrop} style={{ zIndex }} onClick={animateClose}>
+      <div ref={sheetRef} className={styles.sheet} style={{ zIndex: zIndex + 1 }} onClick={e => e.stopPropagation()}>
 
         {/* ── Close button — sits above scrollContent, never scrolls ── */}
         <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Home from './screens/Home'
 import Discover from './screens/Discover'
 import Favourites from './screens/Favourites'
@@ -31,16 +31,23 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('discover') // 'home' temporarily hidden
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
+  const [selectedMealZIndex,       setSelectedMealZIndex]       = useState(200)
+  const [selectedRestaurantZIndex, setSelectedRestaurantZIndex] = useState(200)
+  const zIndexCounterRef = useRef(200)
 
   // ── Global filters — shared across Home + Discover ────────────────────────
   const [activeMainFilters,  setActiveMainFilters]  = useState(getInitialMainFilters)
   const [secondaryFilters,   setSecondaryFilters]   = useState(DEFAULT_SECONDARY_FILTERS)
 
   function handleRestaurantSelect(restaurant) {
+    zIndexCounterRef.current += 10
+    setSelectedRestaurantZIndex(zIndexCounterRef.current)
     setSelectedRestaurant(restaurant)
   }
 
   function handleMealSelect(meal) {
+    zIndexCounterRef.current += 10
+    setSelectedMealZIndex(zIndexCounterRef.current)
     setSelectedMeal(meal)
   }
 
@@ -77,7 +84,9 @@ export default function App() {
 
       {selectedMeal && (
         <MealDescriptionOverlay
+          key={selectedMealZIndex}
           meal={selectedMeal}
+          zIndex={selectedMealZIndex}
           onClose={() => setSelectedMeal(null)}
           onRestaurantSelect={handleRestaurantSelect}
         />
@@ -85,8 +94,10 @@ export default function App() {
 
       {selectedRestaurant && (
         <RestaurantDescriptionOverlay
+          key={selectedRestaurantZIndex}
           restaurant={selectedRestaurant}
           meals={restaurantMeals}
+          zIndex={selectedRestaurantZIndex}
           onClose={() => setSelectedRestaurant(null)}
           onMealSelect={handleMealSelect}
         />

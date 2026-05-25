@@ -4,7 +4,7 @@ import CardMeal from './CardMeal'
 import { withKey } from '../../utils/photoUrl'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
-export default function RestaurantDescriptionOverlay({ restaurant, meals = [], onClose, onMealSelect }) {
+export default function RestaurantDescriptionOverlay({ restaurant, meals = [], zIndex = 200, onClose, onMealSelect }) {
   const backdropRef      = useRef(null)
   const sheetRef         = useRef(null)
   const scrollContentRef = useRef(null)
@@ -115,8 +115,8 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], o
   if (!restaurant) return null
 
   return (
-    <div ref={backdropRef} className={styles.backdrop} onClick={animateClose}>
-      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
+    <div ref={backdropRef} className={styles.backdrop} style={{ zIndex }} onClick={animateClose}>
+      <div ref={sheetRef} className={styles.sheet} style={{ zIndex: zIndex + 1 }} onClick={e => e.stopPropagation()}>
 
         {/* ── Close button — absolute on sheet, never scrolls ── */}
         <button className={styles.closeBtn} onClick={animateClose} aria-label="Close">
