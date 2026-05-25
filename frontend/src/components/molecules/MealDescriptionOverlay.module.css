@@ -184,6 +184,7 @@
   flex-direction: column;
   gap: var(--spacing-12);
   width: 100%;
+  margin-top: 12px; /* heading→content = 12 (parent gap) + 12 = 24px */
 }
 
 .advisorScoreRow {
@@ -221,7 +222,7 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-text-2);
   line-height: 1.5;
-  margin: 0;
+  margin: 12px 0 0; /* track→text = 12 (gap) + 12 = 24px */
 }
 
 /* Skeleton */
