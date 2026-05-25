@@ -122,9 +122,20 @@ export default function Discover({
     if (!map || !pinDataRef.current.length) return
     const bounds = map.getBounds()
     if (!bounds) return
+
+    // Trim the bottom PEEK_SHOW px — that area is hidden behind the sheet
+    const mapH = map.getDiv().offsetHeight
+    const ne = bounds.getNorthEast()
+    const sw = bounds.getSouthWest()
+    const latPerPx = (ne.lat() - sw.lat()) / mapH
+    const visibleBounds = new window.google.maps.LatLngBounds(
+      { lat: sw.lat() + PEEK_SHOW * latPerPx, lng: sw.lng() },
+      { lat: ne.lat(), lng: ne.lng() },
+    )
+
     const meals = []
     for (const cfg of pinDataRef.current) {
-      if (bounds.contains({ lat: cfg.lat, lng: cfg.lng })) {
+      if (visibleBounds.contains({ lat: cfg.lat, lng: cfg.lng })) {
         meals.push(...cfg.meals) // cfg.meals is always the filtered subset
       }
     }
