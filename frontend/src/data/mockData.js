@@ -10,7 +10,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.5,
     "reviewCount": 2963,
     "address": "Skalitzer Str. 95A, 10997 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "isOpen": true,
     "hours": "11:00–23:00",
     "distance": "380m",
@@ -25,7 +25,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 3.5,
     "reviewCount": 2065,
     "address": "Wrangelstraße 35, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "isOpen": true,
     "hours": "07:00–02:00",
     "distance": "560m",
@@ -40,7 +40,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.3,
     "reviewCount": 1829,
     "address": "Skalitzer Str. 60, 10997 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "isOpen": true,
     "hours": "12:00–22:30",
     "distance": "530m",
@@ -55,8 +55,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.9,
     "reviewCount": 1206,
     "address": "Oppelner Str. 34, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": false,
+    "priceRange": "€4–16",
+    "isOpen": true,
     "hours": "16:00–22:00",
     "distance": "610m",
     "lat": 52.4985312,
@@ -70,7 +70,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 1088,
     "address": "Wrangelstraße 42, 10997 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "isOpen": true,
     "hours": "11:00–22:00",
     "distance": "610m",
@@ -85,7 +85,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 910,
     "address": "Ohlauer Str. 10, 10999 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "isOpen": true,
     "hours": "11:00–00:00",
     "distance": "40m",
@@ -100,8 +100,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.9,
     "reviewCount": 899,
     "address": "Görlitzer Str. 63, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": false,
+    "priceRange": "€3–28",
+    "isOpen": true,
     "hours": "16:00–23:00",
     "distance": "360m",
     "lat": 52.498253,
@@ -115,8 +115,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 852,
     "address": "Spreewaldpl. 5, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": false,
+    "priceRange": "€4–18",
+    "isOpen": true,
     "hours": "17:00–22:00",
     "distance": "240m",
     "lat": 52.4986621,
@@ -130,7 +130,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 788,
     "address": "Oppelner Str. 9, 10997 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "isOpen": true,
     "hours": "08:00–19:00",
     "distance": "650m",
@@ -145,7 +145,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.9,
     "reviewCount": 770,
     "address": "Wrangelstraße 43, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "isOpen": true,
     "hours": "12:00–22:00",
     "distance": "630m",
@@ -160,7 +160,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.6,
     "reviewCount": 642,
     "address": "Lausitzer Pl. 13, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "isOpen": true,
     "hours": "11:30–23:00",
     "distance": "510m",
@@ -175,7 +175,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.5,
     "reviewCount": 617,
     "address": "Oranienstraße 200, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "isOpen": true,
     "hours": "12:00–00:00",
     "distance": "630m",
@@ -190,7 +190,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 569,
     "address": "Wiener Str. 31, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "isOpen": true,
     "hours": "11:00–22:00",
     "distance": "140m",
@@ -205,8 +205,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.4,
     "reviewCount": 550,
     "address": "Lausitzer Pl. 10, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": false,
+    "priceRange": "€12–18",
+    "isOpen": true,
     "hours": "17:00–23:00",
     "distance": "440m",
     "lat": 52.5004147,
@@ -220,7 +220,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.3,
     "reviewCount": 549,
     "address": "Ohlauer Str. 27, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "isOpen": true,
     "hours": "14:00–23:00",
     "distance": "160m",
@@ -235,8 +235,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.8,
     "reviewCount": 499,
     "address": "Wrangelstraße 90, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": false,
+    "priceRange": "€4–47",
+    "isOpen": true,
     "hours": "17:00–23:00",
     "distance": "670m",
     "lat": 52.49958729999999,
@@ -250,7 +250,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.9,
     "reviewCount": 440,
     "address": "Wiener Str. 60, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "isOpen": true,
     "hours": "12:00–00:00",
     "distance": "190m",
@@ -265,7 +265,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.5,
     "reviewCount": 384,
     "address": "Görlitzer Str. 69, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "isOpen": false,
     "hours": "Geschlossen",
     "distance": "320m",
@@ -280,7 +280,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.7,
     "reviewCount": 369,
     "address": "Reichenberger Str. 72A, 10999 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "isOpen": false,
     "hours": "Geschlossen",
     "distance": "270m",
@@ -295,7 +295,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.4,
     "reviewCount": 345,
     "address": "Eisenbahnstraße 4, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "isOpen": true,
     "hours": "12:00–23:00",
     "distance": "580m",
@@ -310,7 +310,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.2,
     "reviewCount": 300,
     "address": "Lausitzer Pl. 14, 10997 Berlin, Deutschland",
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "isOpen": true,
     "hours": "12:00–22:00",
     "distance": "510m",
@@ -325,8 +325,8 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.4,
     "reviewCount": 286,
     "address": "Eisenbahnstraße 42, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
-    "isOpen": true,
+    "priceRange": "€4–22",
+    "isOpen": false,
     "hours": "11:00–17:00",
     "distance": "630m",
     "lat": 52.5021335,
@@ -340,7 +340,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.8,
     "reviewCount": 283,
     "address": "Wiener Str. 22, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "isOpen": true,
     "hours": "08:00–19:00",
     "distance": "90m",
@@ -355,7 +355,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.9,
     "reviewCount": 269,
     "address": "Skalitzer Str. 95A, 10997 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "isOpen": true,
     "hours": "11:30–22:00",
     "distance": "370m",
@@ -370,7 +370,7 @@ export const MOCK_RESTAURANTS = [
     "rating": 4.8,
     "reviewCount": 243,
     "address": "Ohlauer Str. 27, 10999 Berlin, Deutschland",
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "isOpen": true,
     "hours": "11:00–00:00",
     "distance": "160m",
@@ -395,7 +395,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -414,7 +414,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -433,7 +433,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -452,7 +452,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -471,7 +471,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -490,7 +490,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -509,7 +509,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -528,7 +528,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -547,7 +547,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -566,7 +566,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -585,7 +585,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -604,7 +604,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -623,7 +623,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -642,7 +642,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -661,7 +661,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -680,7 +680,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -699,7 +699,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -718,7 +718,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -737,7 +737,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -756,7 +756,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -775,7 +775,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -794,7 +794,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -813,7 +813,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -832,7 +832,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -851,7 +851,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -870,7 +870,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -889,7 +889,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -908,7 +908,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -927,7 +927,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -946,7 +946,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -965,7 +965,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -984,7 +984,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1003,7 +1003,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1022,7 +1022,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1041,7 +1041,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1060,7 +1060,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1079,7 +1079,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1098,7 +1098,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1117,7 +1117,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1136,7 +1136,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1155,7 +1155,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1174,7 +1174,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1193,7 +1193,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1212,7 +1212,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1231,7 +1231,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1250,7 +1250,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1269,7 +1269,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1288,7 +1288,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1307,7 +1307,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1326,7 +1326,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1345,7 +1345,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1364,7 +1364,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1383,7 +1383,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1402,7 +1402,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1421,7 +1421,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1440,7 +1440,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1459,7 +1459,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1478,7 +1478,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1497,7 +1497,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1516,7 +1516,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ufm9NwT9ARQehZh4za1b0lXuHRSTCWEwvHizSagPt0itSIEpWfkW8t-PBF6GbETrlDZy-E2PjNagkKqHytkOgeje5wTsMMA0ui7nhJChl14pNS34F_bwlGItYCFoy-zeQjsEqH762ATSQfF4x3sAEwwQDyzoxghWkJA6cY9sPyme_NXH7e4Hxlgo_eN-sEuu6U_Ta5w195aZyww-foBDbsSTr9ncqFTAsVYzeszsD8bN_MOVozs5Ki3F2STP6Z2IdbBcqkfoWcmg3VrAdHhyV2asaszUCHm3FDxQj_h1Ahl2OTDTOszKkpthH6M66_yeE-VeOemGLUW5VSKEMFAjSHi6OWW7qNxvlx6ORfLlA_qpjjMow1reVA5IPux8NdyHqsNGLlZqFc_aQy1OvheeKrFUEVqZKvAKe8HquLgxqj_w",
     "rating": 4.5,
     "reviewCount": 2963,
-    "priceRange": "€",
+    "priceRange": "€3–19",
     "distance": "380m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -1535,7 +1535,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1554,7 +1554,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1573,7 +1573,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1592,7 +1592,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1611,7 +1611,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1630,7 +1630,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1649,7 +1649,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1668,7 +1668,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1687,7 +1687,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1706,7 +1706,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1725,7 +1725,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1744,7 +1744,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1763,7 +1763,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1782,7 +1782,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1801,7 +1801,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1820,7 +1820,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1839,7 +1839,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1858,7 +1858,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1877,7 +1877,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1896,7 +1896,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1915,7 +1915,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1934,7 +1934,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1953,7 +1953,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1972,7 +1972,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -1991,7 +1991,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2010,7 +2010,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2029,7 +2029,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2048,7 +2048,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2067,7 +2067,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2086,7 +2086,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2105,7 +2105,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2124,7 +2124,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2143,7 +2143,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2162,7 +2162,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2181,7 +2181,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2200,7 +2200,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2219,7 +2219,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2238,7 +2238,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2257,7 +2257,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2276,7 +2276,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2295,7 +2295,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2314,7 +2314,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2333,7 +2333,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2352,7 +2352,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2371,7 +2371,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2390,7 +2390,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2409,7 +2409,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2428,7 +2428,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2447,7 +2447,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2466,7 +2466,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2485,7 +2485,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2504,7 +2504,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2523,7 +2523,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2542,7 +2542,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2561,7 +2561,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2580,7 +2580,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2599,7 +2599,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2618,7 +2618,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2637,7 +2637,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2656,7 +2656,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2675,7 +2675,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2694,7 +2694,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2713,7 +2713,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2732,7 +2732,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2751,7 +2751,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2770,7 +2770,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2789,7 +2789,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2808,7 +2808,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2827,7 +2827,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2846,7 +2846,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2865,7 +2865,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2884,7 +2884,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2903,7 +2903,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2922,7 +2922,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2941,7 +2941,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2960,7 +2960,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2979,7 +2979,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -2998,7 +2998,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3017,7 +3017,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3036,7 +3036,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3055,7 +3055,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3074,7 +3074,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3093,7 +3093,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3112,7 +3112,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3131,7 +3131,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3150,7 +3150,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3169,7 +3169,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3188,7 +3188,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3207,7 +3207,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3226,7 +3226,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3245,7 +3245,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3264,7 +3264,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3283,7 +3283,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3302,7 +3302,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3321,7 +3321,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3340,7 +3340,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3359,7 +3359,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3378,7 +3378,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3397,7 +3397,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3416,7 +3416,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3435,7 +3435,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3454,7 +3454,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3473,7 +3473,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3492,7 +3492,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3511,7 +3511,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3530,7 +3530,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3549,7 +3549,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3568,7 +3568,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3587,7 +3587,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3606,7 +3606,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3625,7 +3625,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3644,7 +3644,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3663,7 +3663,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3682,7 +3682,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3701,7 +3701,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3720,7 +3720,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3739,7 +3739,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3758,7 +3758,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3777,7 +3777,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3796,7 +3796,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3815,7 +3815,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3834,7 +3834,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3853,7 +3853,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3872,7 +3872,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3891,7 +3891,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3910,7 +3910,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3929,7 +3929,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3948,7 +3948,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3967,7 +3967,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -3986,7 +3986,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4005,7 +4005,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4024,7 +4024,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4043,7 +4043,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4062,7 +4062,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4081,7 +4081,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4100,7 +4100,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4119,7 +4119,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sR8el13QN2shl2buBN1QgXYLcOhxiZmbfvnCSuzjYD3o-bFZcg_PCvjMmfx5g44l1n-_2Jg_7zJoHvL9VPi7U53HjvRq9BWMpAJAUANF37RQKbrLznrPvE0oHyKQzDHgtbsR0G2vV13pHMeIwMzeebhQe3u6VnVbhvd58hAidBHjOEHVOpVIq-KkYC2JFMDHVEaL26aaCkjrfzBcyTK_EOjDLZjJgahe8AxH4BUYEP6CDAjA0VJ11S9qh6_olWxty0-5-wfGFXpOMWTgjKosDMO9ITlU92VcnEqBV5ChuRmA",
     "rating": 3.5,
     "reviewCount": 2065,
-    "priceRange": "€€",
+    "priceRange": "€3–49",
     "distance": "560m",
     "restaurantAddress": "Wrangelstraße 35, 10997 Berlin, Deutschland"
   },
@@ -4138,7 +4138,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4157,7 +4157,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4176,7 +4176,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4195,7 +4195,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4214,7 +4214,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4233,7 +4233,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4252,7 +4252,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4271,7 +4271,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4290,7 +4290,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4309,7 +4309,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4328,7 +4328,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4347,7 +4347,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4366,7 +4366,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4385,7 +4385,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4404,7 +4404,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4423,7 +4423,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4442,7 +4442,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4461,7 +4461,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4480,7 +4480,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4499,7 +4499,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4518,7 +4518,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4537,7 +4537,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sPXzFKWdpGeB56PoApAS6EVh61s5iQzkwU2TOFdMisvhU4CVuLFAsz-1T_hc-KzvyyN_EiNt0YkyoX_Y1bpJsv5eJ8ChmEhXefHZIMSsxwz_rBvsC0KfiSM-9fSHBgecPhp8-NCun-0zwbD1Ny804x2xTwmz_xeGp9hmTOu4vw-Ly8X-ojAwUixA8J5XZADKkThpI6hp0zfynQCQc6ADqLfD5ifS3a1Z4SEj3OaAj_NumGd55KwSFuEjH9zm8jXqr4WoIsCma5VDZ8VI6EJf4sDvDFKP1LeTl9meBw_6HZQ2k2tDbcXReBSJR-nRL5a2n7sTjKIE1EZ0ROWOA5mMTRe-F4HXmsLeBdbX4mKd7IVcVmOJXDXH4rivW0URhRCPa3NyFidldgly8G5bVTCXH0u1Fpj7s0J66MP8WQwmLP2YKY",
     "rating": 4.3,
     "reviewCount": 1829,
-    "priceRange": "€",
+    "priceRange": "€4–16",
     "distance": "530m",
     "restaurantAddress": "Skalitzer Str. 60, 10997 Berlin, Deutschland"
   },
@@ -4556,7 +4556,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4575,7 +4575,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4594,7 +4594,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4613,7 +4613,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4632,7 +4632,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4651,7 +4651,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4670,7 +4670,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4689,7 +4689,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4708,7 +4708,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4727,7 +4727,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4746,7 +4746,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4765,7 +4765,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4784,7 +4784,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4803,7 +4803,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4822,7 +4822,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4841,7 +4841,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4860,7 +4860,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4879,7 +4879,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4898,7 +4898,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4917,7 +4917,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4936,7 +4936,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4955,7 +4955,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4974,7 +4974,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -4993,7 +4993,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5012,7 +5012,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5031,7 +5031,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5050,7 +5050,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5069,7 +5069,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5088,7 +5088,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5107,7 +5107,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5126,7 +5126,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5145,7 +5145,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5164,7 +5164,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5183,7 +5183,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5202,7 +5202,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5221,7 +5221,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5240,7 +5240,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5259,7 +5259,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5278,7 +5278,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5297,7 +5297,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5316,7 +5316,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5335,7 +5335,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5354,7 +5354,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5373,7 +5373,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uSM_2_f5M-RTpHyeOVwbpTux1Cc2QTNwQ9WTbjlHV423UODTWzzdjN2scmD_CjHVikir8Out1tgE_fgJ6A0dDg6HRLmKaNA-lauU5d191C_vuacT7k_mStjpKEMvbpeuLKpSkHIHOvjNnrmoqRaB6G2SYJzaHGzXwF3TibevQMyQzCcatjkEEVz0AFYMkwoFdzlH5smbqayc_GGbyrjn2gIyWTV4ExTxGHbX72dklj-Du5zzVJ3KT3CxzoFWyQ2wMeSDzq3NBzZXtD7RHp0X9gDW06uzpWzNiQZnsFt8p-V0lLU7_bpwWfi75_BPpdwXSY6Q7S7WWcuMlkSh8M-yzTyoQCpt4Q8Oy-iG6e6wXpT25fVG48pD-cjqeqQr8AWrU-kNZ3cQshzDXKbIwGXz-Tpe_X5xOMiiTOIhYNOABi3ljtdUvOmMUt8Z5a7tdA",
     "rating": 4.9,
     "reviewCount": 1206,
-    "priceRange": "€€",
+    "priceRange": "€4–16",
     "distance": "610m",
     "restaurantAddress": "Oppelner Str. 34, 10997 Berlin, Deutschland"
   },
@@ -5392,7 +5392,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5411,7 +5411,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5430,7 +5430,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5449,7 +5449,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5468,7 +5468,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5487,7 +5487,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5506,7 +5506,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5525,7 +5525,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5544,7 +5544,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5563,7 +5563,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5582,7 +5582,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5601,7 +5601,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5620,7 +5620,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5639,7 +5639,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tIdtZkFAVZ-rwQxkmGWhwMB_7aJByJ2yKx1na3WiW0Xmb6YChNX7120sN0-o4QR3K8u0A5jLEx8we2ratN_f_W5EJjD574RZgna9LNMQmP2Du7z_46R5aYYgQ1dIP-AVDkFfh7UMfuWcsCjZ0-YZcL3krGQBq5uSfuxMFNqDKUMI8ffVrjp-Si3FKeuyd0APYEB6UEIx2m1e8JDOZDyHWTy5jMmNCAH_i_8GLyG1nzi6laYb888EXSQaAUuH3DOgWyXvYwgUF7EEKu7zb3LYne_usmJlMmWlHv_yM2Nmznu5jhrTI5KJu-GGhlwzpjWxI03NhkjQp332-AUD7gBtf835q2VCCIlkCZcZedyXFhfKoEh-hyR1qV7UwDdZYcbqrtdO8p8QE9Zcj3VVmUW0Zesu83b198MPs2L9gXfGuuEw",
     "rating": 4.7,
     "reviewCount": 1088,
-    "priceRange": "€",
+    "priceRange": "€4–18",
     "distance": "610m",
     "restaurantAddress": "Wrangelstraße 42, 10997 Berlin, Deutschland"
   },
@@ -5658,7 +5658,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5677,7 +5677,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5696,7 +5696,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5715,7 +5715,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5734,7 +5734,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5753,7 +5753,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5772,7 +5772,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5791,7 +5791,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5810,7 +5810,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5829,7 +5829,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5848,7 +5848,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5867,7 +5867,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5886,7 +5886,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5905,7 +5905,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5924,7 +5924,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5943,7 +5943,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5962,7 +5962,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -5981,7 +5981,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -6000,7 +6000,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -6019,7 +6019,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -6038,7 +6038,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -6057,7 +6057,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sawZn7lW41VNyAWkBgx1656QNk2Yp44c81GlnEUynJawTq-apsjzi0Pn5eykItqfnik0jHmXQZ2FZTjE7WK5BN88-5MAVy5a-sLvPrW2GVc2Vv9HwMLB7i5xbKzbTrGRHVNXptsEOMBxeU3tk0g_WbUPVIfbp31eug-NWijNXnvThCc5XGA-yGbEOM-e1GLxSjW8e87wpohA0Y_vHGqvwwLfYAmzMp8SKqAXaBmRpWAq52FCZabh3UvExiqjNokKEyS0XWndnAHh2HDK6y4A6WU_SGmEZdVeC4P3E8c4-FAJ7U7Xs0JPPBmn8s6q8PPhir3znfyuhq3ZpOQabr5ET2OO7XLHxzmai1LGXHZ5_cIgDjXK5HUuQwkAMPJEK3VPaTdnokIgjpIrqJ10CxbQPffJWfp2SlCExhTwwzluSwxbkr",
     "rating": 4.7,
     "reviewCount": 910,
-    "priceRange": "€",
+    "priceRange": "€4–14",
     "distance": "40m",
     "restaurantAddress": "Ohlauer Str. 10, 10999 Berlin, Deutschland"
   },
@@ -6076,7 +6076,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6095,7 +6095,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6114,7 +6114,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6133,7 +6133,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6152,7 +6152,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6171,7 +6171,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6190,7 +6190,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6209,7 +6209,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6228,7 +6228,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6247,7 +6247,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6266,7 +6266,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6285,7 +6285,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6304,7 +6304,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6323,7 +6323,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6342,7 +6342,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6361,7 +6361,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6380,7 +6380,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6399,7 +6399,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6418,7 +6418,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6437,7 +6437,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6456,7 +6456,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6475,7 +6475,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6494,7 +6494,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6513,7 +6513,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6532,7 +6532,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6551,7 +6551,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6570,7 +6570,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6589,7 +6589,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6608,7 +6608,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6627,7 +6627,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6646,7 +6646,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6665,7 +6665,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6684,7 +6684,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6703,7 +6703,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6722,7 +6722,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6741,7 +6741,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6760,7 +6760,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6779,7 +6779,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6798,7 +6798,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6817,7 +6817,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6836,7 +6836,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6855,7 +6855,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6874,7 +6874,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6893,7 +6893,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6912,7 +6912,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6931,7 +6931,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6950,7 +6950,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6969,7 +6969,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -6988,7 +6988,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7007,7 +7007,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7026,7 +7026,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7045,7 +7045,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7064,7 +7064,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7083,7 +7083,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7102,7 +7102,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7121,7 +7121,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7140,7 +7140,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7159,7 +7159,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vGzUStDniheWG0-NjPR37u5-U9qSZ0gKW7uoxlfkqM6wggqsjP5rhy1Ean1pkD_3i5eOJcbv_wlOR5swfgh5YYizrJerBki3VQ1hAn4JZ704qVtqtx314lQg_lVIdaoGzqUSw2faGxrVGowtDDBEtXj2VgPG9h-es4xFwz2CiGs5P1zqbup4bvV55xTKX2XknoKNvnXJEo64CVeKXq5yoGwr07kfXWekwrfVvGX_AQ7lIJ7hxBVFW3CxNVeITMntnZLb2z9dS82sQ5PU6HXVyQ2wFiq6A51WiHiHE54mVTFwZOZGLGTdZ0ETPYO-01KNwnOKNOED1_jSrD8BIF5VkmH-hZapcRnnW1AZck0ReDjeUI30L__pXDmx-yydYn_2Jr0H2FbITFKXvsgT9AQAUeA-zVtFEjTo2B2fNLd18fHlfUJsmu4GE5ACbdiS5L",
     "rating": 4.9,
     "reviewCount": 899,
-    "priceRange": "€€",
+    "priceRange": "€3–28",
     "distance": "360m",
     "restaurantAddress": "Görlitzer Str. 63, 10997 Berlin, Deutschland"
   },
@@ -7178,7 +7178,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7197,7 +7197,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7216,7 +7216,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7235,7 +7235,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7254,7 +7254,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7273,7 +7273,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7292,7 +7292,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7311,7 +7311,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7330,7 +7330,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7349,7 +7349,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7368,7 +7368,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7387,7 +7387,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7406,7 +7406,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7425,7 +7425,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7444,7 +7444,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7463,7 +7463,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7482,7 +7482,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7501,7 +7501,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vz3Xq8B_yZxdZelZs-YTfi8kwxoR3ZW5_njlvzeTsOpjhkYEd3NvzzA-ZAvUD8blhgamR6jvLWOcAt4SEj0cT4cNNNdmiGISAG7U67f41GKNSaz-SwqV1sYMPaDRFtozPTxAhdl-32rOjtHLuF0EnmNxRny5iYn5O9OidCsLo6xkTzCslWTkR3uLdg63N9LM5P6PaF20EzjPDZD6ja2C25OhnJtCzp-UzSHZgfT0qngYPNZCrtoIwbJkNAnVf0HtYyicuHwbYs_9YN-WIxHavhbF25DE5L0v_l3Bl6-SvfJQ",
     "rating": 4.7,
     "reviewCount": 852,
-    "priceRange": "€€",
+    "priceRange": "€4–18",
     "distance": "240m",
     "restaurantAddress": "Spreewaldpl. 5, 10999 Berlin, Deutschland"
   },
@@ -7520,7 +7520,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7539,7 +7539,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7558,7 +7558,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7577,7 +7577,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7596,7 +7596,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7615,7 +7615,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7634,7 +7634,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7653,7 +7653,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7672,7 +7672,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7691,7 +7691,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7710,7 +7710,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7729,7 +7729,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7748,7 +7748,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7767,7 +7767,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7786,7 +7786,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7805,7 +7805,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7824,7 +7824,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7843,7 +7843,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7862,7 +7862,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7881,7 +7881,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7900,7 +7900,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vAu9jtnSEzqIjdF2OeCP9a4cmKiElj7PzR3tLQyFJnoAgGEnlkVqTURAauHtDu56i4QmejmhmBIFA5VOpB-m6i4eHj26i2hLYLMC--nzMkNqaUSb89HAUHAC-fn_wMo5fu7HUBtcmxOr2jtShyJlnYbxszeel6FjnLyEUBJWXWjG48SwiY9wab-FKB8tTOsauMewWOuMSMWTXwgr_oznOjXVQtRbE9D83smEM5lmF7JwfkRLCoM_yIcn5LueKgy-lQVrZ2Ml8Q0c8PN1vzQnPD1p5dnH_3Xw0_pSkqqZh-rQ",
     "rating": 4.7,
     "reviewCount": 788,
-    "priceRange": "€",
+    "priceRange": "€6–18",
     "distance": "650m",
     "restaurantAddress": "Oppelner Str. 9, 10997 Berlin, Deutschland"
   },
@@ -7919,7 +7919,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -7938,7 +7938,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -7957,7 +7957,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -7976,7 +7976,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -7995,7 +7995,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8014,7 +8014,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8033,7 +8033,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8052,7 +8052,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8071,7 +8071,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8090,7 +8090,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8109,7 +8109,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8128,7 +8128,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8147,7 +8147,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8166,7 +8166,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8185,7 +8185,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8204,7 +8204,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8223,7 +8223,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8242,7 +8242,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8261,7 +8261,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8280,7 +8280,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8299,7 +8299,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8318,7 +8318,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8337,7 +8337,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8356,7 +8356,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8375,7 +8375,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8394,7 +8394,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8413,7 +8413,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8432,7 +8432,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-supxj-U6NFer3mTOzKJA4k3SeyT_uSwK4AgwteKUQOCYzRkGIKEN6j8Fc9Q8w-NEGNzCSEbIDpYKZpCEKogfjnhV-JBwKNt8_xzHRELJcN2VgVv3ctv9ohm48XwD8ZJni0kYAODLRizu6HfSMrOx41zZFuailSCTSOi0-UOYQ3AFuHi5V8XREpaqZWkywJfqmgaThqzYss--9pt-kqEQZbpRiBFuDcVz8DZEzBSwGPofqZdl76d_F8-1NrphE3RNphK7bxaKMGH1gOL0-dSMfcswU0PP4iloHYHf7Xj95jZSA07a_CLxleZi4cJPUo4p0-ixJIzl6hZbJKrrapI-QBb4SEYTfxabIyf8YGrbJwX7399aSr_hABOFi23LhDm7RBanzr9Q9ywd6Tmfo7Tp9Jt-t7F2UwCZEi0UIX5IWMgr5N8p4vtr6h4PBDADJf",
     "rating": 4.9,
     "reviewCount": 770,
-    "priceRange": "€€",
+    "priceRange": "€3–17",
     "distance": "630m",
     "restaurantAddress": "Wrangelstraße 43, 10997 Berlin, Deutschland"
   },
@@ -8451,7 +8451,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8470,7 +8470,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8489,7 +8489,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8508,7 +8508,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8527,7 +8527,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8546,7 +8546,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8565,7 +8565,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8584,7 +8584,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8603,7 +8603,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8622,7 +8622,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8641,7 +8641,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8660,7 +8660,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8679,7 +8679,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8698,7 +8698,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8717,7 +8717,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8736,7 +8736,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8755,7 +8755,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8774,7 +8774,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8793,7 +8793,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8812,7 +8812,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8831,7 +8831,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8850,7 +8850,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8869,7 +8869,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8888,7 +8888,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8907,7 +8907,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8926,7 +8926,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8945,7 +8945,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8964,7 +8964,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -8983,7 +8983,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9002,7 +9002,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9021,7 +9021,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9040,7 +9040,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9059,7 +9059,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9078,7 +9078,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9097,7 +9097,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9116,7 +9116,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9135,7 +9135,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9154,7 +9154,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9173,7 +9173,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9192,7 +9192,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9211,7 +9211,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9230,7 +9230,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9249,7 +9249,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9268,7 +9268,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9287,7 +9287,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9306,7 +9306,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9325,7 +9325,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9344,7 +9344,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9363,7 +9363,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9382,7 +9382,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9401,7 +9401,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9420,7 +9420,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9439,7 +9439,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9458,7 +9458,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9477,7 +9477,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9496,7 +9496,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9515,7 +9515,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9534,7 +9534,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9553,7 +9553,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9572,7 +9572,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9591,7 +9591,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9610,7 +9610,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9629,7 +9629,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9648,7 +9648,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9667,7 +9667,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9686,7 +9686,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9705,7 +9705,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-siNcKJyDgz0H8px7Tz0WcuMon1yZDLvbENJvcEZPPqdn3orOGOfe0ymfbQn-Y3CBddNbVcwFu5qnLDWV3k2KQGrTJbQYEDTnEHawZ40iW7zneatGsbEgAOZwgbX0Q19tL7wrvSlCb8RW1MYLJg9U0E_U9qbi_14Df7Qz7ALahWto5JkD6ZJcff1Dp08o7yGPJWjhRWqGxjI2M65wyK_CkWavarttbgC0_UlxrfG5qkqVBIssblbl2ExMox3DPKuTKcgjCnvsEabu8T2LWf9W4qxutBPp4NRUXhxqIvORFvUA",
     "rating": 4.6,
     "reviewCount": 642,
-    "priceRange": "€€",
+    "priceRange": "€3–24",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 13, 10997 Berlin, Deutschland"
   },
@@ -9724,7 +9724,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9743,7 +9743,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9762,7 +9762,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9781,7 +9781,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9800,7 +9800,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9819,7 +9819,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9838,7 +9838,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9857,7 +9857,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9876,7 +9876,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9895,7 +9895,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9914,7 +9914,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9933,7 +9933,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9952,7 +9952,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9971,7 +9971,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -9990,7 +9990,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -10009,7 +10009,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-HYQChTHKxvD_L7PvVYNrW8VblbZY7sCOZkOeCHD9hMD45cRY9XJd1PqUs-vH_Kt1eStmTUrS6u4Guy4MlD0Bka_27JVIIKLuSitAQxnwNNiZaQ2vMeP6HxtZEw3a3ncFbFpT2QtMbqp1cCSzmFbFOLJ8DGCubcLJgYl2e6TWBwiNGSaITkMvS2OuYHvGZqofgxXhpsv45nC_YlZQ_opkQcuLN6XOwYMBMr7kyRfrGxwhpgWflK0WslxtP7kp2BCPmHwYDlbVewXk-pyA91Go5OG6XG5Ya4cik8GyO_856p6sprkWZUOAEX9R40DRyXvkaUj6foBWPP-B96Oq29ZMtCsFjl0owcQjyp0LghYo8LF21cNjvQBKODjiXTOcyjUxhm5_rec_JcCane5UQ2-ztli9d3vtZsU1xYJgHlUXuMUVznMmk-4YlMQUlFBD",
     "rating": 4.5,
     "reviewCount": 617,
-    "priceRange": "€€",
+    "priceRange": "€8–18",
     "distance": "630m",
     "restaurantAddress": "Oranienstraße 200, 10999 Berlin, Deutschland"
   },
@@ -10028,7 +10028,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10047,7 +10047,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10066,7 +10066,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10085,7 +10085,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10104,7 +10104,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10123,7 +10123,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10142,7 +10142,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10161,7 +10161,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10180,7 +10180,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10199,7 +10199,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10218,7 +10218,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10237,7 +10237,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10256,7 +10256,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10275,7 +10275,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10294,7 +10294,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10313,7 +10313,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10332,7 +10332,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10351,7 +10351,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10370,7 +10370,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10389,7 +10389,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10408,7 +10408,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10427,7 +10427,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10446,7 +10446,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10465,7 +10465,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10484,7 +10484,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10503,7 +10503,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10522,7 +10522,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10541,7 +10541,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10560,7 +10560,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10579,7 +10579,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10598,7 +10598,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10617,7 +10617,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10636,7 +10636,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10655,7 +10655,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10674,7 +10674,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10693,7 +10693,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10712,7 +10712,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10731,7 +10731,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10750,7 +10750,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10769,7 +10769,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10788,7 +10788,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10807,7 +10807,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10826,7 +10826,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10845,7 +10845,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10864,7 +10864,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10883,7 +10883,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10902,7 +10902,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10921,7 +10921,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10940,7 +10940,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10959,7 +10959,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10978,7 +10978,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -10997,7 +10997,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11016,7 +11016,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11035,7 +11035,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11054,7 +11054,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11073,7 +11073,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11092,7 +11092,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11111,7 +11111,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11130,7 +11130,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11149,7 +11149,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11168,7 +11168,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11187,7 +11187,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sG_VxsAU_vc1NVf3eDwvVEsxKHwJAvzbLs097onSgC3rfh-I1gyTCWTwK-oPxwmDqUvpGSrGjm63DZFZhsxBMuuRlZIPG_LxmRiTxPWhHbmD-CsfxzF6Q7BlxG7J8Mr6AFhYyFa3OZwooJaypI_bY9ttIM6E4uBr6Yr9J3evsbUaOBZjvVsGAYTE_GTivNQUWZbZim8iY-r6c_xH9L6mdPk3CpZPKHOLd1P1h289X18CQl10Q7-TqENQwuFZv_4cKkS3H5nwPXu-76DcQsB2OzjnsN5BO1Qqz9_W70ajiU-w",
     "rating": 4.7,
     "reviewCount": 569,
-    "priceRange": "€€",
+    "priceRange": "€3–40",
     "distance": "140m",
     "restaurantAddress": "Wiener Str. 31, 10999 Berlin, Deutschland"
   },
@@ -11206,7 +11206,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11225,7 +11225,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11244,7 +11244,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11263,7 +11263,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11282,7 +11282,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11301,7 +11301,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11320,7 +11320,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11339,7 +11339,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11358,7 +11358,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11377,7 +11377,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11396,7 +11396,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11415,7 +11415,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11434,7 +11434,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11453,7 +11453,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11472,7 +11472,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11491,7 +11491,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11510,7 +11510,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11529,7 +11529,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11548,7 +11548,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11567,7 +11567,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11586,7 +11586,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11605,7 +11605,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11624,7 +11624,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11643,7 +11643,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-slR63BrOORE3cb1PC0UAQmpxrvMk8HFkSy4TUs_9jxTp7qAS0Q3C4IFxfdqzheFjf3MrJBOAAG5w_X7_paJkMUCmH6HQtALhTzR-niBo2UgUO8TYXcWokB72k4qlYmjf4W3Ju2n6IprLd0h8kf8vFiQJcLhh7Typod9FndsV8TE6HL36KS40yObbRBSGdLYuHRoqhef7RCcIEEsisQJbfrQ99KrP0gTp2WeLbZn7ouu9Dwba9jbhwaFWUIW6Imkif0ZcCu2V1TpJApI3w3CzVKWKpM-2VtfIInSp1Zy0tiiw",
     "rating": 4.4,
     "reviewCount": 550,
-    "priceRange": "€€",
+    "priceRange": "€12–18",
     "distance": "440m",
     "restaurantAddress": "Lausitzer Pl. 10, 10997 Berlin, Deutschland"
   },
@@ -11662,7 +11662,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11681,7 +11681,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11700,7 +11700,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11719,7 +11719,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11738,7 +11738,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11757,7 +11757,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11776,7 +11776,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11795,7 +11795,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11814,7 +11814,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11833,7 +11833,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11852,7 +11852,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11871,7 +11871,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11890,7 +11890,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11909,7 +11909,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11928,7 +11928,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11947,7 +11947,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11966,7 +11966,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -11985,7 +11985,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12004,7 +12004,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12023,7 +12023,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12042,7 +12042,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12061,7 +12061,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12080,7 +12080,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12099,7 +12099,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12118,7 +12118,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12137,7 +12137,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12156,7 +12156,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12175,7 +12175,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12194,7 +12194,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12213,7 +12213,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12232,7 +12232,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12251,7 +12251,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12270,7 +12270,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12289,7 +12289,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12308,7 +12308,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12327,7 +12327,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12346,7 +12346,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12365,7 +12365,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12384,7 +12384,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12403,7 +12403,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12422,7 +12422,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12441,7 +12441,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12460,7 +12460,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12479,7 +12479,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12498,7 +12498,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12517,7 +12517,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12536,7 +12536,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-v-T4QExUD07YwAQJXBhULry2nGucQZGc5jW3CLtxWNBE-kHmljU9X750erPTjCcYum6w3n7kkFqOtdSv4NxvDFQhvLWvkl8o-c-9X85Nm11qDU-o7gjuZ5kBHRQwQGXEFTaz3dph4PnS6_8xIZECpl4VMCWjNZtn_Uhs4xB6qXyOciVjFSxiBI9wEY5JXz784byAPcXU9-WT1pxUUhXQzUekC1LtB-hZk_n-DW_wzYroTBMMheUMmhEF16XnfMRxI3GwUqDL6q7N1PSC-rJGCyY7zZ4P9n4yHtTB_dXFTevg",
     "rating": 4.3,
     "reviewCount": 549,
-    "priceRange": "€€",
+    "priceRange": "€4–25",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -12555,7 +12555,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12574,7 +12574,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12593,7 +12593,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12612,7 +12612,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12631,7 +12631,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12650,7 +12650,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12669,7 +12669,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12688,7 +12688,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12707,7 +12707,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12726,7 +12726,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12745,7 +12745,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12764,7 +12764,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12783,7 +12783,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12802,7 +12802,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12821,7 +12821,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12840,7 +12840,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12859,7 +12859,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12878,7 +12878,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12897,7 +12897,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12916,7 +12916,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12935,7 +12935,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12954,7 +12954,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12973,7 +12973,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -12992,7 +12992,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13011,7 +13011,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13030,7 +13030,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13049,7 +13049,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13068,7 +13068,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13087,7 +13087,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13106,7 +13106,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13125,7 +13125,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13144,7 +13144,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13163,7 +13163,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13182,7 +13182,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13201,7 +13201,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13220,7 +13220,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13239,7 +13239,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13258,7 +13258,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13277,7 +13277,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13296,7 +13296,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13315,7 +13315,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13334,7 +13334,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13353,7 +13353,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13372,7 +13372,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13391,7 +13391,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-uIUqDOkApaewhhCidJU7VEZjfvZgndfgh4woC-qNxh6PljuL680f7hX3ZuvfyHPYGuy-5UsbCeTbKYn2RrmFLSdY8kAXCCLAPHDm49DdBnhLcAZU2FYjmwFKP35-AhXkcasEzmu7V7mmYAAGqIbeloHvyxvP8z0KAOoW7wd5Xesu2K-WxS-M3o7gPl4pcMvLRzszUVfxQi4tLmnv2hbuvETOOqdYNNoUosA2dRIFxea1dgnlVxyrSvTdNEWmBJmdl69iK3v283AFOhg12lOvT7i7pN8NobSF901-ILaEreXQ",
     "rating": 4.8,
     "reviewCount": 499,
-    "priceRange": "€€",
+    "priceRange": "€4–47",
     "distance": "670m",
     "restaurantAddress": "Wrangelstraße 90, 10997 Berlin, Deutschland"
   },
@@ -13410,7 +13410,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13429,7 +13429,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13448,7 +13448,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13467,7 +13467,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13486,7 +13486,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13505,7 +13505,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13524,7 +13524,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13543,7 +13543,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13562,7 +13562,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13581,7 +13581,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13600,7 +13600,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13619,7 +13619,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13638,7 +13638,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13657,7 +13657,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13676,7 +13676,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13695,7 +13695,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13714,7 +13714,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13733,7 +13733,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13752,7 +13752,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13771,7 +13771,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13790,7 +13790,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13809,7 +13809,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13828,7 +13828,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13847,7 +13847,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13866,7 +13866,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13885,7 +13885,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13904,7 +13904,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13923,7 +13923,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13942,7 +13942,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13961,7 +13961,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13980,7 +13980,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -13999,7 +13999,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14018,7 +14018,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14037,7 +14037,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14056,7 +14056,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14075,7 +14075,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14094,7 +14094,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14113,7 +14113,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14132,7 +14132,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14151,7 +14151,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14170,7 +14170,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14189,7 +14189,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14208,7 +14208,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14227,7 +14227,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14246,7 +14246,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14265,7 +14265,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14284,7 +14284,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14303,7 +14303,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14322,7 +14322,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14341,7 +14341,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14360,7 +14360,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14379,7 +14379,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14398,7 +14398,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14417,7 +14417,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14436,7 +14436,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14455,7 +14455,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14474,7 +14474,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14493,7 +14493,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14512,7 +14512,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14531,7 +14531,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14550,7 +14550,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14569,7 +14569,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14588,7 +14588,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14607,7 +14607,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14626,7 +14626,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14645,7 +14645,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14664,7 +14664,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14683,7 +14683,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14702,7 +14702,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14721,7 +14721,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14740,7 +14740,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14759,7 +14759,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14778,7 +14778,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vLtqWlhpPOR5fb7bfVjTsA7s7kH4g7uLrXk_sIai2-htiK23seW1OL4iRh57xPe3V3QnG-XEszQx0M9Znd0wkq5uOng5b7Vi0cuYuukWPCh1wl90imGH5DKMj5vPbmUG0ULX4tbuuH7T1sfPHCc0KYKPZ292IjzLXqy_u4aAJHF6oUoU8rVF5Wlnu-gLkS2Q4AMLpsp6UoYcG7O8fh6LSxjpjfEgohc6szZBAMGgOodZzkjKgG0AmEoYlmiuS_0gGI88l-A7-7rkA4EnIW9kqVrsP_sueeGpvXtCre6qjR1g",
     "rating": 4.9,
     "reviewCount": 440,
-    "priceRange": "€€",
+    "priceRange": "€4–20",
     "distance": "190m",
     "restaurantAddress": "Wiener Str. 60, 10999 Berlin, Deutschland"
   },
@@ -14797,7 +14797,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14816,7 +14816,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14835,7 +14835,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14854,7 +14854,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14873,7 +14873,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14892,7 +14892,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14911,7 +14911,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14930,7 +14930,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14949,7 +14949,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14968,7 +14968,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -14987,7 +14987,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15006,7 +15006,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15025,7 +15025,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15044,7 +15044,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15063,7 +15063,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15082,7 +15082,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-sZRGVD560wLiuOESuA6dAxpkSoHuEYvAkncw-i9MN-F515FnkGY3ksx5wWsvZ_X33LhopJ08LdrZWrkoLhYyxSMbPwPzTjrvS_UUVaTlTPJUB0kUjJ2FnyxI_gvrm_CWy1JT38DkSFkuWk2mR-_QbQCfrJfLY936f6V4AoFE5FVnqedMgdB__-ZVmwlEoM40gVts2tylFF5U1F8OhkQg1KLN0R1nzBviQ7t_OWAtuZKjS6ySH3x_9KOIQwE0CzeN6ts4CKnJMLsz-lCtTOTDJrWh_eVFcp7mbZXkYWXIhAeKQjlgMesNBXoIDN6-IcR6FHjxJn3c_OqVKBMJpKCQZfBKoN_57gi83rCfRHtpT33CRDj7ucO0F1uB9ShoJajJ2id5deguR-Lh68G5bZ337s4kSwdEGogRSeaOK6FXBcip4",
     "rating": 4.5,
     "reviewCount": 384,
-    "priceRange": "€€",
+    "priceRange": "€4–15",
     "distance": "320m",
     "restaurantAddress": "Görlitzer Str. 69, 10997 Berlin, Deutschland"
   },
@@ -15101,7 +15101,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15120,7 +15120,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15139,7 +15139,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15158,7 +15158,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15177,7 +15177,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15196,7 +15196,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15215,7 +15215,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15234,7 +15234,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15253,7 +15253,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15272,7 +15272,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15291,7 +15291,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15310,7 +15310,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-s7ZUWgcCR5FBeBbYjfmfNDj3RkRqzctYNM6Vd8_6xtudiWTWtoYYfJUozHwCugOViaYWgYsIvprB7p8P8o4g55z6AYiCQUSZHdazsF2QxlfSjr0X1msiRwchR6jQimC9BRKCzGWmLfp3WjeZarZy0Wqew8cKoKLBeFULQ7FXeik_cSj-Vs75gD1RR40oyB8wmepoc7i4XEcKLl_xBsHdLsABrRnkILnhGwj0vHpswwyrIfA3MN6IrPFYkYZSAgODMWcHFGuuhPkXRCinlH7N9VNT-BT8mrDP--PUYCgHwgQpMeDVTc4RzK61VQQB44excaMlllWOQfrVJxKtE9p0sZYa1cq4xDvu_I2vf0N9dpSJYXYVvHZQ5AEi8FmiFd9DPlnWRTco6NBSHaRJXCGaIhYGjtFe1JyiJaUQPWjLR3Pg",
     "rating": 4.7,
     "reviewCount": 369,
-    "priceRange": "€",
+    "priceRange": "€5–12",
     "distance": "270m",
     "restaurantAddress": "Reichenberger Str. 72A, 10999 Berlin, Deutschland"
   },
@@ -15329,7 +15329,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15348,7 +15348,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15367,7 +15367,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15386,7 +15386,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15405,7 +15405,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15424,7 +15424,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15443,7 +15443,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15462,7 +15462,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15481,7 +15481,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15500,7 +15500,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15519,7 +15519,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15538,7 +15538,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15557,7 +15557,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15576,7 +15576,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15595,7 +15595,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15614,7 +15614,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15633,7 +15633,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15652,7 +15652,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15671,7 +15671,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15690,7 +15690,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15709,7 +15709,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15728,7 +15728,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15747,7 +15747,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15766,7 +15766,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15785,7 +15785,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15804,7 +15804,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15823,7 +15823,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15842,7 +15842,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15861,7 +15861,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15880,7 +15880,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15899,7 +15899,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15918,7 +15918,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15937,7 +15937,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15956,7 +15956,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15975,7 +15975,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -15994,7 +15994,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16013,7 +16013,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16032,7 +16032,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16051,7 +16051,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16070,7 +16070,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16089,7 +16089,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16108,7 +16108,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16127,7 +16127,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16146,7 +16146,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16165,7 +16165,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16184,7 +16184,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16203,7 +16203,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16222,7 +16222,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16241,7 +16241,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16260,7 +16260,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16279,7 +16279,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16298,7 +16298,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16317,7 +16317,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16336,7 +16336,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16355,7 +16355,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16374,7 +16374,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16393,7 +16393,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16412,7 +16412,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16431,7 +16431,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16450,7 +16450,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16469,7 +16469,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16488,7 +16488,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16507,7 +16507,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16526,7 +16526,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16545,7 +16545,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16564,7 +16564,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16583,7 +16583,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16602,7 +16602,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16621,7 +16621,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16640,7 +16640,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16659,7 +16659,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16678,7 +16678,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ul2duwfJ4Q95x4_oX7aSpNNwYmpohrwExNF6uYm5BvZ7HBrjERrmkUI_4Em8S4wrvAy5IG8F7Exf_4Y2Jaf3e-SXUYDCUPN-bdRT472a3FuVJ3utduqOTGkJFjjbic6EEeA9m9KPS88HJmo_kf11ST5XgZCxPzharxw9C3yCeAcIIXIBwu1HpfYl4V4w9Ipaq529M_hDgtKhlYQ13iCMX30q-JpYIPmkq3FJB7N7yC61f0pYtQqU5JR82Q2zmxFUFpxpfKRI4ReXtDMUsR7ea1Cf-PofqRaFi96Bb31Y66KGaTRIzcVGLQED4I68SVtkQUktqvPElVzAY5FYKAXlMfCZ0774Ki1QWuY63cjK8WMA3iq_nl-_Rff9eaXGDJgRYidOfRft-FQ2qFSgiju7kZtPIR2ZrQXH8D9TXuwyjD8YuWtjfFhFOq4fkau6hj",
     "rating": 4.4,
     "reviewCount": 345,
-    "priceRange": "€€",
+    "priceRange": "€4–17",
     "distance": "580m",
     "restaurantAddress": "Eisenbahnstraße 4, 10997 Berlin, Deutschland"
   },
@@ -16697,7 +16697,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16716,7 +16716,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16735,7 +16735,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16754,7 +16754,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16773,7 +16773,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16792,7 +16792,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16811,7 +16811,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16830,7 +16830,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16849,7 +16849,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16868,7 +16868,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16887,7 +16887,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16906,7 +16906,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16925,7 +16925,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16944,7 +16944,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16963,7 +16963,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -16982,7 +16982,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17001,7 +17001,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17020,7 +17020,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17039,7 +17039,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17058,7 +17058,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17077,7 +17077,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17096,7 +17096,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17115,7 +17115,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17134,7 +17134,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17153,7 +17153,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17172,7 +17172,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17191,7 +17191,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17210,7 +17210,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17229,7 +17229,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17248,7 +17248,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17267,7 +17267,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17286,7 +17286,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-u2ZykVPFzrPnFmHwYljFObIwXnPjJ5UDcql3fGjiXWw1CtwpDD0cWCODABs7igg5qEyAM0ysWgQ_ESUqnq_f9kHTG1CCHYV3JEy71U0TIYn6qpatOgJjqqSC8jg0A7np4OtWphA1XK81Y59ocFBUlB1MZ4JTJ4yq4fTSUrNBF0-LkjjkrtwqOVdyl5JpNVk83SNj0SGhBN-PXRx_2r1ezGGHpPxR_HILRRl8KgaLHQDUFyMl6wwhoPY9gVVUA2OjtotEpmM4T1nkCKN-EEiZLBw0a0EVzUsMdkoWJLTBW4eULXgpjc-Yl-7KJ4Xu8uIswOnNg3LLCfSAidRqvYz5TCs3mjIS918VhLOKZeNVaca-Y2XiFvAezRnXYj80ude6ARa793Y7tiWttlY-eDn_ZLwDjweGM_arjVEjrVZ7jr_O8o",
     "rating": 4.2,
     "reviewCount": 300,
-    "priceRange": "€",
+    "priceRange": "€3–17",
     "distance": "510m",
     "restaurantAddress": "Lausitzer Pl. 14, 10997 Berlin, Deutschland"
   },
@@ -17305,7 +17305,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17324,7 +17324,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17343,7 +17343,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17362,7 +17362,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17381,7 +17381,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17400,7 +17400,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17419,7 +17419,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17438,7 +17438,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17457,7 +17457,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17476,7 +17476,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17495,7 +17495,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17514,7 +17514,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17533,7 +17533,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17552,7 +17552,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-svKOxZNowZ3jzWFbo0W4oWRnnvml-kio-IQkhyhv3Bej346uI9zSy6cCEBN7QRrs2euwl2Fp-zpIjPDum0zcYbARNUcYbT54V2sNqrbTB7ngTGflCUErGnXENgPlHC_GnTpHKdtnbr7M6gGdLKsVF26m301K838weUHwf8CMFJ786mXhyq5bbWcLrw5mm8i64gZRH9byeEwF9fcwjpEmcirTwZC0uFqXiVmtzzmrbty9dNlQRESNio_jMbYXWaDGiMH4UsPmcp9MiomYFT718bRV6ahhkxQ597p_3RRYxC7A",
     "rating": 4.4,
     "reviewCount": 286,
-    "priceRange": "€€",
+    "priceRange": "€4–22",
     "distance": "630m",
     "restaurantAddress": "Eisenbahnstraße 42, 10997 Berlin, Deutschland"
   },
@@ -17571,7 +17571,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17590,7 +17590,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17609,7 +17609,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17628,7 +17628,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17647,7 +17647,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17666,7 +17666,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17685,7 +17685,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17704,7 +17704,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17723,7 +17723,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17742,7 +17742,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17761,7 +17761,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17780,7 +17780,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17799,7 +17799,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-ticAs5M_jztqrUwZFz4T4pz_LL8qHjBVDxhOjQiy_oUd4vTH_VHzzJ7cx7hu_Psy9Qcy5L9ButDUY8M3Jo0CoaAtomjgZolXmY2ccj3TQGtMPrTc9GqoSedsayDtQqWl8snzGgOsTvn8uZtCe1rkgLFSKLi0bQGkbNUqp0PJjOQzhb4Z2wRGOyiNt2_9eVX_sfynVDzf7cpO2_-jch9qzxPueDWN7iFq1CwJ3vM8_M-iBg_l3fGnS0c0oms56FbYjbOx7wZp-ygh96ZirgyKqhuw0_FzNhn4b1v0mXat4IUSbJ2EhJjwmSFFpWg7weWIz_KilSVff7Q-R8ReFA4HKO0CqY9mrH47G_zUYVvkVspa-vhHUFU_sdRZqQ76TFweMSUZd2g1_wtKXCxYGMRl8z7jvMhRc6duNJmxad2n0vG9dq",
     "rating": 4.8,
     "reviewCount": 283,
-    "priceRange": "€€",
+    "priceRange": "€3–13",
     "distance": "90m",
     "restaurantAddress": "Wiener Str. 22, 10999 Berlin, Deutschland"
   },
@@ -17818,7 +17818,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17837,7 +17837,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17856,7 +17856,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17875,7 +17875,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17894,7 +17894,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17913,7 +17913,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17932,7 +17932,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17951,7 +17951,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17970,7 +17970,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -17989,7 +17989,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18008,7 +18008,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18027,7 +18027,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18046,7 +18046,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18065,7 +18065,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18084,7 +18084,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18103,7 +18103,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18122,7 +18122,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18141,7 +18141,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18160,7 +18160,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18179,7 +18179,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18198,7 +18198,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18217,7 +18217,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18236,7 +18236,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18255,7 +18255,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18274,7 +18274,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18293,7 +18293,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18312,7 +18312,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18331,7 +18331,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18350,7 +18350,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18369,7 +18369,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18388,7 +18388,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18407,7 +18407,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18426,7 +18426,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18445,7 +18445,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18464,7 +18464,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18483,7 +18483,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18502,7 +18502,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18521,7 +18521,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18540,7 +18540,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-tOvFXCUjHhIDsHlIpXveMQDLyKVpTvVQCwzHefE1w6HYRN34j-7ZyTH-ol066fafAAbVUrd9zMwCovJfdt5MV6Xc136psyzejmFVp4zH0z3dXHajRmEBczUoZ4YLek9jXUlf8UFUO1Tzp-MkoC7IFRtscNAR4wHPeKXg-moU_8b3HJc3gB59iLJZd-K3kRNz5MumDdV5VKbW99hpAA_ti9h4Pzw51zIbev6QELS7H0Fz3z6rautZMPDFWQ0MDugdAyGI3vb-56l2pnmsQrxi5XNJkIy28jkQYQMU_64f-Osw",
     "rating": 4.9,
     "reviewCount": 269,
-    "priceRange": "€€",
+    "priceRange": "€3–14",
     "distance": "370m",
     "restaurantAddress": "Skalitzer Str. 95A, 10997 Berlin, Deutschland"
   },
@@ -18559,7 +18559,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18578,7 +18578,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18597,7 +18597,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18616,7 +18616,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18635,7 +18635,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18654,7 +18654,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18673,7 +18673,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18692,7 +18692,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18711,7 +18711,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18730,7 +18730,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18749,7 +18749,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18768,7 +18768,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18787,7 +18787,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18806,7 +18806,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18825,7 +18825,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18844,7 +18844,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18863,7 +18863,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18882,7 +18882,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18901,7 +18901,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18920,7 +18920,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18939,7 +18939,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18958,7 +18958,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18977,7 +18977,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -18996,7 +18996,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -19015,7 +19015,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -19034,7 +19034,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -19053,7 +19053,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   },
@@ -19072,7 +19072,7 @@ export const MOCK_MEALS = [
     "restaurantPhoto": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=Ab43m-vTL2OGwDfBPD5vSCa_9KN6r8VHctheGuVWc9K4yhq3voQEXrWhWltydZQTHAR8QsOWXQDEBmh3TOooTjGAKam-6LKK8vMdVrPmyYQBAHIN2uAEFjKuPy_59uu_dNyPL86eMfuVc_sTOK4fRiqtyzBp4DZ3AWaxsFzkmmDGYpeM09O61Ej7nOcw9w9wxg1Qpf6Zg5p9SA5xfKGxnWKb9IIeO35evSaCDT0MXqnReJCqUx2F-jGgqXUzBalX1fRpOx7qi0tzkhAyOFaUvrUuL_q97qPyK2yRVZWgVE0b14NjlYGtMp6ZafTVfCdSpmyngJq-yyUymrb5MnH9ZoSH6rnD8OwXRjiYektXW9-aEzNslbRPLmLjO7PcyWVOZf8yGxhKdEcsa4T0oZH3xRnavMvEPdkHswwyUksSGekvQAT1wHvukTOIV11RaTdiH3PE",
     "rating": 4.8,
     "reviewCount": 243,
-    "priceRange": "€€",
+    "priceRange": "€5–14",
     "distance": "160m",
     "restaurantAddress": "Ohlauer Str. 27, 10999 Berlin, Deutschland"
   }

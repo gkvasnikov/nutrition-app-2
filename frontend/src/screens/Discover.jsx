@@ -150,6 +150,23 @@ export default function Discover({
     setIsExpanded(false)
   }
 
+  function selectPinByRestaurantId(restaurantId) {
+    const entry = markersRef.current.find(({ cfg }) =>
+      cfg.allMeals.some(m => m.restaurantId === restaurantId)
+    )
+    if (!entry) return
+    const { marker, cfg } = entry
+    // Deselect current marker if different
+    if (activeMarkerRef.current && activeMarkerRef.current !== marker) {
+      animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
+    }
+    activeMarkerRef.current = marker
+    animatePin(marker, cfg, 40, 48)
+    selectPin(cfg)
+    // Pan map so the pin is visible
+    mapInstanceRef.current?.panTo({ lat: cfg.lat, lng: cfg.lng })
+  }
+
   function deselectPin() {
     // Animate active marker back to default size
     if (activeMarkerRef.current) {
@@ -591,7 +608,11 @@ export default function Discover({
           {visibleMeals.map((meal, i) => (
             <Fragment key={`${meal.id}-${i}`}>
               {i > 0 && <div className={styles.separator} />}
-              <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
+              <CardMeal
+                {...meal}
+                onClick={() => onMealSelect?.(meal)}
+                onRestaurantClick={() => selectPinByRestaurantId(meal.restaurantId)}
+              />
             </Fragment>
           ))}
         </div>

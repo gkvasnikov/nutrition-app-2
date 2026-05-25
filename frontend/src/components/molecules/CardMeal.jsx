@@ -18,6 +18,7 @@ export default function CardMeal({
   reviewCount,
   hideRestaurant = false,
   onClick,
+  onRestaurantClick,
 }) {
   return (
     <div className={styles.card} onClick={onClick}>
@@ -49,7 +50,7 @@ export default function CardMeal({
       {/* Divider + Restaurant row — hidden when inside restaurant overlay */}
       {!hideRestaurant && <div className={styles.divider} />}
 
-      {!hideRestaurant && <div className={styles.restaurantRow}>
+      {!hideRestaurant && <div className={styles.restaurantRow} onClick={onRestaurantClick ? e => { e.stopPropagation(); onRestaurantClick() } : undefined}>
         <div className={styles.restaurant}>
           <LocationIcon size={16} className={styles.locationIcon} />
           <span className={styles.restaurantName}>{restaurantName}</span>
