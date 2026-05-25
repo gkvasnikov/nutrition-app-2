@@ -12,7 +12,7 @@ import styles from './Discover.module.css'
 
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
-const CENTER = { lat: 52.4965, lng: 13.4315 } // Wrangelstrasse 18, Berlin
+const CENTER = { lat: 52.5170, lng: 13.3889 } // Berlin center
 const PEEK_SHOW = 200 // px visible from bottom in collapsed state
 
 export default function Discover({
@@ -423,7 +423,7 @@ export default function Discover({
     if (!mapRef.current || mapInstanceRef.current) return
     mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
       center: CENTER,
-      zoom: 15,
+      zoom: 12,
       disableDefaultUI: true,
       styles: [
         { featureType: 'poi', stylers: [{ visibility: 'off' }] },
