@@ -171,15 +171,24 @@ export default function Discover({
     )
     if (!entry) return
     const { marker, cfg } = entry
-    // Deselect current marker if different
-    if (activeMarkerRef.current && activeMarkerRef.current !== marker) {
-      animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
+
+    const doSelect = () => {
+      if (activeMarkerRef.current && activeMarkerRef.current !== marker) {
+        animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
+      }
+      activeMarkerRef.current = marker
+      animatePin(marker, cfg, 40, 48)
+      selectPin(cfg)
+      mapInstanceRef.current?.panTo({ lat: cfg.lat, lng: cfg.lng })
     }
-    activeMarkerRef.current = marker
-    animatePin(marker, cfg, 40, 48)
-    selectPin(cfg)
-    // Pan map so the pin is visible
-    mapInstanceRef.current?.panTo({ lat: cfg.lat, lng: cfg.lng })
+
+    if (isExpandedRef.current) {
+      // First collapse the sheet, then focus the pin after animation finishes
+      snapTo(false)
+      setTimeout(doSelect, 420) // matches sheet transition 0.4s
+    } else {
+      doSelect()
+    }
   }
 
   function deselectPin() {
