@@ -285,12 +285,18 @@ export default function Discover({
     document.head.appendChild(script)
   }, [])
 
-  // Step 2 — init map once BOTH the script AND the API data are ready
+  // Step 2 — init map as soon as script is ready (don't wait for API data)
   useEffect(() => {
-    if (!mapsScriptReady || dataLoading || mapInitialisedRef.current) return
+    if (!mapsScriptReady || mapInitialisedRef.current) return
     mapInitialisedRef.current = true
     initMap()
-  }, [mapsScriptReady, dataLoading]) // eslint-disable-line
+  }, [mapsScriptReady]) // eslint-disable-line
+
+  // Step 3 — add pins once API data arrives (map must already exist)
+  useEffect(() => {
+    if (dataLoading || !mapInstanceRef.current || markersRef.current.length > 0) return
+    addMealPins(mapInstanceRef.current)
+  }, [dataLoading]) // eslint-disable-line
 
   // When tab becomes visible again after display:none, the map needs a resize
   // signal to redraw correctly (its container had zero dimensions while hidden)
@@ -504,8 +510,8 @@ export default function Discover({
         { featureType: 'transit', stylers: [{ visibility: 'off' }] },
       ],
     })
-    await addMealPins(mapInstanceRef.current)
-    // Center on user location immediately on load
+    // Pins are added by the dataLoading effect once API data arrives.
+    // Center on user location immediately — no need to wait for pins.
     locateMe()
   }
 
