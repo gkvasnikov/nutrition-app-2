@@ -65,8 +65,9 @@ src/
                              .cardMainExpanded .bodyOpen .bodyInner .bodyContent { opacity: 1 }
                              .cardVisible .bodyOpen .bodyInner .bodyContent { opacity: 1 }
                            toggleSection rule: cannot close without opening another (prev === key ? prev : key)
-                           panelWrapVisible controlled by isVisible state (mount first, then expand)
-                           Unmount timer: 520ms; actions row stagger: 0.25s delay
+                           Animation state: isVisible (mounts component) + isExpanded (drives transitions)
+                           panelWrapVisible keyed off isExpanded (NOT isVisible) — allows fade-out on close
+                           Unmount timer: 520ms; panelWrap fade: 0.35s; actions row stagger: 0.25s delay
                            Available on both Home and Discover screens
       ButtonFilterActions.jsx — Reset (no border, shadow-float) + Apply (shadow-float); NO padding on .wrap
                            (padding is provided by the parent context: FiltersPanel .actions or MealFilterOverlay bodyContent)
@@ -196,6 +197,25 @@ Only pins inside `visibleBounds` contribute to the count.
 - `PIN_PAD = 10` — canvas breathing room so shadow never clips
 - `activeMarkerRef` tracks the currently selected marker (stable ref, safe in map event handlers)
 
+### Pin photos and filter sync
+Each pin shows a photo of the **first meal that matches the current filters** (not a fixed restaurant thumbnail).
+
+`cfg` object per pin:
+- `photo` — URL used for the currently loaded `cfg.img` (either base64 `pinPhoto` initially, or proxy URL after first filter sync)
+- `photoUrl` — raw Wolt CDN URL of the representative meal (used for change detection); `null` until first filter sync
+- `img` — preloaded `Image` element drawn into `createPinIcon`'s canvas
+- `allMeals` — all meals for this restaurant (never changes)
+- `meals` — currently filtered meals (updated by `updatePinFilters`)
+
+`updatePinFilters()` runs on every filter change:
+1. Computes `filtered = applyFiltersToMeals(cfg.allMeals)`
+2. If `filtered[0]?.photo !== cfg.photoUrl` → new representative meal → loads it via `/api/image-proxy`
+3. Shows the current `cfg.img` immediately while the new image loads, then swaps once `onload` fires
+
+**Canvas CORS**: Meal photos are hosted on `imageproxy.wolt.com` (cross-origin). Loading them directly taints the canvas and breaks `toDataURL()`. Solution: all meal photos for pins are routed through `/api/image-proxy` (same-origin), keeping the canvas clean.
+
+Initial load (`addMealPins`): uses the pre-downloaded base64 `pinPhoto` (no CORS issue). First `updatePinFilters` call (at end of `addMealPins`) syncs all pins to the default filter state via the proxy.
+
 ### Pin selection mechanic (MealPin → floating card)
 - Clicking a pin hides the bottom sheet (slides fully off-screen) and shows a floating `pinCardWrap` at the bottom
 - `selectedPin` state: `null | { type: 'single'|'group', meals: Meal[], img, ... }`
@@ -239,6 +259,8 @@ Only pins inside `visibleBounds` contribute to the count.
 Express server (`server.js` at project root), proxied via Vite at `/api`.
 
 `POST /api/advice` — calls Anthropic API (`claude-haiku-4-5-20251001`) with meal name + macros, returns `{ score: number, rating: 'Poor'|'Fair'|'Good'|'Excellent', advice: string }`.
+
+`GET /api/image-proxy?url=<encoded>` — fetches an external CDN image server-side and streams it back. Prevents canvas CORS taint when drawing meal photos into `createPinIcon`. Whitelisted domains: `imageproxy.wolt.com`, `maps.googleapis.com`. Caches responses for 24 h (`Cache-Control: public, max-age=86400`).
 
 API key: `ANTHROPIC_API_KEY` env var (Railway). Never hardcode.
 
