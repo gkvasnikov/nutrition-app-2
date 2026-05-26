@@ -109,7 +109,7 @@
 .restaurantRow {
   display: flex;
   align-items: center;
-  gap: var(--spacing-16);
+  gap: var(--spacing-12);
   overflow: hidden;
 }
 
