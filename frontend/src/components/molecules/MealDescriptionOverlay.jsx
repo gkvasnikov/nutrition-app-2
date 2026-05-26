@@ -4,7 +4,7 @@ import { useAppData } from '../../contexts/DataContext'
 import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
-import { distanceTo } from '../../utils/distance'
+import { distanceTo, mapsDirectionUrl } from '../../utils/distance'
 import styles from './MealDescriptionOverlay.module.css'
 
 const MACRO_BG = {
@@ -29,7 +29,7 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
 
   function handleDirection() {
     const r = restaurantById.get(meal.restaurantId)
-    if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
+    if (r) window.open(mapsDirectionUrl(userLat, userLng, r.lat, r.lng), '_blank')
   }
 
   function handleWolt() {

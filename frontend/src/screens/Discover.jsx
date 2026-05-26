@@ -7,7 +7,9 @@ import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
 import { withKey } from '../utils/photoUrl'
+import { mapsDirectionUrl } from '../utils/distance'
 import { useAppData } from '../contexts/DataContext'
+import { useLocation } from '../contexts/LocationContext'
 import styles from './Discover.module.css'
 
 
@@ -29,6 +31,7 @@ export default function Discover({
   isActive = true,
 }) {
   // ── Data ─────────────────────────────────────────────────────────────────────
+  const { userLat, userLng } = useLocation()
   const {
     restaurants: apiRestaurants,
     summaryById,
@@ -943,7 +946,7 @@ export default function Discover({
                 onClick={() => {
                   const p = selectedPin ?? lastSelectedPinRef.current
                   if (p?.lat && p?.lng) {
-                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`, '_blank')
+                    window.open(mapsDirectionUrl(userLat, userLng, p.lat, p.lng), '_blank')
                   }
                 }}
               >

@@ -32,3 +32,17 @@ export function distanceTo(userLat, userLng, targetLat, targetLng) {
   if (userLat == null || userLng == null || targetLat == null || targetLng == null) return null
   return formatDistance(haversineM(userLat, userLng, targetLat, targetLng))
 }
+
+/**
+ * Google Maps direction URL.
+ * Uses walking mode for distances ≤ 1 km, driving mode above that.
+ * Falls back to walking when user location is unavailable.
+ */
+export function mapsDirectionUrl(userLat, userLng, destLat, destLng) {
+  const mode =
+    userLat != null && userLng != null && destLat != null && destLng != null &&
+    haversineM(userLat, userLng, destLat, destLng) <= 1000
+      ? 'walking'
+      : 'driving'
+  return `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}&travelmode=${mode}`
+}

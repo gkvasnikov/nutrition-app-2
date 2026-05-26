@@ -4,7 +4,7 @@ import CardMeal from './CardMeal'
 import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
-import { distanceTo } from '../../utils/distance'
+import { distanceTo, mapsDirectionUrl } from '../../utils/distance'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200, onClose, onMealSelect }) {
@@ -28,7 +28,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
 
   function handleDirection() {
     if (restaurant?.lat && restaurant?.lng) {
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${restaurant.lat},${restaurant.lng}`, '_blank')
+      window.open(mapsDirectionUrl(userLat, userLng, restaurant.lat, restaurant.lng), '_blank')
     }
   }
 
