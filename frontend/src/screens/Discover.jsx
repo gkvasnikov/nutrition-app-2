@@ -294,9 +294,9 @@ export default function Discover({
 
   // Step 3 — add pins once API data arrives (map must already exist)
   useEffect(() => {
-    if (dataLoading || !mapInstanceRef.current || markersRef.current.length > 0) return
+    if (dataLoading || !apiMeals.length || !mapInstanceRef.current || markersRef.current.length > 0) return
     addMealPins(mapInstanceRef.current)
-  }, [dataLoading]) // eslint-disable-line
+  }, [dataLoading, apiMeals.length]) // eslint-disable-line
 
   // When tab becomes visible again after display:none, the map needs a resize
   // signal to redraw correctly (its container had zero dimensions while hidden)
@@ -426,18 +426,14 @@ export default function Discover({
     requestAnimationFrame(step)
   }
 
-  async function addMealPins(map) {
-    // Group meals by restaurant, build one pin per restaurant
+  function addMealPins(map) {
+    // Group meals by restaurant using O(1) lookup (restaurantByIdRef is ready at this point)
     const restaurantMap = {}
     for (const meal of apiMeals) {
       if (!restaurantMap[meal.restaurantId]) {
-        const r = apiRestaurants.find(r => r.id === meal.restaurantId)
+        const r = restaurantByIdRef.current.get(meal.restaurantId)
         if (!r) continue
-        // firstMealPhoto is a Wolt CDN URL — proxy it to avoid canvas CORS taint
-        const proxyPhoto = r.firstMealPhoto
-          ? `/api/image-proxy?url=${encodeURIComponent(r.firstMealPhoto)}`
-          : null
-        restaurantMap[meal.restaurantId] = { lat: r.lat, lng: r.lng, pinPhoto: proxyPhoto, meals: [] }
+        restaurantMap[meal.restaurantId] = { lat: r.lat, lng: r.lng, meals: [] }
       }
       restaurantMap[meal.restaurantId].meals.push(meal)
     }
@@ -445,15 +441,14 @@ export default function Discover({
       lat:      pin.lat,
       lng:      pin.lng,
       type:     pin.meals.length === 1 ? 'single' : 'group',
-      photo:    pin.pinPhoto || null, // initial base64 thumbnail (pre-downloaded, no CORS)
-      photoUrl: null,                 // raw meal photo URL for change detection; null = not yet synced to filters
+      photo:    null,   // set by updatePinFilters on first run
+      photoUrl: null,   // raw meal photo URL for change detection
+      img:      null,   // images loaded lazily by updatePinFilters, not preloaded
       count:    pin.meals.length,
       meals:    pin.meals,
-      allMeals: pin.meals, // immutable original — meals is mutated by filter updates
+      allMeals: pin.meals, // immutable — meals is replaced by filter updates
     }))
 
-    // Register map-level listeners before image preload — map fires idle/bounds_changed
-    // during preload and we need pinDataRef ready to handle those events correctly
     pinDataRef.current = PIN_DATA
 
     map.addListener('idle', () => updateVisibleMealsRef.current())
@@ -465,14 +460,6 @@ export default function Discover({
         selectPinRef.current(null)
       }
     })
-
-    // Pre-load all images, then place markers on map
-    await Promise.all(PIN_DATA.map(cfg => new Promise(resolve => {
-      const img    = new Image()
-      img.onload   = () => { cfg.img = img; resolve() }
-      img.onerror  = () => { cfg.img = null; resolve() }
-      img.src      = cfg.photo
-    })))
 
     PIN_DATA.forEach(cfg => {
       const marker = new window.google.maps.Marker({
@@ -696,7 +683,7 @@ export default function Discover({
               <p className={styles.mealCount}>{visibleMeals.length} Meals</p>
               <p className={styles.mealSubtitle}>
                 {(() => {
-                  const n = new Set(visibleMeals.map(m => m.restaurantName)).size
+                  const n = new Set(visibleMeals.map(m => m.restaurantId)).size
                   return `in ${n} restaurant${n !== 1 ? 's' : ''} around you`
                 })()}
               </p>
