@@ -128,6 +128,7 @@ export default function Discover({
         marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count))
         if (cfg.photo) {
           const img = new Image()
+          img.crossOrigin = 'anonymous'  // prevent canvas taint when calling toDataURL()
           img.onload  = () => { cfg.img = img;  marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count)) }
           img.onerror = () => { cfg.img = null; marker.setIcon(createPinIcon(null,    40, cfg.type, cfg.count)) }
           img.src = cfg.photo
