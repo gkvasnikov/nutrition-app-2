@@ -190,7 +190,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
       />
 
       {/* Cards stack */}
-      <div className={`${styles.panelWrap} ${isVisible ? styles.panelWrapVisible : ''}`}>
+      <div className={`${styles.panelWrap} ${isExpanded ? styles.panelWrapVisible : ''}`}>
 
         {/* ── Card 1: Meal Time — morphs from pill ───────────────────── */}
         <div className={`${styles.cardMain} ${isExpanded ? styles.cardMainExpanded : ''}`}>

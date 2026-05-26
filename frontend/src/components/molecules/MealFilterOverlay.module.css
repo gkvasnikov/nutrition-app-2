@@ -32,7 +32,7 @@
   gap: var(--spacing-8);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s ease;
+  transition: opacity 0.35s ease;
 }
 
 .panelWrapVisible {
