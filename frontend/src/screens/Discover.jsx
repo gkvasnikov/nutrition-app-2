@@ -17,10 +17,10 @@ const PEEK_SHOW = 200  // px visible from bottom in collapsed state
 
 // Below this zoom level: show simple dot-pins, no image loading, no meal list.
 // At and above: show photo-pins, load meals for the visible area.
-// locateMe() sets zoom=16; dots appear 2 steps back (16-2=14).
-const PHOTO_ZOOM_THRESHOLD = 14
-const MIN_ZOOM = 12   // Berlin overview — "-" disabled at this level
-const MAX_ZOOM = 19   // locateMe(16) + 3 — "+" disabled at this level
+const PHOTO_ZOOM_THRESHOLD = 15
+const MAP_MIN_ZOOM = 12  // Google Maps won't go below this (initial Berlin view)
+const MIN_ZOOM = 15      // "-" button disabled at this level and below (dot mode)
+const MAX_ZOOM = 19      // "+" button disabled at this level and above
 
 export default function Discover({
   activeTab, onTabChange, onMealSelect,
@@ -634,7 +634,7 @@ export default function Discover({
     mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
       center:   CENTER,
       zoom:     12,
-      minZoom:  MIN_ZOOM,
+      minZoom:  MAP_MIN_ZOOM,
       maxZoom:  MAX_ZOOM,
       disableDefaultUI: true,
       styles: [
