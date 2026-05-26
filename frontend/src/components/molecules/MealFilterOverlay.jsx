@@ -32,10 +32,10 @@ const SLIDER_CONFIG = [
 ]
 
 const MEAL_TIMES = [
-  { key: 'breakfast', label: 'Breakfast' },
-  { key: 'lunch',     label: 'Lunch' },
-  { key: 'dinner',    label: 'Dinner' },
-  { key: 'snack',     label: 'Snack' },
+  { key: 'breakfast', label: 'Breakfast', icon: '/icons/Breakfast.svg' },
+  { key: 'lunch',     label: 'Lunch',     icon: '/icons/Lunch.svg' },
+  { key: 'dinner',    label: 'Dinner',    icon: '/icons/Dinner.svg' },
+  { key: 'snack',     label: 'Snack',     icon: '/icons/Snack.svg' },
 ]
 
 const DIET_TYPES = [
@@ -62,31 +62,31 @@ function RangeSlider({ label, min, max, value, onChange }) {
 
   return (
     <div className={styles.sliderRow}>
-      <div className={styles.sliderMeta}>
-        <span className={styles.sliderLabel}>{label}</span>
+      <span className={styles.sliderLabel}>{label}</span>
+      <div className={styles.sliderRight}>
         <span className={styles.sliderValue}>from {lo} to {hi}</span>
-      </div>
-      <div className={styles.sliderTrack}>
-        <div
-          className={styles.sliderFill}
-          style={{ left: `${loPercent}%`, right: `${100 - hiPercent}%` }}
-        />
-        <input
-          type="range"
-          className={styles.sliderInput}
-          min={min}
-          max={max}
-          value={lo}
-          onChange={e => onChange([Math.min(Number(e.target.value), hi - 1), hi])}
-        />
-        <input
-          type="range"
-          className={styles.sliderInput}
-          min={min}
-          max={max}
-          value={hi}
-          onChange={e => onChange([lo, Math.max(Number(e.target.value), lo + 1)])}
-        />
+        <div className={styles.sliderTrack}>
+          <div
+            className={styles.sliderFill}
+            style={{ left: `${loPercent}%`, right: `${100 - hiPercent}%` }}
+          />
+          <input
+            type="range"
+            className={styles.sliderInput}
+            min={min}
+            max={max}
+            value={lo}
+            onChange={e => onChange([Math.min(Number(e.target.value), hi - 1), hi])}
+          />
+          <input
+            type="range"
+            className={styles.sliderInput}
+            min={min}
+            max={max}
+            value={hi}
+            onChange={e => onChange([lo, Math.max(Number(e.target.value), lo + 1)])}
+          />
+        </div>
       </div>
     </div>
   )
@@ -206,8 +206,8 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
             <div className={styles.bodyInner}>
               <div className={styles.bodyContent}>
                 <div className={styles.pillRow}>
-                  {MEAL_TIMES.map(({ key, label }) => (
-                    <PillTab key={key} label={label} selected={mealTime === key} onClick={() => selectMealTime(key)} />
+                  {MEAL_TIMES.map(({ key, label, icon }) => (
+                    <PillTab key={key} label={label} icon={icon} selected={mealTime === key} onClick={() => selectMealTime(key)} />
                   ))}
                 </div>
                 <div className={styles.divider} />
@@ -259,9 +259,9 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                   />
                 ))}
                 <div className={styles.pillRow}>
-                  <PillTab label="Plant-based"       selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
-                  <PillTab label="Gluten-free"        selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
-                  <PillTab label="Diabetes friendly"  selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
+                  <PillTab label="Plant-based"       icon="/icons/Accordion/Pill/plant-based.svg" selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
+                  <PillTab label="Gluten-free"        icon="/icons/Accordion/Pill/gluten-free.svg"  selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
+                  <PillTab label="Diabetes friendly"  icon="/icons/Accordion/Pill/diabetes.svg"     selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
                 </div>
               </div>
             </div>

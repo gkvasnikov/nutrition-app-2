@@ -11,6 +11,14 @@
   white-space: nowrap;
   transition: border-color 0.15s;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.pillIcon {
+  flex-shrink: 0;
+  display: block;
 }
 
 .pill:active {

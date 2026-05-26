@@ -194,44 +194,60 @@
 /* ── Range slider ───────────────────────────────────────────────────────── */
 .sliderRow {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.sliderMeta {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--spacing-16);
 }
 
 .sliderLabel {
+  width: 52px;
+  flex-shrink: 0;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   line-height: 1;
 }
 
+.sliderRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
 .sliderValue {
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-regular);
-  color: var(--color-text-2);
+  color: var(--color-text);
+  text-align: center;
   line-height: 1;
 }
 
+/* Track container — tall enough for 24px thumb */
 .sliderTrack {
   position: relative;
-  height: 4px;
-  background: var(--color-surface-2);
-  border-radius: 2px;
-  margin: 10px 0;
+  height: 28px;
 }
 
+/* 1px grey line centered in track */
+.sliderTrack::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-surface-2);
+  transform: translateY(-50%);
+}
+
+/* 2px black fill for selected range */
 .sliderFill {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
   background: var(--color-text);
-  border-radius: 2px;
+  border-radius: 1px;
   pointer-events: none;
 }
 
@@ -241,7 +257,7 @@
   left: 0;
   transform: translateY(-50%);
   width: 100%;
-  height: 4px;
+  height: 28px;
   margin: 0;
   background: transparent;
   -webkit-appearance: none;
@@ -252,28 +268,23 @@
 .sliderInput::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--color-white);
-  border: 1.5px solid var(--color-surface-2);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-surface-2);
+  box-shadow: var(--shadow-subtle);
   cursor: pointer;
   pointer-events: all;
-  transition: box-shadow 0.15s ease;
-}
-
-.sliderInput::-webkit-slider-thumb:active {
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
 }
 
 .sliderInput::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--color-white);
-  border: 1.5px solid var(--color-surface-2);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-surface-2);
+  box-shadow: var(--shadow-subtle);
   cursor: pointer;
   pointer-events: all;
 }
