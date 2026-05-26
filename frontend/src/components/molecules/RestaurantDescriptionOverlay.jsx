@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
+import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
@@ -190,6 +191,12 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
                   <span className={displayIsOpen ? styles.openNow : styles.closed}>
                     {displayIsOpen ? 'Open now' : 'Closed'}
                   </span>
+                )}
+                {restaurant.priceLevel && (
+                  <>
+                    <span className={styles.dot} />
+                    <PriceLevel level={restaurant.priceLevel} />
+                  </>
                 )}
                 {liveDistance && (
                   <>
