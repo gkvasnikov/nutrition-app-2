@@ -1,25 +1,25 @@
 import { useEffect, useRef, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
-import { MOCK_RESTAURANTS } from '../../data/mockData'
+import { useAppData } from '../../contexts/DataContext'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
-import { RESTAURANT_BY_NAME } from '../../data/restaurantLookup'
 import { distanceTo } from '../../utils/distance'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
 export default function RestaurantDescriptionOverlay({ restaurant, meals = [], zIndex = 200, onClose, onMealSelect }) {
   const { userLat, userLng } = useLocation()
-  const restData = restaurant ? RESTAURANT_BY_NAME[restaurant.name] : null
+  const { restaurantByName } = useAppData()
+  const restData = restaurant ? restaurantByName.get(restaurant.name) : null
   const liveDistance = distanceTo(userLat, userLng, restData?.lat, restData?.lng)
 
   function handleDirection() {
-    const r = MOCK_RESTAURANTS.find(r => r.name === restaurant.name)
+    const r = restaurantByName.get(restaurant.name)
     if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
   }
 
   function handleWolt() {
-    const r = MOCK_RESTAURANTS.find(r => r.name === restaurant.name)
+    const r = restaurantByName.get(restaurant.name)
     if (r?.woltSlug) window.open(`https://wolt.com/de/deu/berlin/restaurant/${r.woltSlug}`, '_blank')
   }
 

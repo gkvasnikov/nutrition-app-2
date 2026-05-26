@@ -183,7 +183,7 @@ app.get('/api/meals', async (req, res) => {
       conditions.push(`m.confidence = ANY(${p()})`)
     }
 
-    const lim = Math.min(parseInt(limit) || 500, 1000)
+    const lim = Math.min(parseInt(limit) || 500, 25000)
     const off = parseInt(offset) || 0
     params.push(lim, off)
 

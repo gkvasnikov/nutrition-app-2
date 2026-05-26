@@ -1,7 +1,7 @@
 import { LocationIcon, WalkIcon } from '../atoms/icons'
 import PillMacro from '../atoms/PillMacro'
 import { useLocation } from '../../contexts/LocationContext'
-import { RESTAURANT_BY_ID } from '../../data/restaurantLookup'
+import { useAppData } from '../../contexts/DataContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './CardMeal.module.css'
 
@@ -25,7 +25,8 @@ export default function CardMeal({
   onRestaurantClick,
 }) {
   const { userLat, userLng } = useLocation()
-  const restaurant = restaurantId ? RESTAURANT_BY_ID[restaurantId] : null
+  const { restaurantById } = useAppData()
+  const restaurant = restaurantId ? restaurantById.get(restaurantId) : null
   const computedDistance = distance ?? (
     restaurant ? distanceTo(userLat, userLng, restaurant.lat, restaurant.lng) : null
   )

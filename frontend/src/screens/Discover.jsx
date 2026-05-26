@@ -7,8 +7,7 @@ import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
 import { withKey } from '../utils/photoUrl'
-import { MOCK_MEALS } from '../data/mockMeals'
-import { MOCK_RESTAURANTS } from '../data/mockData'
+import { useAppData } from '../contexts/DataContext'
 import styles from './Discover.module.css'
 
 
@@ -22,6 +21,19 @@ export default function Discover({
   secondaryFilters, onApplySecondaryFilters, defaultSecondaryFilters,
   isActive = true,
 }) {
+  // ── Data from PostgreSQL (via /api/pins + /api/meals) ────────────────────
+  const { restaurants: apiRestaurants, meals: apiMeals, loading: dataLoading } = useAppData()
+
+  // O(1) lookup for openNow filter — rebuilt when restaurants load
+  const restaurantByIdRef = useRef(new Map())
+  if (apiRestaurants.length && !restaurantByIdRef.current.size) {
+    restaurantByIdRef.current = new Map(apiRestaurants.map(r => [r.id, r]))
+  }
+
+  // Map script + init guards
+  const [mapsScriptReady, setMapsScriptReady] = useState(!!window.google?.maps)
+  const mapInitialisedRef = useRef(false)
+
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedPin, setSelectedPin] = useState(null) // null | { type, meals[] }
   const [pinExiting, setPinExiting] = useState(false)
@@ -74,7 +86,7 @@ export default function Discover({
       if (fat     && meal.fat      != null && (meal.fat      < fat[0]     || meal.fat      > fat[1]))     return false
       if (carbs   && meal.carbs    != null && (meal.carbs    < carbs[0]   || meal.carbs    > carbs[1]))   return false
       if (sf.openNow) {
-        const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+        const r = restaurantByIdRef.current.get(meal.restaurantId)
         if (!r?.isOpen) return false
       }
       if (sf.topRanked && (meal.rating == null || meal.rating < 4.5)) return false
@@ -261,16 +273,24 @@ export default function Discover({
   }
 
   // ── Map ──────────────────────────────────────────────────────────
+  // Step 1 — load Google Maps script (once)
   useEffect(() => {
-    if (window.google?.maps) { initMap(); return }
+    if (window.google?.maps) { setMapsScriptReady(true); return }
     if (document.getElementById('gmaps-script')) return
     const script = document.createElement('script')
     script.id = 'gmaps-script'
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
     script.async = true
-    script.onload = initMap
+    script.onload = () => setMapsScriptReady(true)
     document.head.appendChild(script)
   }, [])
+
+  // Step 2 — init map once BOTH the script AND the API data are ready
+  useEffect(() => {
+    if (!mapsScriptReady || dataLoading || mapInitialisedRef.current) return
+    mapInitialisedRef.current = true
+    initMap()
+  }, [mapsScriptReady, dataLoading]) // eslint-disable-line
 
   // When tab becomes visible again after display:none, the map needs a resize
   // signal to redraw correctly (its container had zero dimensions while hidden)
@@ -403,11 +423,15 @@ export default function Discover({
   async function addMealPins(map) {
     // Group meals by restaurant, build one pin per restaurant
     const restaurantMap = {}
-    for (const meal of MOCK_MEALS) {
+    for (const meal of apiMeals) {
       if (!restaurantMap[meal.restaurantId]) {
-        const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+        const r = apiRestaurants.find(r => r.id === meal.restaurantId)
         if (!r) continue
-        restaurantMap[meal.restaurantId] = { lat: r.lat, lng: r.lng, pinPhoto: r.pinPhoto, meals: [] }
+        // firstMealPhoto is a Wolt CDN URL — proxy it to avoid canvas CORS taint
+        const proxyPhoto = r.firstMealPhoto
+          ? `/api/image-proxy?url=${encodeURIComponent(r.firstMealPhoto)}`
+          : null
+        restaurantMap[meal.restaurantId] = { lat: r.lat, lng: r.lng, pinPhoto: proxyPhoto, meals: [] }
       }
       restaurantMap[meal.restaurantId].meals.push(meal)
     }

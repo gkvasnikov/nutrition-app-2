@@ -6,7 +6,7 @@ import Profile from './screens/Profile'
 import MealDescriptionOverlay from './components/molecules/MealDescriptionOverlay'
 import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescriptionOverlay'
 import { getTimedMealTime } from './utils/filterPill'
-import { MOCK_MEALS } from './data/mockMeals'
+import { DataProvider, useAppData } from './contexts/DataContext'
 import { LocationProvider } from './contexts/LocationContext'
 
 function loadFavourites() {
@@ -33,7 +33,10 @@ function getInitialMainFilters() {
   }
 }
 
-export default function App() {
+// ── Inner component — has access to DataContext ───────────────────────────────
+function AppInner() {
+  const { meals } = useAppData()
+
   const [activeTab, setActiveTab] = useState('discover') // 'home' temporarily hidden
   const [mountedTabs, setMountedTabs] = useState(() => new Set(['discover']))
   const [selectedMeal, setSelectedMeal] = useState(null)
@@ -97,12 +100,13 @@ export default function App() {
     ...filterProps,
   }
 
+  // Meals for the restaurant overlay — filter from loaded API meals
   const restaurantMeals = selectedRestaurant
-    ? MOCK_MEALS.filter(m => m.restaurantName === selectedRestaurant.name)
+    ? meals.filter(m => m.restaurantName === selectedRestaurant.name)
     : []
 
   return (
-    <LocationProvider>
+    <>
       {/* Lazy-mount: each screen mounts on first visit and stays alive.
           Hidden screens get display:none — preserves all state & map instances. */}
 
@@ -148,6 +152,17 @@ export default function App() {
           onMealSelect={handleMealSelect}
         />
       )}
-    </LocationProvider>
+    </>
+  )
+}
+
+// ── Root — provides DataContext + LocationContext ─────────────────────────────
+export default function App() {
+  return (
+    <DataProvider>
+      <LocationProvider>
+        <AppInner />
+      </LocationProvider>
+    </DataProvider>
   )
 }

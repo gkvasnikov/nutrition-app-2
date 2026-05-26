@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CloseIcon, HeartOutlineIcon, HeartFilledIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
-import { MOCK_RESTAURANTS } from '../../data/mockData'
+import { useAppData } from '../../contexts/DataContext'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
@@ -22,16 +22,17 @@ const RATING_COLOR = {
 
 export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, onRestaurantSelect, isFavourite = false, onToggleFavourite }) {
   const { userLat, userLng } = useLocation()
-  const mealRestaurant = meal ? MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId) : null
+  const { restaurantById } = useAppData()
+  const mealRestaurant = meal ? restaurantById.get(meal.restaurantId) : null
   const liveDistance = distanceTo(userLat, userLng, mealRestaurant?.lat, mealRestaurant?.lng)
 
   function handleDirection() {
-    const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+    const r = restaurantById.get(meal.restaurantId)
     if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
   }
 
   function handleWolt() {
-    const r = MOCK_RESTAURANTS.find(r => r.id === meal.restaurantId)
+    const r = restaurantById.get(meal.restaurantId)
     if (r?.woltSlug) window.open(`https://wolt.com/de/deu/berlin/restaurant/${r.woltSlug}`, '_blank')
   }
 
