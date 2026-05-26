@@ -6,6 +6,7 @@ import FiltersPanel from '../components/molecules/FiltersPanel'
 import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
+import { withKey } from '../utils/photoUrl'
 import { MOCK_MEALS } from '../data/mockMeals'
 import { MOCK_RESTAURANTS } from '../data/mockData'
 import styles from './Discover.module.css'
@@ -105,11 +106,35 @@ export default function Discover({
       cfg.meals = filtered
       cfg.count = filtered.length
       cfg.type  = filtered.length <= 1 ? 'single' : 'group'
+
       if (filtered.length === 0) {
         marker.setVisible(false)
-      } else {
-        marker.setVisible(true)
+        continue
+      }
+
+      marker.setVisible(true)
+
+      // Update pin photo to match the first meal in the current filtered results.
+      // cfg.photoUrl tracks which meal photo is currently shown (null = initial restaurant thumbnail).
+      const newPhotoUrl = filtered[0]?.photo || null
+      if (newPhotoUrl === cfg.photoUrl) {
+        // Same representative meal — just refresh count/type badge
         marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count))
+      } else {
+        // First filtered meal changed — load its photo asynchronously
+        cfg.photoUrl = newPhotoUrl
+        cfg.photo    = withKey(newPhotoUrl) || null
+        // Show immediately with the current image while the new one loads
+        marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count))
+        if (cfg.photo) {
+          const img = new Image()
+          img.onload  = () => { cfg.img = img;  marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count)) }
+          img.onerror = () => { cfg.img = null; marker.setIcon(createPinIcon(null,    40, cfg.type, cfg.count)) }
+          img.src = cfg.photo
+        } else {
+          cfg.img = null
+          marker.setIcon(createPinIcon(null, 40, cfg.type, cfg.count))
+        }
       }
     }
     updateVisibleMealsRef.current()
@@ -386,12 +411,13 @@ export default function Discover({
       restaurantMap[meal.restaurantId].meals.push(meal)
     }
     const PIN_DATA = Object.values(restaurantMap).map(pin => ({
-      lat: pin.lat,
-      lng: pin.lng,
-      type: pin.meals.length === 1 ? 'single' : 'group',
-      photo: pin.pinPhoto || null,  // base64 data URI — no CORS issues with canvas
-      count: pin.meals.length,
-      meals: pin.meals,
+      lat:      pin.lat,
+      lng:      pin.lng,
+      type:     pin.meals.length === 1 ? 'single' : 'group',
+      photo:    pin.pinPhoto || null, // initial base64 thumbnail (pre-downloaded, no CORS)
+      photoUrl: null,                 // raw meal photo URL for change detection; null = not yet synced to filters
+      count:    pin.meals.length,
+      meals:    pin.meals,
       allMeals: pin.meals, // immutable original — meals is mutated by filter updates
     }))
 
