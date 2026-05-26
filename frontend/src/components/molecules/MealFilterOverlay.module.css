@@ -10,6 +10,14 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.backdropVisible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ── Cards stack wrapper ────────────────────────────────────────────────── */
@@ -22,14 +30,28 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
 }
 
-/* ── Card 1 — Meal Time ─────────────────────────────────────────────────── */
+.panelWrapVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Card 1 — Meal Time: morphs from pill to card ───────────────────────── */
 .cardMain {
   background: var(--color-white);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-float);
   overflow: hidden;
+  max-height: 59px;
+  transition: max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cardMainExpanded {
+  max-height: 700px;
 }
 
 /* ── Cards 2 & 3 — secondary cards ─────────────────────────────────────── */
@@ -38,6 +60,16 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-float);
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ── Card header row ────────────────────────────────────────────────────── */
@@ -69,14 +101,48 @@
   justify-content: center;
   flex-shrink: 0;
   color: var(--color-text-2);
+  transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* ── Accordion body content ─────────────────────────────────────────────── */
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ── Accordion body ─────────────────────────────────────────────────────── */
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.bodyOpen {
+  grid-template-rows: 1fr;
+}
+
+.bodyInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
 .bodyContent {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
   padding: var(--spacing-4) var(--spacing-16) var(--spacing-16);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Main card: visible only when overlay is expanded AND section is open */
+.cardMainExpanded .bodyOpen .bodyInner .bodyContent {
+  opacity: 1;
+  transition: opacity 0.28s ease 0.1s;
+}
+
+/* Secondary cards: visible when card itself is visible AND section is open */
+.cardVisible .bodyOpen .bodyInner .bodyContent {
+  opacity: 1;
+  transition: opacity 0.28s ease 0.1s;
 }
 
 /* ── Divider (inside bodyContent) ──────────────────────────────────────── */
@@ -326,3 +392,16 @@
   line-height: 1;
 }
 
+/* ── Reset + Apply buttons ──────────────────────────────────────────────── */
+.actions {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.actionsVisible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

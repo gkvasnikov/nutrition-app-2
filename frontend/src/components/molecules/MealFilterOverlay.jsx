@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import { SearchIcon } from '../atoms/icons'
@@ -54,8 +53,6 @@ const DIET_CELL_BG = {
   Carbs:   '#f1f6fe',
 }
 
-const EASE = [0.25, 0.46, 0.45, 0.94]
-
 // ─── RangeSlider ─────────────────────────────────────────────────────────────
 
 function RangeSlider({ label, min, max, value, onChange }) {
@@ -95,32 +92,10 @@ function RangeSlider({ label, min, max, value, onChange }) {
   )
 }
 
-// ─── Accordion body wrapper ───────────────────────────────────────────────────
-
-function AccordionBody({ open, children }) {
-  return (
-    <AnimatePresence initial={false}>
-      {open && (
-        <motion.div
-          key="body"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.42, ease: EASE }}
-          style={{ overflow: 'hidden' }}
-        >
-          <div className={styles.bodyContent}>
-            {children}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
-}
-
 // ─── MealFilterOverlay ───────────────────────────────────────────────────────
 
 export default function MealFilterOverlay({ show, onClose, onApply, initialFilters }) {
+  // Filter state — initialized from current applied filters (or time-based defaults)
   const [mealTime, setMealTime] = useState(() => initialFilters?.mealTime ?? getTimedMealTime())
   const [diet,     setDiet]     = useState(() => initialFilters?.diet     ?? 'high_protein')
   const [macros,   setMacros]   = useState(() => initialFilters?.macros   ?? DEFAULT_MACROS)
@@ -129,6 +104,29 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
 
   // Which accordion is open (only one at a time)
   const [openSection, setOpenSection] = useState('mealtime')
+
+  // Animation state
+  const [isVisible,  setIsVisible]  = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  useEffect(() => {
+    let raf1, raf2, timer
+    if (show) {
+      setOpenSection('mealtime')
+      setIsVisible(true)
+      raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(() => setIsExpanded(true))
+      })
+    } else {
+      setIsExpanded(false)
+      timer = setTimeout(() => setIsVisible(false), 520)
+    }
+    return () => {
+      if (raf1) cancelAnimationFrame(raf1)
+      if (raf2) cancelAnimationFrame(raf2)
+      if (timer) clearTimeout(timer)
+    }
+  }, [show])
 
   // ── Helpers ──────────────────────────────────────────────────────────────
 
@@ -178,41 +176,35 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
     onClose()
   }
 
+  if (!isVisible) return null
+
   // ── Render ───────────────────────────────────────────────────────────────
 
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          className={styles.overlay}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: EASE }}
-        >
+    <div className={styles.overlay}>
 
-          {/* Backdrop — click to dismiss */}
-          <div className={styles.backdrop} onClick={onClose} />
+      {/* Backdrop — click to dismiss */}
+      <div
+        className={`${styles.backdrop} ${isExpanded ? styles.backdropVisible : ''}`}
+        onClick={onClose}
+      />
 
-          {/* Cards stack */}
-          <div className={styles.panelWrap}>
+      {/* Cards stack */}
+      <div className={`${styles.panelWrap} ${isVisible ? styles.panelWrapVisible : ''}`}>
 
-            {/* ── Card 1: Meal Time — expands from pill height ────────── */}
-            <motion.div
-              className={styles.cardMain}
-              initial={{ height: 59 }}
-              animate={{ height: 'auto' }}
-              transition={{ duration: 0.55, ease: EASE }}
-            >
-              <button
-                type="button"
-                className={styles.cardHeader}
-                onClick={() => toggleSection('mealtime')}
-              >
-                <span className={styles.cardTitle}>Meal Time</span>
-              </button>
+        {/* ── Card 1: Meal Time — morphs from pill ───────────────────── */}
+        <div className={`${styles.cardMain} ${isExpanded ? styles.cardMainExpanded : ''}`}>
+          <button
+            type="button"
+            className={styles.cardHeader}
+            onClick={() => toggleSection('mealtime')}
+          >
+            <span className={styles.cardTitle}>Meal Time</span>
+          </button>
 
-              <AccordionBody open={openSection === 'mealtime'}>
+          <div className={`${styles.body} ${openSection === 'mealtime' ? styles.bodyOpen : ''}`}>
+            <div className={styles.bodyInner}>
+              <div className={styles.bodyContent}>
                 <div className={styles.pillRow}>
                   {MEAL_TIMES.map(({ key, label }) => (
                     <PillTab key={key} label={label} selected={mealTime === key} onClick={() => selectMealTime(key)} />
@@ -235,25 +227,27 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                     onChange={e => setSearch(e.target.value)}
                   />
                 </div>
-              </AccordionBody>
-            </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            {/* ── Card 2: Adjust macros ──────────────────────────────── */}
-            <motion.div
-              className={styles.card}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1, ease: EASE }}
-            >
-              <button
-                type="button"
-                className={styles.cardHeader}
-                onClick={() => toggleSection('macros')}
-              >
-                <span className={styles.cardTitle}>Adjust macros</span>
-              </button>
+        {/* ── Card 2: Adjust macros ──────────────────────────────────── */}
+        <div
+          className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.1s' : '0s' }}
+        >
+          <button
+            type="button"
+            className={styles.cardHeader}
+            onClick={() => toggleSection('macros')}
+          >
+            <span className={styles.cardTitle}>Adjust macros</span>
+          </button>
 
-              <AccordionBody open={openSection === 'macros'}>
+          <div className={`${styles.body} ${openSection === 'macros' ? styles.bodyOpen : ''}`}>
+            <div className={styles.bodyInner}>
+              <div className={styles.bodyContent}>
                 {SLIDER_CONFIG.map(cfg => (
                   <RangeSlider
                     key={cfg.key}
@@ -269,69 +263,70 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                   <PillTab label="Gluten-free"        selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
                   <PillTab label="Diabetes friendly"  selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
                 </div>
-              </AccordionBody>
-            </motion.div>
-
-            {/* ── Card 3: Profile ───────────────────────────────────── */}
-            <motion.div
-              className={styles.card}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.18, ease: EASE }}
-            >
-              <button
-                type="button"
-                className={styles.cardHeader}
-                onClick={() => toggleSection('profile')}
-              >
-                <span className={styles.cardTitle}>Profile</span>
-              </button>
-
-              <AccordionBody open={openSection === 'profile'}>
-                <div className={styles.profileRow}>
-                  <div className={styles.avatar}>M</div>
-                  <div className={styles.profileInfo}>
-                    <span className={styles.profileName}>Male, 38</span>
-                    <span className={styles.profileGoal}>Goal: Muscle gain</span>
-                  </div>
-                  <button type="button" className={styles.editBtn}>✎ Edit Profile</button>
-                </div>
-
-                <div className={styles.dietSection}>
-                  <span className={styles.dietLabel}>Your diet</span>
-                  <div className={styles.dietCells}>
-                    {[
-                      { value: '2500', unit: 'Kcal'    },
-                      { value: '156g', unit: 'Protein' },
-                      { value: '83g',  unit: 'Fat'     },
-                      { value: '281g', unit: 'Carbs'   },
-                    ].map(({ value, unit }) => (
-                      <div
-                        key={unit}
-                        className={styles.dietCell}
-                        style={{ background: DIET_CELL_BG[unit] }}
-                      >
-                        <span className={styles.dietCellValue}>{value}</span>
-                        <span className={styles.dietCellUnit}>{unit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </AccordionBody>
-            </motion.div>
-
-            {/* ── Reset + Apply ─────────────────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.25, ease: EASE }}
-            >
-              <ButtonFilterActions onReset={handleReset} onApply={handleApply} />
-            </motion.div>
-
+              </div>
+            </div>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+
+        {/* ── Card 3: Profile ───────────────────────────────────────── */}
+        <div
+          className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.18s' : '0s' }}
+        >
+          <button
+            type="button"
+            className={styles.cardHeader}
+            onClick={() => toggleSection('profile')}
+          >
+            <span className={styles.cardTitle}>Profile</span>
+          </button>
+
+          <div className={`${styles.body} ${openSection === 'profile' ? styles.bodyOpen : ''}`}>
+            <div className={styles.bodyInner}>
+              <div className={styles.bodyContent}>
+              <div className={styles.profileRow}>
+                <div className={styles.avatar}>M</div>
+                <div className={styles.profileInfo}>
+                  <span className={styles.profileName}>Male, 38</span>
+                  <span className={styles.profileGoal}>Goal: Muscle gain</span>
+                </div>
+                <button type="button" className={styles.editBtn}>✎ Edit Profile</button>
+              </div>
+
+              <div className={styles.dietSection}>
+                <span className={styles.dietLabel}>Your diet</span>
+                <div className={styles.dietCells}>
+                  {[
+                    { value: '2500', unit: 'Kcal'    },
+                    { value: '156g', unit: 'Protein' },
+                    { value: '83g',  unit: 'Fat'     },
+                    { value: '281g', unit: 'Carbs'   },
+                  ].map(({ value, unit }) => (
+                    <div
+                      key={unit}
+                      className={styles.dietCell}
+                      style={{ background: DIET_CELL_BG[unit] }}
+                    >
+                      <span className={styles.dietCellValue}>{value}</span>
+                      <span className={styles.dietCellUnit}>{unit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Reset + Apply ─────────────────────────────────────────── */}
+        <div
+          className={`${styles.actions} ${isExpanded ? styles.actionsVisible : ''}`}
+          style={{ transitionDelay: isExpanded ? '0.25s' : '0s' }}
+        >
+          <ButtonFilterActions onReset={handleReset} onApply={handleApply} />
+        </div>
+
+      </div>
+    </div>
   )
 }
