@@ -20,6 +20,7 @@ export default function Discover({
   activeTab, onTabChange, onMealSelect,
   activeMainFilters, onApplyMainFilters,
   secondaryFilters, onApplySecondaryFilters, defaultSecondaryFilters,
+  isActive = true,
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedPin, setSelectedPin] = useState(null) // null | { type, meals[] }
@@ -236,6 +237,17 @@ export default function Discover({
     script.onload = initMap
     document.head.appendChild(script)
   }, [])
+
+  // When tab becomes visible again after display:none, the map needs a resize
+  // signal to redraw correctly (its container had zero dimensions while hidden)
+  useEffect(() => {
+    if (isActive && mapInstanceRef.current && window.google?.maps) {
+      const t = setTimeout(() => {
+        window.google.maps.event.trigger(mapInstanceRef.current, 'resize')
+      }, 0)
+      return () => clearTimeout(t)
+    }
+  }, [isActive])
 
   function locateMe() {
     if (!navigator.geolocation) return

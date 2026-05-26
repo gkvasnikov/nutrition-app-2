@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import Home from './screens/Home'
 import Discover from './screens/Discover'
 import Favourites from './screens/Favourites'
@@ -35,6 +35,7 @@ function getInitialMainFilters() {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('discover') // 'home' temporarily hidden
+  const [mountedTabs, setMountedTabs] = useState(() => new Set(['discover']))
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
   const [selectedMealZIndex,       setSelectedMealZIndex]       = useState(200)
@@ -68,6 +69,16 @@ export default function App() {
     setSelectedMeal(meal)
   }
 
+  const handleTabChange = useCallback((tab) => {
+    setActiveTab(tab)
+    setMountedTabs(prev => {
+      if (prev.has(tab)) return prev
+      const next = new Set(prev)
+      next.add(tab)
+      return next
+    })
+  }, [])
+
   const filterProps = {
     activeMainFilters,
     onApplyMainFilters:      setActiveMainFilters,
@@ -78,19 +89,12 @@ export default function App() {
 
   const screenProps = {
     activeTab,
-    onTabChange:        setActiveTab,
+    onTabChange:        handleTabChange,
     onMealSelect:       handleMealSelect,
     onRestaurantSelect: handleRestaurantSelect,
     favourites,
     onToggleFavourite:  toggleFavourite,
     ...filterProps,
-  }
-
-  function renderScreen() {
-    if (activeTab === 'discover')   return <Discover {...screenProps} />
-    if (activeTab === 'favourites') return <Favourites {...screenProps} />
-    if (activeTab === 'profile')    return <Profile activeTab={activeTab} onTabChange={setActiveTab} />
-    return <Home {...screenProps} />
   }
 
   const restaurantMeals = selectedRestaurant
@@ -99,7 +103,28 @@ export default function App() {
 
   return (
     <LocationProvider>
-      {renderScreen()}
+      {/* Lazy-mount: each screen mounts on first visit and stays alive.
+          Hidden screens get display:none — preserves all state & map instances. */}
+
+      {mountedTabs.has('discover') && (
+        <div style={activeTab !== 'discover' ? { display: 'none' } : undefined}>
+          <Discover
+            {...screenProps}
+            isActive={activeTab === 'discover'}
+          />
+        </div>
+      )}
+
+      {mountedTabs.has('favourites') && (
+        <div style={activeTab !== 'favourites' ? { display: 'none' } : undefined}>
+          <Favourites {...screenProps} />
+        </div>
+      )}
+
+      {/* Profile is lightweight — remount on visit is fine */}
+      {activeTab === 'profile' && (
+        <Profile activeTab={activeTab} onTabChange={handleTabChange} />
+      )}
 
       {selectedMeal && (
         <MealDescriptionOverlay

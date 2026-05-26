@@ -183,26 +183,19 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
   return (
     <AnimatePresence>
       {show && (
-        <div className={styles.overlay}>
+        <motion.div
+          className={styles.overlay}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: EASE }}
+        >
 
           {/* Backdrop — click to dismiss */}
-          <motion.div
-            className={styles.backdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: EASE }}
-            onClick={onClose}
-          />
+          <div className={styles.backdrop} onClick={onClose} />
 
           {/* Cards stack */}
-          <motion.div
-            className={styles.panelWrap}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-          >
+          <div className={styles.panelWrap}>
 
             {/* ── Card 1: Meal Time — expands from pill height ────────── */}
             <motion.div
@@ -336,8 +329,8 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
               <ButtonFilterActions onReset={handleReset} onApply={handleApply} />
             </motion.div>
 
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   )
