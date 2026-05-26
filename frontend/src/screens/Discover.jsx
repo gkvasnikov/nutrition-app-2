@@ -873,10 +873,13 @@ export default function Discover({
                 <>
                   <p className={styles.mealCount}>{visibleMeals.length} Meals</p>
                   <p className={styles.mealSubtitle}>
-                    {(() => {
-                      const n = new Set(visibleMeals.map(m => m.restaurantId)).size
-                      return `in ${n} restaurant${n !== 1 ? 's' : ''} around you`
-                    })()}
+                    {visibleMeals.length === 0
+                      ? 'No matches — try adjusting filters'
+                      : (() => {
+                          const n = new Set(visibleMeals.map(m => m.restaurantId)).size
+                          return `in ${n} restaurant${n !== 1 ? 's' : ''} around you`
+                        })()
+                    }
                   </p>
                 </>
               ) : (
@@ -899,6 +902,10 @@ export default function Discover({
           {!isPhotoMode ? (
             <div className={styles.zoomPrompt}>
               <p className={styles.zoomPromptText}>Zoom into a neighbourhood to explore meals</p>
+            </div>
+          ) : visibleMeals.length === 0 ? (
+            <div className={styles.zoomPrompt}>
+              <p className={styles.zoomPromptText}>No meals match your filters here.<br />Pan the map or ease up on the filters to find something nearby.</p>
             </div>
           ) : (
             visibleMeals.map((meal, i) => (
