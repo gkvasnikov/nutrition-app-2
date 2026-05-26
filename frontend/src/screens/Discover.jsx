@@ -17,7 +17,10 @@ const PEEK_SHOW = 200  // px visible from bottom in collapsed state
 
 // Below this zoom level: show simple dot-pins, no image loading, no meal list.
 // At and above: show photo-pins, load meals for the visible area.
-const PHOTO_ZOOM_THRESHOLD = 9
+// locateMe() sets zoom=16; dots appear 2 steps back (16-2=14).
+const PHOTO_ZOOM_THRESHOLD = 14
+const MIN_ZOOM = 12   // Berlin overview — "-" disabled at this level
+const MAX_ZOOM = 19   // locateMe(16) + 3 — "+" disabled at this level
 
 export default function Discover({
   activeTab, onTabChange, onMealSelect,
@@ -629,8 +632,10 @@ export default function Discover({
   function initMap() {
     if (!mapRef.current || mapInstanceRef.current) return
     mapInstanceRef.current = new window.google.maps.Map(mapRef.current, {
-      center: CENTER,
-      zoom:   12,
+      center:   CENTER,
+      zoom:     12,
+      minZoom:  MIN_ZOOM,
+      maxZoom:  MAX_ZOOM,
       disableDefaultUI: true,
       styles: [
         { featureType: 'poi',     stylers: [{ visibility: 'off' }] },
@@ -751,12 +756,26 @@ export default function Discover({
 
       {/* Map controls */}
       <div className={styles.mapControls}>
-        <button className={styles.mapBtn} aria-label="Zoom in"
-          onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) + 1)}>
+        <button
+          className={`${styles.mapBtn} ${zoomLevel >= MAX_ZOOM ? styles.mapBtnDisabled : ''}`}
+          aria-label="Zoom in"
+          disabled={zoomLevel >= MAX_ZOOM}
+          onClick={() => {
+            const z = mapInstanceRef.current?.getZoom() ?? 15
+            if (z < MAX_ZOOM) mapInstanceRef.current?.setZoom(z + 1)
+          }}
+        >
           <span className={styles.mapBtnText}>+</span>
         </button>
-        <button className={styles.mapBtn} aria-label="Zoom out"
-          onClick={() => mapInstanceRef.current?.setZoom((mapInstanceRef.current.getZoom() || 15) - 1)}>
+        <button
+          className={`${styles.mapBtn} ${zoomLevel <= MIN_ZOOM ? styles.mapBtnDisabled : ''}`}
+          aria-label="Zoom out"
+          disabled={zoomLevel <= MIN_ZOOM}
+          onClick={() => {
+            const z = mapInstanceRef.current?.getZoom() ?? 15
+            if (z > MIN_ZOOM) mapInstanceRef.current?.setZoom(z - 1)
+          }}
+        >
           <span className={styles.mapBtnText}>−</span>
         </button>
         <button className={`${styles.mapBtn} ${styles.mapBtnLocate}`} aria-label="My location"

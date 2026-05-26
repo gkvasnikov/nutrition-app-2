@@ -42,6 +42,12 @@
   background: var(--color-surface);
 }
 
+.mapBtnDisabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
 
 .mapBtnText {
   font-size: 22px;
