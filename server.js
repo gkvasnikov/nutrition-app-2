@@ -132,34 +132,27 @@ app.get('/api/pins', async (req, res) => {
 })
 
 
-// ── /api/meals — top 15 meals per restaurant for map pins + filtering ─────────
+// ── /api/meals — all meals for client-side filtering ─────────────────────────
 // Returns compact meal objects (no restaurant fields — look those up via restaurantById).
-// Max ~15 meals per restaurant → ~7800 total meals → ~400KB gzipped (mobile-safe).
+// ~23K meals × compact format → ~4.5MB raw → ~700KB gzipped (safe for iOS Safari).
+// All filtering is done client-side so sliders/filters remain instantaneous.
 app.get('/api/meals', async (req, res) => {
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
   try {
-    const PER_RESTAURANT = 15   // top N meals per restaurant
-
     const { rows } = await pool.query(`
-      WITH ranked AS (
-        SELECT
-          m.id, m.name, m.description, m.calories, m.protein, m.fat, m.carbs,
-          m.confidence, m.price, m.image_url, m.restaurant_id,
-          ROW_NUMBER() OVER (
-            PARTITION BY m.restaurant_id
-            ORDER BY
-              CASE m.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
-              m.calories DESC NULLS LAST
-          ) AS rn
-        FROM menu_items m
-        JOIN restaurants r ON r.id = m.restaurant_id
-        WHERE m.source = 'wolt_menu'
-          AND m.calories IS NOT NULL
-          AND m.image_url IS NOT NULL AND m.image_url <> ''
-          AND r.lat IS NOT NULL AND r.lon IS NOT NULL
-      )
-      SELECT * FROM ranked WHERE rn <= $1
-    `, [PER_RESTAURANT])
+      SELECT
+        m.id, m.name, m.description, m.calories, m.protein, m.fat, m.carbs,
+        m.confidence, m.price, m.image_url, m.restaurant_id
+      FROM menu_items m
+      JOIN restaurants r ON r.id = m.restaurant_id
+      WHERE m.source = 'wolt_menu'
+        AND m.calories IS NOT NULL
+        AND m.image_url IS NOT NULL AND m.image_url <> ''
+        AND r.lat IS NOT NULL AND r.lon IS NOT NULL
+      ORDER BY
+        CASE m.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+        m.calories DESC NULLS LAST
+    `)
 
     const meals = rows.map((m, i) => ({
       id: i,
