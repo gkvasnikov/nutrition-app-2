@@ -276,6 +276,12 @@ Respond ONLY with valid JSON (no markdown):
 
 
 // ── Image proxy — prevents canvas CORS taint ──────────────────────────────────
+// Server-side cache: each unique URL is fetched from Wolt CDN at most once per 24 h.
+// This prevents Railway's IP from hammering Wolt on every page load.
+const _proxyCache = new Map()  // url → { buf: Buffer, ct: string, ts: number }
+const _PROXY_TTL  = 24 * 60 * 60 * 1000  // 24 h in ms
+const _PROXY_MAX  = 2000                   // evict oldest when cache exceeds this many entries
+
 app.get('/api/image-proxy', async (req, res) => {
   const { url } = req.query
   if (!url) return res.status(400).send('Missing url')
@@ -285,14 +291,33 @@ app.get('/api/image-proxy', async (req, res) => {
   if (!allowed.some(d => parsed.hostname === d || parsed.hostname.endsWith('.' + d))) {
     return res.status(403).send('Disallowed domain')
   }
+
+  // Serve from cache if still fresh
+  const cached = _proxyCache.get(url)
+  if (cached && Date.now() - cached.ts < _PROXY_TTL) {
+    res.set('Content-Type', cached.ct)
+    res.set('Cache-Control', 'public, max-age=86400')
+    res.set('X-Cache', 'HIT')
+    return res.send(cached.buf)
+  }
+
   try {
     const response = await fetch(url)
     if (!response.ok) return res.status(response.status).send('Upstream error')
-    const contentType = response.headers.get('content-type') || 'image/jpeg'
-    const buffer = await response.arrayBuffer()
-    res.set('Content-Type', contentType)
+    const ct  = response.headers.get('content-type') || 'image/jpeg'
+    const buf = Buffer.from(await response.arrayBuffer())
+
+    // Evict oldest entry if cache is full
+    if (_proxyCache.size >= _PROXY_MAX) {
+      const oldest = [..._proxyCache.entries()].reduce((a, b) => a[1].ts < b[1].ts ? a : b)
+      _proxyCache.delete(oldest[0])
+    }
+    _proxyCache.set(url, { buf, ct, ts: Date.now() })
+
+    res.set('Content-Type', ct)
     res.set('Cache-Control', 'public, max-age=86400')
-    res.send(Buffer.from(buffer))
+    res.set('X-Cache', 'MISS')
+    res.send(buf)
   } catch (e) {
     console.error('Image proxy error:', e.message)
     res.status(500).send('Error fetching image')
