@@ -131,6 +131,9 @@ export default function Discover({
       if (protein && meal.protein  != null && (meal.protein  < protein[0] || meal.protein  > protein[1])) return false
       if (fat     && meal.fat      != null && (meal.fat      < fat[0]     || meal.fat      > fat[1]))     return false
       if (carbs   && meal.carbs    != null && (meal.carbs    < carbs[0]   || meal.carbs    > carbs[1]))   return false
+      if (sf.macrosConfidence?.length && sf.macrosConfidence.length < 2) {
+        if (!sf.macrosConfidence.includes(meal.confidence)) return false
+      }
       if (sf.openNow) {
         const r = restaurantByIdRef.current.get(meal.restaurantId)
         if (!r?.isOpen) return false
@@ -144,7 +147,10 @@ export default function Discover({
 
     if (sf.sortBy === 'a_z') {
       result.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sf.sortBy === 'nearest') {
+      // Nearest: preserve natural API order (already grouped by restaurant proximity)
     } else {
+      // best_match: score based on active diet
       const diet = mf.diet
       const score = meal => {
         if (diet === 'high_protein') return (meal.protein ?? 0) / (meal.calories || 1) * 100
