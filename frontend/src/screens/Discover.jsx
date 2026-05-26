@@ -263,6 +263,38 @@ export default function Discover({
         meals.push(...cfg.meals)
       }
     }
+
+    // Global sort across all restaurants
+    const sf   = secondaryFiltersRef.current
+    const mf   = activeMainFiltersRef.current
+    const diet = mf.diet
+
+    if (sf.sortBy === 'nearest') {
+      const center = map.getCenter()
+      if (center) {
+        const clat = center.lat(), clng = center.lng()
+        // Attach restaurant coords for sorting, then discard
+        meals.sort((a, b) => {
+          const ra = restaurantByIdRef.current.get(a.restaurantId)
+          const rb = restaurantByIdRef.current.get(b.restaurantId)
+          const da = ra ? Math.hypot(ra.lat - clat, ra.lng - clng) : Infinity
+          const db = rb ? Math.hypot(rb.lat - clat, rb.lng - clng) : Infinity
+          return da - db
+        })
+      }
+    } else if (sf.sortBy === 'a_z') {
+      meals.sort((a, b) => a.name.localeCompare(b.name))
+    } else {
+      // best_match: score by active diet
+      const score = meal => {
+        if (diet === 'high_protein') return (meal.protein ?? 0) / (meal.calories || 1) * 100
+        if (diet === 'keto')         return (meal.fat ?? 0) - (meal.carbs ?? 0)
+        if (diet === 'high_carb')    return meal.carbs ?? 0
+        return restaurantByIdRef.current.get(meal.restaurantId)?.rating ?? 0
+      }
+      meals.sort((a, b) => score(b) - score(a))
+    }
+
     setVisibleMeals(meals)
   }
   const updateVisibleMealsRef = useRef(null)
