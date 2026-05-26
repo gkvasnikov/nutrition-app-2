@@ -1,6 +1,9 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import styles from './FiltersPanel.module.css'
+
+const EASE = [0.25, 0.46, 0.45, 0.94]
 
 export default function FiltersPanel({ show, pending, onChange, onReset, onApply, onClose }) {
 
@@ -24,98 +27,118 @@ export default function FiltersPanel({ show, pending, onChange, onReset, onApply
   }
 
   return (
-    <>
-      {/* Dark backdrop — click to dismiss */}
-      <div
-        className={`${styles.backdrop} ${show ? styles.backdropVisible : ''}`}
-        onClick={onClose}
-      />
+    <AnimatePresence>
+      {show && <>
 
-      {/* Filter panel — slides down from top */}
-      <div className={`${styles.panel} ${show ? styles.panelVisible : ''}`}>
-      <div className={styles.panelContent}>
+        {/* Dark backdrop — click to dismiss */}
+        <motion.div
+          className={styles.backdrop}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.55, ease: EASE }}
+          onClick={onClose}
+        />
 
-        {/* Macros confidence — multi-select */}
-        <div className={styles.section}>
-          <span className={styles.label}>Macros confidence</span>
-          <div className={styles.pills}>
-            <PillTab
-              label="High"
-              selected={pending.macrosConfidence.includes('high')}
-              onClick={() => toggleMulti('macrosConfidence', 'high')}
-            />
-            <PillTab
-              label="Medium"
-              selected={pending.macrosConfidence.includes('medium')}
-              onClick={() => toggleMulti('macrosConfidence', 'medium')}
-            />
-          </div>
-        </div>
+        {/* Filter panel — slides down from top */}
+        <motion.div
+          className={styles.panel}
+          initial={{ y: '-105%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-105%' }}
+          transition={{ duration: 0.55, ease: EASE }}
+        >
+          <motion.div
+            className={styles.panelContent}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
 
-        {/* Measure — single-select */}
-        <div className={styles.section}>
-          <span className={styles.label}>Measure</span>
-          <div className={styles.pills}>
-            <PillTab
-              label="per meal"
-              selected={pending.measure === 'per_meal'}
-              onClick={() => toggle('measure', 'per_meal')}
-            />
-            <PillTab
-              label="per 100 g"
-              selected={pending.measure === 'per_100g'}
-              onClick={() => toggle('measure', 'per_100g')}
-            />
-          </div>
-        </div>
+            {/* Macros confidence — multi-select */}
+            <div className={styles.section}>
+              <span className={styles.label}>Macros confidence</span>
+              <div className={styles.pills}>
+                <PillTab
+                  label="High"
+                  selected={pending.macrosConfidence.includes('high')}
+                  onClick={() => toggleMulti('macrosConfidence', 'high')}
+                />
+                <PillTab
+                  label="Medium"
+                  selected={pending.macrosConfidence.includes('medium')}
+                  onClick={() => toggleMulti('macrosConfidence', 'medium')}
+                />
+              </div>
+            </div>
 
-        {/* Sort by — single-select */}
-        <div className={styles.section}>
-          <span className={styles.label}>Sort by</span>
-          <div className={styles.pills}>
-            <PillTab
-              label="Best match"
-              selected={pending.sortBy === 'best_match'}
-              onClick={() => toggle('sortBy', 'best_match')}
-            />
-            <PillTab
-              label="Nearest"
-              selected={pending.sortBy === 'nearest'}
-              onClick={() => toggle('sortBy', 'nearest')}
-            />
-            <PillTab
-              label="A-Z"
-              selected={pending.sortBy === 'a_z'}
-              onClick={() => toggle('sortBy', 'a_z')}
-            />
-          </div>
-        </div>
+            {/* Measure — single-select */}
+            <div className={styles.section}>
+              <span className={styles.label}>Measure</span>
+              <div className={styles.pills}>
+                <PillTab
+                  label="per meal"
+                  selected={pending.measure === 'per_meal'}
+                  onClick={() => toggle('measure', 'per_meal')}
+                />
+                <PillTab
+                  label="per 100 g"
+                  selected={pending.measure === 'per_100g'}
+                  onClick={() => toggle('measure', 'per_100g')}
+                />
+              </div>
+            </div>
 
-        <div className={styles.divider} />
+            {/* Sort by — single-select */}
+            <div className={styles.section}>
+              <span className={styles.label}>Sort by</span>
+              <div className={styles.pills}>
+                <PillTab
+                  label="Best match"
+                  selected={pending.sortBy === 'best_match'}
+                  onClick={() => toggle('sortBy', 'best_match')}
+                />
+                <PillTab
+                  label="Nearest"
+                  selected={pending.sortBy === 'nearest'}
+                  onClick={() => toggle('sortBy', 'nearest')}
+                />
+                <PillTab
+                  label="A-Z"
+                  selected={pending.sortBy === 'a_z'}
+                  onClick={() => toggle('sortBy', 'a_z')}
+                />
+              </div>
+            </div>
 
-        {/* Open now + Top ranked — independent toggles */}
-        <div className={styles.section}>
-          <div className={styles.pills}>
-            <PillTab
-              label="Open now"
-              selected={pending.openNow}
-              onClick={() => toggleBool('openNow')}
-            />
-            <PillTab
-              label="Top ranked"
-              selected={pending.topRanked}
-              onClick={() => toggleBool('topRanked')}
-            />
-          </div>
-        </div>
+            <div className={styles.divider} />
 
-        {/* Reset + Apply */}
-        <div className={styles.actions}>
-          <ButtonFilterActions onReset={onReset} onApply={onApply} />
-        </div>
+            {/* Open now + Top ranked — independent toggles */}
+            <div className={styles.section}>
+              <div className={styles.pills}>
+                <PillTab
+                  label="Open now"
+                  selected={pending.openNow}
+                  onClick={() => toggleBool('openNow')}
+                />
+                <PillTab
+                  label="Top ranked"
+                  selected={pending.topRanked}
+                  onClick={() => toggleBool('topRanked')}
+                />
+              </div>
+            </div>
 
-      </div>
-      </div>
-    </>
+            {/* Reset + Apply */}
+            <div className={styles.actions}>
+              <ButtonFilterActions onReset={onReset} onApply={onApply} />
+            </div>
+
+          </motion.div>
+        </motion.div>
+
+      </>}
+    </AnimatePresence>
   )
 }

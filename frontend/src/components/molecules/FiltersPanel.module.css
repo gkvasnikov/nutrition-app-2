@@ -4,14 +4,6 @@
   inset: 0;
   z-index: 20;
   background: rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.backdropVisible {
-  opacity: 1;
-  pointer-events: all;
 }
 
 /* ── Panel ─────────────────────────────────────────────────── */
@@ -23,36 +15,21 @@
   z-index: 21;
   background: var(--color-white);
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
 
   /* Push content below the TopBar pill */
   padding-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 16px);
 
   display: flex;
   flex-direction: column;
-
-  /* Hidden above screen */
-  transform: translateY(-105%);
-  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.panelVisible {
-  transform: translateY(0);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* ── Panel content — fades in after panel slides down ──────── */
+/* ── Panel content ─────────────────────────────────────────── */
 .panelContent {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-24);
   padding-bottom: var(--spacing-16);
-  opacity: 0;
-  transition: opacity 0.15s ease 0s;
-}
-
-.panelVisible .panelContent {
-  opacity: 1;
-  transition: opacity 0.3s ease 0.1s;
 }
 
 /* ── Section ───────────────────────────────────────────────── */
