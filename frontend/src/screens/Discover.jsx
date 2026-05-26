@@ -17,7 +17,7 @@ const PEEK_SHOW = 200  // px visible from bottom in collapsed state
 
 // Below this zoom level: show simple dot-pins, no image loading, no meal list.
 // At and above: show photo-pins, load meals for the visible area.
-const PHOTO_ZOOM_THRESHOLD = 13
+const PHOTO_ZOOM_THRESHOLD = 9
 
 export default function Discover({
   activeTab, onTabChange, onMealSelect,
@@ -400,14 +400,23 @@ export default function Discover({
     addMealPins(mapInstanceRef.current)
   }, [dataLoading, apiRestaurants.length]) // eslint-disable-line
 
-  // Resize map after tab becomes visible
+  // Resize map after tab becomes visible.
+  // Must wait two animation frames so the browser finishes removing display:none
+  // before calling resize — otherwise the map measures 0×0 and goes blank.
   useEffect(() => {
-    if (isActive && mapInstanceRef.current && window.google?.maps) {
-      const t = setTimeout(() => {
-        window.google.maps.event.trigger(mapInstanceRef.current, 'resize')
-      }, 0)
-      return () => clearTimeout(t)
-    }
+    if (!isActive || !mapInstanceRef.current || !window.google?.maps) return
+    let raf1, raf2
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        const map = mapInstanceRef.current
+        if (!map) return
+        const center = map.getCenter()
+        window.google.maps.event.trigger(map, 'resize')
+        // Restore center after resize — map resets to (0,0) if it had 0 size
+        if (center) map.setCenter(center)
+      })
+    })
+    return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2) }
   }, [isActive])
 
   function locateMe() {
