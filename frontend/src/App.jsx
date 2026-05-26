@@ -6,7 +6,7 @@ import Profile from './screens/Profile'
 import MealDescriptionOverlay from './components/molecules/MealDescriptionOverlay'
 import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescriptionOverlay'
 import { getTimedMealTime } from './utils/filterPill'
-import { DataProvider, useAppData } from './contexts/DataContext'
+import { DataProvider } from './contexts/DataContext'
 import { LocationProvider } from './contexts/LocationContext'
 
 function loadFavourites() {
@@ -35,8 +35,6 @@ function getInitialMainFilters() {
 
 // ── Inner component — has access to DataContext ───────────────────────────────
 function AppInner() {
-  const { meals } = useAppData()
-
   const [activeTab, setActiveTab] = useState('discover') // 'home' temporarily hidden
   const [mountedTabs, setMountedTabs] = useState(() => new Set(['discover']))
   const [selectedMeal, setSelectedMeal] = useState(null)
@@ -100,12 +98,6 @@ function AppInner() {
     ...filterProps,
   }
 
-  // Meals for the restaurant overlay — filter from loaded API meals
-  // Compact meals from /api/meals don't have restaurantName; match by restaurantId instead.
-  const restaurantMeals = selectedRestaurant
-    ? meals.filter(m => m.restaurantId === selectedRestaurant.id)
-    : []
-
   return (
     <>
       {/* Lazy-mount: each screen mounts on first visit and stays alive.
@@ -147,7 +139,6 @@ function AppInner() {
         <RestaurantDescriptionOverlay
           key={selectedRestaurantZIndex}
           restaurant={selectedRestaurant}
-          meals={restaurantMeals}
           zIndex={selectedRestaurantZIndex}
           onClose={() => setSelectedRestaurant(null)}
           onMealSelect={handleMealSelect}

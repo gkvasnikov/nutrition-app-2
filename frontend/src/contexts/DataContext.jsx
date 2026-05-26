@@ -1,29 +1,32 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 /**
- * Loads restaurants (pins) and meals from the Express API.
- * Replaces the static mockData.js import — data now comes from Railway PostgreSQL.
+ * Loads restaurants (pins) and restaurant macro-summaries from the API.
  *
- * Shape mirrors what extract_frontend_data.py used to produce:
- *   restaurants    → same as MOCK_RESTAURANTS (id, name, lat, lng, isOpen, …)
- *   meals          → same as MOCK_MEALS       (id, name, photo, calories, …)
- *   restaurantById → Map<id, restaurant>  — O(1) lookup (replaces RESTAURANT_BY_ID)
- *   restaurantByName → Map<name, restaurant> — O(1) lookup (replaces RESTAURANT_BY_NAME)
+ * Meal data is NO LONGER loaded globally — Discover.jsx loads meals
+ * lazily per viewport via /api/area-meals when the user zooms in.
+ *
+ * restaurants   → pin data (id, name, lat, lng, isOpen, rating, …)
+ * summaries     → macro ranges per restaurant for low-zoom filter (minCal, maxPro, …)
+ * summaryById   → Map<id, summary>  — O(1) lookup
+ * restaurantById  → Map<id, restaurant>
+ * restaurantByName → Map<name, restaurant>
  */
 const DataContext = createContext({
-  restaurants: [],
-  meals: [],
-  restaurantById: new Map(),
+  restaurants:     [],
+  summaries:       [],
+  summaryById:     new Map(),
+  restaurantById:  new Map(),
   restaurantByName: new Map(),
   loading: true,
-  error: null,
+  error:   null,
 })
 
 export function DataProvider({ children }) {
   const [restaurants, setRestaurants] = useState([])
-  const [meals, setMeals] = useState([])
+  const [summaries,   setSummaries]   = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error,   setError]   = useState(null)
 
   useEffect(() => {
     Promise.all([
@@ -31,14 +34,14 @@ export function DataProvider({ children }) {
         if (!r.ok) throw new Error(`/api/pins ${r.status}`)
         return r.json()
       }),
-      fetch('/api/meals').then(r => {
-        if (!r.ok) throw new Error(`/api/meals ${r.status}`)
+      fetch('/api/restaurant-summaries').then(r => {
+        if (!r.ok) throw new Error(`/api/restaurant-summaries ${r.status}`)
         return r.json()
       }),
     ])
-      .then(([pins, mealData]) => {
+      .then(([pins, summaryList]) => {
         setRestaurants(pins)
-        setMeals(mealData)
+        setSummaries(summaryList)
       })
       .catch(err => {
         console.error('[DataContext] Failed to load app data:', err)
@@ -47,18 +50,16 @@ export function DataProvider({ children }) {
       .finally(() => setLoading(false))
   }, [])
 
-  const restaurantById = useMemo(
-    () => new Map(restaurants.map(r => [r.id, r])),
-    [restaurants]
-  )
-
-  const restaurantByName = useMemo(
-    () => new Map(restaurants.map(r => [r.name, r])),
-    [restaurants]
-  )
+  const restaurantById   = useMemo(() => new Map(restaurants.map(r => [r.id, r])),   [restaurants])
+  const restaurantByName = useMemo(() => new Map(restaurants.map(r => [r.name, r])), [restaurants])
+  const summaryById      = useMemo(() => new Map(summaries.map(s => [s.id, s])),      [summaries])
 
   return (
-    <DataContext.Provider value={{ restaurants, meals, restaurantById, restaurantByName, loading, error }}>
+    <DataContext.Provider value={{
+      restaurants, summaries, summaryById,
+      restaurantById, restaurantByName,
+      loading, error,
+    }}>
       {children}
     </DataContext.Provider>
   )

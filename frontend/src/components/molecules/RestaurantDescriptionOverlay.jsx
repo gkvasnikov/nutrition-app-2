@@ -1,26 +1,42 @@
-import { useEffect, useRef, Fragment } from 'react'
+import { useEffect, useRef, useState, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
-import { useAppData } from '../../contexts/DataContext'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './RestaurantDescriptionOverlay.module.css'
 
-export default function RestaurantDescriptionOverlay({ restaurant, meals = [], zIndex = 200, onClose, onMealSelect }) {
+const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+
+export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200, onClose, onMealSelect }) {
   const { userLat, userLng } = useLocation()
-  const { restaurantByName } = useAppData()
-  const restData = restaurant ? restaurantByName.get(restaurant.name) : null
-  const liveDistance = distanceTo(userLat, userLng, restData?.lat, restData?.lng)
+  const liveDistance = distanceTo(userLat, userLng, restaurant?.lat, restaurant?.lng)
+
+  // ── Fetch meals for this restaurant ──────────────────────────────────────────
+  const [meals, setMeals]               = useState([])
+  const [mealsLoading, setMealsLoading] = useState(false)
+
+  useEffect(() => {
+    if (!restaurant?.id) return
+    setMealsLoading(true)
+    setMeals([])
+    fetch(`/api/restaurants/${restaurant.id}/meals`)
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(data => setMeals(data))
+      .catch(err => console.error('[RestaurantOverlay] meals fetch error:', err))
+      .finally(() => setMealsLoading(false))
+  }, [restaurant?.id])
 
   function handleDirection() {
-    const r = restaurantByName.get(restaurant.name)
-    if (r) window.open(`https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}`, '_blank')
+    if (restaurant?.lat && restaurant?.lng) {
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${restaurant.lat},${restaurant.lng}`, '_blank')
+    }
   }
 
   function handleWolt() {
-    const r = restaurantByName.get(restaurant.name)
-    if (r?.woltSlug) window.open(`https://wolt.com/de/deu/berlin/restaurant/${r.woltSlug}`, '_blank')
+    if (restaurant?.woltSlug) {
+      window.open(`https://wolt.com/de/deu/berlin/restaurant/${restaurant.woltSlug}`, '_blank')
+    }
   }
 
   function handleShare() {
@@ -31,6 +47,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
       navigator.clipboard?.writeText(`${restaurant.name} — ${url}`)
     }
   }
+
   const backdropRef      = useRef(null)
   const sheetRef         = useRef(null)
   const scrollContentRef = useRef(null)
@@ -140,6 +157,8 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
 
   if (!restaurant) return null
 
+  const displayPriceRange = restaurant.priceRange ?? (restaurant.priceLevel ? PRICE_LEVEL_MAP[restaurant.priceLevel] : null)
+
   return (
     <div ref={backdropRef} className={styles.backdrop} style={{ zIndex }} onClick={animateClose}>
       <div ref={sheetRef} className={styles.sheet} style={{ zIndex: zIndex + 1 }} onClick={e => e.stopPropagation()}>
@@ -170,10 +189,10 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
               {/* Meta row */}
               <div className={styles.meta}>
                 <span className={styles.openNow}>Open now</span>
-                {restaurant.priceRange && (
+                {displayPriceRange && (
                   <>
                     <span className={styles.dot} />
-                    <span className={styles.metaText}>{restaurant.priceRange}</span>
+                    <span className={styles.metaText}>{displayPriceRange}</span>
                   </>
                 )}
                 {liveDistance && (
@@ -208,14 +227,21 @@ export default function RestaurantDescriptionOverlay({ restaurant, meals = [], z
 
             <div className={styles.mealsSection}>
               <h3 className={styles.mealsHeading}>Meals</h3>
-              <div className={styles.mealsList}>
-                {meals.map((meal, i) => (
-                  <Fragment key={meal.id}>
-                    {i > 0 && <div className={styles.separator} />}
-                    <CardMeal {...meal} hideRestaurant onClick={() => onMealSelect?.(meal)} />
-                  </Fragment>
-                ))}
-              </div>
+              {mealsLoading ? (
+                <div className={styles.mealsLoading}>Loading meals…</div>
+              ) : (
+                <div className={styles.mealsList}>
+                  {meals.map((meal, i) => (
+                    <Fragment key={meal.id ?? i}>
+                      {i > 0 && <div className={styles.separator} />}
+                      <CardMeal {...meal} hideRestaurant onClick={() => onMealSelect?.(meal)} />
+                    </Fragment>
+                  ))}
+                  {!mealsLoading && meals.length === 0 && (
+                    <p className={styles.noMeals}>No meals available</p>
+                  )}
+                </div>
+              )}
             </div>
 
           </div>

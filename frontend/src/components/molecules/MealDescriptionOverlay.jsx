@@ -6,6 +6,8 @@ import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './MealDescriptionOverlay.module.css'
 
+const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+
 const MACRO_BG = {
   calories: 'var(--color-surface)',
   protein:  'var(--color-semantic-green)',
@@ -278,28 +280,22 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
             <div
               className={styles.restaurantCard}
               style={{ cursor: 'pointer' }}
-              onClick={() => onRestaurantSelect?.({
-                name:        meal.restaurantName,
-                photo:       meal.restaurantPhoto,
-                address:     meal.restaurantAddress,
-                priceRange:  meal.priceRange,
-                distance:    liveDistance,
-                rating:      meal.rating,
-                reviewCount: meal.reviewCount,
-              })}
+              onClick={() => mealRestaurant && onRestaurantSelect?.(mealRestaurant)}
             >
               <div className={styles.restaurantPhotoWrap}>
-                {meal.restaurantPhoto
-                  ? <img src={withKey(meal.restaurantPhoto)} alt={meal.restaurantName} className={styles.restaurantPhoto} />
+                {mealRestaurant?.photo
+                  ? <img src={withKey(mealRestaurant.photo)} alt={mealRestaurant.name} className={styles.restaurantPhoto} />
                   : <div className={styles.restaurantPhotoPlaceholder} />
                 }
-                {meal.priceRange && <span className={styles.priceBadge}>{meal.priceRange}</span>}
+                {mealRestaurant?.priceLevel && (
+                  <span className={styles.priceBadge}>{PRICE_LEVEL_MAP[mealRestaurant.priceLevel]}</span>
+                )}
               </div>
               <div className={styles.restaurantInfo}>
                 <div className={styles.restaurantNameWrap}>
-                  <span className={styles.restaurantName}>{meal.restaurantName}</span>
+                  <span className={styles.restaurantName}>{mealRestaurant?.name}</span>
                   <span className={styles.restaurantAddress}>
-                    {meal.restaurantAddress ?? 'Eisenbahnstraße 42-43, 10997 Berlin, Deutschland'}
+                    {mealRestaurant?.address || 'Berlin, Deutschland'}
                   </span>
                 </div>
                 <div className={styles.restaurantMeta}>
@@ -313,12 +309,12 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                       </span>
                     </>
                   )}
-                  {meal.rating != null && (
+                  {mealRestaurant?.rating != null && (
                     <>
                       <span className={styles.dot} />
                       <span className={styles.ratingGroup}>
-                        <span className={styles.metaStar}>★{meal.rating}</span>
-                        <span className={styles.metaText}>({meal.reviewCount?.toLocaleString('de-DE')})</span>
+                        <span className={styles.metaStar}>★{mealRestaurant.rating}</span>
+                        <span className={styles.metaText}>({mealRestaurant.reviewCount?.toLocaleString('de-DE')})</span>
                       </span>
                     </>
                   )}

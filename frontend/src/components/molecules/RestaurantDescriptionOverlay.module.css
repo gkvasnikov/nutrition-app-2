@@ -206,3 +206,10 @@
   background: var(--color-surface-2);
   margin: var(--spacing-16) 0;
 }
+
+.mealsLoading,
+.noMeals {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-16) 0;
+}

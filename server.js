@@ -81,6 +81,95 @@ function getHoursString(openingHours) {
 
 const _MENU_NUM_RE = /^\d+\.\s*/
 
+// ── /api/restaurant-summaries — macro ranges per restaurant for low-zoom filter ─
+// ~1 700 rows × ~60 bytes = ~100 KB gzip. Used to show/hide dot-pins at zoom < 13
+// without loading full meal data.
+app.get('/api/restaurant-summaries', async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        r.id,
+        MIN(m.calories) AS min_cal,  MAX(m.calories) AS max_cal,
+        MIN(m.protein)  AS min_pro,  MAX(m.protein)  AS max_pro,
+        MIN(m.fat)      AS min_fat,  MAX(m.fat)      AS max_fat,
+        MIN(m.carbs)    AS min_carb, MAX(m.carbs)    AS max_carb
+      FROM restaurants r
+      JOIN menu_items m ON m.restaurant_id = r.id
+      WHERE m.source = 'wolt_menu'
+        AND m.calories IS NOT NULL
+        AND r.lat IS NOT NULL AND r.lon IS NOT NULL
+      GROUP BY r.id
+    `)
+
+    const summaries = rows.map(r => ({
+      id:      r.id,
+      minCal:  Math.round(r.min_cal  ?? 0), maxCal:  Math.round(r.max_cal  ?? 0),
+      minPro:  Math.round(r.min_pro  ?? 0), maxPro:  Math.round(r.max_pro  ?? 0),
+      minFat:  Math.round(r.min_fat  ?? 0), maxFat:  Math.round(r.max_fat  ?? 0),
+      minCarb: Math.round(r.min_carb ?? 0), maxCarb: Math.round(r.max_carb ?? 0),
+    }))
+
+    res.set('Cache-Control', 'public, max-age=300')
+    res.json(summaries)
+  } catch (err) {
+    console.error('/api/restaurant-summaries error:', err.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+})
+
+
+// ── /api/area-meals — meals for restaurants within a map bounding box ─────────
+// Called when user zooms in to zoom ≥ 13. Only loads meals for visible area.
+// Replaces the need to load all ~23K meals at app start.
+app.get('/api/area-meals', async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const { swLat, swLng, neLat, neLng } = req.query
+    if (!swLat || !swLng || !neLat || !neLng) {
+      return res.status(400).json({ error: 'swLat, swLng, neLat, neLng required' })
+    }
+
+    const { rows } = await pool.query(`
+      SELECT
+        m.id, m.name, m.description, m.calories, m.protein, m.fat, m.carbs,
+        m.confidence, m.price, m.image_url, m.restaurant_id
+      FROM menu_items m
+      JOIN restaurants r ON r.id = m.restaurant_id
+      WHERE m.source = 'wolt_menu'
+        AND m.calories IS NOT NULL
+        AND m.image_url IS NOT NULL AND m.image_url <> ''
+        AND r.lat IS NOT NULL AND r.lon IS NOT NULL
+        AND r.lat BETWEEN $1 AND $3
+        AND r.lon BETWEEN $2 AND $4
+      ORDER BY
+        CASE m.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+        m.calories DESC NULLS LAST
+    `, [+swLat, +swLng, +neLat, +neLng])
+
+    const meals = rows.map((m, i) => ({
+      id:           i,
+      name:         m.name.replace(_MENU_NUM_RE, ''),
+      photo:        m.image_url,
+      price:        m.price ? `€${parseFloat(m.price).toFixed(2)}` : null,
+      description:  m.description || '',
+      calories:     m.calories,
+      protein:      m.protein,
+      fat:          m.fat,
+      carbs:        m.carbs,
+      confidence:   m.confidence,
+      restaurantId: m.restaurant_id,
+    }))
+
+    res.set('Cache-Control', 'public, max-age=60')
+    res.json(meals)
+  } catch (err) {
+    console.error('/api/area-meals error:', err.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+})
+
+
 // ── /api/pins — lightweight map data (restaurants with meal counts) ───────────
 // Used by Discover.jsx to show pins immediately; ~200-400 KB for full Berlin
 app.get('/api/pins', async (req, res) => {

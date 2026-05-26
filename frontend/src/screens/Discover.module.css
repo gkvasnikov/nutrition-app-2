@@ -277,3 +277,20 @@
   box-shadow: var(--shadow-float);
   padding: var(--spacing-12);
 }
+
+/* ── Zoom prompt — shown in sheet when zoom < 13 ── */
+.zoomPrompt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-24) var(--spacing-16);
+}
+
+.zoomPromptText {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 260px;
+}
