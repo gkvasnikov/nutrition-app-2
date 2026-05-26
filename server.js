@@ -56,6 +56,31 @@ Respond ONLY with valid JSON (no markdown):
   }
 })
 
+// Image proxy — fetches external CDN images server-side to avoid canvas CORS taint
+app.get('/api/image-proxy', async (req, res) => {
+  const { url } = req.query
+  if (!url) return res.status(400).send('Missing url')
+  // Only proxy known CDN domains (prevent SSRF)
+  const allowed = ['imageproxy.wolt.com', 'maps.googleapis.com']
+  let parsed
+  try { parsed = new URL(url) } catch { return res.status(400).send('Invalid url') }
+  if (!allowed.some(d => parsed.hostname === d || parsed.hostname.endsWith('.' + d))) {
+    return res.status(403).send('Disallowed domain')
+  }
+  try {
+    const response = await fetch(url)
+    if (!response.ok) return res.status(response.status).send('Upstream error')
+    const contentType = response.headers.get('content-type') || 'image/jpeg'
+    const buffer = await response.arrayBuffer()
+    res.set('Content-Type', contentType)
+    res.set('Cache-Control', 'public, max-age=86400')
+    res.send(Buffer.from(buffer))
+  } catch (e) {
+    console.error('Image proxy error:', e.message)
+    res.status(500).send('Error fetching image')
+  }
+})
+
 // SPA fallback — serve index.html for all non-API routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/dist/index.html'))

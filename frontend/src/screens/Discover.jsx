@@ -123,14 +123,14 @@ export default function Discover({
       } else {
         // First filtered meal changed — load its photo asynchronously
         cfg.photoUrl = newPhotoUrl
-        cfg.photo    = withKey(newPhotoUrl) || null
+        // Route through the backend proxy so canvas.toDataURL() isn't tainted by cross-origin CDN images
+        cfg.photo    = newPhotoUrl ? `/api/image-proxy?url=${encodeURIComponent(newPhotoUrl)}` : null
         // Show immediately with the current image while the new one loads
         marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count))
         if (cfg.photo) {
           const img = new Image()
-          img.crossOrigin = 'anonymous'  // prevent canvas taint when calling toDataURL()
-          img.onload  = () => { cfg.img = img;  marker.setIcon(createPinIcon(cfg.img, 40, cfg.type, cfg.count)) }
-          img.onerror = () => { cfg.img = null; marker.setIcon(createPinIcon(null,    40, cfg.type, cfg.count)) }
+          img.onload  = () => { cfg.img = img;  marker.setIcon(createPinIcon(img,  40, cfg.type, cfg.count)) }
+          img.onerror = () => { cfg.img = null; marker.setIcon(createPinIcon(null, 40, cfg.type, cfg.count)) }
           img.src = cfg.photo
         } else {
           cfg.img = null
