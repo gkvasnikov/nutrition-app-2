@@ -152,6 +152,14 @@
   flex-shrink: 0;
 }
 
+.openNow {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .distanceGroup {
   display: flex;
   align-items: center;

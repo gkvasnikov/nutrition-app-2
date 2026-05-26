@@ -300,7 +300,11 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                   </span>
                 </div>
                 <div className={styles.restaurantMeta}>
-                  <span className={styles.openNow}>Open now</span>
+                  {mealRestaurant?.isOpen != null && (
+                    <span className={mealRestaurant.isOpen ? styles.openNow : styles.closed}>
+                      {mealRestaurant.isOpen ? 'Open now' : 'Closed'}
+                    </span>
+                  )}
                   {liveDistance && (
                     <>
                       <span className={styles.dot} />

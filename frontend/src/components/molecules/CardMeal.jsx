@@ -1,6 +1,5 @@
 import { LocationIcon, WalkIcon } from '../atoms/icons'
 import PillMacro from '../atoms/PillMacro'
-import PriceLevel from '../atoms/PriceLevel'
 import { useLocation } from '../../contexts/LocationContext'
 import { useAppData } from '../../contexts/DataContext'
 import { distanceTo } from '../../utils/distance'
@@ -31,10 +30,10 @@ export default function CardMeal({
 
   // Compact meal objects from /api/meals don't carry restaurant fields —
   // fall back to the restaurant lookup from DataContext.
-  const displayName       = restaurantName ?? restaurant?.name
-  const displayRating     = rating         ?? restaurant?.rating
-  const displayReviews    = reviewCount    ?? restaurant?.reviewCount
-  const displayPriceLevel = restaurant?.priceLevel ?? null
+  const displayName    = restaurantName ?? restaurant?.name
+  const displayRating  = rating         ?? restaurant?.rating
+  const displayReviews = reviewCount    ?? restaurant?.reviewCount
+  const displayIsOpen  = restaurant?.isOpen ?? null  // true | false | null
 
   const computedDistance = distance ?? (
     restaurant ? distanceTo(userLat, userLng, restaurant.lat, restaurant.lng) : null
@@ -74,10 +73,12 @@ export default function CardMeal({
           <LocationIcon size={16} className={styles.locationIcon} />
           <span className={styles.restaurantName}>{displayName}</span>
         </div>
-        {displayPriceLevel && (
+        {displayIsOpen != null && (
           <>
             <span className={styles.dot} />
-            <PriceLevel level={displayPriceLevel} className={styles.meta} />
+            <span className={displayIsOpen ? styles.openNow : styles.meta}>
+              {displayIsOpen ? 'Open now' : 'Closed'}
+            </span>
           </>
         )}
         {computedDistance && (

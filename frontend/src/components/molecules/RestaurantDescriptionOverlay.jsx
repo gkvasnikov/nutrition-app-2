@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
-import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
@@ -156,7 +155,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
 
   if (!restaurant) return null
 
-  const displayPriceLevel = restaurant.priceLevel ?? null
+  const displayIsOpen = restaurant.isOpen ?? null
 
   return (
     <div ref={backdropRef} className={styles.backdrop} style={{ zIndex }} onClick={animateClose}>
@@ -187,12 +186,10 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
 
               {/* Meta row */}
               <div className={styles.meta}>
-                <span className={styles.openNow}>Open now</span>
-                {displayPriceLevel && (
-                  <>
-                    <span className={styles.dot} />
-                    <PriceLevel level={displayPriceLevel} />
-                  </>
+                {displayIsOpen != null && (
+                  <span className={displayIsOpen ? styles.openNow : styles.closed}>
+                    {displayIsOpen ? 'Open now' : 'Closed'}
+                  </span>
                 )}
                 {liveDistance && (
                   <>

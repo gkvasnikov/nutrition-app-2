@@ -360,6 +360,16 @@
   white-space: nowrap;
 }
 
+.closed {
+  background: var(--color-surface-2);
+  color: var(--color-text-2);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-regular);
+  padding: 3px var(--spacing-8);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
 .dot {
   width: 2px;
   height: 2px;
