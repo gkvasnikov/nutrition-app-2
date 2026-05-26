@@ -30,6 +30,9 @@ src/
                            Exception: MapFloatIcon has fill="white" hardcoded
       PillMacro.jsx      — calorie/protein/fat/carbs pill with semantic background colors
       PillTab.jsx        — filter/tab pill; border 1px surface-2 (unselected) / text (selected); Body/regular 15px both states
+                           accepts optional `icon` prop → renders 16×16 <img> before label with 4px gap
+      PriceLevel.jsx     — €€€€ price indicator: `level` signs filled (color-text) + rest grey (opacity 0.2)
+                           accepts `level` (1–4) and optional `className`
       ButtonSeeAll.jsx
     molecules/
       TopBar.jsx         — white pill with icon left + title/subtitle center + filter icon right
@@ -41,7 +44,8 @@ src/
                            (used inside RestaurantDescriptionOverlay)
                            accepts `restaurantId` → falls back to restaurantById (DataContext)
                            for restaurant name/rating/priceRange on compact meals
-                           PRICE_LEVEL_MAP: { 1:'€', 2:'€€', 3:'€€€', 4:'€€€€' }
+                           restaurant row: name + Open/Closed badge + rating + WalkIcon + distance
+                           gap between dish/divider/restaurant row: var(--spacing-12)
       CardRestaurant.jsx — restaurant card: photo + rating + hours + distance
       HeroCarousel.jsx   — infinite-loop carousel, 3 slides, auto-advance 3s, swipe support
                            clone technique: 5 slots [clone_last, 0, 1, 2, clone_first]
@@ -69,13 +73,22 @@ src/
                            Animation state: isVisible (mounts component) + isExpanded (drives transitions)
                            panelWrapVisible keyed off isExpanded (NOT isVisible) — allows fade-out on close
                            Unmount timer: 520ms; panelWrap fade: 0.35s; actions row stagger: 0.25s delay
+                           Meal Time pills have 16×16 icons: /icons/Breakfast.svg, /icons/Lunch.svg,
+                             /icons/Dinner.svg, /icons/Snack.svg
+                           Diet tag pills have 16×16 icons: /icons/Accordion/Pill/plant-based.svg,
+                             /icons/Accordion/Pill/gluten-free.svg, /icons/Accordion/Pill/diabetes.svg
+                           RangeSlider layout: label (52px fixed) left + sliderRight column (flex:1)
+                             sliderRight: value text centered above (.sliderValue) + .sliderTrack (28px tall)
+                             Track: 1px grey line via ::before pseudo-element; 2px black fill via .sliderFill div
+                             Thumbs: 24×24px, border: 1px solid var(--color-text), box-shadow: var(--shadow-subtle)
                            Available on both Home and Discover screens
       ButtonFilterActions.jsx — Reset (no border, shadow-float) + Apply (shadow-float); NO padding on .wrap
                            (padding is provided by the parent context: FiltersPanel .actions or MealFilterOverlay bodyContent)
       MealDescriptionOverlay.jsx
                          — full-screen bottom sheet for a single meal
-                           4 action buttons: Direction (Google Maps), Wolt (restaurant page),
+                           4 action buttons: Direction (Google Maps via mapsDirectionUrl), Wolt (restaurant page),
                            Heart (favourite toggle, red when active), Share (Web Share API / clipboard fallback)
+                           Direction URL: walking if ≤1km, driving if >1km (mapsDirectionUrl from distance.js)
                            AI Advisor section: POST /api/advice → score + rating + advice text; skeleton while loading
                            Restaurant card: uses restaurantById.get(meal.restaurantId) from DataContext
                            (compact meals don't carry restaurantName/restaurantPhoto fields directly)
@@ -85,7 +98,9 @@ src/
                          — full-screen bottom sheet for a restaurant + its meals list
                            Fetches own meals: GET /api/restaurants/:id/meals on mount (restaurant.id required)
                            Shows loading state while meals fetch; no meals prop needed from parent
-                           3 action buttons: Direction, Wolt, Share — use restaurant.lat/lng/woltSlug directly
+                           Meta row: rating · hours · distance · PriceLevel component (if priceLevel set)
+                           3 action buttons: Direction (mapsDirectionUrl), Wolt, Share
+                           Direction URL: walking if ≤1km, driving if >1km (mapsDirectionUrl from distance.js)
                            Meals rendered with <CardMeal hideRestaurant />
                            Live GPS distance via LocationContext + restaurant.lat/lng
                            z-index: backdrop 200, sheet 201
@@ -113,6 +128,9 @@ src/
                              haversineM(lat1,lon1,lat2,lon2) → metres
                              formatDistance(metres) → "380 m" | "1.2 km"
                              distanceTo(userLat,userLng,targetLat,targetLng) → string | null
+                             mapsDirectionUrl(userLat,userLng,destLat,destLng) → Google Maps URL
+                               walking mode if distance ≤1000m, driving mode otherwise
+                               falls back to driving when user location unavailable
     filterPill.jsx       — getTimedMealTime(), buildMainSubtitle() for TopBar subtitle
     photoUrl.js          — withKey(url) injects VITE_GOOGLE_MAPS_API_KEY at render time
                            NEVER store API keys in data files or committed files
@@ -194,6 +212,9 @@ Two modes determined by `PHOTO_ZOOM_THRESHOLD = 15`:
 - `topBarFill` is always rendered and animates in/out via a CSS class toggle (`translateY(-100%)` → `translateY(0)`)
 - Floating "Map" button uses `MapFloatIcon` (inlined SVG component, not `<img>`) to avoid render delay
 - Dot mode: sheet shows `.zoomPrompt` placeholder instead of meal list
+- Empty-match state: when zoom ≥ 15 but `visibleMeals.length === 0`, sheet shows `.zoomPrompt` with
+  "No meals match your filters here. Pan the map or ease up on the filters…" instead of the list
+  Sheet header subtitle changes to "No matches — try adjusting filters" in this case
 
 ### Visible meals count
 `updateVisibleMeals()` computes "X Meals in Y restaurants around you" shown in the sheet header.
@@ -235,9 +256,21 @@ Each photo-pin shows a photo of the **first meal that matches the current filter
 - `meals` — currently filtered subset
 - `count`, `type` — badge count and pin type
 
+`applyFiltersToMeals(meals)` — filters and sorts a per-restaurant meal array:
+- Applies mealTime, diet, macros range, dietTags (plantBased/glutenFree/diabetesFriendly), search
+- Applies macrosConfidence filter: if `sf.macrosConfidence.length < 2`, only keep meals matching that confidence level
+- Sorts by the current `sortBy` value (best_match score, a_z, nearest — nearest is a no-op here, sorted globally later)
+- Used for: pin representative photo selection AND as input to `updateVisibleMeals()`
+
 `updatePinFilters()` branches on zoom mode:
 - **Dot mode**: `summaryMatchesFilters(summary)` → show/hide dot, no image loading
 - **Photo mode**: `applyFiltersToMeals(cfg.allMeals)` → update meals, lazy-load new representative photo via `/api/image-proxy` if changed
+
+`updateVisibleMeals()` collects all `cfg.meals` arrays from visible restaurants, then applies a **global sort**:
+- `nearest`: sort by Euclidean distance from `map.getCenter()` to restaurant coordinates
+- `a_z`: `localeCompare` on meal name
+- `best_match` (default): score function (protein, calories, confidence weight) descending
+- Global sort ensures meals from different restaurants are interleaved by relevance, not grouped by restaurant
 
 **Canvas CORS**: Meal photos are on `imageproxy.wolt.com` (cross-origin). All pin photos routed through `/api/image-proxy` (same-origin) to prevent canvas taint.
 
@@ -275,7 +308,8 @@ Each photo-pin shows a photo of the **first meal that matches the current filter
 ### MealDescriptionOverlay
 - Close button: `position: absolute` on `.sheet` (never scrolls)
 - Photo scrolls inside `scrollContentRef`
-- 4 action buttons: Direction (Google Maps URL), Wolt (woltSlug URL), Heart (isFavourite prop + onToggleFavourite), Share
+- 4 action buttons: Direction (Google Maps via `mapsDirectionUrl`), Wolt (woltSlug URL), Heart (isFavourite prop + onToggleFavourite), Share
+- Direction URL: `mapsDirectionUrl(userLat, userLng, r.lat, r.lng)` — walking ≤1km, driving >1km
 - AI Advisor: `POST /api/advice` with meal macros → `{ score, rating, advice }`; skeleton shown while loading
 - Restaurant card: looks up restaurant via `restaurantById.get(meal.restaurantId)` from DataContext
   (compact meals from `/api/area-meals` don't carry restaurantName/restaurantPhoto)
@@ -285,9 +319,9 @@ Each photo-pin shows a photo of the **first meal that matches the current filter
 - Fetches own meals via `GET /api/restaurants/:id/meals` on mount; shows loading state
 - No `meals` prop — parent just passes `restaurant` object (must include `id`)
 - `restaurant` object fields used: `id`, `name`, `photo`, `address`, `lat`, `lng`, `woltSlug`, `priceLevel`, `rating`, `reviewCount`
-- `displayPriceRange`: uses `restaurant.priceRange ?? PRICE_LEVEL_MAP[restaurant.priceLevel]`
+- Meta row shows: rating · hours · WalkIcon+distance · `<PriceLevel level={restaurant.priceLevel} />` (if set)
 - Meals rendered with `<CardMeal hideRestaurant />`
-- 3 action buttons: Direction, Wolt, Share — uses `restaurant.lat`/`lng`/`woltSlug` directly
+- 3 action buttons: Direction (`mapsDirectionUrl`), Wolt, Share — uses `restaurant.lat`/`lng`/`woltSlug` directly
 - z-index: backdrop 200, sheet 201
 
 ---
@@ -332,6 +366,9 @@ API key: `ANTHROPIC_API_KEY` env var (Railway). Never hardcode.
 - `public/meals/` — dish photos (avif): `bowl-pollo-asado`, `karisik-izgara`, `halbes-hahnchen`, `schnitzel-bowl`
 - `public/restaurants/` — restaurant photos (jpg/png)
 - `public/` root — SVG icons used as `<img>` tags: `Map.svg`, `User.svg`, `Pie.svg`, `Door.svg`, `Chevron-right.svg`
+- `public/icons/` — meal time icons: `Breakfast.svg`, `Lunch.svg`, `Dinner.svg`, `Snack.svg`
+- `public/icons/Accordion/Pill/` — diet tag icons: `plant-based.svg`, `gluten-free.svg`, `diabetes.svg`
+  **These must be committed to git** — Railway builds from the repo; missing icons won't be served in production
 - All files in `public/` are served at the root path (`/filename`)
 - SVGs that need to render instantly (e.g. inside buttons) → add to `icons.jsx` as inlined React components instead of `<img>`
 
@@ -361,7 +398,7 @@ TopBar title: "Discover"; subtitle built from `buildMainSubtitle(activeMainFilte
 - `CardMeal` internal divider: **dashed** (`border-top: 1px dashed var(--color-surface-2)`)
 - Separator **between** `CardMeal` cards: **solid** `1px` line, `margin: var(--spacing-16) 0`
 - `CardMeal` gap between dish/divider/restaurant row: `var(--spacing-12)`
-- `CardMeal` restaurant row gap: `var(--spacing-16)`
+- `CardMeal` restaurant row gap: `var(--spacing-12)`
 - `MainNavigation` background: `rgba(229, 229, 229, 0.3)` + `backdrop-filter: blur(6px)`
 - All icons in `icons.jsx` use `fill="currentColor"` and accept `size` + `className` props
 - Exception: `MapFloatIcon` has `fill="white"` hardcoded (white icon on dark button)
