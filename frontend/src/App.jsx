@@ -101,8 +101,9 @@ function AppInner() {
   }
 
   // Meals for the restaurant overlay — filter from loaded API meals
+  // Compact meals from /api/meals don't have restaurantName; match by restaurantId instead.
   const restaurantMeals = selectedRestaurant
-    ? meals.filter(m => m.restaurantName === selectedRestaurant.name)
+    ? meals.filter(m => m.restaurantId === selectedRestaurant.id)
     : []
 
   return (

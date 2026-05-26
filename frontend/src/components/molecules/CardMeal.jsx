@@ -5,6 +5,8 @@ import { useAppData } from '../../contexts/DataContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './CardMeal.module.css'
 
+const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+
 export default function CardMeal({
   photo,
   name,
@@ -27,6 +29,14 @@ export default function CardMeal({
   const { userLat, userLng } = useLocation()
   const { restaurantById } = useAppData()
   const restaurant = restaurantId ? restaurantById.get(restaurantId) : null
+
+  // Compact meal objects from /api/meals don't carry restaurant fields —
+  // fall back to the restaurant lookup from DataContext.
+  const displayName       = restaurantName ?? restaurant?.name
+  const displayRating     = rating         ?? restaurant?.rating
+  const displayReviews    = reviewCount    ?? restaurant?.reviewCount
+  const displayPriceRange = priceRange     ?? (restaurant?.priceLevel ? PRICE_LEVEL_MAP[restaurant.priceLevel] : null)
+
   const computedDistance = distance ?? (
     restaurant ? distanceTo(userLat, userLng, restaurant.lat, restaurant.lng) : null
   )
@@ -63,12 +73,12 @@ export default function CardMeal({
       {!hideRestaurant && <div className={styles.restaurantRow} onClick={onRestaurantClick ? e => { e.stopPropagation(); onRestaurantClick() } : undefined}>
         <div className={styles.restaurant}>
           <LocationIcon size={16} className={styles.locationIcon} />
-          <span className={styles.restaurantName}>{restaurantName}</span>
+          <span className={styles.restaurantName}>{displayName}</span>
         </div>
-        {priceRange && (
+        {displayPriceRange && (
           <>
             <span className={styles.dot} />
-            <span className={styles.meta}>{priceRange}</span>
+            <span className={styles.meta}>{displayPriceRange}</span>
           </>
         )}
         {computedDistance && (
@@ -80,13 +90,13 @@ export default function CardMeal({
             </span>
           </>
         )}
-        {rating != null && (
+        {displayRating != null && (
           <>
             <span className={styles.dot} />
             <span className={styles.rating}>
               <span className={styles.star}>★</span>
-              <span className={styles.ratingNum}>{rating}</span>{' '}
-              <span className={styles.reviewCount}>({reviewCount?.toLocaleString('de-DE')})</span>
+              <span className={styles.ratingNum}>{displayRating}</span>{' '}
+              <span className={styles.reviewCount}>({displayReviews?.toLocaleString('de-DE')})</span>
             </span>
           </>
         )}

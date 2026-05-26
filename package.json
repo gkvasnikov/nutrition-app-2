@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.54.0",
+    "compression": "^1.8.1",
     "dotenv": "^17.4.2",
     "express": "^4.21.2",
     "pg": "^8.21.0"

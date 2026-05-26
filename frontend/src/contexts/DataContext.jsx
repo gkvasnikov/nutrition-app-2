@@ -31,7 +31,7 @@ export function DataProvider({ children }) {
         if (!r.ok) throw new Error(`/api/pins ${r.status}`)
         return r.json()
       }),
-      fetch('/api/meals?limit=25000').then(r => {
+      fetch('/api/meals').then(r => {
         if (!r.ok) throw new Error(`/api/meals ${r.status}`)
         return r.json()
       }),
