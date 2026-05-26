@@ -534,7 +534,10 @@ export default function Discover({
   // ── addMealPins ───────────────────────────────────────────────────────────────
   function addMealPins(map) {
     const initialZoom = map.getZoom() ?? 12
+    // Sync both the ref AND React state — locateMe may have changed zoom
+    // before data arrived, so zoom_changed listener never caught it.
     zoomLevelRef.current = initialZoom
+    setZoomLevel(initialZoom)
 
     // One pin per restaurant, using data from /api/pins
     const PIN_DATA = apiRestaurants
@@ -625,8 +628,15 @@ export default function Discover({
       markersRef.current.push({ marker, cfg })
     })
 
-    // Initial filter sync (dot mode — uses summaries, instant)
+    // Initial filter sync
     updatePinFiltersRef.current()
+
+    // If already in photo mode (locateMe ran before data arrived and the map
+    // settled at zoom ≥ 15 before the idle listener was added), load area meals
+    // now — the idle event won't fire again until the user moves the map.
+    if (zoomLevelRef.current >= PHOTO_ZOOM_THRESHOLD) {
+      loadAreaMealsRef.current?.()
+    }
   }
 
   function initMap() {
