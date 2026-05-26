@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, Fragment } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
@@ -22,12 +23,10 @@ export default function Discover({
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedPin, setSelectedPin] = useState(null) // null | { type, meals[] }
-  const [pinExiting, setPinExiting] = useState(false)
   const [visibleMeals, setVisibleMeals] = useState([]) // meals from pins in current viewport
   const [showFilters, setShowFilters] = useState(false)
   const [pendingFilters, setPendingFilters] = useState(secondaryFilters)
   const [showMealFilter, setShowMealFilter] = useState(false)
-  const lastSelectedPinRef = useRef(null) // keeps content visible during exit anim
   const pinDataRef = useRef([])           // all PIN_DATA, populated after image load
   const markersRef = useRef([])           // [{ marker, cfg }] for filter-driven updates
   const mapRef = useRef(null)
@@ -155,17 +154,10 @@ export default function Discover({
     if (!cfg) {
       // Start sheet sliding back up immediately (parallel with card exit)
       setTransform(peekY(), true)
-      // Play exit animation, then unmount
-      setPinExiting(true)
-      setTimeout(() => {
-        setPinExiting(false)
-        setSelectedPin(null)
-      }, 300)
+      setSelectedPin(null)
       return
     }
-    // New pin selected — cancel any ongoing exit, show immediately
-    setPinExiting(false)
-    lastSelectedPinRef.current = cfg
+    // New pin selected — show immediately
     setSelectedPin(cfg)
     // Push sheet fully off screen
     const sheet = sheetRef.current
@@ -661,24 +653,27 @@ export default function Discover({
         </button>
       )}
 
-      {/* Gradient — visible when no pin selected, or during exit animation */}
-      {(!selectedPin || pinExiting) && <div className={styles.gradient} />}
+      {/* Gradient — visible when no pin selected */}
+      {!selectedPin && <div className={styles.gradient} />}
 
       {/* ── Pin selected: floating card(s) ── */}
-      {(selectedPin || pinExiting) && (() => {
-        const pin = selectedPin ?? lastSelectedPinRef.current
-        if (!pin) return null
-        return (
-          <div className={`${styles.pinCardWrap} ${pinExiting ? styles.pinCardWrapExiting : ''}`}>
+      <AnimatePresence>
+        {selectedPin && (
+          <motion.div
+            className={styles.pinCardWrap}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+          >
             {/* Direction + Close buttons */}
             <div className={styles.pinControls}>
               <button
                 className={styles.mapBtn}
                 aria-label="Directions"
                 onClick={() => {
-                  const pin = selectedPin ?? lastSelectedPinRef.current
-                  if (pin?.lat && pin?.lng) {
-                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${pin.lat},${pin.lng}`, '_blank')
+                  if (selectedPin?.lat && selectedPin?.lng) {
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedPin.lat},${selectedPin.lng}`, '_blank')
                   }
                 }}
               >
@@ -690,28 +685,28 @@ export default function Discover({
             </div>
 
             {/* Single meal card */}
-            {pin.type === 'single' && (
+            {selectedPin.type === 'single' && (
               <div className={styles.pinCardSingle}>
                 <CardMeal
-                  {...pin.meals[0]}
-                  onClick={() => onMealSelect?.(pin.meals[0])}
+                  {...selectedPin.meals[0]}
+                  onClick={() => onMealSelect?.(selectedPin.meals[0])}
                 />
               </div>
             )}
 
             {/* Group carousel */}
-            {pin.type === 'group' && (
+            {selectedPin.type === 'group' && (
               <div className={styles.pinCardCarousel}>
-                {pin.meals.map(meal => (
+                {selectedPin.meals.map(meal => (
                   <div key={meal.id} className={styles.pinCardSlide}>
                     <CardMeal {...meal} onClick={() => onMealSelect?.(meal)} />
                   </div>
                 ))}
               </div>
             )}
-          </div>
-        )
-      })()}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <MainNavigation active={activeTab} onChange={onTabChange} />
     </div>
