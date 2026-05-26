@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState, Fragment } from 'react'
 import { CloseIcon, DirectionIcon, WoltIcon, ShareUpIcon, WalkIcon } from '../atoms/icons'
 import CardMeal from './CardMeal'
+import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './RestaurantDescriptionOverlay.module.css'
-
-const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
 
 export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200, onClose, onMealSelect }) {
   const { userLat, userLng } = useLocation()
@@ -157,7 +156,7 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
 
   if (!restaurant) return null
 
-  const displayPriceRange = restaurant.priceRange ?? (restaurant.priceLevel ? PRICE_LEVEL_MAP[restaurant.priceLevel] : null)
+  const displayPriceLevel = restaurant.priceLevel ?? null
 
   return (
     <div ref={backdropRef} className={styles.backdrop} style={{ zIndex }} onClick={animateClose}>
@@ -189,10 +188,10 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
               {/* Meta row */}
               <div className={styles.meta}>
                 <span className={styles.openNow}>Open now</span>
-                {displayPriceRange && (
+                {displayPriceLevel && (
                   <>
                     <span className={styles.dot} />
-                    <span className={styles.metaText}>{displayPriceRange}</span>
+                    <PriceLevel level={displayPriceLevel} />
                   </>
                 )}
                 {liveDistance && (

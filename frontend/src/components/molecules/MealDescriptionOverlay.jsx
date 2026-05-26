@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { CloseIcon, HeartOutlineIcon, HeartFilledIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
 import { useAppData } from '../../contexts/DataContext'
+import PriceLevel from '../atoms/PriceLevel'
 import { withKey } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './MealDescriptionOverlay.module.css'
-
-const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
 
 const MACRO_BG = {
   calories: 'var(--color-surface)',
@@ -288,7 +287,9 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                   : <div className={styles.restaurantPhotoPlaceholder} />
                 }
                 {mealRestaurant?.priceLevel && (
-                  <span className={styles.priceBadge}>{PRICE_LEVEL_MAP[mealRestaurant.priceLevel]}</span>
+                  <span className={styles.priceBadge}>
+                    <PriceLevel level={mealRestaurant.priceLevel} />
+                  </span>
                 )}
               </div>
               <div className={styles.restaurantInfo}>

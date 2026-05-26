@@ -1,11 +1,10 @@
 import { LocationIcon, WalkIcon } from '../atoms/icons'
 import PillMacro from '../atoms/PillMacro'
+import PriceLevel from '../atoms/PriceLevel'
 import { useLocation } from '../../contexts/LocationContext'
 import { useAppData } from '../../contexts/DataContext'
 import { distanceTo } from '../../utils/distance'
 import styles from './CardMeal.module.css'
-
-const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
 
 export default function CardMeal({
   photo,
@@ -35,7 +34,7 @@ export default function CardMeal({
   const displayName       = restaurantName ?? restaurant?.name
   const displayRating     = rating         ?? restaurant?.rating
   const displayReviews    = reviewCount    ?? restaurant?.reviewCount
-  const displayPriceRange = priceRange     ?? (restaurant?.priceLevel ? PRICE_LEVEL_MAP[restaurant.priceLevel] : null)
+  const displayPriceLevel = restaurant?.priceLevel ?? null
 
   const computedDistance = distance ?? (
     restaurant ? distanceTo(userLat, userLng, restaurant.lat, restaurant.lng) : null
@@ -75,10 +74,10 @@ export default function CardMeal({
           <LocationIcon size={16} className={styles.locationIcon} />
           <span className={styles.restaurantName}>{displayName}</span>
         </div>
-        {displayPriceRange && (
+        {displayPriceLevel && (
           <>
             <span className={styles.dot} />
-            <span className={styles.meta}>{displayPriceRange}</span>
+            <PriceLevel level={displayPriceLevel} className={styles.meta} />
           </>
         )}
         {computedDistance && (
