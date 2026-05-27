@@ -170,13 +170,6 @@
   display: flex;
   flex-wrap: nowrap;
   gap: var(--spacing-8);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.pillRowScroll::-webkit-scrollbar {
-  display: none;
 }
 
 /* ── Search field ───────────────────────────────────────────────────────── */

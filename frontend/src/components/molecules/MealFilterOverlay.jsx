@@ -207,8 +207,8 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
             <div className={styles.bodyInner}>
               <div className={styles.bodyContent}>
                 <div className={styles.pillRowScroll}>
-                  {MEAL_TIMES.map(({ key, label, icon }) => (
-                    <PillTab key={key} label={label} icon={icon} selected={mealTime === key} onClick={() => selectMealTime(key)} />
+                  {MEAL_TIMES.map(({ key, label }) => (
+                    <PillTab key={key} label={label} selected={mealTime === key} onClick={() => selectMealTime(key)} />
                   ))}
                 </div>
                 <div className={styles.divider} />
