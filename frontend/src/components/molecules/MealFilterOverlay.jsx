@@ -224,13 +224,23 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
 
         {/* ── Card 1: Meal Time — morphs from pill ───────────────────── */}
         <div className={`${styles.cardMain} ${isExpanded ? styles.cardMainExpanded : ''}`}>
-          <button
-            type="button"
-            className={styles.cardHeader}
-            onClick={() => toggleSection('mealtime')}
-          >
-            <span className={styles.cardTitle}>Meal Time</span>
-          </button>
+          <div className={styles.cardHeader}>
+            <button
+              type="button"
+              className={styles.cardHeaderBtn}
+              onClick={() => toggleSection('mealtime')}
+            >
+              <span className={styles.cardTitle}>Meal Time</span>
+            </button>
+            <button
+              type="button"
+              className={styles.closeBtn}
+              onClick={onClose}
+              aria-label="Close filters"
+            >
+              <img src="/icons/Close filters.svg" width={24} height={24} alt="" />
+            </button>
+          </div>
 
           <div className={`${styles.body} ${openSection === 'mealtime' ? styles.bodyOpen : ''}`}>
             <div className={styles.bodyInner}>
@@ -265,9 +275,9 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                 ))}
                 <div className={styles.divider} />
                 <div className={styles.pillRow}>
-                  <PillTab label="Plant-based"       icon="/icons/Accordion/Pill/plant-based.svg" selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
-                  <PillTab label="Gluten-free"        icon="/icons/Accordion/Pill/gluten-free.svg"  selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
-                  <PillTab label="Diabetes friendly"  icon="/icons/Accordion/Pill/diabetes.svg"     selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
+                  <PillTab label="Plant-based"       icon="/icons/plant-based.svg" selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
+                  <PillTab label="Gluten-free"        icon="/icons/gluten-free.svg"  selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
+                  <PillTab label="Diabetes friendly"  icon="/icons/diabetes.svg"     selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
                 </div>
               </div>
             </div>

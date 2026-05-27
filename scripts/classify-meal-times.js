@@ -17,7 +17,8 @@ import Anthropic from '@anthropic-ai/sdk'
 
 const DRY_RUN     = process.argv.includes('--dry-run')
 const BATCH_SIZE  = 20   // dishes per Claude API call
-const CONCURRENCY = 5    // parallel API calls in flight
+const CONCURRENCY = 1    // sequential — safest under 50 RPM limit
+const DELAY_MS    = 1500 // ms between batches (~40 RPM)
 const LOG_EVERY   = 100  // log progress every N dishes
 
 const VALID_TAGS = new Set(['breakfast', 'lunch_dinner', 'snack'])
@@ -42,6 +43,22 @@ async function ensureColumn() {
     ON menu_items USING GIN (meal_times)
   `)
   console.log('Column meal_times ensured.')
+}
+
+// ── Retry helper ─────────────────────────────────────────────────────────────
+async function withRetry(fn, maxRetries = 5) {
+  let delay = 15000  // start at 15s on first 429
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      const is429 = err?.status === 429 || err?.message?.includes('429')
+      if (!is429 || attempt === maxRetries) throw err
+      console.log(`Rate limited — waiting ${delay / 1000}s before retry ${attempt + 1}/${maxRetries}...`)
+      await new Promise(r => setTimeout(r, delay))
+      delay = Math.min(delay * 1.5, 120000)  // exponential backoff, max 2 min
+    }
+  }
 }
 
 // ── Classify one batch of dishes via Claude ───────────────────────────────────
@@ -79,11 +96,11 @@ ${JSON.stringify(dishes.map(d => ({
     carbs: d.carbs,
   })), null, 0)}`
 
-  const message = await client.messages.create({
+  const message = await withRetry(() => client.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 1024,
     messages: [{ role: 'user', content: prompt }],
-  })
+  }))
 
   const raw = message.content[0].text.replace(/```json\n?|\n?```/g, '').trim()
 
@@ -177,6 +194,7 @@ async function main() {
 
   const tasks = batches.map((batch, batchIdx) =>
     sem(async () => {
+      await new Promise(r => setTimeout(r, DELAY_MS))
       try {
         const results = await classifyBatch(batch)
 

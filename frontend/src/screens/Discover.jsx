@@ -865,7 +865,7 @@ export default function Discover({
           }}
         >
           <span>{SORT_LABELS[secondaryFilters.sortBy] ?? 'Nearest'}</span>
-          <img src="/icons/Pill/Switch.svg" width={16} height={16} alt="" />
+          <img src="/icons/Switch.svg" width={16} height={16} alt="" />
         </button>
 
         <button
