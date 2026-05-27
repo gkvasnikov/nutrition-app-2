@@ -164,6 +164,7 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
         protein:     meal.protein,
         fat:         meal.fat,
         carbs:       meal.carbs,
+        imageUrl:    meal.photo || null,
       }),
     })
       .then(r => r.ok ? r.json() : Promise.reject())
@@ -267,6 +268,9 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
                       />
                     </div>
                     <p className={styles.advisorText}>{advice.advice}</p>
+                    {advice.macroWarning && (
+                      <p className={styles.advisorWarning}>{advice.macroWarning}</p>
+                    )}
                   </div>
                 )}
               </>

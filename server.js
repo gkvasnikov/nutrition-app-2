@@ -328,7 +328,7 @@ app.get('/api/restaurants/:id/meals', async (req, res) => {
 
 // ── /api/advice ───────────────────────────────────────────────────────────────
 app.post('/api/advice', async (req, res) => {
-  const { name, description, calories, protein, fat, carbs, diet, mealTime } = req.body
+  const { name, description, calories, protein, fat, carbs, diet, mealTime, imageUrl } = req.body
 
   if (!name || calories == null) {
     return res.status(400).json({ error: 'name and calories are required' })
@@ -349,18 +349,28 @@ app.post('/api/advice', async (req, res) => {
 Meal: ${name}
 ${description ? `Description: ${description}` : ''}
 Nutrition per serving: ${calories} kcal, protein ${protein ?? '?'}g, fat ${fat ?? '?'}g, carbs ${carbs ?? '?'}g
+${imageUrl ? `
+Carefully look at the photo of the dish. If you notice visual cues that suggest the listed macros may be underestimated — such as heavy sauces, visible oil pools, melted cheese, thick dressings, hidden calorie-dense toppings, or an unusually large portion — add a gentle "macroWarning" field with one short, softly phrased sentence (e.g. "Fat content may be higher due to visible sauce"). Also reduce the score by 5–15 points to reflect the uncertainty. If the macros look plausible from the photo, omit "macroWarning".` : ''}
 
 Respond ONLY with valid JSON (no markdown):
 {
   "score": <integer 0–100 reflecting how well this meal fits the ${dietLabel} diet>,
   "rating": <"Poor" | "Fair" | "Good" | "Excellent">,
-  "advice": "<2–3 sentences: what makes this meal suitable or not for the diet, and one practical tip>"
+  "advice": "<2–3 sentences: what makes this meal suitable or not for the diet, and one practical tip>",
+  "macroWarning": "<optional: one short sentence if photo suggests macros may be underestimated, otherwise omit this field>"
 }`
+
+    const messageContent = imageUrl
+      ? [
+          { type: 'image', source: { type: 'url', url: imageUrl } },
+          { type: 'text', text: prompt },
+        ]
+      : prompt
 
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 300,
-      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 400,
+      messages: [{ role: 'user', content: messageContent }],
     })
 
     const raw = message.content[0].text.replace(/```json\n?|\n?```/g, '').trim()

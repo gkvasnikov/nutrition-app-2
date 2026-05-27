@@ -229,6 +229,14 @@
   margin: 12px 0 0; /* track→text = 12 (gap) + 12 = 24px */
 }
 
+.advisorWarning {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+  color: #f97316;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
 /* Skeleton */
 .advisorSkeleton {
   display: flex;
