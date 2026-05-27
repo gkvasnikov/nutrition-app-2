@@ -14,20 +14,20 @@ const MEAL_PRESETS = {
 }
 
 const DIET_PRESETS = {
-  high_protein: { kcal: [300,  900], protein: [25, 150], fat: [5,   55], carbs: [0,  150] },
-  high_carb:    { kcal: [350, 1000], protein: [10,  60], fat: [5,   30], carbs: [60, 250] },
-  balanced:     { kcal: [300,  800], protein: [15,  60], fat: [8,   40], carbs: [30, 120] },
-  keto:         { kcal: [300,  900], protein: [20,  80], fat: [30, 100], carbs: [0,   25] },
+  high_protein: { kcal: [300,  900], protein: [25, 150], fat: [5,  55], carbs: [0,  150] },
+  high_carb:    { kcal: [350, 1000], protein: [10,  60], fat: [5,  30], carbs: [60, 200] },
+  balanced:     { kcal: [300,  800], protein: [15,  60], fat: [8,  40], carbs: [30, 120] },
+  keto:         { kcal: [300,  900], protein: [20,  80], fat: [30, 100], carbs: [0,  25] },
   custom:       null,
 }
 
-const DEFAULT_MACROS = { kcal: [100, 1200], protein: [0, 200], fat: [0, 100], carbs: [0, 250] }
+const DEFAULT_MACROS = { kcal: [0, 1800], protein: [0, 150], fat: [0, 100], carbs: [0, 200] }
 
 const SLIDER_CONFIG = [
-  { key: 'kcal',    label: 'Kcal',    min: 0, max: 2000 },
-  { key: 'protein', label: 'Protein', min: 0, max: 300  },
-  { key: 'fat',     label: 'Fat',     min: 0, max: 150  },
-  { key: 'carbs',   label: 'Carbs',   min: 0, max: 400  },
+  { key: 'kcal',    label: 'Kcal',    min: 0, max: 1800, step: 10 },
+  { key: 'protein', label: 'Protein', min: 0, max: 150,  step: 5  },
+  { key: 'fat',     label: 'Fat',     min: 0, max: 100,  step: 5  },
+  { key: 'carbs',   label: 'Carbs',   min: 0, max: 200,  step: 5  },
 ]
 
 const MEAL_TIMES = [
@@ -54,7 +54,7 @@ const DIET_CELL_BG = {
 
 // ─── RangeSlider ─────────────────────────────────────────────────────────────
 
-function RangeSlider({ label, min, max, value, onChange }) {
+function RangeSlider({ label, min, max, step = 1, value, onChange }) {
   const [lo, hi] = value
   const loPercent = ((lo - min) / (max - min)) * 100
   const hiPercent = ((hi - min) / (max - min)) * 100
@@ -74,16 +74,18 @@ function RangeSlider({ label, min, max, value, onChange }) {
             className={styles.sliderInput}
             min={min}
             max={max}
+            step={step}
             value={lo}
-            onChange={e => onChange([Math.min(Number(e.target.value), hi - 1), hi])}
+            onChange={e => onChange([Math.min(Number(e.target.value), hi - step), hi])}
           />
           <input
             type="range"
             className={styles.sliderInput}
             min={min}
             max={max}
+            step={step}
             value={hi}
-            onChange={e => onChange([lo, Math.max(Number(e.target.value), lo + 1)])}
+            onChange={e => onChange([lo, Math.max(Number(e.target.value), lo + step)])}
           />
         </div>
       </div>
@@ -240,6 +242,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                     label={cfg.label}
                     min={cfg.min}
                     max={cfg.max}
+                    step={cfg.step}
                     value={macros[cfg.key]}
                     onChange={v => setMacros(prev => ({ ...prev, [cfg.key]: v }))}
                   />
