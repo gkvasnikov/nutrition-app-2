@@ -2,26 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import { getTimedMealTime } from '../../utils/filterPill'
+import { MACRO_PRESETS, DEFAULT_MACROS, getPreset } from '../../utils/macroPresets'
 import styles from './MealFilterOverlay.module.css'
-
-// ─── Presets ─────────────────────────────────────────────────────────────────
-
-const MEAL_PRESETS = {
-  breakfast: { kcal: [250, 700],  protein: [10, 50], fat: [5,  30], carbs: [20, 100] },
-  lunch:     { kcal: [350, 850],  protein: [20, 65], fat: [8,  45], carbs: [20, 120] },
-  dinner:    { kcal: [350, 900],  protein: [20, 65], fat: [8,  45], carbs: [10, 120] },
-  snack:     { kcal: [100, 500],  protein: [5,  35], fat: [2,  25], carbs: [5,   80] },
-}
-
-const DIET_PRESETS = {
-  high_protein: { kcal: [300,  900], protein: [25, 150], fat: [5,  55], carbs: [0,  150] },
-  high_carb:    { kcal: [350, 1000], protein: [10,  60], fat: [5,  30], carbs: [60, 200] },
-  balanced:     { kcal: [300,  800], protein: [15,  60], fat: [8,  40], carbs: [30, 120] },
-  keto:         { kcal: [300,  900], protein: [20,  80], fat: [30, 100], carbs: [0,  25] },
-  custom:       null,
-}
-
-const DEFAULT_MACROS = { kcal: [0, 1800], protein: [0, 150], fat: [0, 100], carbs: [0, 200] }
 
 const SLIDER_CONFIG = [
   { key: 'kcal',    label: 'Kcal',    min: 0, max: 1800, step: 10 },
@@ -184,9 +166,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
   }
 
   function computeMacros(mealTimeVal, dietVal) {
-    const mealPreset = mealTimeVal ? MEAL_PRESETS[mealTimeVal] : DEFAULT_MACROS
-    const dietPreset = dietVal && DIET_PRESETS[dietVal] ? DIET_PRESETS[dietVal] : null
-    return dietPreset ?? mealPreset
+    return getPreset(dietVal, mealTimeVal)
   }
 
   function selectMealTime(t) {

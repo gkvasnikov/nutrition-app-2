@@ -6,6 +6,7 @@ import Profile from './screens/Profile'
 import MealDescriptionOverlay from './components/molecules/MealDescriptionOverlay'
 import RestaurantDescriptionOverlay from './components/molecules/RestaurantDescriptionOverlay'
 import { getTimedMealTime } from './utils/filterPill'
+import { getPreset } from './utils/macroPresets'
 import { DataProvider } from './contexts/DataContext'
 import { LocationProvider } from './contexts/LocationContext'
 
@@ -24,10 +25,11 @@ const DEFAULT_SECONDARY_FILTERS = {
 
 function getInitialMainFilters() {
   const mealTime = getTimedMealTime()
+  const diet = 'high_protein'
   return {
     mealTime,
-    diet: 'high_protein',
-    macros: { kcal: [300, 900], protein: [25, 150], fat: [5, 55], carbs: [0, 150] },
+    diet,
+    macros: getPreset(diet, mealTime),
     dietTags: { plantBased: false, glutenFree: false, diabetesFriendly: false },
     search: '',
   }

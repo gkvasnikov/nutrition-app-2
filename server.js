@@ -133,7 +133,8 @@ app.get('/api/area-meals', async (req, res) => {
     const { rows } = await pool.query(`
       SELECT
         m.id, m.name, m.description, m.calories, m.protein, m.fat, m.carbs,
-        m.confidence, m.price, m.image_url, m.restaurant_id
+        m.confidence, m.price, m.image_url, m.restaurant_id, m.meal_times,
+        m.is_vegan, m.is_gluten_free, m.is_diabetic_friendly
       FROM menu_items m
       JOIN restaurants r ON r.id = m.restaurant_id
       WHERE m.source = 'wolt_menu'
@@ -148,17 +149,21 @@ app.get('/api/area-meals', async (req, res) => {
     `, [+swLat, +swLng, +neLat, +neLng])
 
     const meals = rows.map((m, i) => ({
-      id:           i,
-      name:         m.name.replace(_MENU_NUM_RE, ''),
-      photo:        m.image_url,
-      price:        m.price ? `€${parseFloat(m.price).toFixed(2)}` : null,
-      description:  m.description || '',
-      calories:     m.calories,
-      protein:      m.protein,
-      fat:          m.fat,
-      carbs:        m.carbs,
-      confidence:   m.confidence,
-      restaurantId: m.restaurant_id,
+      id:                 i,
+      name:               m.name.replace(_MENU_NUM_RE, ''),
+      photo:              m.image_url,
+      price:              m.price ? `€${parseFloat(m.price).toFixed(2)}` : null,
+      description:        m.description || '',
+      calories:           m.calories,
+      protein:            m.protein,
+      fat:                m.fat,
+      carbs:              m.carbs,
+      confidence:         m.confidence,
+      restaurantId:       m.restaurant_id,
+      mealTimes:          m.meal_times || null,
+      isVegan:            m.is_vegan ?? null,
+      isGlutenFree:       m.is_gluten_free ?? null,
+      isDiabeticFriendly: m.is_diabetic_friendly ?? null,
     }))
 
     res.set('Cache-Control', 'public, max-age=60')
@@ -305,7 +310,11 @@ app.get('/api/restaurants/:id/meals', async (req, res) => {
       reviewCount: m.reviews_count,
       priceRange,
       distance: null,
-      restaurantAddress: m.address || '',
+      restaurantAddress:   m.address || '',
+      mealTimes:           m.meal_times || null,
+      isVegan:             m.is_vegan ?? null,
+      isGlutenFree:        m.is_gluten_free ?? null,
+      isDiabeticFriendly:  m.is_diabetic_friendly ?? null,
     }))
 
     res.set('Cache-Control', 'public, max-age=60')

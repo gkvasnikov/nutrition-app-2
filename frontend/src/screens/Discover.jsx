@@ -131,6 +131,13 @@ export default function Discover({
       if (protein && meal.protein  != null && (meal.protein  < protein[0] || meal.protein  > protein[1])) return false
       if (fat     && meal.fat      != null && (meal.fat      < fat[0]     || meal.fat      > fat[1]))     return false
       if (carbs   && meal.carbs    != null && (meal.carbs    < carbs[0]   || meal.carbs    > carbs[1]))   return false
+      if (mf.mealTime && meal.mealTimes?.length) {
+        const aiKey = (mf.mealTime === 'lunch' || mf.mealTime === 'dinner') ? 'lunch_dinner' : mf.mealTime
+        if (!meal.mealTimes.includes(aiKey)) return false
+      }
+      if (mf.dietTags?.plantBased      && meal.isVegan            !== true) return false
+      if (mf.dietTags?.glutenFree      && meal.isGlutenFree        !== true) return false
+      if (mf.dietTags?.diabetesFriendly && meal.isDiabeticFriendly !== true) return false
       if (sf.macrosConfidence?.length && sf.macrosConfidence.length < 2) {
         if (!sf.macrosConfidence.includes(meal.confidence)) return false
       }
