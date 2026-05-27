@@ -1,0 +1,1089 @@
+/* Nutrition Admin — Main App
+   View states: 'berlin' | 'district'  (drill-down)
+   Detail panels: restaurant | script (overlay over the workspace)
+*/
+
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+const { DISTRICTS, RESTAURANTS, MEALS_SAMPLE, SCRIPTS, ACTIVITY, COST_BREAKDOWN } = window.AdminData;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "green",
+  "mapTheme": "light",
+  "density": "comfortable"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = window.useTweaks
+    ? window.useTweaks(TWEAK_DEFAULTS)
+    : [TWEAK_DEFAULTS, () => {}];
+
+  const [view, setView]                       = useState('berlin');    // 'berlin' | 'district'
+  const [districtId, setDistrictId]           = useState(null);
+  const [berlinTab, setBerlinTab]             = useState('neighbourhoods'); // 'neighbourhoods' | 'restaurants' | 'stats'
+  const [districtTab, setDistrictTab]         = useState('restaurants');    // 'restaurants' | 'scripts'
+  const [selectedRestaurantId, setRestaurantId] = useState(null);
+  const [selectedScriptId, setScriptId]         = useState(null);
+  const [hoverDistrict, setHoverDistrict]     = useState(null);
+  const [feedOpen, setFeedOpen]               = useState(true);
+  const [toast, setToast]                     = useState(null);
+
+  const districts = DISTRICTS;
+  const district  = districts.find(d => d.id === districtId);
+
+  // Sync map -> drill-down when a district polygon is clicked
+  const onDistrictSelect = useCallback((id) => {
+    const d = districts.find(x => x.id === id);
+    if (!d) return;
+    setDistrictId(id);
+    setView('district');
+    // Default to Restaurants tab for covered districts, Scripts for empty/active
+    setDistrictTab(d.status === 'covered' ? 'restaurants' : 'scripts');
+  }, [districts]);
+
+  const { zoomTo } = window.useBerlinMap({
+    districts,
+    selectedId: districtId,
+    onSelect: onDistrictSelect,
+    onHover: setHoverDistrict,
+    accent: t.accent || 'green',
+    theme: t.mapTheme || 'light',
+  });
+
+  // Animate map when view changes
+  useEffect(() => {
+    if (view === 'district' && districtId) zoomTo(districtId);
+    if (view === 'berlin') zoomTo(null);
+  }, [view, districtId, zoomTo]);
+
+  // Floating tooltip on map = hovered district info
+  const hoverData = hoverDistrict ? districts.find(d => d.id === hoverDistrict) : null;
+
+  return (
+    <div className="app">
+      <Sidebar
+        view={view} setView={setView}
+        districtId={districtId} setDistrictId={setDistrictId}
+        berlinTab={berlinTab} setBerlinTab={setBerlinTab}
+        districtTab={districtTab} setDistrictTab={setDistrictTab}
+        onDistrictSelect={onDistrictSelect}
+        onRestaurantOpen={setRestaurantId}
+        onScriptOpen={setScriptId}
+        showToast={setToast}
+      />
+      <div className="workspace">
+        <div id="map"/>
+
+        {/* Map overlay top bar */}
+        <div className="maptop">
+          <div className="maptop__title">
+            {view === 'berlin' ? (
+              <>
+                <Icon name="map-pin" size={14}/>
+                <span>Berlin</span>
+                <span className="muted" style={{ fontWeight: 500 }}>· 12 districts</span>
+              </>
+            ) : (
+              <>
+                <button className="breadcrumb__back" onClick={() => { setView('berlin'); setDistrictId(null); }} style={{ width: 22, height: 22, marginRight: 0 }}>
+                  <Icon name="chevron-left" size={14}/>
+                </button>
+                <span className="muted" style={{ fontWeight: 500, cursor: 'pointer' }} onClick={() => { setView('berlin'); setDistrictId(null); }}>Berlin</span>
+                <Icon name="chevron-right" size={12} style={{ color: 'var(--color-text-3)' }}/>
+                <span>{district?.name}</span>
+              </>
+            )}
+          </div>
+          <div className="spacer"/>
+          <div className="maptop__legend">
+            <span className="legend__item"><span className="legend__swatch legend__swatch--covered"/>Covered</span>
+            <span className="legend__item"><span className="legend__swatch legend__swatch--warn"/>Scraping</span>
+            <span className="legend__item"><span className="legend__swatch legend__swatch--none"/>No data</span>
+          </div>
+        </div>
+
+        {/* Map right controls */}
+        <div className="mapright">
+          <button className="mapbtn" title="Zoom in" onClick={() => zoomTo(districtId)}><Icon name="plus" size={16}/></button>
+          <button className="mapbtn" title="Reset" onClick={() => zoomTo(null)}><Icon name="refresh" size={14}/></button>
+          <button className="mapbtn" title="Layers"><Icon name="layers" size={16}/></button>
+        </div>
+
+        {/* Hovered district floating card */}
+        <DistrictHoverCard data={hoverData} onOpen={() => onDistrictSelect(hoverDistrict)}/>
+
+        {/* Activity feed */}
+        <ActivityFeed open={feedOpen} onToggle={() => setFeedOpen(v => !v)}/>
+
+        {/* Detail panels */}
+        <RestaurantDetail
+          restaurantId={selectedRestaurantId}
+          onClose={() => setRestaurantId(null)}
+        />
+        <ScriptDetail
+          scriptId={selectedScriptId}
+          district={district}
+          onClose={() => setScriptId(null)}
+          showToast={setToast}
+        />
+
+        {/* Toast */}
+        {toast && (
+          <div className={`toast toast--show`}>
+            <span>{toast.text}</span>
+            {toast.action && <button className="btn btn--ghost" style={{ color: 'white', height: 24, padding: '0 8px', fontSize: 12 }} onClick={() => setToast(null)}>{toast.action}</button>}
+          </div>
+        )}
+      </div>
+
+      {/* Tweaks (only renders when toolbar Tweaks is on) */}
+      {window.TweaksPanel && (
+        <window.TweaksPanel title="Tweaks">
+          <window.TweakSection label="Map">
+            <window.TweakRadio
+              label="Tile theme"
+              value={t.mapTheme}
+              options={[
+                { value: 'light', label: 'Light' },
+                { value: 'clean', label: 'Clean' },
+                { value: 'dark',  label: 'Dark'  },
+              ]}
+              onChange={v => setTweak('mapTheme', v)}
+            />
+          </window.TweakSection>
+          <window.TweakSection label="Accent">
+            <window.TweakRadio
+              label="District color"
+              value={t.accent}
+              options={[
+                { value: 'green', label: 'Emerald' },
+                { value: 'blue',  label: 'Blue'    },
+                { value: 'black', label: 'Black'   },
+              ]}
+              onChange={v => setTweak('accent', v)}
+            />
+          </window.TweakSection>
+        </window.TweaksPanel>
+      )}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Sidebar — switches content depending on view
+   ───────────────────────────────────────────────────────────── */
+function Sidebar(props) {
+  const { view } = props;
+  return (
+    <aside className="sidebar">
+      <div className="sidebar__head">
+        <div className="brand">
+          <span className="brand__mark">N</span>
+          <span style={{ flex: 1 }}>Nutrition <span className="brand__sub">/ Admin · v2.0</span></span>
+          <form method="POST" action="/admin/logout" style={{ margin: 0 }}>
+            <button type="submit" className="btn btn--ghost" style={{ height: 28, padding: '0 8px', fontSize: 12, color: 'var(--color-text-3)' }} title="Sign out">
+              <Icon name="external" size={13}/>
+            </button>
+          </form>
+        </div>
+        {view === 'berlin' ? <BerlinHeader {...props}/> : <DistrictHeader {...props}/>}
+      </div>
+
+      {view === 'berlin'
+        ? <BerlinBody {...props}/>
+        : <DistrictBody {...props}/>}
+    </aside>
+  );
+}
+
+/* ─── Berlin overview ─── */
+function BerlinHeader({ berlinTab, setBerlinTab }) {
+  const totalCovered = DISTRICTS.filter(d => d.status === 'covered').length;
+  const totalActive  = DISTRICTS.filter(d => d.status === 'active').length;
+  const totalMeals   = DISTRICTS.reduce((s,d) => s + (d.meals||0), 0);
+  return (
+    <>
+      <div className="breadcrumb">
+        <span className="breadcrumb__crumb">Berlin</span>
+      </div>
+      <Search placeholder="Search districts, restaurants, meals…"/>
+      <div className="statsrow">
+        <Cell label="Districts covered" value={`${totalCovered} / 12`} sub="2 active · 1 scraping" subClass="statsrow__sub--up"/>
+        <Cell label="Total meals" value={totalMeals.toLocaleString('en-US')} sub="+312 this week" subClass="statsrow__sub--up"/>
+        <Cell label="MTD spend" value="$186" sub="$200 budget · 93%" subClass="statsrow__sub--down"/>
+      </div>
+      <div className="tabs" style={{ marginLeft: -24, marginRight: -24, paddingLeft: 24, paddingRight: 24 }}>
+        <button className={`tab ${berlinTab==='neighbourhoods'?'tab--active':''}`} onClick={() => setBerlinTab('neighbourhoods')}>
+          Neighbourhoods <span className="tab__count">12</span>
+        </button>
+        <button className={`tab ${berlinTab==='restaurants'?'tab--active':''}`} onClick={() => setBerlinTab('restaurants')}>
+          All Restaurants <span className="tab__count">30</span>
+        </button>
+        <button className={`tab ${berlinTab==='stats'?'tab--active':''}`} onClick={() => setBerlinTab('stats')}>
+          Stats
+        </button>
+      </div>
+    </>
+  );
+}
+
+function Cell({ label, value, sub, subClass }) {
+  return (
+    <div className="statsrow__cell">
+      <span className="statsrow__label">{label}</span>
+      <span className="statsrow__value num">{value}</span>
+      {sub && <span className={`statsrow__sub ${subClass||''}`}>{sub}</span>}
+    </div>
+  );
+}
+
+function BerlinBody(props) {
+  const { berlinTab, onDistrictSelect } = props;
+  return (
+    <div className="sidebar__body fade-in" key={berlinTab}>
+      {berlinTab === 'neighbourhoods' && <NeighbourhoodsList onSelect={onDistrictSelect}/>}
+      {berlinTab === 'restaurants' && <AllRestaurants onOpen={props.onRestaurantOpen}/>}
+      {berlinTab === 'stats' && <BerlinStats/>}
+    </div>
+  );
+}
+
+function NeighbourhoodsList({ onSelect }) {
+  const covered = DISTRICTS.filter(d => d.status === 'covered');
+  const active = DISTRICTS.filter(d => d.status === 'active');
+  const none = DISTRICTS.filter(d => d.status === 'none');
+  return (
+    <>
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Covered</span>
+          <span className="section__count">{covered.length}</span>
+        </div>
+        <div className="dlist">
+          {covered.map(d => <DistrictRow key={d.id} d={d} onSelect={onSelect} variant="covered"/>)}
+        </div>
+      </div>
+      {active.length > 0 && (
+        <div className="section">
+          <div className="section__head">
+            <span className="section__title">Scraping</span>
+            <span className="section__count">{active.length}</span>
+          </div>
+          <div className="dlist">
+            {active.map(d => <DistrictRow key={d.id} d={d} onSelect={onSelect} variant="warn"/>)}
+          </div>
+        </div>
+      )}
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Not covered</span>
+          <span className="section__count">{none.length}</span>
+        </div>
+        <div className="dlist">
+          {none.map(d => <DistrictRow key={d.id} d={d} onSelect={onSelect} variant="none"/>)}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function DistrictRow({ d, onSelect, variant }) {
+  return (
+    <div className={`drow drow--${variant}`} onClick={() => onSelect(d.id)}>
+      <span className="drow__dot"/>
+      <span className="drow__name">{d.name}</span>
+      {variant === 'covered' && (
+        <span className="drow__meta">
+          <span><strong className="num">{d.restaurants}</strong> rest.</span>
+          <span><strong className="num">{(d.meals||0).toLocaleString('en-US')}</strong> meals</span>
+        </span>
+      )}
+      {variant === 'warn' && (
+        <span className="drow__meta">
+          <Pill variant="warn" dot>scraping</Pill>
+        </span>
+      )}
+      {variant === 'none' && (
+        <span className="drow__meta muted" style={{ fontSize: 12 }}>—</span>
+      )}
+      <Icon name="chevron-right" size={14} className="drow__chev"/>
+    </div>
+  );
+}
+
+function AllRestaurants({ onOpen }) {
+  return <RestaurantList title="All restaurants · Berlin" restaurants={RESTAURANTS} onOpen={onOpen}/>;
+}
+
+/* Shared filterable restaurant list — used by Berlin overview "All Restaurants"
+   tab AND district drill-down Restaurants tab */
+function RestaurantList({ title, restaurants, onOpen }) {
+  const [filter, setFilter] = useState('all');
+  const filtered = useMemo(() => {
+    let r = restaurants;
+    if (filter === 'open')     r = r.filter(x => x.open);
+    if (filter === 'closed')   r = r.filter(x => !x.open);
+    if (filter === 'photos')   r = r.filter(x => x.photos);
+    if (filter === 'partners') r = r.filter(x => x.partner);
+    return r;
+  }, [filter, restaurants]);
+
+  return (
+    <>
+      <div className="section">
+        <div className="chips">
+          <Chip active={filter==='all'}      onClick={() => setFilter('all')}>All <span className="num">{restaurants.length}</span></Chip>
+          <Chip active={filter==='partners'} onClick={() => setFilter('partners')}>Partners</Chip>
+          <Chip active={filter==='open'}     onClick={() => setFilter('open')}>Open now</Chip>
+          <Chip active={filter==='closed'}   onClick={() => setFilter('closed')}>Closed</Chip>
+          <Chip active={filter==='photos'}   onClick={() => setFilter('photos')}>Has photos</Chip>
+        </div>
+      </div>
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">{title}</span>
+          <button className="btn btn--ghost" style={{ height: 24, padding: '0 6px', fontSize: 12 }}>
+            <Icon name="filter" size={12}/>Sort
+          </button>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {filtered.map(r => <RestaurantRow key={r.id} r={r} onOpen={onOpen}/>)}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function RestaurantRow({ r, onOpen, active }) {
+  return (
+    <div className={`irow ${active?'irow--active':''}`} onClick={() => onOpen?.(r.id)}>
+      <div className="irow__img" style={{ background: `linear-gradient(135deg, oklch(0.85 0.06 ${(r.id.charCodeAt(1)*7)%360}), oklch(0.75 0.10 ${(r.id.charCodeAt(1)*11)%360}))` }}>
+      </div>
+      <div className="irow__main">
+        <div className="irow__name">{r.name}</div>
+        <div className="irow__meta">
+          <span>{r.cuisine}</span>
+          <span className="irow__meta__dot"/>
+          <span className="num">{r.meals} meals</span>
+          <span className="irow__meta__dot"/>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+            <Icon name="star" size={11} style={{ color: 'var(--color-rating-star)' }}/>
+            <span className="num">{r.rating}</span>
+          </span>
+        </div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-end' }}>
+        {r.open ? <Pill variant="success" dot>Open</Pill> : <Pill dot>Closed</Pill>}
+        {r.partner && <Pill variant="info">Partner</Pill>}
+      </div>
+    </div>
+  );
+}
+
+function BerlinStats() {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+  const mapsUsage = [120, 165, 190, 142, 178, 210];
+  const claudeUsage = [620, 840, 990, 1120, 1180, 1320];
+  const maxA = Math.max(...mapsUsage), maxB = Math.max(...claudeUsage);
+  return (
+    <>
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Cost-to-date · This month</span>
+          <Pill variant="info" dot>day 27</Pill>
+        </div>
+        <div style={{ padding: '14px 16px', border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+            <span className="num" style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em' }}>${COST_BREAKDOWN.total}</span>
+            <span className="muted">of ${COST_BREAKDOWN.budget} budget</span>
+          </div>
+          <div style={{ marginTop: 10, display: 'flex', height: 8, borderRadius: 4, overflow: 'hidden', background: 'var(--color-surface-3)' }}>
+            {COST_BREAKDOWN.parts.map((p, i) => (
+              <div key={i} style={{ width: `${(p.value/COST_BREAKDOWN.budget)*100}%`, background: p.color }}/>
+            ))}
+          </div>
+          <div style={{ marginTop: 12, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {COST_BREAKDOWN.parts.map((p,i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12 }}>
+                <span style={{ width: 8, height: 8, borderRadius: 2, background: p.color }}/>
+                <span style={{ flex: 1 }} className="muted">{p.label}</span>
+                <span className="num" style={{ fontWeight: 600 }}>${p.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Anthropic Tokens</span>
+          <span className="section__count num">1.32M this month</span>
+        </div>
+        <div className="chart">
+          {claudeUsage.map((v,i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="chart__bar" style={{ height: `${(v/maxB)*100}%` }}/>
+              <div className="chart__label">{months[i]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Google Maps Calls</span>
+          <span className="section__count num">210K this month</span>
+        </div>
+        <div className="chart">
+          {mapsUsage.map((v,i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="chart__bar" style={{ height: `${(v/maxA)*100}%`, background: '#0080ff' }}/>
+              <div className="chart__label">{months[i]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ─── District drill-down ─── */
+function DistrictHeader({ districtId, setDistrictId, setView, districtTab, setDistrictTab }) {
+  const d = DISTRICTS.find(x => x.id === districtId);
+  if (!d) return null;
+  return (
+    <>
+      <div className="breadcrumb">
+        <button className="breadcrumb__back" onClick={() => { setView('berlin'); setDistrictId(null); }}>
+          <Icon name="chevron-left" size={18}/>
+        </button>
+        <span className="breadcrumb__crumb breadcrumb__crumb--muted" onClick={() => { setView('berlin'); setDistrictId(null); }}>Berlin</span>
+        <span className="breadcrumb__sep">/</span>
+        <span className="breadcrumb__crumb">{d.name}</span>
+      </div>
+      <Search placeholder={`Search restaurants in ${d.name}…`}/>
+      <div className="statsrow">
+        <Cell label="Restaurants" value={d.restaurants || 0} sub={d.restaurants ? 'partners' : '—'}/>
+        <Cell label="Meals indexed" value={(d.meals || 0).toLocaleString('en-US')} sub={d.meals ? `${Math.round(d.meals/d.restaurants)} avg/rest.` : '—'}/>
+        <Cell label="Coverage" value={`${d.coverage || 0}%`} sub={d.cost ? `${d.cost} spent` : '—'}/>
+      </div>
+      <div className="tabs" style={{ marginLeft: -24, marginRight: -24, paddingLeft: 24, paddingRight: 24 }}>
+        <button className={`tab ${districtTab==='restaurants'?'tab--active':''}`} onClick={() => setDistrictTab('restaurants')}>
+          Restaurants <span className="tab__count">{d.restaurants||0}</span>
+        </button>
+        <button className={`tab ${districtTab==='scripts'?'tab--active':''}`} onClick={() => setDistrictTab('scripts')}>
+          Scripts <span className="tab__count">{SCRIPTS.length}</span>
+        </button>
+        <button className={`tab ${districtTab==='stats'?'tab--active':''}`} onClick={() => setDistrictTab('stats')}>
+          Stats
+        </button>
+      </div>
+    </>
+  );
+}
+
+function DistrictBody({ districtId, districtTab, setDistrictTab, onRestaurantOpen, onScriptOpen, showToast }) {
+  const d = DISTRICTS.find(x => x.id === districtId);
+  if (!d) return null;
+  return (
+    <div className="sidebar__body" key={districtTab}>
+      {districtTab === 'restaurants' && (
+        d.restaurants > 0
+          ? <DistrictRestaurants d={d} onOpen={onRestaurantOpen}/>
+          : <RestaurantsEmpty d={d} onJumpToScripts={() => setDistrictTab('scripts')}/>
+      )}
+      {districtTab === 'scripts' && <DistrictScripts d={d} onOpen={onScriptOpen} showToast={showToast}/>}
+      {districtTab === 'stats' && (
+        d.meals > 0
+          ? <DistrictMiniStats d={d}/>
+          : <StatsEmpty d={d} onJumpToScripts={() => setDistrictTab('scripts')}/>
+      )}
+    </div>
+  );
+}
+
+function EmptyState({ icon = 'database', title, body, primary, primaryIcon, onPrimary, secondary, onSecondary, footer }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '40px 8px 24px' }}>
+      <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'var(--color-surface-3)', display: 'grid', placeItems: 'center' }}>
+        <Icon name={icon} size={28} style={{ color: 'var(--color-text-3)' }}/>
+      </div>
+      <div style={{ fontSize: 20, fontWeight: 700, marginTop: 16, letterSpacing: '-0.01em' }}>{title}</div>
+      <div className="muted" style={{ marginTop: 6, maxWidth: 320, fontSize: 13, fontWeight: 400 }}>{body}</div>
+      {(primary || secondary) && (
+        <div style={{ marginTop: 20, display: 'flex', gap: 8 }}>
+          {primary && <Btn variant="primary" icon={primaryIcon} onClick={onPrimary}>{primary}</Btn>}
+          {secondary && <Btn variant="secondary" onClick={onSecondary}>{secondary}</Btn>}
+        </div>
+      )}
+      {footer && <div style={{ marginTop: 20, width: '100%' }}>{footer}</div>}
+    </div>
+  );
+}
+
+function RestaurantsEmpty({ d, onJumpToScripts }) {
+  return (
+    <EmptyState
+      icon="utensils"
+      title="No restaurants yet"
+      body={`${d.name} hasn't been scraped. Run the scrapers to populate the restaurant list.`}
+      primary="Open scripts"
+      primaryIcon="play"
+      onPrimary={onJumpToScripts}
+    />
+  );
+}
+
+function StatsEmpty({ d, onJumpToScripts }) {
+  return (
+    <EmptyState
+      icon="brain"
+      title="No data to chart"
+      body={`Run the macros estimator and other scripts to populate confidence stats for ${d.name}.`}
+      primary="Open scripts"
+      primaryIcon="play"
+      onPrimary={onJumpToScripts}
+    />
+  );
+}
+
+function DistrictRestaurants({ d, onOpen }) {
+  return <RestaurantList title={`${d.name} · restaurants`} restaurants={RESTAURANTS} onOpen={onOpen}/>;
+}
+
+function Chip({ active, onClick, children }) {
+  return (
+    <button className={`chip ${active?'chip--active':''}`} onClick={onClick}>{children}</button>
+  );
+}
+
+function DistrictScripts({ d, onOpen, showToast }) {
+  // Derive per-district script state — covered districts use the canned SCRIPTS;
+  // empty/active districts show idle scripts with optional running first step.
+  const scripts = useMemo(() => {
+    if (d.status === 'covered') return SCRIPTS;
+    if (d.status === 'active') {
+      return SCRIPTS.map((s, i) => ({
+        ...s,
+        status: i === 0 ? 'running' : 'idle',
+        lastRun: i === 0 ? 'running now' : 'never',
+        duration: i === 0 ? '~ 4 min' : '—',
+        coverage: i === 0 ? 42 : 0,
+      }));
+    }
+    // status === 'none'
+    return SCRIPTS.map(s => ({ ...s, status: 'idle', lastRun: 'never', duration: '—', coverage: 0 }));
+  }, [d.status]);
+
+  // Local "running this script" state for the play buttons on each card
+  const [runningId, setRunningId] = useState(null);
+  const runOne = (s) => {
+    setRunningId(s.id);
+    fetch(`/admin/api/scripts/${s.id}/run`, { method: 'POST' })
+      .then(r => r.json())
+      .then(data => showToast({ text: data.message || `${s.name} started for ${d.name}` }))
+      .catch(() => showToast({ text: `Failed to start ${s.name}` }))
+      .finally(() => setTimeout(() => setRunningId(null), 2400));
+  };
+
+  const headerStatus = d.status === 'covered'
+    ? <Pill variant="success" dot>last sync {d.lastSync}</Pill>
+    : d.status === 'active'
+      ? <Pill variant="warn" dot>pipeline running</Pill>
+      : <Pill dot>never run</Pill>;
+
+  const totalCost = d.status === 'covered' ? '$54' : '$48 — $62';
+  const totalDur  = d.status === 'covered' ? '~ 45 min' : '~ 38 min';
+  const runAllLabel = d.status === 'covered'
+    ? 'Re-run all scripts'
+    : d.status === 'active'
+      ? 'Cancel pipeline'
+      : 'Start full pipeline';
+  const runAllIcon = d.status === 'active' ? 'pause' : 'refresh';
+  const runAllVariant = d.status === 'active' ? 'secondary' : 'primary';
+
+  return (
+    <>
+      <div className="section">
+        <div className="section__head">
+          <span className="section__title">Pipeline · {d.name}</span>
+          {headerStatus}
+        </div>
+        <div className="scards">
+          {scripts.map(s => (
+            <ScriptCard
+              key={s.id}
+              s={s}
+              onOpen={() => onOpen(s.id)}
+              running={runningId === s.id || s.status === 'running'}
+              onRun={(e) => { e.stopPropagation(); runOne(s); }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="section">
+        <Btn variant={runAllVariant} size="lg" block icon={runAllIcon} onClick={() => {
+          showToast({ text: d.status === 'covered'
+            ? `Re-running 6 scripts for ${d.name}…`
+            : d.status === 'active'
+              ? `Cancelled pipeline for ${d.name}`
+              : `Started full pipeline for ${d.name}…` });
+        }}>{runAllLabel}</Btn>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontSize: 12, color: 'var(--color-text-2)' }}>
+          <span>Estimated cost: <strong className="num" style={{ color: 'var(--color-text)' }}>{totalCost}</strong></span>
+          <span>{totalDur}</span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ScriptCard({ s, onOpen, running, onRun }) {
+  const statusMap = {
+    success: { v: 'success', label: 'OK' },
+    warning: { v: 'warn',    label: 'partial' },
+    error:   { v: 'danger',  label: 'failed' },
+    running: { v: 'warn',    label: 'running' },
+    idle:    { v: 'default', label: 'never run' },
+  };
+  const st = statusMap[s.status] || statusMap.success;
+  const showRunBtn = !running;
+  return (
+    <div className="scard" onClick={onOpen}>
+      <div className="scard__icon"><Icon name={s.icon} size={18}/></div>
+      <div>
+        <div className="scard__name">{s.name}</div>
+        <div className="scard__meta">
+          <span>{s.lastRun}</span>
+          {s.coverage > 0 && (
+            <>
+              <span>·</span>
+              <span className="num">{s.coverage}% cov.</span>
+            </>
+          )}
+          {s.duration && s.duration !== '—' && (
+            <>
+              <span>·</span>
+              <span className="num">{s.duration}</span>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="scard__right">
+        {st.v === 'default'
+          ? <Pill dot>{st.label}</Pill>
+          : <Pill variant={st.v} dot>{st.label}</Pill>}
+        <button
+          className="scard__run"
+          onClick={onRun}
+          title={running ? 'Running…' : 'Run this script'}
+        >
+          <Icon name={running ? 'pause' : 'play'} size={14}/>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function DistrictMiniStats({ d }) {
+  return (
+    <>
+      <div className="section">
+        <div className="section__title">Confidence distribution</div>
+        <div style={{ padding: 14, border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)' }}>
+          {[
+            { label: 'High (>0.85)', count: 1820, color: 'var(--color-accent)' },
+            { label: 'Medium (0.7–0.85)', count: 614, color: '#0080ff' },
+            { label: 'Low (<0.7)', count: 329, color: 'var(--color-rating-star)' },
+          ].map((row, i) => (
+            <div key={i} style={{ marginBottom: i < 2 ? 10 : 0 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 4 }}>
+                <span>{row.label}</span>
+                <span className="num" style={{ fontWeight: 600 }}>{row.count.toLocaleString('en-US')}</span>
+              </div>
+              <div className="progress"><div className="progress__fill" style={{ width: `${(row.count/2763)*100}%`, background: row.color }}/></div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="section">
+        <div className="section__title">Latest runs</div>
+        <div>
+          {[
+            { name: 'Macros Estimator', when: '2h ago', dur: '23m 12s', ok: true },
+            { name: 'Google Place', when: '5h ago', dur: '4m 12s', ok: true },
+            { name: 'Wolt Menu', when: '5h ago', dur: '11m 04s', ok: true },
+            { name: 'Restaurant Website', when: '1d ago', dur: 'failed', ok: false },
+          ].map((r,i) => (
+            <div key={i} className="runrow">
+              <span style={{ color: r.ok ? 'var(--color-accent)' : 'var(--color-rating-star)' }}>
+                <Icon name={r.ok ? 'check-circle' : 'x-circle'} size={14}/>
+              </span>
+              <span style={{ fontWeight: 500 }}>{r.name}</span>
+              <span className="runrow__time">{r.when}</span>
+              <span className="runrow__dur">{r.dur}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ─── Floating district hover card on map ─── */
+function DistrictHoverCard({ data, onOpen }) {
+  const show = !!data;
+  return (
+    <div className={`mapcard ${show?'mapcard--show':''}`}>
+      {data && (
+        <>
+          <div className="mapcard__head">
+            <div>
+              <div className="mapcard__name">{data.name}</div>
+              <div style={{ marginTop: 4 }}>
+                {data.status === 'covered' && <Pill variant="success" dot>covered</Pill>}
+                {data.status === 'active' && <Pill variant="warn" dot>scraping…</Pill>}
+                {data.status === 'none' && <Pill dot>no data</Pill>}
+              </div>
+            </div>
+          </div>
+          {data.status === 'covered' ? (
+            <>
+              <div className="mapcard__stats">
+                <div>
+                  <div className="mapcard__stat__v num">{data.restaurants}</div>
+                  <div className="mapcard__stat__l">Restaurants</div>
+                </div>
+                <div>
+                  <div className="mapcard__stat__v num">{data.meals.toLocaleString('en-US')}</div>
+                  <div className="mapcard__stat__l">Meals</div>
+                </div>
+                <div>
+                  <div className="mapcard__stat__v num">{data.coverage}%</div>
+                  <div className="mapcard__stat__l">Coverage</div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <Btn variant="primary" block icon="arrow-up-right" onClick={onOpen}>Open</Btn>
+                <Btn variant="secondary" icon="refresh">Re-sync</Btn>
+              </div>
+            </>
+          ) : data.status === 'active' ? (
+            <>
+              <div style={{ fontSize: 13, color: 'var(--color-text-2)', margin: '4px 0 10px' }}>
+                Initial scrape running. ETA ~38 min.
+              </div>
+              <div className="progress" style={{ marginBottom: 10 }}><div className="progress__fill" style={{ width: '42%', background: 'var(--color-rating-star)' }}/></div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--color-text-3)', marginBottom: 12 }}>
+                <span>Google Place Scraper · step 2/6</span>
+                <span className="num">42%</span>
+              </div>
+              <Btn variant="secondary" block icon="eye" onClick={onOpen}>View progress</Btn>
+            </>
+          ) : (
+            <>
+              <div style={{ fontSize: 13, color: 'var(--color-text-2)', margin: '4px 0 12px' }}>
+                Not yet covered. Start the scraping pipeline to add it.
+              </div>
+              <Btn variant="primary" block icon="play" onClick={onOpen}>Start scraping</Btn>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ─── Activity feed (floating, collapsible) ─── */
+function ActivityFeed({ open, onToggle }) {
+  return (
+    <div className={`feed ${!open?'feed--collapsed':''}`}>
+      <div className="feed__head" onClick={onToggle}>
+        <span className="feed__title">
+          <span className="feed__dot"/>
+          Activity
+          <span className="muted" style={{ fontWeight: 500 }}>· last 24h</span>
+        </span>
+        <Icon name={open ? 'chevron-down' : 'chevron-down'} size={14} style={{ transform: open ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 200ms ease', color: 'var(--color-text-3)' }}/>
+      </div>
+      <div className="feed__list">
+        {ACTIVITY.map((it, i) => (
+          <div key={i} className="feed__item">
+            <span className={`feed__item__dot feed__item__dot--${it.kind}`}/>
+            <div>
+              <div className="feed__item__text">{it.text}</div>
+              <div className="feed__item__sub">{it.sub}</div>
+            </div>
+            <span className="feed__item__time">{it.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Restaurant detail overlay ─── */
+function RestaurantDetail({ restaurantId, onClose }) {
+  const r = RESTAURANTS.find(x => x.id === restaurantId);
+  const open = !!r;
+  // Keep last r alive during exit anim
+  const [cache, setCache] = useState(r);
+  useEffect(() => { if (r) setCache(r); }, [r]);
+  const data = r || cache;
+  if (!data) return <div className="detail detail--narrow"></div>;
+  return (
+    <div className={`detail detail--narrow ${open?'detail--open':''}`}>
+      <div className="detail__head">
+        <span className="detail__title">
+          <Icon name="utensils" size={18}/>
+          Restaurant
+        </span>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Btn variant="secondary" icon="external">Open in app</Btn>
+          <button className="detail__close" onClick={onClose}><Icon name="x" size={18}/></button>
+        </div>
+      </div>
+      <div className="detail__body">
+        <div className="rdetail__hero">
+          <div className="rdetail__hero__img" style={{ background: `linear-gradient(135deg, oklch(0.85 0.06 ${(data.id.charCodeAt(1)*7)%360}), oklch(0.65 0.10 ${(data.id.charCodeAt(1)*11)%360}))` }}/>
+          <div>
+            <div className="rdetail__hero__name">{data.name}</div>
+            <div className="rdetail__hero__sub">{data.cuisine} · {data.price} · {data.address}</div>
+            <div className="rdetail__hero__meta">
+              {data.open ? <Pill variant="success" dot>Open · {data.hours}</Pill> : <Pill dot>Closed</Pill>}
+              <Pill variant="info">
+                <Icon name="star" size={11}/>
+                <span className="num">{data.rating}</span>
+                <span style={{ opacity: 0.7 }} className="num">({data.reviews})</span>
+              </Pill>
+              {data.confidence < 0.7
+                ? <Pill variant="warn">low confidence</Pill>
+                : <Pill variant="success">conf. {Math.round(data.confidence*100)}%</Pill>}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="h-section">Data sources</h3>
+          <div className="kvgrid">
+            <div className="kv"><span className="kv__l">Working hours</span><span className="kv__v">{data.hours}</span></div>
+            <div className="kv"><span className="kv__l">Address</span><span className="kv__v">{data.address}</span></div>
+            <div className="kv"><span className="kv__l">Price range</span><span className="kv__v">{data.price}</span></div>
+            <div className="kv"><span className="kv__l">Rating</span><span className="kv__v">{data.rating} ({data.reviews} reviews)</span></div>
+            <div className="kv"><span className="kv__l">Coordinates</span><span className="kv__v mono">52.520, 13.405</span></div>
+            <div className="kv"><span className="kv__l">Phone</span><span className="kv__v mono">+49 30 24 24 39 78</span></div>
+            <div className="kv"><span className="kv__l">Wolt slug</span><span className="kv__v mono">{data.name.toLowerCase().replace(/[^a-z]/g,'-').replace(/-+/g,'-').slice(0,28)}</span></div>
+            <div className="kv"><span className="kv__l">Last refresh</span><span className="kv__v">{data.updated}</span></div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="h-section">
+            <span>Meals · {data.meals}</span>
+            <button className="btn btn--ghost" style={{ height: 22, padding: '0 6px', fontSize: 12 }}>View all</button>
+          </h3>
+          <div className="mealgrid">
+            {MEALS_SAMPLE.map((m,i) => (
+              <div key={i} className="meal">
+                <div className="meal__img" style={{ background: m.photo }}/>
+                <div>
+                  <div className="meal__name">{m.name}</div>
+                  <div className="meal__macros">
+                    <span className="macro macro--cal">{m.kcal} kcal</span>
+                    <span className="macro macro--p">P {m.p}g</span>
+                    <span className="macro macro--f">F {m.f}g</span>
+                    <span className="macro macro--c">C {m.c}g</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="h-section">Pipeline runs · last 4</h3>
+          <div>
+            {['2h ago · Macros Estimator', '5h ago · Google Place', '5h ago · Wolt Menu', '1d ago · Restaurant Website'].map((t,i) => {
+              const ok = i !== 3;
+              return (
+                <div key={i} className="runrow">
+                  <span style={{ color: ok ? 'var(--color-accent)' : 'var(--color-rating-star)' }}>
+                    <Icon name={ok ? 'check-circle' : 'x-circle'} size={14}/>
+                  </span>
+                  <span>{t}</span>
+                  <span className="runrow__time">{ok ? `+${Math.floor(Math.random()*32)+4} fields` : '502 Bad Gateway'}</span>
+                  <span className="runrow__dur">{ok ? `${Math.floor(Math.random()*8)+1}m ${(Math.random()*60).toFixed(0)}s` : 'retry'}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Script detail overlay ─── */
+function ScriptDetail({ scriptId, district, onClose, showToast }) {
+  const s = SCRIPTS.find(x => x.id === scriptId);
+  const open = !!s;
+  const [cache, setCache] = useState(s);
+  useEffect(() => { if (s) setCache(s); }, [s]);
+  const data = s || cache;
+  const [progress, setProgress] = useState(0);
+  const [running, setRunning] = useState(false);
+
+  // Per-script interactive checklist state — which collected fields are enabled
+  const [checked, setChecked] = useState({});
+  const items = data?.includes || [];
+  const itemsChecked = checked[data?.id] || items.map(() => true);
+  const toggleItem = (i) => {
+    if (!data) return;
+    setChecked(prev => {
+      const arr = prev[data.id] ? [...prev[data.id]] : items.map(() => true);
+      arr[i] = !arr[i];
+      return { ...prev, [data.id]: arr };
+    });
+  };
+  const enabledCount = itemsChecked.filter(Boolean).length;
+
+  // Trigger script via API, animate progress bar locally
+  const runIt = () => {
+    if (!data) return;
+    setRunning(true); setProgress(0);
+    fetch(`/admin/api/scripts/${data.id}/run`, { method: 'POST' })
+      .then(r => r.json())
+      .then(res => showToast({ text: res.message || `${data.name} started for ${district?.name || 'Berlin'}` }))
+      .catch(() => showToast({ text: `Failed to start ${data.name}` }));
+    let p = 0;
+    const interval = setInterval(() => {
+      p += Math.random() * 8 + 3;
+      if (p >= 100) { p = 100; clearInterval(interval); setTimeout(() => setRunning(false), 600); }
+      setProgress(p);
+    }, 220);
+  };
+
+  if (!data) return <div className="detail detail--narrow"></div>;
+
+  return (
+    <div className={`detail detail--narrow ${open?'detail--open':''}`}>
+      <div className="detail__head">
+        <span className="detail__title">
+          <Icon name={data.icon} size={18}/>
+          Script
+        </span>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Btn variant="secondary" icon="settings">Configure</Btn>
+          <button className="detail__close" onClick={onClose}><Icon name="x" size={18}/></button>
+        </div>
+      </div>
+      <div className="detail__body">
+        <div className="sdetail__hero">
+          <div className="sdetail__icon"><Icon name={data.icon} size={26}/></div>
+          <div>
+            <div className="sdetail__name">{data.name}</div>
+            <div className="sdetail__desc">{data.desc}</div>
+            <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
+              <Pill variant={data.status === 'success' ? 'success' : data.status === 'warning' ? 'warn' : 'danger'} dot>
+                {data.status === 'success' ? 'healthy' : data.status === 'warning' ? 'partial' : 'failing'}
+              </Pill>
+              <Pill>scope: {district?.name || 'Berlin'}</Pill>
+            </div>
+          </div>
+        </div>
+
+        <div className="sdetail__bigrow">
+          <div className="sdetail__cell">
+            <span className="sdetail__cell__l">Last run</span>
+            <span className="sdetail__cell__v">{data.lastRun}</span>
+          </div>
+          <div className="sdetail__cell">
+            <span className="sdetail__cell__l">Duration</span>
+            <span className="sdetail__cell__v num">{data.duration}</span>
+          </div>
+          <div className="sdetail__cell">
+            <span className="sdetail__cell__l">Coverage</span>
+            <span className="sdetail__cell__v num">{data.coverage}%</span>
+          </div>
+          <div className="sdetail__cell">
+            <span className="sdetail__cell__l">Cost / run</span>
+            <span className="sdetail__cell__v num">{data.cost}</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="h-section">
+            <span>What it collects</span>
+            <span className="muted" style={{ fontWeight: 500, fontSize: 'var(--fs-secondary)' }}>{enabledCount} / {items.length}</span>
+          </h3>
+          <div className="checklist">
+            {items.map((it, i) => {
+              const on = itemsChecked[i];
+              return (
+                <label key={i} className={`checklist__item ${on ? '' : 'checklist__item--off'}`}>
+                  <input
+                    type="checkbox"
+                    checked={on}
+                    onChange={() => toggleItem(i)}
+                    className="checklist__input"
+                  />
+                  <span className={`check ${on ? '' : 'check--off'}`}>
+                    {on && <Icon name="check" size={11}/>}
+                  </span>
+                  <span style={{ flex: 1 }}>{it}</span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="h-section">Recent runs</h3>
+          <div>
+            {Array.from({ length: 5 }).map((_, i) => {
+              const failed = (data.status === 'error' && i === 0);
+              const ago = ['2h', '12h', '1d', '2d', '3d'][i];
+              return (
+                <div key={i} className="runrow">
+                  <span style={{ color: failed ? 'var(--color-rating-star)' : 'var(--color-accent)' }}>
+                    <Icon name={failed ? 'x-circle' : 'check-circle'} size={14}/>
+                  </span>
+                  <span>{failed ? 'Failed — 502 Bad Gateway' : `${Math.floor(Math.random()*30)+10} records updated`}</span>
+                  <span className="runrow__time">{ago} ago</span>
+                  <span className="runrow__dur num">{failed ? '—' : `${Math.floor(Math.random()*10)+2}m ${(Math.random()*59).toFixed(0)}s`}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky bottom action bar */}
+      <div className="drawer">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, marginBottom: 10 }}>
+          <div>
+            <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600 }}>Estimated cost</div>
+            <div className="num" style={{ fontSize: 22, fontWeight: 700 }}>{data.cost}</div>
+          </div>
+          <div>
+            <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, textAlign: 'right' }}>~ Duration</div>
+            <div className="num" style={{ fontSize: 14, fontWeight: 600 }}>{data.duration}</div>
+          </div>
+        </div>
+        {running && (
+          <div style={{ marginBottom: 10 }}>
+            <div className="progress"><div className="progress__fill" style={{ width: `${progress}%` }}/></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginTop: 4, color: 'var(--color-text-2)' }}>
+              <span>Running…</span>
+              <span className="num">{Math.floor(progress)}%</span>
+            </div>
+          </div>
+        )}
+        <Btn variant="primary" size="lg" block icon={running ? 'pause' : 'refresh'} onClick={runIt} disabled={running}>
+          {running ? 'Running…' : `Re-run ${data.name}`}
+        </Btn>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);

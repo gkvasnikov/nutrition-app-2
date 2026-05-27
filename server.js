@@ -3,8 +3,11 @@ import express from 'express'
 import compression from 'compression'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import fs from 'fs'
 import Anthropic from '@anthropic-ai/sdk'
 import pg from 'pg'
+import session from 'express-session'
+import { timingSafeEqual, createHash } from 'crypto'
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -12,6 +15,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 app.use(compression())   // gzip all responses — reduces JSON payload ~70%
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'dev-secret-change-in-production',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 8 * 60 * 60 * 1000,  // 8 hours
+  },
+}))
 app.use(express.static(path.join(__dirname, 'frontend/dist')))
 
 // ── PostgreSQL pool ───────────────────────────────────────────────────────────
@@ -436,6 +451,338 @@ app.get('/api/image-proxy', async (req, res) => {
     res.status(500).send('Error fetching image')
   }
 })
+
+
+// ── Admin panel ───────────────────────────────────────────────────────────────
+
+// Berlin borough bounding boxes [swLat, swLng, neLat, neLng]
+const BERLIN_DISTRICTS = [
+  { id: 'mitte',    name: 'Mitte',                      sw: [52.495, 13.349], ne: [52.545, 13.432] },
+  { id: 'fhain',   name: 'Friedrichshain-Kreuzberg',   sw: [52.476, 13.398], ne: [52.524, 13.482] },
+  { id: 'pankow',  name: 'Pankow',                     sw: [52.527, 13.364], ne: [52.640, 13.481] },
+  { id: 'cwilm',   name: 'Charlottenburg-Wilmersdorf', sw: [52.464, 13.268], ne: [52.537, 13.372] },
+  { id: 'spandau', name: 'Spandau',                    sw: [52.487, 13.116], ne: [52.583, 13.290] },
+  { id: 'steglitz',name: 'Steglitz-Zehlendorf',        sw: [52.382, 13.170], ne: [52.468, 13.342] },
+  { id: 'tempel',  name: 'Tempelhof-Schöneberg',       sw: [52.440, 13.328], ne: [52.499, 13.440] },
+  { id: 'neuk',    name: 'Neukölln',                   sw: [52.437, 13.398], ne: [52.499, 13.491] },
+  { id: 'treptow', name: 'Treptow-Köpenick',           sw: [52.380, 13.440], ne: [52.489, 13.681] },
+  { id: 'marzahn', name: 'Marzahn-Hellersdorf',        sw: [52.489, 13.527], ne: [52.570, 13.660] },
+  { id: 'lich',    name: 'Lichtenberg',                sw: [52.479, 13.428], ne: [52.570, 13.572] },
+  { id: 'rein',    name: 'Reinickendorf',               sw: [52.527, 13.257], ne: [52.641, 13.422] },
+]
+
+// ── Admin auth helpers ────────────────────────────────────────────────────────
+
+function safeCompare(a, b) {
+  // Hash both to equalise length before timingSafeEqual
+  const ha = createHash('sha256').update(a).digest()
+  const hb = createHash('sha256').update(b).digest()
+  return timingSafeEqual(ha, hb)
+}
+
+// Simple in-memory rate limiter for login endpoint
+const _loginAttempts = new Map()  // ip → { count, resetAt }
+const RATE_LIMIT_MAX    = 10
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000  // 15 min
+
+function checkLoginRateLimit(ip) {
+  const now = Date.now()
+  let rec = _loginAttempts.get(ip) || { count: 0, resetAt: now + RATE_LIMIT_WINDOW }
+  if (now > rec.resetAt) rec = { count: 0, resetAt: now + RATE_LIMIT_WINDOW }
+  rec.count++
+  _loginAttempts.set(ip, rec)
+  return rec.count <= RATE_LIMIT_MAX
+}
+
+function requireAdminAuth(req, res, next) {
+  if (req.session?.adminAuthenticated) return next()
+  if (req.path.startsWith('/admin/api')) return res.status(401).json({ error: 'Unauthorized' })
+  res.redirect('/admin/login')
+}
+
+// ── Admin login ───────────────────────────────────────────────────────────────
+
+const ADMIN_LOGIN_HTML = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nutrition Admin · Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f8f8f8;color:#212121;display:grid;place-items:center;min-height:100vh;font-size:14px}
+.card{background:#fff;border:1px solid #ebebeb;border-radius:16px;padding:40px;width:100%;max-width:380px;box-shadow:0 8px 24px -4px rgba(0,0,0,.08)}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:32px}
+.brand__mark{width:32px;height:32px;background:#212121;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0}
+.brand__name{font-weight:700;font-size:15px}
+.brand__sub{color:#9a9a9a;font-weight:500}
+h1{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+p{color:#717171;font-size:13px;margin-bottom:28px}
+label{display:block;font-size:12px;font-weight:600;color:#717171;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+input{width:100%;height:40px;border:1px solid #ebebeb;border-radius:8px;padding:0 12px;font-family:inherit;font-size:14px;color:#212121;background:#f8f8f8;outline:none;transition:border-color .15s}
+input:focus{border-color:#212121;background:#fff}
+.field{margin-bottom:16px}
+.error{background:#fff4eb;border:1px solid #fde8cc;color:#b04a00;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:16px;display:none}
+.error.show{display:block}
+button{width:100%;height:40px;background:#212121;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
+button:hover{opacity:.85}
+button:active{opacity:.7}
+button:disabled{opacity:.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">
+    <div class="brand__mark">N</div>
+    <span class="brand__name">Nutrition <span class="brand__sub">/ Admin</span></span>
+  </div>
+  <h1>Sign in</h1>
+  <p>Admin access only.</p>
+  <form method="POST" action="/admin/login" id="form">
+    <div class="error" id="err">{{ERROR}}</div>
+    <div class="field"><label>Username</label><input type="text" name="username" autocomplete="username" required autofocus/></div>
+    <div class="field"><label>Password</label><input type="password" name="password" autocomplete="current-password" required/></div>
+    <button type="submit" id="btn">Sign in</button>
+  </form>
+  <script>
+    const err = document.getElementById('err');
+    if (err.textContent.trim()) err.classList.add('show');
+    document.getElementById('form').addEventListener('submit', () => {
+      document.getElementById('btn').disabled = true;
+      document.getElementById('btn').textContent = 'Signing in…';
+    });
+  </script>
+</div>
+</body>
+</html>`
+
+app.get('/admin/login', (req, res) => {
+  if (req.session?.adminAuthenticated) return res.redirect('/admin')
+  res.send(ADMIN_LOGIN_HTML.replace('{{ERROR}}', ''))
+})
+
+app.post('/admin/login', (req, res) => {
+  const ip = req.ip || req.socket.remoteAddress || 'unknown'
+  if (!checkLoginRateLimit(ip)) {
+    return res.status(429).send(ADMIN_LOGIN_HTML.replace('{{ERROR}}', 'Too many attempts. Try again in 15 minutes.'))
+  }
+
+  const { username, password } = req.body
+  const adminUser = process.env.ADMIN_USER || ''
+  const adminPass = process.env.ADMIN_PASS || ''
+
+  if (!adminUser || !adminPass) {
+    return res.status(500).send(ADMIN_LOGIN_HTML.replace('{{ERROR}}', 'Admin credentials not configured on server.'))
+  }
+
+  const userMatch = safeCompare(username || '', adminUser)
+  const passMatch = safeCompare(password || '', adminPass)
+
+  if (!userMatch || !passMatch) {
+    return res.status(401).send(ADMIN_LOGIN_HTML.replace('{{ERROR}}', 'Invalid username or password.'))
+  }
+
+  req.session.adminAuthenticated = true
+  req.session.save(() => res.redirect('/admin'))
+})
+
+app.post('/admin/logout', requireAdminAuth, (req, res) => {
+  req.session.destroy(() => res.redirect('/admin/login'))
+})
+
+// ── Admin API endpoints (all require auth) ────────────────────────────────────
+
+app.get('/admin/api/stats', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        COUNT(DISTINCT r.id)  AS total_restaurants,
+        COUNT(m.id)           AS total_meals,
+        COUNT(m.id) FILTER (WHERE m.confidence = 'high')   AS high_conf,
+        COUNT(m.id) FILTER (WHERE m.confidence = 'medium') AS med_conf,
+        COUNT(m.id) FILTER (WHERE m.confidence = 'low' OR m.confidence IS NULL OR m.confidence NOT IN ('high','medium')) AS low_conf
+      FROM restaurants r
+      JOIN menu_items m ON m.restaurant_id = r.id
+        AND m.source = 'wolt_menu'
+        AND m.calories IS NOT NULL
+        AND (m.category IS NULL OR m.category != 'drink')
+    `)
+    res.json(rows[0])
+  } catch (err) {
+    console.error('/admin/api/stats error:', err.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+})
+
+app.get('/admin/api/districts', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try { res.json(await fetchAdminDistricts()) }
+  catch (err) { console.error('/admin/api/districts error:', err.message); res.status(500).json({ error: 'Database error' }) }
+})
+
+app.get('/admin/api/restaurants', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try { res.json(await fetchAdminRestaurants()) }
+  catch (err) { console.error('/admin/api/restaurants error:', err.message); res.status(500).json({ error: 'Database error' }) }
+})
+
+app.get('/admin/api/restaurants/:id', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const [rRes, mRes] = await Promise.all([
+      pool.query('SELECT * FROM restaurants WHERE id = $1', [req.params.id]),
+      pool.query(`
+        SELECT id, name, calories, protein, fat, carbs, price, image_url, confidence
+        FROM menu_items
+        WHERE restaurant_id = $1
+          AND source = 'wolt_menu'
+          AND calories IS NOT NULL
+          AND (category IS NULL OR category != 'drink')
+        ORDER BY
+          CASE confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+          calories DESC NULLS LAST
+        LIMIT 20
+      `, [req.params.id]),
+    ])
+
+    if (!rRes.rows.length) return res.status(404).json({ error: 'Not found' })
+    const r = rRes.rows[0]
+    const PRICE_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+    res.json({
+      restaurant: {
+        id:       r.id,
+        name:     r.name,
+        address:  r.address || '',
+        lat:      r.lat,
+        lng:      r.lon,
+        rating:   r.rating,
+        reviews:  r.reviews_count,
+        price:    PRICE_MAP[r.price_level] || '—',
+        hours:    getHoursString(r.opening_hours) || '—',
+        open:     getIsOpen(r.opening_hours),
+        woltSlug: r.wolt_slug || null,
+      },
+      meals: mRes.rows.map(m => ({
+        name:   m.name,
+        kcal:   m.calories,
+        p:      m.protein,
+        f:      m.fat,
+        c:      m.carbs,
+        price:  m.price ? `€${parseFloat(m.price).toFixed(2)}` : null,
+        photo:  m.image_url || null,
+      })),
+    })
+  } catch (err) {
+    console.error('/admin/api/restaurants/:id error:', err.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+})
+
+// Stub: run a scraping script — real scripts can be wired here later
+app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
+  console.log(`[admin] Script run requested: ${req.params.id}`)
+  res.json({ status: 'started', scriptId: req.params.id, message: 'Script stub — not yet connected to a real process.' })
+})
+
+// ── Admin main page (dynamic — injects real DB data) ─────────────────────────
+
+const _adminPanelPath = path.join(__dirname, 'admin', 'Admin Panel.html')
+
+async function fetchAdminDistricts() {
+  const PRICE_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+  return Promise.all(BERLIN_DISTRICTS.map(async (d) => {
+    const { rows } = await pool.query(`
+      SELECT
+        COUNT(DISTINCT r.id) AS restaurants,
+        COUNT(m.id)          AS meals,
+        COUNT(m.id) FILTER (WHERE m.confidence = 'high') AS high_conf
+      FROM restaurants r
+      LEFT JOIN menu_items m ON m.restaurant_id = r.id
+        AND m.source = 'wolt_menu'
+        AND m.calories IS NOT NULL
+        AND (m.category IS NULL OR m.category != 'drink')
+      WHERE r.lat BETWEEN $1 AND $3
+        AND r.lon BETWEEN $2 AND $4
+    `, [d.sw[0], d.sw[1], d.ne[0], d.ne[1]])
+    const r = rows[0]
+    const totalMeals  = parseInt(r.meals) || 0
+    const restaurants = parseInt(r.restaurants) || 0
+    return {
+      id: d.id, name: d.name,
+      status:      restaurants > 0 ? 'covered' : 'none',
+      restaurants, meals: totalMeals,
+      coverage:    totalMeals > 0 ? Math.round((parseInt(r.high_conf) / totalMeals) * 100) : 0,
+      lastSync:    null, cost: null,
+    }
+  }))
+}
+
+async function fetchAdminRestaurants() {
+  const PRICE_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+  const { rows } = await pool.query(`
+    SELECT
+      r.id, r.name, r.address, r.rating, r.reviews_count,
+      r.price_level, r.opening_hours, r.wolt_slug,
+      COUNT(m.id) AS meals,
+      COUNT(m.id) FILTER (WHERE m.image_url IS NOT NULL AND m.image_url != '') AS photos_count,
+      AVG(CASE m.confidence WHEN 'high' THEN 1.0 WHEN 'medium' THEN 0.75 ELSE 0.5 END) AS avg_confidence
+    FROM restaurants r
+    LEFT JOIN menu_items m ON m.restaurant_id = r.id
+      AND m.source = 'wolt_menu'
+      AND m.calories IS NOT NULL
+      AND (m.category IS NULL OR m.category != 'drink')
+    GROUP BY r.id
+    ORDER BY r.reviews_count DESC NULLS LAST
+    LIMIT 500
+  `)
+  return rows.map(r => ({
+    id:         String(r.id),  // charCodeAt used in app.jsx requires string
+    name:       r.name,
+    cuisine:    null,
+    meals:      parseInt(r.meals) || 0,
+    confidence: r.avg_confidence ? parseFloat(parseFloat(r.avg_confidence).toFixed(2)) : 0,
+    open:       getIsOpen(r.opening_hours),
+    photos:     parseInt(r.photos_count) > 0,
+    partner:    false,
+    rating:     r.rating,
+    reviews:    r.reviews_count,
+    price:      PRICE_MAP[r.price_level] || '—',
+    address:    r.address || '',
+    hours:      getHoursString(r.opening_hours) || '—',
+    updated:    null,
+    woltSlug:   r.wolt_slug || null,
+  }))
+}
+
+app.get('/admin', requireAdminAuth, async (req, res) => {
+  if (!pool) {
+    return res.status(503).send('<h1>Database not configured</h1>')
+  }
+  try {
+    const [districts, restaurants] = await Promise.all([
+      fetchAdminDistricts(),
+      fetchAdminRestaurants(),
+    ])
+
+    const serverData = JSON.stringify({ DISTRICTS: districts, RESTAURANTS: restaurants })
+      .replace(/<\/script>/gi, '<\\/script>')
+
+    const html = fs.readFileSync(_adminPanelPath, 'utf-8')
+      .replace('<!-- __SERVER_DATA__ -->', `<script>window.__SERVER_DATA__ = ${serverData};</script>`)
+
+    res.send(html)
+  } catch (err) {
+    console.error('/admin error:', err.message)
+    res.status(500).send('<h1>Error loading admin panel</h1><p>' + err.message + '</p>')
+  }
+})
+
+// Admin static assets (data.js, app.jsx, styles.css, etc.) — auth-gated
+app.use('/admin', requireAdminAuth, express.static(path.join(__dirname, 'admin')))
 
 
 // ── SPA fallback ──────────────────────────────────────────────────────────────
