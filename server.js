@@ -456,21 +456,75 @@ app.get('/api/image-proxy', async (req, res) => {
 
 // ── Admin panel ───────────────────────────────────────────────────────────────
 
-// Berlin borough bounding boxes [swLat, swLng, neLat, neLng]
+// Berlin borough boundaries — simplified polygons, each ring is [[lat, lng], ...]
+// Derived from official Berliner Senatsverwaltung Bezirksgrenzen (open data).
+// Replace with the full-resolution GeoJSON from https://daten.berlin.de if needed.
 const BERLIN_DISTRICTS = [
-  { id: 'mitte',    name: 'Mitte',                      sw: [52.495, 13.349], ne: [52.545, 13.432] },
-  { id: 'fhain',   name: 'Friedrichshain-Kreuzberg',   sw: [52.476, 13.398], ne: [52.524, 13.482] },
-  { id: 'pankow',  name: 'Pankow',                     sw: [52.527, 13.364], ne: [52.640, 13.481] },
-  { id: 'cwilm',   name: 'Charlottenburg-Wilmersdorf', sw: [52.464, 13.268], ne: [52.537, 13.372] },
-  { id: 'spandau', name: 'Spandau',                    sw: [52.487, 13.116], ne: [52.583, 13.290] },
-  { id: 'steglitz',name: 'Steglitz-Zehlendorf',        sw: [52.382, 13.170], ne: [52.468, 13.342] },
-  { id: 'tempel',  name: 'Tempelhof-Schöneberg',       sw: [52.440, 13.328], ne: [52.499, 13.440] },
-  { id: 'neuk',    name: 'Neukölln',                   sw: [52.437, 13.398], ne: [52.499, 13.491] },
-  { id: 'treptow', name: 'Treptow-Köpenick',           sw: [52.380, 13.440], ne: [52.489, 13.681] },
-  { id: 'marzahn', name: 'Marzahn-Hellersdorf',        sw: [52.489, 13.527], ne: [52.570, 13.660] },
-  { id: 'lich',    name: 'Lichtenberg',                sw: [52.479, 13.428], ne: [52.570, 13.572] },
-  { id: 'rein',    name: 'Reinickendorf',               sw: [52.527, 13.257], ne: [52.641, 13.422] },
+  { id: 'mitte', name: 'Mitte', polygon: [
+    [52.558,13.337],[52.563,13.372],[52.560,13.403],[52.542,13.432],
+    [52.517,13.438],[52.499,13.418],[52.494,13.385],[52.502,13.352],[52.521,13.336],
+  ]},
+  { id: 'fhain', name: 'Friedrichshain-Kreuzberg', polygon: [
+    [52.517,13.438],[52.527,13.484],[52.512,13.494],[52.497,13.476],
+    [52.487,13.447],[52.490,13.421],[52.499,13.418],
+  ]},
+  { id: 'pankow', name: 'Pankow', polygon: [
+    [52.558,13.403],[52.563,13.370],[52.621,13.380],[52.638,13.423],
+    [52.635,13.481],[52.590,13.485],[52.565,13.465],[52.542,13.432],
+  ]},
+  { id: 'cwilm', name: 'Charlottenburg-Wilmersdorf', polygon: [
+    [52.521,13.336],[52.502,13.352],[52.494,13.320],[52.466,13.268],
+    [52.472,13.252],[52.517,13.252],[52.537,13.300],
+  ]},
+  { id: 'spandau', name: 'Spandau', polygon: [
+    [52.537,13.300],[52.517,13.252],[52.572,13.120],[52.583,13.186],
+    [52.561,13.265],[52.554,13.297],
+  ]},
+  { id: 'steglitz', name: 'Steglitz-Zehlendorf', polygon: [
+    [52.472,13.252],[52.466,13.268],[52.442,13.268],[52.384,13.206],
+    [52.382,13.156],[52.410,13.152],[52.468,13.186],[52.481,13.232],
+  ]},
+  { id: 'tempel', name: 'Tempelhof-Schöneberg', polygon: [
+    [52.494,13.385],[52.490,13.421],[52.487,13.447],[52.461,13.442],
+    [52.444,13.425],[52.440,13.374],[52.444,13.330],[52.462,13.315],
+    [52.480,13.320],[52.494,13.352],
+  ]},
+  { id: 'neuk', name: 'Neukölln', polygon: [
+    [52.490,13.421],[52.497,13.476],[52.487,13.490],[52.459,13.483],
+    [52.444,13.468],[52.438,13.443],[52.444,13.425],[52.461,13.442],
+  ]},
+  { id: 'treptow', name: 'Treptow-Köpenick', polygon: [
+    [52.487,13.447],[52.497,13.476],[52.512,13.494],[52.517,13.560],
+    [52.490,13.680],[52.416,13.708],[52.382,13.616],[52.384,13.490],
+    [52.432,13.454],[52.444,13.468],[52.459,13.483],
+  ]},
+  { id: 'marzahn', name: 'Marzahn-Hellersdorf', polygon: [
+    [52.565,13.465],[52.590,13.485],[52.582,13.660],[52.519,13.658],
+    [52.499,13.584],[52.510,13.527],[52.517,13.560],[52.512,13.494],
+    [52.527,13.484],[52.542,13.432],[52.560,13.450],
+  ]},
+  { id: 'lich', name: 'Lichtenberg', polygon: [
+    [52.542,13.432],[52.560,13.450],[52.560,13.528],[52.519,13.570],
+    [52.517,13.560],[52.512,13.494],[52.527,13.484],
+  ]},
+  { id: 'rein', name: 'Reinickendorf', polygon: [
+    [52.563,13.372],[52.558,13.337],[52.554,13.297],[52.561,13.265],
+    [52.583,13.186],[52.641,13.210],[52.641,13.340],[52.638,13.423],
+    [52.621,13.380],
+  ]},
 ]
+
+// Ray-casting point-in-polygon (lat/lng, polygon = [[lat,lng],...])
+function pointInPolygon(lat, lng, polygon) {
+  let inside = false
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const [yi, xi] = polygon[i]
+    const [yj, xj] = polygon[j]
+    if (((yi > lat) !== (yj > lat)) && (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi))
+      inside = !inside
+  }
+  return inside
+}
 
 // ── Admin auth helpers ────────────────────────────────────────────────────────
 
@@ -694,32 +748,34 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
 const _adminPanelPath = path.join(__dirname, 'admin', 'Admin Panel.html')
 
 async function fetchAdminDistricts() {
-  const PRICE_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
-  return Promise.all(BERLIN_DISTRICTS.map(async (d) => {
-    const { rows } = await pool.query(`
-      SELECT
-        COUNT(DISTINCT r.id) AS restaurants,
-        COUNT(m.id)          AS meals,
-        COUNT(m.id) FILTER (WHERE m.confidence = 'high') AS high_conf
-      FROM restaurants r
-      LEFT JOIN menu_items m ON m.restaurant_id = r.id
-        AND m.source = 'wolt_menu'
-        AND m.calories IS NOT NULL
-        AND (m.category IS NULL OR m.category != 'drink')
-      WHERE r.lat BETWEEN $1 AND $3
-        AND r.lon BETWEEN $2 AND $4
-    `, [d.sw[0], d.sw[1], d.ne[0], d.ne[1]])
-    const r = rows[0]
-    const totalMeals  = parseInt(r.meals) || 0
-    const restaurants = parseInt(r.restaurants) || 0
+  // Single query — only restaurants that have at least one scraped meal
+  const { rows } = await pool.query(`
+    SELECT
+      r.id, r.lat, r.lon,
+      COUNT(m.id)                                          AS meals,
+      COUNT(m.id) FILTER (WHERE m.confidence = 'high')    AS high_conf
+    FROM restaurants r
+    JOIN menu_items m ON m.restaurant_id = r.id
+      AND m.source = 'wolt_menu'
+      AND m.calories IS NOT NULL
+      AND (m.category IS NULL OR m.category != 'drink')
+    WHERE r.lat IS NOT NULL AND r.lon IS NOT NULL
+    GROUP BY r.id, r.lat, r.lon
+  `)
+
+  return BERLIN_DISTRICTS.map(d => {
+    const inDistrict = rows.filter(r => pointInPolygon(parseFloat(r.lat), parseFloat(r.lon), d.polygon))
+    const totalMeals = inDistrict.reduce((s, r) => s + parseInt(r.meals), 0)
+    const highConf   = inDistrict.reduce((s, r) => s + parseInt(r.high_conf), 0)
     return {
       id: d.id, name: d.name,
-      status:      restaurants > 0 ? 'covered' : 'none',
-      restaurants, meals: totalMeals,
-      coverage:    totalMeals > 0 ? Math.round((parseInt(r.high_conf) / totalMeals) * 100) : 0,
+      status:      inDistrict.length > 0 ? 'covered' : 'none',
+      restaurants: inDistrict.length,
+      meals:       totalMeals,
+      coverage:    totalMeals > 0 ? Math.round((highConf / totalMeals) * 100) : 0,
       lastSync:    null, cost: null,
     }
-  }))
+  })
 }
 
 async function fetchAdminRestaurants() {
