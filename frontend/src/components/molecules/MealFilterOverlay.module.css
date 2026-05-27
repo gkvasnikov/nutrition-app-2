@@ -170,6 +170,21 @@
   display: flex;
   flex-wrap: nowrap;
   gap: var(--spacing-8);
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--spacing-16);
+}
+
+.pillRowScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* prevent pills from shrinking — they must overflow into scroll */
+.pillRowScroll > * {
+  flex-shrink: 0;
 }
 
 /* ── Search field ───────────────────────────────────────────────────────── */
