@@ -76,8 +76,8 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
     const tick = (t) => {
       const p  = Math.min((t - t0) / dur, 1)
       const e  = 1 - (1 - p) ** 3          // ease-out cubic
-      const cLo = Math.round((fLo + (targetLo - fLo) * e) / step) * step
-      const cHi = Math.round((fHi + (targetHi - fHi) * e) / step) * step
+      const cLo = Math.round(fLo + (targetLo - fLo) * e)
+      const cHi = Math.round(fHi + (targetHi - fHi) * e)
       dispRef.current = [cLo, cHi]
       setDispLo(cLo)
       setDispHi(cHi)
