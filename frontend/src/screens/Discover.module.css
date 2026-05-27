@@ -60,7 +60,7 @@
 /* ── Map filter pills (Nearest / Open Now) ───────────────────────────────── */
 .mapFilters {
   position: absolute;
-  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 8px);
+  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px);
   left: var(--spacing-16);
   z-index: 5;
   display: flex;
