@@ -44,15 +44,22 @@ function makeDotIcon() {
   });
 }
 
-function makePhotoIcon(photoUrl) {
+function makePhotoIcon(photoUrl, mealCount) {
   const L = window.L;
   const src = photoUrl || '';
-  const html = src
-    ? `<div style="width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);background:#e0e0e0"><img src="${src}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentNode.style.background='#ccc'"/></div>`
-    : `<div style="width:32px;height:32px;border-radius:50%;background:#ccc;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`;
+  const badge = mealCount > 1
+    ? `<div style="position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;background:#212121;color:#fff;font-size:10px;font-weight:700;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:Inter,sans-serif;line-height:1;border:1.5px solid #fff;pointer-events:none">${mealCount > 99 ? '99+' : mealCount}</div>`
+    : '';
+  const img = src
+    ? `<img src="${src}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentNode.style.background='#ccc'"/>`
+    : '';
+  const html = `<div style="position:relative;width:32px;height:32px">
+    <div style="width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);background:#d0d0d0">${img}</div>
+    ${badge}
+  </div>`;
   return L.divIcon({
     html,
-    iconSize: [32, 32],
+    iconSize: [42, 42],
     iconAnchor: [16, 16],
     className: '',
   });
@@ -162,7 +169,7 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
       if (!r.lat || !r.lng) return;
 
       const dotIcon   = makeDotIcon();
-      const photoIcon = makePhotoIcon(r.photo);
+      const photoIcon = makePhotoIcon(r.photo, r.meals);
 
       const marker = L.marker([r.lat, r.lng], {
         icon: photoMode ? photoIcon : dotIcon,

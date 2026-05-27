@@ -758,6 +758,7 @@ async function fetchAdminDistricts() {
     JOIN menu_items m ON m.restaurant_id = r.id
       AND m.source = 'wolt_menu'
       AND m.calories IS NOT NULL
+      AND m.image_url IS NOT NULL AND m.image_url <> ''
       AND (m.category IS NULL OR m.category != 'drink')
     WHERE r.lat IS NOT NULL AND r.lon IS NOT NULL
     GROUP BY r.id, r.lat, r.lon
@@ -780,20 +781,24 @@ async function fetchAdminDistricts() {
 
 async function fetchAdminRestaurants() {
   const PRICE_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
+  // Exact same filter as /api/pins: only restaurants that have ≥1 meal
+  // with wolt_menu source + calories + image_url (= what the app shows).
   const { rows } = await pool.query(`
     SELECT
       r.id, r.name, r.address, r.rating, r.reviews_count,
       r.price_level, r.opening_hours, r.wolt_slug,
       r.lat, r.lon, r.photo_url,
       COUNT(m.id) AS meals,
-      COUNT(m.id) FILTER (WHERE m.image_url IS NOT NULL AND m.image_url != '') AS photos_count,
       AVG(CASE m.confidence WHEN 'high' THEN 1.0 WHEN 'medium' THEN 0.75 ELSE 0.5 END) AS avg_confidence
     FROM restaurants r
-    LEFT JOIN menu_items m ON m.restaurant_id = r.id
+    JOIN menu_items m ON m.restaurant_id = r.id
       AND m.source = 'wolt_menu'
       AND m.calories IS NOT NULL
+      AND m.image_url IS NOT NULL AND m.image_url <> ''
       AND (m.category IS NULL OR m.category != 'drink')
+    WHERE r.lat IS NOT NULL AND r.lon IS NOT NULL
     GROUP BY r.id
+    HAVING COUNT(m.id) > 0
     ORDER BY r.reviews_count DESC NULLS LAST
     LIMIT 500
   `)
@@ -812,7 +817,7 @@ async function fetchAdminRestaurants() {
       meals:      parseInt(r.meals) || 0,
       confidence: r.avg_confidence ? parseFloat(parseFloat(r.avg_confidence).toFixed(2)) : 0,
       open:       getIsOpen(r.opening_hours),
-      photos:     parseInt(r.photos_count) > 0,
+      photos:     parseInt(r.meals) > 0,
       partner:    false,
       rating:     r.rating,
       reviews:    r.reviews_count,
