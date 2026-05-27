@@ -98,6 +98,7 @@ app.get('/api/restaurant-summaries', async (req, res) => {
       JOIN menu_items m ON m.restaurant_id = r.id
       WHERE m.source = 'wolt_menu'
         AND m.calories IS NOT NULL
+        AND (m.category IS NULL OR m.category != 'drink')
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
       GROUP BY r.id
     `)
@@ -140,6 +141,7 @@ app.get('/api/area-meals', async (req, res) => {
       WHERE m.source = 'wolt_menu'
         AND m.calories IS NOT NULL
         AND m.image_url IS NOT NULL AND m.image_url <> ''
+        AND (m.category IS NULL OR m.category != 'drink')
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
         AND r.lat BETWEEN $1 AND $3
         AND r.lon BETWEEN $2 AND $4
@@ -194,6 +196,7 @@ app.get('/api/pins', async (req, res) => {
         AND m.source = 'wolt_menu'
         AND m.calories IS NOT NULL
         AND m.image_url IS NOT NULL AND m.image_url <> ''
+        AND (m.category IS NULL OR m.category != 'drink')
       WHERE r.lat IS NOT NULL AND r.lon IS NOT NULL
       GROUP BY r.id
       HAVING COUNT(m.id) > 0
@@ -242,6 +245,7 @@ app.get('/api/meals', async (req, res) => {
       WHERE m.source = 'wolt_menu'
         AND m.calories IS NOT NULL
         AND m.image_url IS NOT NULL AND m.image_url <> ''
+        AND (m.category IS NULL OR m.category != 'drink')
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
       ORDER BY
         CASE m.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
@@ -284,6 +288,7 @@ app.get('/api/restaurants/:id/meals', async (req, res) => {
       FROM menu_items m
       JOIN restaurants r ON r.id = m.restaurant_id
       WHERE m.restaurant_id = $1 AND m.source = 'wolt_menu'
+        AND (m.category IS NULL OR m.category != 'drink')
       ORDER BY
         CASE m.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
         m.calories DESC NULLS LAST
