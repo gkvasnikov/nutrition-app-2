@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, Fragment } from 'react'
 import TopBar from '../components/molecules/TopBar'
 import MainNavigation from '../components/molecules/MainNavigation'
 import CardMeal from '../components/molecules/CardMeal'
-import FiltersPanel from '../components/molecules/FiltersPanel'
 import MealFilterOverlay from '../components/molecules/MealFilterOverlay'
 import { LocateIcon, MapFloatIcon, DirectionIcon, CloseIcon } from '../components/atoms/icons'
 import { buildPillTitle, buildPillIcon, buildPillSubtitle } from '../utils/filterPill'
@@ -27,7 +26,7 @@ const MAX_ZOOM = 19      // "+" button disabled at this level and above
 export default function Discover({
   activeTab, onTabChange, onMealSelect,
   activeMainFilters, onApplyMainFilters,
-  secondaryFilters, onApplySecondaryFilters, defaultSecondaryFilters,
+  secondaryFilters, onApplySecondaryFilters,
   isActive = true,
 }) {
   // ── Data ─────────────────────────────────────────────────────────────────────
@@ -61,8 +60,6 @@ export default function Discover({
   const [selectedPin,   setSelectedPin]   = useState(null)
   const [pinExiting,    setPinExiting]    = useState(false)
   const [visibleMeals,  setVisibleMeals]  = useState([])
-  const [showFilters,   setShowFilters]   = useState(false)
-  const [pendingFilters, setPendingFilters] = useState(secondaryFilters)
   const [showMealFilter, setShowMealFilter] = useState(false)
 
   const lastSelectedPinRef = useRef(null)
@@ -409,14 +406,12 @@ export default function Discover({
   selectPinRef.current = selectPin
 
   // ── Filters ───────────────────────────────────────────────────────────────────
-  function openFilters()  { setPendingFilters(secondaryFilters); setShowFilters(true) }
-  function closeFilters() { setShowFilters(false) }
+  function handlePillClick() { setShowMealFilter(true) }
 
-  function handlePillClick() {
-    if (showFilters) { closeFilters(); setTimeout(() => setShowMealFilter(true), 550) }
-    else setShowMealFilter(true)
-  }
-  function applyFilters() { onApplySecondaryFilters(pendingFilters); setShowFilters(false) }
+  function haptic() { navigator.vibrate?.(10) }
+
+  const SORT_CYCLE  = ['nearest', 'best_match', 'a_z']
+  const SORT_LABELS = { nearest: 'Nearest', best_match: 'Best match', a_z: 'A-Z' }
 
   // ── Map setup ─────────────────────────────────────────────────────────────────
   // Step 1 — load Google Maps script
@@ -839,9 +834,9 @@ export default function Discover({
         title={buildPillTitle(activeMainFilters)}
         icon={buildPillIcon(activeMainFilters)}
         subtitle={buildPillSubtitle(activeMainFilters)}
-        filterActive={showFilters}
+        filterActive={showMealFilter}
         onPillClick={handlePillClick}
-        onFilterClick={showFilters ? closeFilters : openFilters}
+        onFilterClick={() => setShowMealFilter(v => !v)}
       />
 
       <MealFilterOverlay
@@ -851,14 +846,34 @@ export default function Discover({
         initialFilters={activeMainFilters}
       />
 
-      <FiltersPanel
-        show={showFilters}
-        pending={pendingFilters}
-        onChange={setPendingFilters}
-        onReset={() => setPendingFilters(defaultSecondaryFilters)}
-        onApply={applyFilters}
-        onClose={closeFilters}
-      />
+      {/* ── Map filter pills ──────────────────────────────────────────── */}
+      <div className={styles.mapFilters}>
+        <button
+          className={styles.mapFilterPill}
+          onClick={() => {
+            haptic()
+            const idx  = SORT_CYCLE.indexOf(secondaryFilters.sortBy)
+            const next = SORT_CYCLE[(idx + 1) % SORT_CYCLE.length]
+            onApplySecondaryFilters({ ...secondaryFilters, sortBy: next })
+          }}
+        >
+          <img src="/icons/Pill/Switch.svg" width={16} height={16} alt="" />
+          <span>{SORT_LABELS[secondaryFilters.sortBy] ?? 'Nearest'}</span>
+        </button>
+
+        <button
+          className={`${styles.mapFilterPill} ${secondaryFilters.openNow ? styles.mapFilterPillActive : ''}`}
+          onClick={() => {
+            haptic()
+            onApplySecondaryFilters({ ...secondaryFilters, openNow: !secondaryFilters.openNow })
+          }}
+        >
+          {secondaryFilters.openNow && (
+            <img src="/icons/Pill/Check.svg" width={16} height={16} alt="" style={{ filter: 'invert(1)' }} />
+          )}
+          <span>Open now</span>
+        </button>
+      </div>
 
       <div className={`${styles.topBarFill} ${isExpanded ? styles.topBarFillVisible : ''}`} />
 

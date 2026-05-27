@@ -57,6 +57,45 @@
   margin-top: -1px; /* optical alignment */
 }
 
+/* ── Map filter pills (Nearest / Open Now) ───────────────────────────────── */
+.mapFilters {
+  position: absolute;
+  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 8px + 59px + 8px);
+  left: var(--spacing-16);
+  z-index: 5;
+  display: flex;
+  gap: var(--spacing-8);
+  pointer-events: auto;
+}
+
+.mapFilterPill {
+  height: 34px;
+  padding: 0 var(--spacing-8);
+  background: var(--color-bg);
+  border: none;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mapFilterPill:active {
+  opacity: 0.75;
+}
+
+/* Active state (Open Now on) — dark bg, white content */
+.mapFilterPillActive {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
 /* White fill behind TopBar — slides down from above screen when sheet expands */
 .topBarFill {
   position: absolute;
