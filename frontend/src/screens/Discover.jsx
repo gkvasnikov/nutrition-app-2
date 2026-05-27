@@ -876,7 +876,7 @@ export default function Discover({
           }}
         >
           {secondaryFilters.openNow && (
-            <img src="/icons/Pill/Check.svg" width={16} height={16} alt="" />
+            <img src="/icons/Check.svg" width={16} height={16} alt="" />
           )}
           <span>Open now</span>
         </button>

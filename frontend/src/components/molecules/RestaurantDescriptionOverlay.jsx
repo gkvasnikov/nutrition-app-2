@@ -192,6 +192,12 @@ export default function RestaurantDescriptionOverlay({ restaurant, zIndex = 200,
                     {displayIsOpen ? 'Open now' : 'Closed'}
                   </span>
                 )}
+                {restaurant.hours && (
+                  <>
+                    <span className={styles.dot} />
+                    <span className={styles.metaText}>{restaurant.hours}</span>
+                  </>
+                )}
                 {restaurant.priceLevel && (
                   <>
                     <span className={styles.dot} />
