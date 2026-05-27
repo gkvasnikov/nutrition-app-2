@@ -100,28 +100,28 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [value[0], value[1]]) // eslint-disable-line
 
-  const initLo = value[0]
-  const initHi = value[1]
-  const initLoP = ((initLo - min) / (max - min)) * 100
-  const initHiP = ((initHi - min) / (max - min)) * 100
+  // Use dispRef for JSX so fill never snaps on re-render — animation drives DOM directly
+  const [curLo, curHi] = dispRef.current
+  const curLoP = ((curLo - min) / (max - min)) * 100
+  const curHiP = ((curHi - min) / (max - min)) * 100
 
   return (
     <div className={styles.sliderRow}>
       <span className={styles.sliderLabel}>{label}</span>
       <div className={styles.sliderRight}>
-        <span ref={labelRef} className={styles.sliderValue}>from {initLo} to {initHi}</span>
+        <span ref={labelRef} className={styles.sliderValue}>from {curLo} to {curHi}</span>
         <div className={styles.sliderTrack}>
           <div
             ref={fillRef}
             className={styles.sliderFill}
-            style={{ left: `${initLoP}%`, right: `${100 - initHiP}%` }}
+            style={{ left: `${curLoP}%`, right: `${100 - curHiP}%` }}
           />
           <input
             ref={loInputRef}
             type="range"
             className={styles.sliderInput}
             min={min} max={max} step={step}
-            defaultValue={initLo}
+            defaultValue={curLo}
             onPointerDown={() => { dragging.current = true }}
             onPointerUp={()   => { dragging.current = false }}
             onChange={e => onChange([Math.min(Number(e.target.value), dispRef.current[1] - step), dispRef.current[1]])}
@@ -131,7 +131,7 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
             type="range"
             className={styles.sliderInput}
             min={min} max={max} step={step}
-            defaultValue={initHi}
+            defaultValue={curHi}
             onPointerDown={() => { dragging.current = true }}
             onPointerUp={()   => { dragging.current = false }}
             onChange={e => onChange([dispRef.current[0], Math.max(Number(e.target.value), dispRef.current[0] + step)])}
