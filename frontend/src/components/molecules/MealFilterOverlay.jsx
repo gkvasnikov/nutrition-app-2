@@ -55,18 +55,32 @@ const DIET_CELL_BG = {
 // ─── RangeSlider ─────────────────────────────────────────────────────────────
 
 function RangeSlider({ label, min, max, step = 1, value, onChange }) {
-  const [dispLo, setDispLo] = useState(value[0])
-  const [dispHi, setDispHi] = useState(value[1])
-  const dragging = useRef(false)
-  const rafRef   = useRef(null)
-  const dispRef  = useRef([value[0], value[1]])
+  const loInputRef  = useRef(null)
+  const hiInputRef  = useRef(null)
+  const fillRef     = useRef(null)
+  const labelRef    = useRef(null)
+  const dragging    = useRef(false)
+  const rafRef      = useRef(null)
+  const dispRef     = useRef([value[0], value[1]])
+
+  // Direct DOM update — no React re-render, no jank
+  function paint(lo, hi) {
+    const loP = ((lo - min) / (max - min)) * 100
+    const hiP = ((hi - min) / (max - min)) * 100
+    if (loInputRef.current)  loInputRef.current.value            = lo
+    if (hiInputRef.current)  hiInputRef.current.value            = hi
+    if (fillRef.current) {
+      fillRef.current.style.left  = `${loP}%`
+      fillRef.current.style.right = `${100 - hiP}%`
+    }
+    if (labelRef.current)    labelRef.current.textContent = `from ${lo} to ${hi}`
+  }
 
   useEffect(() => {
     const [targetLo, targetHi] = value
     if (dragging.current) {
       dispRef.current = [targetLo, targetHi]
-      setDispLo(targetLo)
-      setDispHi(targetHi)
+      paint(targetLo, targetHi)
       return
     }
     if (rafRef.current) cancelAnimationFrame(rafRef.current)
@@ -74,53 +88,53 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
     const t0  = performance.now()
     const dur = 380
     const tick = (t) => {
-      const p  = Math.min((t - t0) / dur, 1)
-      const e  = 1 - (1 - p) ** 3          // ease-out cubic
+      const p   = Math.min((t - t0) / dur, 1)
+      const e   = 1 - (1 - p) ** 3
       const cLo = Math.round(fLo + (targetLo - fLo) * e)
       const cHi = Math.round(fHi + (targetHi - fHi) * e)
       dispRef.current = [cLo, cHi]
-      setDispLo(cLo)
-      setDispHi(cHi)
+      paint(cLo, cHi)
       if (p < 1) rafRef.current = requestAnimationFrame(tick)
     }
     rafRef.current = requestAnimationFrame(tick)
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [value[0], value[1]]) // eslint-disable-line
 
-  const loP = ((dispLo - min) / (max - min)) * 100
-  const hiP = ((dispHi - min) / (max - min)) * 100
+  const initLo = value[0]
+  const initHi = value[1]
+  const initLoP = ((initLo - min) / (max - min)) * 100
+  const initHiP = ((initHi - min) / (max - min)) * 100
 
   return (
     <div className={styles.sliderRow}>
       <span className={styles.sliderLabel}>{label}</span>
       <div className={styles.sliderRight}>
-        <span className={styles.sliderValue}>from {dispLo} to {dispHi}</span>
+        <span ref={labelRef} className={styles.sliderValue}>from {initLo} to {initHi}</span>
         <div className={styles.sliderTrack}>
           <div
+            ref={fillRef}
             className={styles.sliderFill}
-            style={{ left: `${loP}%`, right: `${100 - hiP}%` }}
+            style={{ left: `${initLoP}%`, right: `${100 - initHiP}%` }}
           />
           <input
+            ref={loInputRef}
             type="range"
             className={styles.sliderInput}
-            min={min}
-            max={max}
-            step={step}
-            value={dispLo}
+            min={min} max={max} step={step}
+            defaultValue={initLo}
             onPointerDown={() => { dragging.current = true }}
             onPointerUp={()   => { dragging.current = false }}
-            onChange={e => onChange([Math.min(Number(e.target.value), dispHi - step), dispHi])}
+            onChange={e => onChange([Math.min(Number(e.target.value), dispRef.current[1] - step), dispRef.current[1]])}
           />
           <input
+            ref={hiInputRef}
             type="range"
             className={styles.sliderInput}
-            min={min}
-            max={max}
-            step={step}
-            value={dispHi}
+            min={min} max={max} step={step}
+            defaultValue={initHi}
             onPointerDown={() => { dragging.current = true }}
             onPointerUp={()   => { dragging.current = false }}
-            onChange={e => onChange([dispLo, Math.max(Number(e.target.value), dispLo + step)])}
+            onChange={e => onChange([dispRef.current[0], Math.max(Number(e.target.value), dispRef.current[0] + step)])}
           />
         </div>
       </div>
