@@ -355,7 +355,7 @@ Meal: ${name}
 ${description ? `Description: ${description}` : ''}
 Nutrition per serving: ${calories} kcal, protein ${protein ?? '?'}g, fat ${fat ?? '?'}g, carbs ${carbs ?? '?'}g
 ${imageUrl ? `
-Carefully look at the photo of the dish and compare what you see with the listed macros. If anything looks off — whether it's fat (sauces, oil, cheese), carbs (large bread/rice/pasta portions, sugary glazes), overall calorie density, or portion size — add a gentle "macroWarning" field with one short, softly phrased sentence describing the concern. Also reduce the score by 5–15 points to reflect the uncertainty. If the macros look plausible from the photo, omit "macroWarning".` : ''}
+Carefully look at the photo and compare it with the listed macros. Add a "macroWarning" ONLY if you spot a specific, concrete reason the listed macros are likely wrong — for example: a visibly large amount of oil, sauce, or melted cheese clearly not reflected in the fat/calorie count; the cooking method is ambiguous and would materially change the macros (e.g. appears deep-fried but listed macros suggest grilled); or the portion looks dramatically larger or smaller than what the listed calories imply. Do NOT add a warning just because the dish is complex, contains multiple components, or because minor deviations are theoretically possible. If you have no specific concrete concern, omit "macroWarning" entirely. When you do add it, reduce the score by 5–15 points and keep the warning to one short, factual sentence.` : ''}
 
 Respond ONLY with valid JSON (no markdown):
 {
