@@ -166,10 +166,9 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
   }
 
   function handleReset() {
-    const defaultMeal = getTimedMealTime()
-    setMealTime(defaultMeal)
-    setDiet('high_protein')
-    setMacros(computeMacros(defaultMeal, 'high_protein'))
+    setMealTime(getTimedMealTime())
+    setDiet('custom')
+    setMacros(DEFAULT_MACROS)
     setDietTags({ plantBased: false, glutenFree: false, diabetesFriendly: false })
   }
 
