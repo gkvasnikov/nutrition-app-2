@@ -10,6 +10,7 @@ import session from 'express-session'
 import { timingSafeEqual, createHash } from 'crypto'
 
 const app = express()
+app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
 const PORT = process.env.PORT || 3001
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
