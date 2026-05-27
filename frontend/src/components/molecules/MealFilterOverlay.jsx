@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
 import { getTimedMealTime } from '../../utils/filterPill'
@@ -55,19 +55,50 @@ const DIET_CELL_BG = {
 // ─── RangeSlider ─────────────────────────────────────────────────────────────
 
 function RangeSlider({ label, min, max, step = 1, value, onChange }) {
-  const [lo, hi] = value
-  const loPercent = ((lo - min) / (max - min)) * 100
-  const hiPercent = ((hi - min) / (max - min)) * 100
+  const [dispLo, setDispLo] = useState(value[0])
+  const [dispHi, setDispHi] = useState(value[1])
+  const dragging = useRef(false)
+  const rafRef   = useRef(null)
+  const dispRef  = useRef([value[0], value[1]])
+
+  useEffect(() => {
+    const [targetLo, targetHi] = value
+    if (dragging.current) {
+      dispRef.current = [targetLo, targetHi]
+      setDispLo(targetLo)
+      setDispHi(targetHi)
+      return
+    }
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    const [fLo, fHi] = dispRef.current
+    const t0  = performance.now()
+    const dur = 380
+    const tick = (t) => {
+      const p  = Math.min((t - t0) / dur, 1)
+      const e  = 1 - (1 - p) ** 3          // ease-out cubic
+      const cLo = Math.round((fLo + (targetLo - fLo) * e) / step) * step
+      const cHi = Math.round((fHi + (targetHi - fHi) * e) / step) * step
+      dispRef.current = [cLo, cHi]
+      setDispLo(cLo)
+      setDispHi(cHi)
+      if (p < 1) rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [value[0], value[1]]) // eslint-disable-line
+
+  const loP = ((dispLo - min) / (max - min)) * 100
+  const hiP = ((dispHi - min) / (max - min)) * 100
 
   return (
     <div className={styles.sliderRow}>
       <span className={styles.sliderLabel}>{label}</span>
       <div className={styles.sliderRight}>
-        <span className={styles.sliderValue}>from {lo} to {hi}</span>
+        <span className={styles.sliderValue}>from {dispLo} to {dispHi}</span>
         <div className={styles.sliderTrack}>
           <div
             className={styles.sliderFill}
-            style={{ left: `${loPercent}%`, right: `${100 - hiPercent}%` }}
+            style={{ left: `${loP}%`, right: `${100 - hiP}%` }}
           />
           <input
             type="range"
@@ -75,8 +106,10 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
             min={min}
             max={max}
             step={step}
-            value={lo}
-            onChange={e => onChange([Math.min(Number(e.target.value), hi - step), hi])}
+            value={dispLo}
+            onPointerDown={() => { dragging.current = true }}
+            onPointerUp={()   => { dragging.current = false }}
+            onChange={e => onChange([Math.min(Number(e.target.value), dispHi - step), dispHi])}
           />
           <input
             type="range"
@@ -84,8 +117,10 @@ function RangeSlider({ label, min, max, step = 1, value, onChange }) {
             min={min}
             max={max}
             step={step}
-            value={hi}
-            onChange={e => onChange([lo, Math.max(Number(e.target.value), lo + step)])}
+            value={dispHi}
+            onPointerDown={() => { dragging.current = true }}
+            onPointerUp={()   => { dragging.current = false }}
+            onChange={e => onChange([dispLo, Math.max(Number(e.target.value), dispLo + step)])}
           />
         </div>
       </div>
