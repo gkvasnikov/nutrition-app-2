@@ -90,10 +90,9 @@
   opacity: 0.75;
 }
 
-/* Active state (Open Now on) — dark bg, white content */
+/* Active state (Open Now on) — keep white bg, add border to signal active */
 .mapFilterPillActive {
-  background: var(--color-text);
-  color: var(--color-bg);
+  border: 1.5px solid var(--color-text);
 }
 
 /* White fill behind TopBar — slides down from above screen when sheet expands */

@@ -857,8 +857,8 @@ export default function Discover({
             onApplySecondaryFilters({ ...secondaryFilters, sortBy: next })
           }}
         >
-          <img src="/icons/Pill/Switch.svg" width={16} height={16} alt="" />
           <span>{SORT_LABELS[secondaryFilters.sortBy] ?? 'Nearest'}</span>
+          <img src="/icons/Pill/Switch.svg" width={16} height={16} alt="" />
         </button>
 
         <button
@@ -869,7 +869,7 @@ export default function Discover({
           }}
         >
           {secondaryFilters.openNow && (
-            <img src="/icons/Pill/Check.svg" width={16} height={16} alt="" style={{ filter: 'invert(1)' }} />
+            <img src="/icons/Pill/Check.svg" width={16} height={16} alt="" />
           )}
           <span>Open now</span>
         </button>
