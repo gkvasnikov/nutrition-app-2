@@ -1,8 +1,8 @@
 export const MACRO_PRESETS = {
   high_protein: {
     breakfast: { kcal: [495,  825], protein: [40, 72], fat: [14, 28], carbs: [40,  72] },
-    lunch:     { kcal: [585, 1045], protein: [50, 88], fat: [18, 39], carbs: [45,  83] },
-    dinner:    { kcal: [495,  935], protein: [45, 83], fat: [18, 39], carbs: [32,  66] },
+    lunch:     { kcal: [585, 1045], protein: [40, 88], fat: [18, 39], carbs: [45,  83] },
+    dinner:    { kcal: [495,  935], protein: [40, 83], fat: [18, 39], carbs: [32,  66] },
     snack:     { kcal: [135,  330], protein: [18, 39], fat: [5,  13], carbs: [9,   28] },
   },
   high_carb: {
