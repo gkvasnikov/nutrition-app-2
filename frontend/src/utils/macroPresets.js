@@ -1,27 +1,27 @@
 export const MACRO_PRESETS = {
   high_protein: {
-    breakfast: { kcal: [550,  750], protein: [45, 65], fat: [15, 25], carbs: [45,  65] },
-    lunch:     { kcal: [650,  950], protein: [55, 80], fat: [20, 35], carbs: [50,  75] },
-    dinner:    { kcal: [550,  850], protein: [50, 75], fat: [20, 35], carbs: [35,  60] },
-    snack:     { kcal: [150,  300], protein: [20, 35], fat: [5,  12], carbs: [10,  25] },
+    breakfast: { kcal: [495,  825], protein: [40, 72], fat: [14, 28], carbs: [40,  72] },
+    lunch:     { kcal: [585, 1045], protein: [50, 88], fat: [18, 39], carbs: [45,  83] },
+    dinner:    { kcal: [495,  935], protein: [45, 83], fat: [18, 39], carbs: [32,  66] },
+    snack:     { kcal: [135,  330], protein: [18, 39], fat: [5,  13], carbs: [9,   28] },
   },
   high_carb: {
-    breakfast: { kcal: [550,  800], protein: [25, 40], fat: [10, 20], carbs: [75,  110] },
-    lunch:     { kcal: [700, 1000], protein: [30, 50], fat: [15, 25], carbs: [100, 150] },
-    dinner:    { kcal: [550,  800], protein: [25, 40], fat: [12, 22], carbs: [75,  110] },
-    snack:     { kcal: [150,  300], protein: [5,  15], fat: [3,  10], carbs: [40,   60] },
+    breakfast: { kcal: [495,  880], protein: [23, 44], fat: [9,  22], carbs: [68,  121] },
+    lunch:     { kcal: [630, 1100], protein: [27, 55], fat: [14, 28], carbs: [90,  165] },
+    dinner:    { kcal: [495,  880], protein: [23, 44], fat: [11, 24], carbs: [68,  121] },
+    snack:     { kcal: [135,  330], protein: [5,  17], fat: [3,  11], carbs: [36,   66] },
   },
   balanced: {
-    breakfast: { kcal: [500,  750], protein: [25, 40], fat: [15, 25], carbs: [55,  80] },
-    lunch:     { kcal: [650,  900], protein: [35, 55], fat: [20, 30], carbs: [70, 100] },
-    dinner:    { kcal: [550,  800], protein: [30, 50], fat: [18, 28], carbs: [60,  90] },
-    snack:     { kcal: [150,  300], protein: [10, 20], fat: [5,  12], carbs: [25,  45] },
+    breakfast: { kcal: [450,  825], protein: [23, 44], fat: [14, 28], carbs: [50,  88] },
+    lunch:     { kcal: [585,  990], protein: [32, 61], fat: [18, 33], carbs: [63, 110] },
+    dinner:    { kcal: [495,  880], protein: [27, 55], fat: [16, 31], carbs: [54,  99] },
+    snack:     { kcal: [135,  330], protein: [9,  22], fat: [5,  13], carbs: [23,  50] },
   },
   keto: {
-    breakfast: { kcal: [500,  750], protein: [30, 50], fat: [35, 55], carbs: [3,  10] },
-    lunch:     { kcal: [600,  900], protein: [35, 60], fat: [45, 70], carbs: [5,  15] },
-    dinner:    { kcal: [500,  800], protein: [30, 55], fat: [40, 65], carbs: [5,  12] },
-    snack:     { kcal: [100,  300], protein: [10, 25], fat: [15, 25], carbs: [1,   6] },
+    breakfast: { kcal: [450,  825], protein: [27, 55], fat: [32, 61], carbs: [3,  11] },
+    lunch:     { kcal: [540,  990], protein: [32, 66], fat: [41, 77], carbs: [5,  17] },
+    dinner:    { kcal: [450,  880], protein: [27, 61], fat: [36, 72], carbs: [5,  13] },
+    snack:     { kcal: [90,   330], protein: [9,  28], fat: [14, 28], carbs: [1,   7] },
   },
 }
 
