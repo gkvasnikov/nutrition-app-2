@@ -7,7 +7,7 @@ export default function PillTab({ label, icon, selected = false, onClick }) {
       className={`${styles.pill} ${selected ? styles.selected : ''}`}
       onClick={onClick}
     >
-      {icon && <img src={icon} width={16} height={16} alt="" aria-hidden="true" className={styles.pillIcon} />}
+      {icon && <img src={icon} width={24} height={24} alt="" aria-hidden="true" className={styles.pillIcon} />}
       {label}
     </button>
   )
