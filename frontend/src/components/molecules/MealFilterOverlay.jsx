@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import PillTab from '../atoms/PillTab'
 import ButtonFilterActions from './ButtonFilterActions'
-import { SearchIcon } from '../atoms/icons'
 import { getTimedMealTime } from '../../utils/filterPill'
 import styles from './MealFilterOverlay.module.css'
 
@@ -99,7 +98,6 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
   const [mealTime, setMealTime] = useState(() => initialFilters?.mealTime ?? getTimedMealTime())
   const [diet,     setDiet]     = useState(() => initialFilters?.diet     ?? 'high_protein')
   const [macros,   setMacros]   = useState(() => initialFilters?.macros   ?? DEFAULT_MACROS)
-  const [search,   setSearch]   = useState(() => initialFilters?.search   ?? '')
   const [dietTags, setDietTags] = useState(() => initialFilters?.dietTags ?? { plantBased: false, glutenFree: false, diabetesFriendly: false })
 
   // Which accordion is open (only one at a time)
@@ -168,11 +166,10 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
     setDiet('high_protein')
     setMacros(computeMacros(defaultMeal, 'high_protein'))
     setDietTags({ plantBased: false, glutenFree: false, diabetesFriendly: false })
-    setSearch('')
   }
 
   function handleApply() {
-    onApply?.({ mealTime, diet, macros, dietTags, search })
+    onApply?.({ mealTime, diet, macros, dietTags })
     onClose()
   }
 
@@ -215,17 +212,6 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                   {DIET_TYPES.map(({ key, label }) => (
                     <PillTab key={key} label={label} selected={diet === key} onClick={() => selectDiet(key)} />
                   ))}
-                </div>
-                <div className={styles.divider} />
-                <div className={styles.searchWrap}>
-                  <SearchIcon size={14} className={styles.searchIcon} />
-                  <input
-                    type="text"
-                    className={styles.searchInput}
-                    placeholder="Search"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                  />
                 </div>
               </div>
             </div>

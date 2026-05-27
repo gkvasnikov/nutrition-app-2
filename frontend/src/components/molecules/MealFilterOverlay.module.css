@@ -149,7 +149,7 @@
 .divider {
   height: 1px;
   background: var(--color-surface-2);
-  margin: 0 calc(-1 * var(--spacing-16));
+  margin: 0;
 }
 
 /* ── Pills row ──────────────────────────────────────────────────────────── */
