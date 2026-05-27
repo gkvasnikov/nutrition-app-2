@@ -238,7 +238,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
               onClick={onClose}
               aria-label="Close filters"
             >
-              <img src="/icons/Close filters.svg" width={24} height={24} alt="" />
+              <img src="/icons/Close filters.svg" width={32} height={32} alt="" />
             </button>
           </div>
 
@@ -275,9 +275,9 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                 ))}
                 <div className={styles.divider} />
                 <div className={styles.pillRow}>
-                  <PillTab label="Plant-based"       icon="/icons/plant-based.svg" selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
-                  <PillTab label="Gluten-free"        icon="/icons/gluten-free.svg"  selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
-                  <PillTab label="Diabetes friendly"  icon="/icons/diabetes.svg"     selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
+                  <PillTab label="Plant-based"       icon="/icons/plant-based.svg" iconSize={16} selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
+                  <PillTab label="Gluten-free"        icon="/icons/gluten-free.svg"  iconSize={16} selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
+                  <PillTab label="Diabetes friendly"  icon="/icons/diabetes.svg"     iconSize={16} selected={dietTags.diabetesFriendly}   onClick={() => toggleDietTag('diabetesFriendly')} />
                 </div>
               </div>
             </div>
