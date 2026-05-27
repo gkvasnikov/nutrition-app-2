@@ -166,6 +166,19 @@
   gap: var(--spacing-8);
 }
 
+.pillRowScroll {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--spacing-8);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pillRowScroll::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Search field ───────────────────────────────────────────────────────── */
 .searchWrap {
   height: 42px;

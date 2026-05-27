@@ -206,7 +206,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
           <div className={`${styles.body} ${openSection === 'mealtime' ? styles.bodyOpen : ''}`}>
             <div className={styles.bodyInner}>
               <div className={styles.bodyContent}>
-                <div className={styles.pillRow}>
+                <div className={styles.pillRowScroll}>
                   {MEAL_TIMES.map(({ key, label, icon }) => (
                     <PillTab key={key} label={label} icon={icon} selected={mealTime === key} onClick={() => selectMealTime(key)} />
                   ))}
@@ -243,8 +243,8 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
           </div>
         </div>
 
-        {/* ── Card 2: Profile ───────────────────────────────────────── */}
-        <div
+        {/* ── Card 2: Profile ─────────────────────────── (hidden) ─── */}
+        {false && <div
           className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
           style={{ transitionDelay: isExpanded ? '0.1s' : '0s' }}
         >
@@ -292,7 +292,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
         {/* ── Reset + Apply ─────────────────────────────────────────── */}
         <div
