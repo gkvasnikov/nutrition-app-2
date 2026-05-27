@@ -1,4 +1,4 @@
-/* Leaflet map: tiles + Berlin district polygons */
+/* Leaflet map: tiles + Berlin district polygons + restaurant pins */
 
 // Berlin name normalisation: GeoJSON property "Gemeinde_name" → our district id
 const GEO_NAME_MAP = {
@@ -31,11 +31,40 @@ const TILE_PRESETS = {
   },
 };
 
-function useBerlinMap({ districts, selectedId, onSelect, onHover, accent = 'green', theme = 'light' }) {
+// Zoom threshold: below → dot markers, above → photo circle markers
+const PIN_PHOTO_ZOOM = 13;
+
+function makeDotIcon() {
+  const L = window.L;
+  return L.divIcon({
+    html: '<div style="width:7px;height:7px;border-radius:50%;background:#212121;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.35)"></div>',
+    iconSize: [7, 7],
+    iconAnchor: [3.5, 3.5],
+    className: '',
+  });
+}
+
+function makePhotoIcon(photoUrl) {
+  const L = window.L;
+  const src = photoUrl || '';
+  const html = src
+    ? `<div style="width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);background:#e0e0e0"><img src="${src}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentNode.style.background='#ccc'"/></div>`
+    : `<div style="width:32px;height:32px;border-radius:50%;background:#ccc;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`;
+  return L.divIcon({
+    html,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    className: '',
+  });
+}
+
+function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, onRestaurantPin, accent = 'green', theme = 'light' }) {
   const mapRef = React.useRef(null);
   const tileRef = React.useRef(null);
   const layersRef = React.useRef({}); // id -> polygon layer
-  const containerRef = React.useRef(null);
+  const pinLayerRef = React.useRef(null); // Leaflet LayerGroup for restaurant markers
+  const markersRef = React.useRef({}); // restaurantId -> marker
+  const photoModeRef = React.useRef(false);
 
   // Initialise map once
   React.useEffect(() => {
@@ -54,6 +83,9 @@ function useBerlinMap({ districts, selectedId, onSelect, onHover, accent = 'gree
       subdomains: 'abcd',
       maxZoom: 19,
     }).addTo(map);
+
+    // Layer group for restaurant pins (sits above tiles, below district polygons label-wise)
+    pinLayerRef.current = L.layerGroup().addTo(map);
 
     // load geojson
     fetch('https://cdn.jsdelivr.net/gh/funkeinteraktiv/Berlin-Geodaten@master/berlin_bezirke.geojson')
@@ -84,9 +116,21 @@ function useBerlinMap({ districts, selectedId, onSelect, onHover, accent = 'gree
         map.fitBounds(all.getBounds().pad(0.04), { animate: false });
       })
       .catch(err => console.warn('Berlin GeoJSON failed:', err));
+
+    // Zoom listener — switch between dot and photo markers
+    map.on('zoomend', () => {
+      const z = map.getZoom();
+      const wantPhoto = z >= PIN_PHOTO_ZOOM;
+      if (wantPhoto !== photoModeRef.current) {
+        photoModeRef.current = wantPhoto;
+        Object.entries(markersRef.current).forEach(([, m]) => {
+          m.setIcon(wantPhoto ? m._adminPhotoIcon : m._adminDotIcon);
+        });
+      }
+    });
   }, []);
 
-  // Restyle when state changes
+  // Restyle district polygons when state changes
   React.useEffect(() => {
     Object.entries(layersRef.current).forEach(([id, layer]) => {
       layer.setStyle(computeStyle(id, districts, selectedId, accent));
@@ -98,6 +142,52 @@ function useBerlinMap({ districts, selectedId, onSelect, onHover, accent = 'gree
     if (!mapRef.current || !tileRef.current) return;
     tileRef.current.setUrl(TILE_PRESETS[theme].url);
   }, [theme]);
+
+  // Build / rebuild restaurant markers when restaurants list changes
+  React.useEffect(() => {
+    const map = mapRef.current;
+    const group = pinLayerRef.current;
+    if (!map || !group || !restaurants?.length) return;
+
+    // Clear old markers
+    group.clearLayers();
+    markersRef.current = {};
+
+    const L = window.L;
+    const zoom = map.getZoom();
+    const photoMode = zoom >= PIN_PHOTO_ZOOM;
+    photoModeRef.current = photoMode;
+
+    restaurants.forEach(r => {
+      if (!r.lat || !r.lng) return;
+
+      const dotIcon   = makeDotIcon();
+      const photoIcon = makePhotoIcon(r.photo);
+
+      const marker = L.marker([r.lat, r.lng], {
+        icon: photoMode ? photoIcon : dotIcon,
+        title: r.name,
+        zIndexOffset: 10,
+      });
+
+      // Store both icons on the marker for fast toggling
+      marker._adminDotIcon   = dotIcon;
+      marker._adminPhotoIcon = photoIcon;
+
+      marker.bindTooltip(
+        `<strong>${r.name}</strong><br><span style="color:#888;font-size:11px">${r.meals} meals</span>`,
+        { direction: 'top', offset: [0, -6], className: 'admin-pin-tooltip' }
+      );
+
+      marker.on('click', (e) => {
+        e.originalEvent.stopPropagation();
+        onRestaurantPin?.(r.id);
+      });
+
+      marker.addTo(group);
+      markersRef.current[r.id] = marker;
+    });
+  }, [restaurants]);
 
   // Zoom-to handler exposed
   const zoomTo = React.useCallback((id) => {
@@ -111,7 +201,14 @@ function useBerlinMap({ districts, selectedId, onSelect, onHover, accent = 'gree
     map.flyToBounds(layer.getBounds().pad(0.15), { duration: 0.8 });
   }, []);
 
-  return { mapRef, zoomTo };
+  // Highlight / pan to a specific restaurant pin
+  const focusPin = React.useCallback((restaurantId) => {
+    const map = mapRef.current; if (!map) return;
+    const marker = markersRef.current[restaurantId]; if (!marker) return;
+    map.flyTo(marker.getLatLng(), Math.max(map.getZoom(), 14), { duration: 0.6 });
+  }, []);
+
+  return { mapRef, zoomTo, focusPin };
 }
 
 function computeStyle(id, districts, selectedId, accent) {

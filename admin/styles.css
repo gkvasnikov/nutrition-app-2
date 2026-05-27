@@ -973,3 +973,17 @@ svg { display: block; }
 
 /* Layout class kept for React key changes; opacity changes done via JS state to avoid stuck animations in unfocused iframes */
 .fade-in { /* no-op */ }
+
+/* Leaflet restaurant pin tooltip */
+.admin-pin-tooltip {
+  background: var(--color-bg);
+  border: 1px solid var(--color-stroke);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+.admin-pin-tooltip::before { display: none; }

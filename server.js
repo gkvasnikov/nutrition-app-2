@@ -784,6 +784,7 @@ async function fetchAdminRestaurants() {
     SELECT
       r.id, r.name, r.address, r.rating, r.reviews_count,
       r.price_level, r.opening_hours, r.wolt_slug,
+      r.lat, r.lon, r.photo_url,
       COUNT(m.id) AS meals,
       COUNT(m.id) FILTER (WHERE m.image_url IS NOT NULL AND m.image_url != '') AS photos_count,
       AVG(CASE m.confidence WHEN 'high' THEN 1.0 WHEN 'medium' THEN 0.75 ELSE 0.5 END) AS avg_confidence
@@ -796,23 +797,35 @@ async function fetchAdminRestaurants() {
     ORDER BY r.reviews_count DESC NULLS LAST
     LIMIT 500
   `)
-  return rows.map(r => ({
-    id:         String(r.id),  // charCodeAt used in app.jsx requires string
-    name:       r.name,
-    cuisine:    null,
-    meals:      parseInt(r.meals) || 0,
-    confidence: r.avg_confidence ? parseFloat(parseFloat(r.avg_confidence).toFixed(2)) : 0,
-    open:       getIsOpen(r.opening_hours),
-    photos:     parseInt(r.photos_count) > 0,
-    partner:    false,
-    rating:     r.rating,
-    reviews:    r.reviews_count,
-    price:      PRICE_MAP[r.price_level] || '—',
-    address:    r.address || '',
-    hours:      getHoursString(r.opening_hours) || '—',
-    updated:    null,
-    woltSlug:   r.wolt_slug || null,
-  }))
+  const mapsKey = process.env.VITE_GOOGLE_MAPS_API_KEY || ''
+  return rows.map(r => {
+    const rawPhoto = (r.photo_url || '').split('&key=')[0]
+    const photo = rawPhoto
+      ? (rawPhoto.includes('googleapis.com') && mapsKey
+          ? rawPhoto + '&key=' + mapsKey
+          : rawPhoto)
+      : null
+    return {
+      id:         String(r.id),
+      name:       r.name,
+      cuisine:    null,
+      meals:      parseInt(r.meals) || 0,
+      confidence: r.avg_confidence ? parseFloat(parseFloat(r.avg_confidence).toFixed(2)) : 0,
+      open:       getIsOpen(r.opening_hours),
+      photos:     parseInt(r.photos_count) > 0,
+      partner:    false,
+      rating:     r.rating,
+      reviews:    r.reviews_count,
+      price:      PRICE_MAP[r.price_level] || '—',
+      address:    r.address || '',
+      hours:      getHoursString(r.opening_hours) || '—',
+      updated:    null,
+      woltSlug:   r.wolt_slug || null,
+      lat:        r.lat  ? parseFloat(r.lat)  : null,
+      lng:        r.lon  ? parseFloat(r.lon)  : null,
+      photo,
+    }
+  })
 }
 
 app.get('/admin', requireAdminAuth, async (req, res) => {

@@ -40,11 +40,13 @@ function App() {
     setDistrictTab(d.status === 'covered' ? 'restaurants' : 'scripts');
   }, [districts]);
 
-  const { zoomTo } = window.useBerlinMap({
+  const { zoomTo, focusPin } = window.useBerlinMap({
     districts,
+    restaurants: RESTAURANTS,
     selectedId: districtId,
     onSelect: onDistrictSelect,
     onHover: setHoverDistrict,
+    onRestaurantPin: (id) => setRestaurantId(id),
     accent: t.accent || 'green',
     theme: t.mapTheme || 'light',
   });
@@ -356,7 +358,8 @@ function RestaurantList({ title, restaurants, onOpen }) {
 function RestaurantRow({ r, onOpen, active }) {
   return (
     <div className={`irow ${active?'irow--active':''}`} onClick={() => onOpen?.(r.id)}>
-      <div className="irow__img" style={{ background: `linear-gradient(135deg, oklch(0.85 0.06 ${(r.id.charCodeAt(1)*7)%360}), oklch(0.75 0.10 ${(r.id.charCodeAt(1)*11)%360}))` }}>
+      <div className="irow__img" style={r.photo ? {} : { background: `linear-gradient(135deg, oklch(0.85 0.06 ${(r.id.charCodeAt(1)*7)%360}), oklch(0.75 0.10 ${(r.id.charCodeAt(1)*11)%360}))` }}>
+        {r.photo && <img src={r.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
       </div>
       <div className="irow__main">
         <div className="irow__name">{r.name}</div>
@@ -829,7 +832,25 @@ function RestaurantDetail({ restaurantId, onClose }) {
   const [cache, setCache] = useState(r);
   useEffect(() => { if (r) setCache(r); }, [r]);
   const data = r || cache;
+
+  // Fetch real meals for this restaurant
+  const [meals, setMeals] = useState([]);
+  const [mealsLoading, setMealsLoading] = useState(false);
+  useEffect(() => {
+    if (!restaurantId) return;
+    setMeals([]);
+    setMealsLoading(true);
+    fetch(`/api/restaurants/${restaurantId}/meals`)
+      .then(res => res.json())
+      .then(list => setMeals(Array.isArray(list) ? list.slice(0, 12) : []))
+      .catch(() => setMeals([]))
+      .finally(() => setMealsLoading(false));
+  }, [restaurantId]);
+
   if (!data) return <div className="detail detail--narrow"></div>;
+
+  const fallbackBg = `linear-gradient(135deg, oklch(0.85 0.06 ${(data.id.charCodeAt(1)*7)%360}), oklch(0.65 0.10 ${(data.id.charCodeAt(1)*11)%360}))`;
+
   return (
     <div className={`detail detail--narrow ${open?'detail--open':''}`}>
       <div className="detail__head">
@@ -838,16 +859,22 @@ function RestaurantDetail({ restaurantId, onClose }) {
           Restaurant
         </span>
         <div style={{ display: 'flex', gap: 8 }}>
-          <Btn variant="secondary" icon="external">Open in app</Btn>
+          {data.woltSlug && (
+            <a href={`https://wolt.com/en/deu/berlin/restaurant/${data.woltSlug}`} target="_blank" rel="noopener noreferrer" className="btn btn--secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none', fontSize: 13 }}>
+              <Icon name="external" size={13}/>Wolt
+            </a>
+          )}
           <button className="detail__close" onClick={onClose}><Icon name="x" size={18}/></button>
         </div>
       </div>
       <div className="detail__body">
         <div className="rdetail__hero">
-          <div className="rdetail__hero__img" style={{ background: `linear-gradient(135deg, oklch(0.85 0.06 ${(data.id.charCodeAt(1)*7)%360}), oklch(0.65 0.10 ${(data.id.charCodeAt(1)*11)%360}))` }}/>
+          <div className="rdetail__hero__img" style={{ background: data.photo ? 'var(--color-surface-3)' : fallbackBg }}>
+            {data.photo && <img src={data.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
+          </div>
           <div>
             <div className="rdetail__hero__name">{data.name}</div>
-            <div className="rdetail__hero__sub">{data.cuisine} · {data.price} · {data.address}</div>
+            <div className="rdetail__hero__sub">{data.price} · {data.address}</div>
             <div className="rdetail__hero__meta">
               {data.open ? <Pill variant="success" dot>Open · {data.hours}</Pill> : <Pill dot>Closed</Pill>}
               <Pill variant="info">
@@ -869,34 +896,50 @@ function RestaurantDetail({ restaurantId, onClose }) {
             <div className="kv"><span className="kv__l">Address</span><span className="kv__v">{data.address}</span></div>
             <div className="kv"><span className="kv__l">Price range</span><span className="kv__v">{data.price}</span></div>
             <div className="kv"><span className="kv__l">Rating</span><span className="kv__v">{data.rating} ({data.reviews} reviews)</span></div>
-            <div className="kv"><span className="kv__l">Coordinates</span><span className="kv__v mono">52.520, 13.405</span></div>
-            <div className="kv"><span className="kv__l">Phone</span><span className="kv__v mono">+49 30 24 24 39 78</span></div>
-            <div className="kv"><span className="kv__l">Wolt slug</span><span className="kv__v mono">{data.name.toLowerCase().replace(/[^a-z]/g,'-').replace(/-+/g,'-').slice(0,28)}</span></div>
-            <div className="kv"><span className="kv__l">Last refresh</span><span className="kv__v">{data.updated}</span></div>
+            {data.lat && <div className="kv"><span className="kv__l">Coordinates</span><span className="kv__v mono">{data.lat.toFixed(4)}, {data.lng.toFixed(4)}</span></div>}
+            <div className="kv"><span className="kv__l">Wolt slug</span><span className="kv__v mono">{data.woltSlug || '—'}</span></div>
+            <div className="kv"><span className="kv__l">Last refresh</span><span className="kv__v">{data.updated || '—'}</span></div>
           </div>
         </div>
 
         <div>
           <h3 className="h-section">
             <span>Meals · {data.meals}</span>
-            <button className="btn btn--ghost" style={{ height: 22, padding: '0 6px', fontSize: 12 }}>View all</button>
           </h3>
-          <div className="mealgrid">
-            {MEALS_SAMPLE.map((m,i) => (
-              <div key={i} className="meal">
-                <div className="meal__img" style={{ background: m.photo }}/>
-                <div>
-                  <div className="meal__name">{m.name}</div>
-                  <div className="meal__macros">
-                    <span className="macro macro--cal">{m.kcal} kcal</span>
-                    <span className="macro macro--p">P {m.p}g</span>
-                    <span className="macro macro--f">F {m.f}g</span>
-                    <span className="macro macro--c">C {m.c}g</span>
+          {mealsLoading ? (
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {[1,2,3,4].map(i => (
+                <div key={i} className="meal" style={{ opacity: 0.5 }}>
+                  <div className="meal__img" style={{ background: 'var(--color-surface-3)' }}/>
+                  <div>
+                    <div style={{ height: 12, borderRadius: 4, background: 'var(--color-surface-3)', marginBottom: 6, width: '80%' }}/>
+                    <div style={{ height: 10, borderRadius: 4, background: 'var(--color-surface-3)', width: '60%' }}/>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : meals.length > 0 ? (
+            <div className="mealgrid">
+              {meals.map((m, i) => (
+                <div key={m.id || i} className="meal">
+                  <div className="meal__img" style={{ background: 'var(--color-surface-3)' }}>
+                    {m.image_url && <img src={m.image_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
+                  </div>
+                  <div>
+                    <div className="meal__name">{m.name}</div>
+                    <div className="meal__macros">
+                      {m.calories && <span className="macro macro--cal">{m.calories} kcal</span>}
+                      {m.protein  && <span className="macro macro--p">P {m.protein}g</span>}
+                      {m.fat      && <span className="macro macro--f">F {m.fat}g</span>}
+                      {m.carbs    && <span className="macro macro--c">C {m.carbs}g</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="muted" style={{ fontSize: 13, padding: '12px 0' }}>No meal data available.</div>
+          )}
         </div>
 
         <div>
