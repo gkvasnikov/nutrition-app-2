@@ -155,7 +155,10 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
   function selectDiet(d) {
     const next = diet === d ? null : d
     setDiet(next)
-    setMacros(computeMacros(mealTime, next))
+    // Custom = keep current slider values unchanged
+    if (next !== 'custom') {
+      setMacros(computeMacros(mealTime, next))
+    }
   }
 
   function toggleDietTag(key) {
@@ -215,27 +218,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                     <PillTab key={key} label={label} selected={diet === key} onClick={() => selectDiet(key)} />
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Card 2: Adjust macros ──────────────────────────────────── */}
-        <div
-          className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
-          style={{ transitionDelay: isExpanded ? '0.1s' : '0s' }}
-        >
-          <button
-            type="button"
-            className={styles.cardHeader}
-            onClick={() => toggleSection('macros')}
-          >
-            <span className={styles.cardTitle}>Adjust macros</span>
-          </button>
-
-          <div className={`${styles.body} ${openSection === 'macros' ? styles.bodyOpen : ''}`}>
-            <div className={styles.bodyInner}>
-              <div className={styles.bodyContent}>
+                <div className={styles.divider} />
                 {SLIDER_CONFIG.map(cfg => (
                   <RangeSlider
                     key={cfg.key}
@@ -244,9 +227,13 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
                     max={cfg.max}
                     step={cfg.step}
                     value={macros[cfg.key]}
-                    onChange={v => setMacros(prev => ({ ...prev, [cfg.key]: v }))}
+                    onChange={v => {
+                      setMacros(prev => ({ ...prev, [cfg.key]: v }))
+                      if (diet !== 'custom') setDiet('custom')
+                    }}
                   />
                 ))}
+                <div className={styles.divider} />
                 <div className={styles.pillRow}>
                   <PillTab label="Plant-based"       icon="/icons/Accordion/Pill/plant-based.svg" selected={dietTags.plantBased}        onClick={() => toggleDietTag('plantBased')} />
                   <PillTab label="Gluten-free"        icon="/icons/Accordion/Pill/gluten-free.svg"  selected={dietTags.glutenFree}         onClick={() => toggleDietTag('glutenFree')} />
@@ -257,10 +244,10 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
           </div>
         </div>
 
-        {/* ── Card 3: Profile ───────────────────────────────────────── */}
+        {/* ── Card 2: Profile ───────────────────────────────────────── */}
         <div
           className={`${styles.card} ${isExpanded ? styles.cardVisible : ''}`}
-          style={{ transitionDelay: isExpanded ? '0.18s' : '0s' }}
+          style={{ transitionDelay: isExpanded ? '0.1s' : '0s' }}
         >
           <button
             type="button"
@@ -268,6 +255,7 @@ export default function MealFilterOverlay({ show, onClose, onApply, initialFilte
             onClick={() => toggleSection('profile')}
           >
             <span className={styles.cardTitle}>Profile</span>
+            <span className={styles.cardOptional}>Optional</span>
           </button>
 
           <div className={`${styles.body} ${openSection === 'profile' ? styles.bodyOpen : ''}`}>

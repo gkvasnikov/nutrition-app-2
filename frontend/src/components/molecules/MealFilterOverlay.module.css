@@ -51,7 +51,7 @@
 }
 
 .cardMainExpanded {
-  max-height: 700px;
+  max-height: 1000px;
 }
 
 /* ── Cards 2 & 3 — secondary cards ─────────────────────────────────────── */
@@ -88,6 +88,13 @@
 .cardTitle {
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.cardOptional {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
   color: var(--color-text);
   line-height: 1;
 }
@@ -199,7 +206,7 @@
 }
 
 .sliderLabel {
-  width: 52px;
+  width: 80px;
   flex-shrink: 0;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
