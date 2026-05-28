@@ -1607,10 +1607,34 @@ async function runGooglePlaceScript(districtId, enabledFields = [], limit = null
   }
 }
 
+// Ensure a table's `id` column auto-increments. The original data was bulk-imported
+// with explicit ids and no sequence default, so app-side INSERTs without an id fail
+// with "null value in column id violates not-null constraint". This attaches a
+// sequence (aligned past the current max id) as the column default. Idempotent.
+async function ensureIdSequence(table) {
+  if (!pool) return
+  const { rows } = await pool.query(`
+    SELECT pg_get_expr(d.adbin, d.adrelid) AS def
+    FROM pg_attribute a
+    LEFT JOIN pg_attrdef d ON d.adrelid = a.attrelid AND d.adnum = a.attnum
+    WHERE a.attrelid = $1::regclass AND a.attname = 'id'
+  `, [table])
+  if (rows[0]?.def) return  // already has a default — nothing to do
+  const seq = `${table}_id_seq`  // table is a hardcoded literal — no injection
+  await pool.query(`CREATE SEQUENCE IF NOT EXISTS ${seq}`)
+  await pool.query(`SELECT setval('${seq}', COALESCE((SELECT MAX(id) FROM ${table}), 0) + 1, false)`)
+  await pool.query(`ALTER TABLE ${table} ALTER COLUMN id SET DEFAULT nextval('${seq}')`)
+  await pool.query(`ALTER SEQUENCE ${seq} OWNED BY ${table}.id`)
+  console.log(`Attached id sequence "${seq}" to ${table}`)
+}
+
 // ── Wolt schema migrations ────────────────────────────────────────────────────
 async function ensureWoltSchema() {
   if (!pool) return
   try {
+    // 0. Ensure restaurants.id / menu_items.id auto-increment (bulk import had no sequence)
+    await ensureIdSequence('restaurants')
+    await ensureIdSequence('menu_items')
     // 1. Remove any duplicate wolt_slug rows (keep highest id = most recent)
     await pool.query(`
       DELETE FROM restaurants a
