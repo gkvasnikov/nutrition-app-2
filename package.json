@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cd frontend && npm ci && npm run build",
+    "build": "npx playwright install chromium --with-deps && cd frontend && npm ci && npm run build",
     "start": "node server.js",
     "dev:server": "node server.js"
   },
