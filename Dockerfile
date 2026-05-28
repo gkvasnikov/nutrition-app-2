@@ -1,24 +1,21 @@
 # Official Playwright image: Ubuntu + Node 20 + Chromium + all system libraries
 # preinstalled and version-matched to playwright 1.60.0 (see package.json).
-# This fixes "error while loading shared libraries: libglib-2.0.so.0" that
-# occurs under nixpacks, where Chromium's system deps are not installed.
+# Chromium is already in the base image — no separate install step needed.
 FROM mcr.microsoft.com/playwright:v1.60.0-jammy
 
 WORKDIR /app
 
-# 1. Install server (root) dependencies
+# 1. Install server (root) dependencies — cached until package.json changes
 COPY package*.json ./
 RUN npm ci
 
-# 2. Copy the full source
+# 2. Install frontend dependencies — cached until frontend/package.json changes
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm ci
+
+# 3. Copy full source and build frontend
 COPY . .
-
-# 3. Ensure the Chromium build matching this playwright version is present.
-#    (System deps already exist in the base image — no --with-deps needed.)
-RUN npx playwright install chromium
-
-# 4. Build the frontend (Vite). Runs before NODE_ENV=production so dev deps install.
-RUN cd frontend && npm ci && npm run build
+RUN cd frontend && npm run build
 
 ENV NODE_ENV=production
 # Railway injects PORT at runtime; server.js falls back to 3001 locally.
