@@ -677,6 +677,8 @@ async function runImageCacheJob() {
     // overwriting a good previous sync record with partial data.
     if (!_cacheJob.cancelled) {
       saveR2SyncStats().catch(e => console.warn('Could not persist R2 sync stats:', e.message))
+      logActivity(_cacheJob.errors > 0 ? 'error' : 'success', 'Photos resynced to R2',
+        `${_cacheJob.newlyCached} new · ${_cacheJob.skipped} cached${_cacheJob.errors ? ` · ${_cacheJob.errors} errors` : ''}`)
     }
   }
 }
@@ -1118,6 +1120,53 @@ async function loadScriptStats() {
 // Warm up on startup
 loadScriptStats().catch(() => {})
 
+// ── Activity log ────────────────────────────────────────────────────────────────
+// Persistent event feed shown in the admin "Activity · last 24h" panel.
+async function ensureActivitySchema() {
+  if (!pool) return
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS admin_activity (
+        id         SERIAL PRIMARY KEY,
+        kind       TEXT NOT NULL,          -- 'success' | 'error' | 'info'
+        text       TEXT NOT NULL,
+        sub        TEXT,
+        created_at TIMESTAMPTZ DEFAULT NOW()
+      )
+    `)
+    await pool.query(`CREATE INDEX IF NOT EXISTS admin_activity_created_idx ON admin_activity (created_at DESC)`)
+  } catch (e) {
+    console.warn('ensureActivitySchema:', e.message)
+  }
+}
+ensureActivitySchema().catch(() => {})
+
+// Append an activity entry (best-effort — never throws into the caller)
+async function logActivity(kind, text, sub = null) {
+  if (!pool) return
+  try {
+    await pool.query(`INSERT INTO admin_activity (kind, text, sub) VALUES ($1, $2, $3)`, [kind, text, sub])
+  } catch (e) {
+    console.warn('logActivity:', e.message)
+  }
+}
+
+// Display name for a district slug ('mitte' → 'Mitte'); null → 'Berlin'
+function districtLabel(districtId) {
+  return districtId ? (DISTRICT_NAMES[districtId] || districtId) : 'Berlin'
+}
+
+// Compact relative-time string for the activity feed ('2m', '8m', '1h', '3d')
+function msToRelativeServer(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000))
+  if (s < 60)  return `${s}s`
+  const m = Math.floor(s / 60)
+  if (m < 60)  return `${m}m`
+  const h = Math.floor(m / 60)
+  if (h < 24)  return `${h}h`
+  return `${Math.floor(h / 24)}d`
+}
+
 // ── Macros + Meal Type script (real Claude-powered implementation) ─────────────
 async function runMacrosScript(districtId) {
   const job = getScriptJob('macros')
@@ -1159,6 +1208,7 @@ async function runMacrosScript(districtId) {
 
     job.total = filtered.length
     console.log(`Macros script started: ${filtered.length} meals to process${districtId ? ` in ${districtId}` : ''}`)
+    logActivity('info', 'Macros Estimator started', `${districtLabel(districtId)} · ${filtered.length} meals queued`)
 
     const BATCH_SIZE = 20
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
@@ -1228,6 +1278,8 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
     console.log(`Macros script finished: ${job.done} processed, ${job.newItems} updated, ${job.errors} errors`)
     if (!job.cancelled) {
       saveScriptStats('macros').catch(e => console.warn('Could not persist macros stats:', e.message))
+      logActivity(job.errors > 0 ? 'error' : 'success', 'Macros Estimator completed',
+        `${districtLabel(job.districtId)} · ${job.newItems} meals scored${job.errors ? ` · ${job.errors} errors` : ''}`)
     }
   }
 }
@@ -1303,7 +1355,11 @@ async function runDedupScript(districtId) {
     job.running = false
     job.finishedAt = new Date().toISOString()
     console.log(`Dedup finished: ${job.newItems} duplicates removed, ${job.errors} errors`)
-    if (!job.cancelled) saveScriptStats('dedup').catch(() => {})
+    if (!job.cancelled) {
+      saveScriptStats('dedup').catch(() => {})
+      logActivity(job.errors > 0 ? 'error' : 'success', 'Duplicate detection completed',
+        `${districtLabel(job.districtId)} · ${job.newItems} duplicates removed`)
+    }
   }
 }
 
@@ -1413,6 +1469,7 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
 
     job.total = restaurants.length
     console.log(`Google Place enricher: ${restaurants.length} new Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}`)
+    logActivity('info', 'Google Place Enricher started', `${districtLabel(districtId)} · ${restaurants.length} restaurants to enrich`)
 
     for (const r of restaurants) {
       if (!job.running) { job.cancelled = true; break }
@@ -1535,7 +1592,11 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
     job.running = false
     job.finishedAt = new Date().toISOString()
     console.log(`Google Place enricher finished: ${job.newItems} enriched, ${job.findPlaceCalls} FindPlace, ${job.detailsCalls} Details calls, ${job.errors} errors`)
-    if (!job.cancelled) saveScriptStats('gplace').catch(() => {})
+    if (!job.cancelled) {
+      saveScriptStats('gplace').catch(() => {})
+      logActivity(job.errors > 0 ? 'error' : 'success', 'Google Place Enricher completed',
+        `${districtLabel(job.districtId)} · ${job.newItems} restaurants enriched${job.errors ? ` · ${job.errors} errors` : ''}`)
+    }
   }
 }
 
@@ -1691,6 +1752,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
 
     job.total = venues.length
     console.log(`Wolt script: ${venues.length} venues in district${districtId ? ` ${districtId}` : ''}`)
+    logActivity('info', 'Wolt Menu Scraper started', `${districtLabel(districtId)} · ${venues.length} venues${limit ? ` · limit ${limit}` : ''}`)
 
     // ── Phase 2: upsert restaurants + scrape menus with Playwright ──────────────
     // One browser for the entire run (same pattern as original Python script)
@@ -1799,7 +1861,11 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     job.running = false
     job.finishedAt = new Date().toISOString()
     console.log(`Wolt finished: ${job.done} venues processed, ${job.newItems} new restaurants, ${job.errors} errors`)
-    if (!job.cancelled) saveScriptStats('wolt').catch(() => {})
+    if (!job.cancelled) {
+      saveScriptStats('wolt').catch(() => {})
+      logActivity(job.errors > 0 ? 'error' : 'success', 'Wolt Menu Scraper completed',
+        `${districtLabel(job.districtId)} · ${job.newItems} new restaurants${job.errors ? ` · ${job.errors} errors` : ''}`)
+    }
   }
 }
 
@@ -1967,6 +2033,29 @@ app.get('/admin/api/scripts/status', requireAdminAuth, async (req, res) => {
     } catch (e) { /* ignore */ }
   }
   res.json({ jobs: _scriptJobs, enabled, pipeline: _pipeline })
+})
+
+// Activity feed — recent events from the last 24h (script runs, R2 syncs, etc.)
+app.get('/admin/api/activity', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.json([])
+  try {
+    const { rows } = await pool.query(`
+      SELECT kind, text, sub, created_at
+      FROM admin_activity
+      WHERE created_at > NOW() - INTERVAL '24 hours'
+      ORDER BY created_at DESC
+      LIMIT 25
+    `)
+    res.json(rows.map(r => ({
+      kind: r.kind,
+      text: r.text,
+      sub:  r.sub || '',
+      time: msToRelativeServer(Date.now() - new Date(r.created_at).getTime()),
+    })))
+  } catch (e) {
+    console.error('/admin/api/activity error:', e.message)
+    res.json([])
+  }
 })
 
 // Save Wolt limit config (persisted to admin_settings so it survives restarts)

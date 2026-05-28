@@ -1130,6 +1130,21 @@ function DistrictHoverCard({ data, onOpen, onMouseEnter, onMouseLeave }) {
 
 /* ─── Activity feed (floating, collapsible) ─── */
 function ActivityFeed({ open, onToggle }) {
+  const [items, setItems] = useState(null);  // null = not loaded yet
+
+  useEffect(() => {
+    let alive = true;
+    const load = () => {
+      fetch('/admin/api/activity')
+        .then(r => r.json())
+        .then(list => { if (alive) setItems(Array.isArray(list) ? list : []); })
+        .catch(() => { if (alive) setItems([]); });
+    };
+    load();
+    const iv = setInterval(load, 15000);  // refresh every 15s
+    return () => { alive = false; clearInterval(iv); };
+  }, []);
+
   return (
     <div className={`feed ${!open?'feed--collapsed':''}`}>
       <div className="feed__head" onClick={onToggle}>
@@ -1141,7 +1156,11 @@ function ActivityFeed({ open, onToggle }) {
         <Icon name={open ? 'chevron-down' : 'chevron-down'} size={14} style={{ transform: open ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 200ms ease', color: 'var(--color-text-3)' }}/>
       </div>
       <div className="feed__list">
-        {ACTIVITY.map((it, i) => (
+        {items === null ? (
+          <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>Loading…</div>
+        ) : items.length === 0 ? (
+          <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>No activity in the last 24h</div>
+        ) : items.map((it, i) => (
           <div key={i} className="feed__item">
             <span className={`feed__item__dot feed__item__dot--${it.kind}`}/>
             <div>
