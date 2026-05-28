@@ -51,10 +51,18 @@ if (pool) {
 }
 
 // ── Cloudflare R2 (persistent image cache) ────────────────────────────────────
-const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && process.env.R2_ACCOUNT_ID)
+// R2_JURISDICTION=eu required for EU-jurisdiction buckets (shows EU badge in Cloudflare dashboard)
+const _r2Jurisdiction = process.env.R2_JURISDICTION  // e.g. 'eu', leave unset for global
+const _r2Endpoint = process.env.R2_ACCOUNT_ID
+  ? _r2Jurisdiction
+    ? `https://${process.env.R2_ACCOUNT_ID}.${_r2Jurisdiction}.r2.cloudflarestorage.com`
+    : `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
+  : null
+
+const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && _r2Endpoint)
   ? new S3Client({
       region: 'auto',
-      endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+      endpoint: _r2Endpoint,
       credentials: {
         accessKeyId:     process.env.R2_ACCESS_KEY_ID,
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
@@ -65,10 +73,9 @@ const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && 
 const R2_BUCKET = process.env.R2_BUCKET || 'nutrition-app-images'
 
 if (r2) {
-  const endpoint = `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
   const keyId = process.env.R2_ACCESS_KEY_ID || ''
   const keyPreview = keyId.length > 8 ? `${keyId.slice(0,4)}...${keyId.slice(-4)} (${keyId.length} chars)` : `[too short: ${keyId.length} chars]`
-  console.log(`R2 client created → endpoint: ${endpoint}`)
+  console.log(`R2 client created → endpoint: ${_r2Endpoint}${_r2Jurisdiction ? ` [jurisdiction: ${_r2Jurisdiction}]` : ''}`)
   console.log(`R2 bucket: "${R2_BUCKET}" | access key: ${keyPreview}`)
   // Startup write test — confirms credentials + bucket are valid
   r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: '_ping', Body: Buffer.from('1'), ContentType: 'text/plain' }))
