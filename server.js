@@ -1046,6 +1046,7 @@ async function fetchAdminRestaurants() {
       rating:     r.rating,
       reviews:    r.reviews_count,
       price:      PRICE_MAP[r.price_level] || '—',
+      priceLevel: r.price_level ? parseInt(r.price_level) : null,
       address:    r.address || '',
       hours:      getHoursString(r.opening_hours) || '—',
       updated:    null,

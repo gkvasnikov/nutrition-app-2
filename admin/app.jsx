@@ -976,17 +976,23 @@ function RestaurantDetail({ restaurantId, onClose }) {
           </div>
           <div>
             <div className="rdetail__hero__name">{data.name}</div>
-            <div className="rdetail__hero__sub">{data.price} · {data.address}</div>
+            <div className="rdetail__hero__sub">
+              {data.priceLevel
+                ? <span style={{ marginRight: 6 }}>{Array.from({length:4},(_,i)=><span key={i} style={{opacity: i < data.priceLevel ? 1 : 0.2}}>€</span>)}</span>
+                : null}
+              {data.address}
+            </div>
             <div className="rdetail__hero__meta">
-              {data.open ? <Pill variant="success" dot>Open · {data.hours}</Pill> : <Pill dot>Closed</Pill>}
-              <Pill variant="info">
-                <Icon name="star" size={11}/>
-                <span className="num">{data.rating}</span>
-                <span style={{ opacity: 0.7 }} className="num">({data.reviews})</span>
-              </Pill>
-              {data.confidence < 0.7
-                ? <Pill variant="warn">low confidence</Pill>
-                : <Pill variant="success">conf. {Math.round(data.confidence*100)}%</Pill>}
+              {data.open != null && (data.open
+                ? <Pill variant="success" dot>Open · {data.hours}</Pill>
+                : <Pill dot>Closed · {data.hours}</Pill>)}
+              {data.rating != null && (
+                <Pill variant="info">
+                  <Icon name="star" size={11}/>
+                  <span className="num">{data.rating}</span>
+                  <span style={{ opacity: 0.6 }} className="num">({Number(data.reviews).toLocaleString('de-DE')})</span>
+                </Pill>
+              )}
             </div>
           </div>
         </div>
@@ -996,7 +1002,7 @@ function RestaurantDetail({ restaurantId, onClose }) {
           <div className="kvgrid">
             <div className="kv"><span className="kv__l">Working hours</span><span className="kv__v">{data.hours}</span></div>
             <div className="kv"><span className="kv__l">Address</span><span className="kv__v">{data.address}</span></div>
-            <div className="kv"><span className="kv__l">Price range</span><span className="kv__v">{data.price}</span></div>
+            <div className="kv"><span className="kv__l">Price range</span><span className="kv__v">{data.priceLevel ? Array.from({length:4},(_,i)=><span key={i} style={{opacity: i < data.priceLevel ? 1 : 0.2}}>€</span>) : data.price}</span></div>
             <div className="kv"><span className="kv__l">Rating</span><span className="kv__v">{data.rating} ({data.reviews} reviews)</span></div>
             {data.lat && <div className="kv"><span className="kv__l">Coordinates</span><span className="kv__v mono">{data.lat.toFixed(4)}, {data.lng.toFixed(4)}</span></div>}
             <div className="kv"><span className="kv__l">Wolt slug</span><span className="kv__v mono">{data.woltSlug || '—'}</span></div>
