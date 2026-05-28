@@ -115,6 +115,36 @@ function r2Key(url) {
   return `images/${hash}.${ext}`
 }
 
+// Proactively cache a single image URL into R2 under its image-proxy key.
+// Stores under r2Key(url) so a later /api/image-proxy?url=<url> request is an instant R2 hit.
+// No-op if R2 is unconfigured or the object already exists.
+async function cacheImageToR2(url) {
+  if (!r2 || !url) return
+  const key = r2Key(url)
+  try {
+    await r2.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
+    return  // already in R2
+  } catch (e) {
+    if (e.$metadata?.httpStatusCode !== 404 && e.name !== 'NotFound' && e.name !== 'NoSuchKey') return
+  }
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(15_000) })
+    if (!res.ok) return
+    const buf = Buffer.from(await res.arrayBuffer())
+    const ct  = res.headers.get('content-type') || 'image/jpeg'
+    await r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: buf, ContentType: ct }))
+  } catch (_) { /* best-effort — image-proxy will retry lazily on first view */ }
+}
+
+// Cache a list of image URLs into R2 with bounded concurrency.
+async function cacheImagesToR2(urls, concurrency = 6) {
+  if (!r2) return
+  const list = [...new Set(urls.filter(Boolean))]
+  for (let i = 0; i < list.length; i += concurrency) {
+    await Promise.all(list.slice(i, i + concurrency).map(cacheImageToR2))
+  }
+}
+
 
 // ── Price level helper ────────────────────────────────────────────────────────
 const PRICE_LEVEL_MAP = { 1: '€', 2: '€€', 3: '€€€', 4: '€€€€' }
@@ -1357,11 +1387,14 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
     }
 
     let restaurants
+    // Only enrich restaurants NOT yet processed by Google (google_enriched_at IS NULL).
+    // Existing/already-enriched restaurants are skipped — their Google data is kept as-is.
     if (districtId && bbox) {
       const { rows } = await pool.query(`
         SELECT id, name, lat, lon AS lng, address, google_place_id
         FROM restaurants
         WHERE wolt_slug IS NOT NULL
+          AND google_enriched_at IS NULL
           AND lat IS NOT NULL AND lon IS NOT NULL
           AND lat BETWEEN $1 AND $2 AND lon BETWEEN $3 AND $4
       `, [bbox.minLat, bbox.maxLat, bbox.minLng, bbox.maxLng])
@@ -1372,13 +1405,14 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
       const { rows } = await pool.query(`
         SELECT id, name, lat, lon AS lng, address, google_place_id
         FROM restaurants
-        WHERE wolt_slug IS NOT NULL AND lat IS NOT NULL AND lon IS NOT NULL
+        WHERE wolt_slug IS NOT NULL AND google_enriched_at IS NULL
+          AND lat IS NOT NULL AND lon IS NOT NULL
       `)
       restaurants = rows
     }
 
     job.total = restaurants.length
-    console.log(`Google Place enricher: ${restaurants.length} Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}`)
+    console.log(`Google Place enricher: ${restaurants.length} new Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}`)
 
     for (const r of restaurants) {
       if (!job.running) { job.cancelled = true; break }
@@ -1407,7 +1441,11 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
           }
 
           placeId = fpData.candidates?.[0]?.place_id || null
-          if (!placeId) { job.done++; continue }  // not found on Google — keep Wolt data
+          if (!placeId) {
+            // Not found on Google — stamp as processed so we don't retry, keep Wolt data
+            await pool.query(`UPDATE restaurants SET google_enriched_at = NOW() WHERE id = $1`, [r.id])
+            job.done++; continue
+          }
         }
 
         // ── Step 3: Place Details ────────────────────────────────────────────
@@ -1419,7 +1457,10 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
         const detailRes = await fetch(detailUrl)
         job.detailsCalls++
         const d = (await detailRes.json()).result
-        if (!d) { job.done++; continue }
+        if (!d) {
+          await pool.query(`UPDATE restaurants SET google_enriched_at = NOW() WHERE id = $1`, [r.id])
+          job.done++; continue
+        }
 
         // ── Step 4: Download photo → upload to R2 → get permanent URL ────────
         let photoUrl = null
@@ -1456,14 +1497,15 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
         // ── Step 5: UPDATE restaurant — Google data OVERWRITES Wolt ──────────
         await pool.query(`
           UPDATE restaurants SET
-            google_place_id = COALESCE(google_place_id, $2),
-            phone           = COALESCE($3, phone),
-            website         = COALESCE($4, website),
-            opening_hours   = COALESCE($5::jsonb, opening_hours),
-            photo_url       = COALESCE($6, photo_url),
-            address         = COALESCE($7, address),
-            rating          = COALESCE($8::numeric, rating),
-            reviews_count   = COALESCE($9::int, reviews_count)
+            google_place_id    = COALESCE(google_place_id, $2),
+            phone              = COALESCE($3, phone),
+            website            = COALESCE($4, website),
+            opening_hours      = COALESCE($5::jsonb, opening_hours),
+            photo_url          = COALESCE($6, photo_url),
+            address            = COALESCE($7, address),
+            rating             = COALESCE($8::numeric, rating),
+            reviews_count      = COALESCE($9::int, reviews_count),
+            google_enriched_at = NOW()
           WHERE id = $1
         `, [
           r.id,
@@ -1668,8 +1710,10 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     }
 
     try {
+      let limitReached = false
       for (const v of venues) {
         if (!job.running) { job.cancelled = true; break }
+        if (limitReached) break  // limit hit on previous iteration — stop (not cancelled, stats persist)
         try {
           // Upsert by wolt_slug — Wolt data as baseline (Google enricher overwrites later)
           // COALESCE: keep existing lat/lon/address/photo if already set (Google may be better)
@@ -1692,47 +1736,51 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
           const restId = restRow.id
 
           // Track new restaurant inserts (for limit)
-          if (restRow.is_new) {
-            job.newItems++
-            // Stop early if limit reached
-            if (limit && job.newItems >= limit) {
-              console.log(`Wolt script: limit of ${limit} new restaurants reached`)
-              job.running = false
-            }
-          }
-
-          if (!job.running) { job.cancelled = true; break }
+          if (restRow.is_new) job.newItems++
 
           // Skip menu fetch if restaurant already has menu items
           const { rows: [countRow] } = await pool.query(
             `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
             [restId]
           )
-          if (parseInt(countRow.n) > 0) { job.done++; continue }
-
-          // Scrape menu via Playwright (headless browser, same as original Python script)
-          console.log(`Wolt: scraping menu for ${v.slug}`)
-          const items = await scrapeWoltMenuPlaywright(page, v.slug)
-
-          if (items.length === 0) {
-            console.log(`  — no items found for ${v.slug}`)
+          if (parseInt(countRow.n) > 0) {
+            job.done++
           } else {
-            let menuAdded = 0
-            for (const item of items) {
-              try {
-                const { rowCount } = await pool.query(`
-                  INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
-                  VALUES ($1, $2, $3, $4, 'wolt_menu')
-                  ON CONFLICT (restaurant_id, LOWER(name)) WHERE source = 'wolt_menu'
-                  DO NOTHING
-                `, [restId, item.name, item.price, item.imageUrl || null])
-                if (rowCount > 0) menuAdded++
-              } catch (_) {}
+            // Scrape menu via Playwright (headless browser, same as original Python script)
+            console.log(`Wolt: scraping menu for ${v.slug}`)
+            const items = await scrapeWoltMenuPlaywright(page, v.slug)
+
+            if (items.length === 0) {
+              console.log(`  — no items found for ${v.slug}`)
+            } else {
+              let menuAdded = 0
+              for (const item of items) {
+                try {
+                  const { rowCount } = await pool.query(`
+                    INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
+                    VALUES ($1, $2, $3, $4, 'wolt_menu')
+                    ON CONFLICT (restaurant_id, LOWER(name)) WHERE source = 'wolt_menu'
+                    DO NOTHING
+                  `, [restId, item.name, item.price, item.imageUrl || null])
+                  if (rowCount > 0) menuAdded++
+                } catch (_) {}
+              }
+              console.log(`  ${menuAdded} items → ${v.slug}`)
+
+              // Push Wolt photos (hero + meal images) to R2 immediately so they're
+              // permanently hosted, not dependent on lazy image-proxy caching.
+              const woltPhotos = [v.heroPhoto, ...items.map(it => it.imageUrl)]
+              await cacheImagesToR2(woltPhotos)
             }
-            console.log(`  ${menuAdded} items → ${v.slug}`)
+            job.done++
           }
 
-          job.done++
+          // Limit check AFTER the current restaurant is fully processed (menu scraped),
+          // so the Nth new restaurant lands on the map with its menu.
+          if (limit && job.newItems >= limit) {
+            console.log(`Wolt script: limit of ${limit} new restaurants reached`)
+            limitReached = true
+          }
         } catch (e) {
           console.error(`Wolt script venue ${v.slug}:`, e.message)
           job.errors++
