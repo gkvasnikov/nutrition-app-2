@@ -1667,38 +1667,39 @@ async function scrapeWoltMenuPlaywright(page, slug) {
     }).filter(i => i.name)
   ).catch(() => [])
 
-  // Up to 2 attempts — Wolt occasionally serves a slow/empty page to datacenter IPs,
-  // leaving a restaurant with 0 menu items. Reload once before giving up.
-  // Returns { items, diag } so the caller can distinguish throttle (no cards ever / error page)
-  // from timing (cards appear only on the 2nd attempt).
-  let sawCard = false, status = null
+  // The menu is server-rendered into the page HTML, so we fetch the HTML directly (no SPA
+  // hydration / menu XHR — that rendering was unreliable on Railway) and parse it via setContent.
+  // Up to 2 attempts. Returns { items, diag } so the caller can tell why a venue came back empty.
+  const headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml',
+    'Accept-Language': 'de-DE,de;q=0.9',
+    'Referer': 'https://wolt.com/',
+  }
+  let status = null, htmlLen = 0, sawCard = false
   for (let attempt = 1; attempt <= 2; attempt++) {
+    let html = ''
     try {
-      const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
-      if (resp) status = resp.status()
-    } catch {
-      await page.waitForTimeout(3000)
-    }
-    // Dismiss cookie / consent banner if present
-    await page.evaluate(() => {
-      document.querySelectorAll("[data-test-id='consents-banner-overlay']").forEach(el => el.remove())
-    }).catch(() => {})
-    // Wait for the menu cards to actually render (loaded via XHR; networkidle is unreliable here)
-    const sel = await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => null)
-    if (sel) sawCard = true
-    await page.waitForTimeout(500)
+      const resp = await fetch(url, { headers, signal: AbortSignal.timeout(20000) })
+      status = resp.status
+      html = await resp.text()
+      htmlLen = html.length
+      sawCard = html.includes('horizontal-item-card')
+    } catch { /* network error — retry */ }
 
-    const items = await extract()
-    if (items.length > 0) {
-      return { items, diag: { sawCard, status, recovered: attempt === 2 } }
+    if (html) {
+      await page.setContent(html, { waitUntil: 'domcontentloaded' }).catch(() => {})
+      const items = await extract()
+      if (items.length > 0) {
+        return { items, diag: { sawCard, status, htmlLen, recovered: attempt === 2 } }
+      }
     }
     if (attempt === 2) {
-      const title = await page.title().catch(() => '')
-      return { items: [], diag: { sawCard, status, title, recovered: false } }
+      return { items: [], diag: { sawCard, status, htmlLen, recovered: false } }
     }
-    await page.waitForTimeout(2000)  // brief backoff, then one retry
+    await page.waitForTimeout(1500)  // brief backoff, then one retry
   }
-  return { items: [], diag: { sawCard, status, recovered: false } }
+  return { items: [], diag: { sawCard, status, htmlLen, recovered: false } }
 }
 
 // ── Wolt scraper ──────────────────────────────────────────────────────────────
@@ -1904,9 +1905,9 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               job.scrapeEmpty = (job.scrapeEmpty || 0) + 1
               if (!job.emptySamples) job.emptySamples = []
               if (job.emptySamples.length < 8) {
-                job.emptySamples.push({ slug: v.slug, title: diag.title || '', sawCard: !!diag.sawCard, status: diag.status })
+                job.emptySamples.push({ slug: v.slug, sawCard: !!diag.sawCard, status: diag.status, htmlLen: diag.htmlLen })
               }
-              console.log(`  — no items for ${v.slug} (sawCard=${diag.sawCard}, status=${diag.status}, title="${diag.title || ''}")`)
+              console.log(`  — no items for ${v.slug} (sawCard=${diag.sawCard}, status=${diag.status}, htmlLen=${diag.htmlLen})`)
             } else {
               let menuAdded = 0
               for (const item of items) {
