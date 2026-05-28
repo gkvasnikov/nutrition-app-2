@@ -66,11 +66,20 @@ const R2_BUCKET = process.env.R2_BUCKET || 'nutrition-app-images'
 
 if (r2) {
   const endpoint = `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
-  console.log(`R2 client created → endpoint: ${endpoint} bucket: ${R2_BUCKET}`)
+  const keyId = process.env.R2_ACCESS_KEY_ID || ''
+  const keyPreview = keyId.length > 8 ? `${keyId.slice(0,4)}...${keyId.slice(-4)} (${keyId.length} chars)` : `[too short: ${keyId.length} chars]`
+  console.log(`R2 client created → endpoint: ${endpoint}`)
+  console.log(`R2 bucket: "${R2_BUCKET}" | access key: ${keyPreview}`)
   // Startup write test — confirms credentials + bucket are valid
   r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: '_ping', Body: Buffer.from('1'), ContentType: 'text/plain' }))
     .then(() => console.log(`R2 write test: ✓ OK`))
-    .catch(e => console.error(`R2 write test FAILED → HTTP ${e.$metadata?.httpStatusCode} | name: ${e.name} | msg: ${e.message}`))
+    .catch(e => {
+      const code = e.$metadata?.httpStatusCode
+      console.error(`R2 write test FAILED → HTTP ${code} | name: ${e.name} | msg: ${e.message}`)
+      if (code === 404) console.error(`  → 404 = bucket "${R2_BUCKET}" not found. Check: (1) bucket name matches exactly, (2) R2 token was created in R2 section (not Account API Tokens)`)
+      if (code === 403) console.error(`  → 403 = credentials valid but no permission. Check token has "Object Read & Write" for this bucket.`)
+      if (code === 401) console.error(`  → 401 = invalid credentials. You may have used a Cloudflare Bearer API token instead of an R2 S3 token.`)
+    })
 } else {
   console.log('R2 not configured — image proxy uses memory cache only')
 }
