@@ -562,17 +562,26 @@ app.get('/api/image-proxy', async (req, res) => {
 // Downloads every Wolt meal photo to R2 so the app is fully independent of Wolt CDN.
 // Runs in the background; progress tracked in _cacheJob.
 
-const _cacheJob = { running: false, total: 0, done: 0, errors: 0, startedAt: null, finishedAt: null }
+const _cacheJob = {
+  running: false, total: 0, done: 0,
+  skipped: 0,   // files already in R2 (no download needed)
+  newlyCached: 0, // files downloaded and saved this run
+  errors: 0,
+  startedAt: null, finishedAt: null, cancelled: false,
+}
 
 async function runImageCacheJob() {
   if (!r2 || !pool)  return
   if (_cacheJob.running) return  // already running
 
-  _cacheJob.running   = true
-  _cacheJob.done      = 0
-  _cacheJob.errors    = 0
-  _cacheJob.startedAt = new Date().toISOString()
-  _cacheJob.finishedAt = null
+  _cacheJob.running     = true
+  _cacheJob.cancelled   = false
+  _cacheJob.done        = 0
+  _cacheJob.skipped     = 0
+  _cacheJob.newlyCached = 0
+  _cacheJob.errors      = 0
+  _cacheJob.startedAt   = new Date().toISOString()
+  _cacheJob.finishedAt  = null
 
   try {
     // Collect all unique image URLs: meal photos + restaurant photos
@@ -600,24 +609,26 @@ async function runImageCacheJob() {
 
     const CONCURRENCY = 8  // parallel fetches — don't overwhelm Wolt or the server
     for (let i = 0; i < rows.length; i += CONCURRENCY) {
-      if (!_cacheJob.running) break  // allow cancellation
+      if (!_cacheJob.running) { _cacheJob.cancelled = true; break }  // stopped by user
       await Promise.all(rows.slice(i, i + CONCURRENCY).map(async ({ image_url: url }) => {
         try {
           const key = r2Key(url)
-          // Skip if already in R2
+          // Check if already in R2 — skip download if so
           try {
             await r2.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
+            _cacheJob.skipped++
             _cacheJob.done++
-            return  // already cached
+            return  // already cached — no download needed
           } catch (e) {
             if (e.$metadata?.httpStatusCode !== 404 && e.name !== 'NotFound' && e.name !== 'NoSuchKey') throw e
           }
-          // Fetch from Wolt and save to R2
+          // Not in R2 yet — fetch from Wolt and upload
           const res = await fetch(url, { signal: AbortSignal.timeout(15_000) })
           if (!res.ok) throw new Error(`HTTP ${res.status}`)
           const buf = Buffer.from(await res.arrayBuffer())
           const ct  = res.headers.get('content-type') || 'image/jpeg'
           await r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: buf, ContentType: ct }))
+          _cacheJob.newlyCached++
           _cacheJob.done++
         } catch {
           _cacheJob.errors++
@@ -630,9 +641,12 @@ async function runImageCacheJob() {
   } finally {
     _cacheJob.running    = false
     _cacheJob.finishedAt = new Date().toISOString()
-    console.log(`Image cache job finished: ${_cacheJob.done - _cacheJob.errors} saved, ${_cacheJob.errors} errors`)
-    // Persist completed stats to DB so they survive server restarts
-    saveR2SyncStats().catch(e => console.warn('Could not persist R2 sync stats:', e.message))
+    console.log(`Image cache job finished: ${_cacheJob.skipped} skipped, ${_cacheJob.newlyCached} new, ${_cacheJob.errors} errors`)
+    // Only persist stats on natural completion (not user-cancelled) to avoid
+    // overwriting a good previous sync record with partial data.
+    if (!_cacheJob.cancelled) {
+      saveR2SyncStats().catch(e => console.warn('Could not persist R2 sync stats:', e.message))
+    }
   }
 }
 
@@ -641,7 +655,11 @@ const R2_SYNC_INTERVAL_DAYS = 7
 
 async function saveR2SyncStats() {
   if (!pool) return
-  const stats = { total: _cacheJob.total, done: _cacheJob.done, errors: _cacheJob.errors, finishedAt: _cacheJob.finishedAt }
+  const stats = {
+    total: _cacheJob.total, done: _cacheJob.done,
+    skipped: _cacheJob.skipped, newlyCached: _cacheJob.newlyCached,
+    errors: _cacheJob.errors, finishedAt: _cacheJob.finishedAt,
+  }
   await pool.query(`
     CREATE TABLE IF NOT EXISTS admin_settings (
       key TEXT PRIMARY KEY,
@@ -669,10 +687,12 @@ async function loadR2SyncStats() {
     const { rows } = await pool.query(`SELECT value FROM admin_settings WHERE key = 'r2_last_sync'`)
     if (rows.length) {
       const s = rows[0].value
-      _cacheJob.total      = s.total      || 0
-      _cacheJob.done       = s.done       || 0
-      _cacheJob.errors     = s.errors     || 0
-      _cacheJob.finishedAt = s.finishedAt || null
+      _cacheJob.total       = s.total       || 0
+      _cacheJob.done        = s.done        || 0
+      _cacheJob.skipped     = s.skipped     || 0
+      _cacheJob.newlyCached = s.newlyCached || 0
+      _cacheJob.errors      = s.errors      || 0
+      _cacheJob.finishedAt  = s.finishedAt  || null
       console.log(`R2 sync stats loaded from DB: ${s.total} total, finished ${s.finishedAt}`)
     }
   } catch (e) {
@@ -1006,8 +1026,11 @@ app.post('/admin/api/cache-images/stop', requireAdminAuth, (req, res) => {
 
 app.get('/admin/api/cache-images/status', requireAdminAuth, (req, res) => {
   const cachedCount = Math.max(0, _cacheJob.done - _cacheJob.errors)
-  const coveragePct = _cacheJob.total > 0 ? Math.round(cachedCount / _cacheJob.total * 10) / 10 : null
-  const nextSyncAt  = _cacheJob.finishedAt
+  // coveragePct: 0.0–100.0 (one decimal place percentage)
+  const coveragePct = _cacheJob.total > 0
+    ? Math.round(cachedCount / _cacheJob.total * 1000) / 10
+    : null
+  const nextSyncAt  = _cacheJob.finishedAt && !_cacheJob.cancelled
     ? new Date(new Date(_cacheJob.finishedAt).getTime() + R2_SYNC_INTERVAL_DAYS * 86400_000).toISOString()
     : null
   res.json({
@@ -1015,10 +1038,12 @@ app.get('/admin/api/cache-images/status', requireAdminAuth, (req, res) => {
     r2Enabled: !!r2,
     stats: {
       cachedCount,
-      totalCount:  _cacheJob.total,
-      errorCount:  _cacheJob.errors,
+      totalCount:      _cacheJob.total,
+      errorCount:      _cacheJob.errors,
+      skippedCount:    _cacheJob.skipped    || 0,
+      newlyCachedCount: _cacheJob.newlyCached || 0,
       coveragePct,
-      lastSyncAt:  _cacheJob.finishedAt,
+      lastSyncAt:      _cacheJob.cancelled ? null : _cacheJob.finishedAt,
       nextSyncAt,
       syncIntervalDays: R2_SYNC_INTERVAL_DAYS,
     },

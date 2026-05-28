@@ -451,9 +451,10 @@ function R2CachePanel() {
   const stop  = () => fetch('/admin/api/cache-images/stop',  { method: 'POST' })
     .then(r => r.json()).then(d => { setJob(d.job); setStats(d.stats); }).catch(() => {});
 
-  // While a job is running use live progress pct; otherwise use persisted coverage
+  // While a job is running show live progress %; otherwise show persisted coverage %
+  // Formula: * 1000 / 10 gives one decimal place percentage (0.0–100.0)
   const activePct = job?.running && job?.total > 0
-    ? Math.round(job.done / job.total * 10) / 10
+    ? Math.round(job.done / job.total * 1000) / 10
     : null;
   const coveragePct = activePct ?? stats?.coveragePct ?? null;
   const pctDisplay  = coveragePct !== null ? coveragePct.toFixed(1) : '—';
@@ -508,6 +509,7 @@ function R2CachePanel() {
             <span><span className="num" style={{ color: 'var(--color-text)', fontWeight: 700 }}>{stats.cachedCount.toLocaleString()}</span> cached</span>
             <span><span className="num" style={{ color: 'var(--color-text)', fontWeight: 700 }}>{stats.totalCount.toLocaleString()}</span> total</span>
             {stats.errorCount > 0 && <span style={{ color: 'var(--color-text-3)' }}><span className="num">{stats.errorCount.toLocaleString()}</span> dead links</span>}
+            {stats.newlyCachedCount > 0 && <span style={{ color: 'var(--color-accent)' }}><span className="num">+{stats.newlyCachedCount.toLocaleString()}</span> last run</span>}
           </div>
         )}
 
@@ -547,7 +549,10 @@ function R2CachePanel() {
         {/* Live progress while running */}
         {job?.running && job?.total > 0 && (
           <div style={{ padding: '0 16px 12px', fontSize: 12, color: 'var(--color-text-3)', textAlign: 'center' }}>
-            {job.done.toLocaleString()} / {job.total.toLocaleString()} processed · {job.errors} errors
+            {job.done.toLocaleString()} / {job.total.toLocaleString()}
+            {job.skipped > 0 && <span style={{ color: 'var(--color-accent)' }}> · {job.skipped.toLocaleString()} already in R2</span>}
+            {job.newlyCached > 0 && <span> · {job.newlyCached.toLocaleString()} new</span>}
+            {job.errors > 0 && <span> · {job.errors} errors</span>}
           </div>
         )}
       </div>
