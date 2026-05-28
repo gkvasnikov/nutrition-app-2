@@ -1646,39 +1646,48 @@ ensureWoltSchema().catch(() => {})
 //   wait for page to settle, then query DOM card elements.
 async function scrapeWoltMenuPlaywright(page, slug) {
   const url = `https://wolt.com/de/deu/berlin/restaurant/${slug}`
-  try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
-  } catch {
-    await page.waitForTimeout(3000)
-  }
 
-  // Dismiss cookie / consent banner if present
-  await page.evaluate(() => {
-    document.querySelectorAll("[data-test-id='consents-banner-overlay']")
-      .forEach(el => el.remove())
-  }).catch(() => {})
-
-  // Wait for the menu cards to actually render (Wolt loads them via XHR; relying on
-  // networkidle alone is unreliable in a datacenter where the socket never settles).
-  await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => {})
-  await page.waitForTimeout(500)
-
-  return page.$$eval("[data-test-id='horizontal-item-card']", cards =>
+  // Extract all menu cards: name, description (the <p>, e.g. ingredients), price, image.
+  const extract = () => page.$$eval("[data-test-id='horizontal-item-card']", cards =>
     cards.map(card => {
       const nameEl  = card.querySelector("[data-test-id='horizontal-item-card-header']")
       const priceEl = card.querySelector("[data-test-id='horizontal-item-card-price']")
+      const descEl  = card.querySelector('p')
       const imgEl   = card.querySelector('img')
 
-      const name     = nameEl?.innerText?.trim() || ''
-      const priceRaw = (priceEl?.getAttribute('aria-label') || priceEl?.innerText || '').replace(',', '.')
-      const imageUrl = imgEl?.getAttribute('src') || imgEl?.getAttribute('data-src') || ''
+      const name        = nameEl?.innerText?.trim() || ''
+      const description = descEl?.innerText?.trim() || ''
+      const priceRaw    = (priceEl?.getAttribute('aria-label') || priceEl?.innerText || '').replace(',', '.')
+      const imageUrl    = imgEl?.getAttribute('src') || imgEl?.getAttribute('data-src') || ''
 
       const m = priceRaw.match(/\d+[.,]?\d*/)
       const price = m ? parseFloat(m[0]) : null
 
-      return { name, price, imageUrl }
+      return { name, description, price, imageUrl }
     }).filter(i => i.name)
   ).catch(() => [])
+
+  // Up to 2 attempts — Wolt occasionally serves a slow/empty page to datacenter IPs,
+  // leaving a restaurant with 0 menu items. Reload once before giving up.
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+    } catch {
+      await page.waitForTimeout(3000)
+    }
+    // Dismiss cookie / consent banner if present
+    await page.evaluate(() => {
+      document.querySelectorAll("[data-test-id='consents-banner-overlay']").forEach(el => el.remove())
+    }).catch(() => {})
+    // Wait for the menu cards to actually render (loaded via XHR; networkidle is unreliable here)
+    await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => {})
+    await page.waitForTimeout(500)
+
+    const items = await extract()
+    if (items.length > 0 || attempt === 2) return items
+    await page.waitForTimeout(2000)  // brief backoff, then one retry
+  }
+  return []
 }
 
 // ── Wolt scraper ──────────────────────────────────────────────────────────────
@@ -1886,13 +1895,13 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
                   // unique index can't be built over the existing duplicate dishes, so
                   // we guard with NOT EXISTS instead of ON CONFLICT.
                   const { rowCount } = await pool.query(`
-                    INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
-                    SELECT $1, $2, $3, $4, 'wolt_menu'
+                    INSERT INTO menu_items (restaurant_id, name, description, price, image_url, source)
+                    SELECT $1, $2, $3, $4, $5, 'wolt_menu'
                     WHERE NOT EXISTS (
                       SELECT 1 FROM menu_items
                       WHERE restaurant_id = $1 AND LOWER(name) = LOWER($2) AND source = 'wolt_menu'
                     )
-                  `, [restId, item.name, item.price, item.imageUrl || null])
+                  `, [restId, item.name, item.description || null, item.price, item.imageUrl || null])
                   if (rowCount > 0) menuAdded++
                 } catch (e) {
                   // Surface the first menu-insert error instead of swallowing it silently
