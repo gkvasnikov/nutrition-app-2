@@ -1403,7 +1403,7 @@ const GPLACE_FIELDS_BASE = 'place_id,name,geometry,formatted_address,rating,user
 //   - opening_hours, address, rating, reviews: Google if found, else keep Wolt
 // Never inserts new restaurants (Wolt is the discovery source).
 // enabledFields: array of UI label strings (from checkboxes). If empty → fetch all.
-async function runGooglePlaceScript(districtId, enabledFields = []) {
+async function runGooglePlaceScript(districtId, enabledFields = [], limit = null) {
   const job = getScriptJob('gplace')
   if (job.running) return
   const apiKey = process.env.GOOGLE_PLACES_API_KEY || process.env.VITE_GOOGLE_MAPS_API_KEY
@@ -1445,6 +1445,8 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
     let restaurants
     // Only enrich restaurants NOT yet processed by Google (google_enriched_at IS NULL).
     // Existing/already-enriched restaurants are skipped — their Google data is kept as-is.
+    // ORDER BY id DESC → most recently added restaurants first (so a limited run
+    // enriches the freshly-discovered ones, e.g. the batch Wolt just added).
     if (districtId && bbox) {
       const { rows } = await pool.query(`
         SELECT id, name, lat, lon AS lng, address, google_place_id
@@ -1453,6 +1455,7 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
           AND google_enriched_at IS NULL
           AND lat IS NOT NULL AND lon IS NOT NULL
           AND lat BETWEEN $1 AND $2 AND lon BETWEEN $3 AND $4
+        ORDER BY id DESC
       `, [bbox.minLat, bbox.maxLat, bbox.minLng, bbox.maxLng])
       restaurants = rings
         ? rows.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lng), rings))
@@ -1463,12 +1466,16 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
         FROM restaurants
         WHERE wolt_slug IS NOT NULL AND google_enriched_at IS NULL
           AND lat IS NOT NULL AND lon IS NOT NULL
+        ORDER BY id DESC
       `)
       restaurants = rows
     }
 
+    // Apply limit AFTER the polygon filter so we get exactly N in-district restaurants
+    if (limit && restaurants.length > limit) restaurants = restaurants.slice(0, limit)
+
     job.total = restaurants.length
-    console.log(`Google Place enricher: ${restaurants.length} new Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}`)
+    console.log(`Google Place enricher: ${restaurants.length} Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}${limit ? ` (limit ${limit})` : ''}`)
     logActivity('info', 'Google Place Enricher started', `${districtLabel(districtId)} · ${restaurants.length} restaurants to enrich`)
 
     for (const r of restaurants) {
@@ -1916,7 +1923,7 @@ async function runPipeline(districtId, woltLimit = null) {
       console.log(`[pipeline] Starting step: ${id}`)
       try {
         if (id === 'wolt')        await runWoltScript(districtId, [], woltLimit)
-        else if (id === 'gplace') await runGooglePlaceScript(districtId, [])
+        else if (id === 'gplace') await runGooglePlaceScript(districtId, [], woltLimit)
         else if (id === 'macros') await runMacrosScript(districtId)
         else if (id === 'dedup')  await runDedupScript(districtId)
       } catch (e) {

@@ -1436,8 +1436,9 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
 
   if (!data) return <div className="detail detail--narrow"></div>;
 
-  const lastRun = job?.finishedAt
-    ? msToRelative(Date.now() - new Date(job.finishedAt).getTime()) + ' ago'
+  const lastRunRel = job?.finishedAt ? msToRelative(Date.now() - new Date(job.finishedAt).getTime()) : null;
+  const lastRun = lastRunRel
+    ? (lastRunRel === 'just now' ? 'just now' : lastRunRel + ' ago')
     : job?.startedAt && !job?.finishedAt
       ? 'running now'
       : data.lastRun;
