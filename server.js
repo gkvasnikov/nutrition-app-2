@@ -64,8 +64,16 @@ const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && 
   : null
 const R2_BUCKET = process.env.R2_BUCKET || 'nutrition-app-images'
 
-if (r2) console.log(`R2 connected → bucket: ${R2_BUCKET}`)
-else    console.log('R2 not configured — image proxy uses memory cache only')
+if (r2) {
+  const endpoint = `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
+  console.log(`R2 client created → endpoint: ${endpoint} bucket: ${R2_BUCKET}`)
+  // Startup write test — confirms credentials + bucket are valid
+  r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: '_ping', Body: Buffer.from('1'), ContentType: 'text/plain' }))
+    .then(() => console.log(`R2 write test: ✓ OK`))
+    .catch(e => console.error(`R2 write test FAILED → HTTP ${e.$metadata?.httpStatusCode} | name: ${e.name} | msg: ${e.message}`))
+} else {
+  console.log('R2 not configured — image proxy uses memory cache only')
+}
 
 // Stable R2 key from URL: images/<md5>.<ext>
 function r2Key(url) {
@@ -497,7 +505,7 @@ app.get('/api/image-proxy', async (req, res) => {
         Key:         r2Key(url),
         Body:        buf,
         ContentType: ct,
-      })).catch(e => console.error('R2 put error:', e.message))
+      })).catch(e => console.error(`R2 put error → HTTP ${e.$metadata?.httpStatusCode} | ${e.name} | ${e.message} | bucket: ${R2_BUCKET}`))
     }
 
     // Save to L1
