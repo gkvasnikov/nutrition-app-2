@@ -58,7 +58,7 @@ function App() {
     selectedId: districtId,
     onSelect: onDistrictSelect,
     onHover: handleHover,
-    onRestaurantPin: (id) => { setRestaurantId(id); },
+    onRestaurantPin: (id) => { setRestaurantId(id); focusPin(id); },
     accent: t.accent || 'green',
     theme: t.mapTheme || 'light',
   });
@@ -976,22 +976,24 @@ function RestaurantDetail({ restaurantId, onClose }) {
           </div>
           <div>
             <div className="rdetail__hero__name">{data.name}</div>
-            <div className="rdetail__hero__sub">
-              {data.priceLevel
-                ? <span style={{ marginRight: 6 }}>{Array.from({length:4},(_,i)=><span key={i} style={{opacity: i < data.priceLevel ? 1 : 0.2}}>€</span>)}</span>
-                : null}
-              {data.address}
-            </div>
+            <div className="rdetail__hero__sub">{data.address}</div>
             <div className="rdetail__hero__meta">
-              {data.open != null && (data.open
-                ? <Pill variant="success" dot>Open · {data.hours}</Pill>
-                : <Pill dot>Closed · {data.hours}</Pill>)}
+              {data.open != null && (
+                <span style={{ color: data.open ? 'var(--color-rating-green, #34a853)' : 'var(--color-text-2)', fontWeight: 500 }}>
+                  {data.open ? 'Open now' : 'Closed'}
+                </span>
+              )}
+              {data.priceLevel && (
+                <><span className="meta-dot">·</span>
+                <span>{Array.from({length:4},(_,i) => <span key={i} style={{opacity: i < data.priceLevel ? 1 : 0.2}}>€</span>)}</span></>
+              )}
               {data.rating != null && (
-                <Pill variant="info">
-                  <Icon name="star" size={11}/>
+                <><span className="meta-dot">·</span>
+                <span style={{ display:'inline-flex', alignItems:'center', gap: 3 }}>
+                  <span style={{ color:'#e8502c' }}>★</span>
                   <span className="num">{data.rating}</span>
-                  <span style={{ opacity: 0.6 }} className="num">({Number(data.reviews).toLocaleString('de-DE')})</span>
-                </Pill>
+                  <span className="num" style={{ opacity: 0.5 }}>({Number(data.reviews).toLocaleString('de-DE')})</span>
+                </span></>
               )}
             </div>
           </div>
