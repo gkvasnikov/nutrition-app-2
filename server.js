@@ -1449,7 +1449,27 @@ async function runGooglePlaceScript(districtId) {
   }
 }
 
-// ── Wolt venue discovery + menu scrape (REST API, no Playwright) ──────────────
+// ── Wolt schema migration ─────────────────────────────────────────────────────
+async function ensureWoltMenuIndex() {
+  if (!pool) return
+  try {
+    // Unique index prevents duplicate menu items from repeated scrapes
+    await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS menu_items_rest_name_wolt_idx
+        ON menu_items (restaurant_id, LOWER(name))
+        WHERE source = 'wolt_menu'
+    `)
+  } catch (e) {
+    console.warn('ensureWoltMenuIndex:', e.message)
+  }
+}
+ensureWoltMenuIndex().catch(() => {})
+
+// ── Wolt Scraper ──────────────────────────────────────────────────────────────
+// 1. Discovers venues in the district via Wolt API (paginated from centre outward)
+// 2. Upserts each venue into restaurants by wolt_slug
+// 3. Skips menu fetch entirely if the restaurant already has menu items in the DB
+// 4. For restaurants without menus: fetches via Wolt v4 menu API and inserts items
 async function runWoltScript(districtId) {
   const job = getScriptJob('wolt')
   if (job.running) return
@@ -1458,50 +1478,51 @@ async function runWoltScript(districtId) {
   job.finishedAt = null; job.districtId = districtId || null
 
   try {
-    // Get bounding box and polygon rings for the district (or all Berlin)
+    await ensureWoltMenuIndex()
+
+    // District polygon + centroid
     let rings = null
     let centerLat = 52.520, centerLng = 13.405
     if (districtId) {
       const polygons = await loadBerlinPolygons()
-      if (polygons && polygons.has(districtId)) {
+      if (polygons?.has(districtId)) {
         rings = polygons.get(districtId)
-        // Compute centroid
         const allPts = rings.flat()
         centerLat = allPts.reduce((s, p) => s + p[0], 0) / allPts.length
         centerLng = allPts.reduce((s, p) => s + p[1], 0) / allPts.length
       }
     }
 
-    // Discover venues via Wolt API (paginated, 50 per page)
+    // ── Phase 1: discover venues (paginate until no more in-district results) ──
     const venues = []
-    const seen = new Set()
+    const seen   = new Set()
     let skip = 0
+    let emptyPages = 0
     const headers = { 'User-Agent': 'Mozilla/5.0 (compatible; NutritionAdmin/1.0)', 'Accept': 'application/json' }
 
-    while (true) {
+    while (emptyPages < 2) {
       if (!job.running) { job.cancelled = true; break }
       try {
         const url = `https://consumer-api.wolt.com/v1/pages/restaurants?lat=${centerLat}&lon=${centerLng}&limit=50&skip=${skip}`
         const res  = await fetch(url, { headers })
         if (!res.ok) break
         const data = await res.json()
-        const sections = data.sections || []
-        let found = 0
-        for (const section of sections) {
+        let inDistrictFound = 0
+        for (const section of (data.sections || [])) {
           for (const item of (section.items || [])) {
-            const v = item.venue || item
-            const slug  = v.slug  || v.wolt_slug
-            const vLat  = v.location?.coordinates?.[1] ?? v.lat
-            const vLng  = v.location?.coordinates?.[0] ?? v.lon
+            const v    = item.venue || item
+            const slug = v.slug || v.wolt_slug
+            const vLat = v.location?.coordinates?.[1] ?? v.lat
+            const vLng = v.location?.coordinates?.[0] ?? v.lon
             if (!slug || seen.has(slug)) continue
-            // Filter by district polygon
-            if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
             seen.add(slug)
+            if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
             venues.push({ slug, name: v.name, lat: vLat, lng: vLng })
-            found++
+            inDistrictFound++
           }
         }
-        if (found === 0) break
+        // Stop if we got an empty page twice in a row (API exhausted or moved far from district)
+        emptyPages = inDistrictFound === 0 ? emptyPages + 1 : 0
         skip += 50
         await new Promise(r => setTimeout(r, 300))
       } catch (e) {
@@ -1511,51 +1532,66 @@ async function runWoltScript(districtId) {
     }
 
     job.total = venues.length
-    console.log(`Wolt script: ${venues.length} venues discovered${districtId ? ` in ${districtId}` : ''}`)
+    console.log(`Wolt script: ${venues.length} venues in district${districtId ? ` ${districtId}` : ''}`)
 
+    // ── Phase 2: upsert restaurants + fetch menus only for those without items ──
     for (const v of venues) {
       if (!job.running) { job.cancelled = true; break }
       try {
-        // Upsert restaurant (wolt_slug is unique key)
-        await pool.query(`
+        // Upsert restaurant, get its DB id in one query
+        const { rows: [restRow] } = await pool.query(`
           INSERT INTO restaurants (name, lat, lon, wolt_slug)
           VALUES ($1, $2, $3, $4)
           ON CONFLICT (wolt_slug) DO UPDATE SET
             name = EXCLUDED.name,
-            lat  = COALESCE(restaurants.lat,  EXCLUDED.lat),
-            lon  = COALESCE(restaurants.lon,  EXCLUDED.lon)
-          WHERE restaurants.wolt_slug IS NOT NULL
+            lat  = COALESCE(restaurants.lat, EXCLUDED.lat),
+            lon  = COALESCE(restaurants.lon, EXCLUDED.lon)
+          RETURNING id
         `, [v.name, v.lat, v.lng, v.slug])
 
-        // Try to fetch menu items via Wolt API
+        if (!restRow) { job.done++; continue }
+        const restId = restRow.id
+
+        // Check if this restaurant already has menu items → skip if so
+        const { rows: [countRow] } = await pool.query(
+          `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
+          [restId]
+        )
+        if (parseInt(countRow.n) > 0) {
+          job.done++
+          continue  // already has a menu — skip, no Wolt API call
+        }
+
+        // No menu yet — fetch from Wolt
         try {
           const menuUrl = `https://consumer-api.wolt.com/v4/venue/slug/${v.slug}/menu`
           const menuRes = await fetch(menuUrl, { headers })
           if (menuRes.ok) {
-            const menuData = await menuRes.json()
+            const menuData  = await menuRes.json()
             const categories = menuData.categories || menuData.menu?.items || []
             for (const cat of categories) {
               for (const item of (cat.items || [])) {
                 const name = item.name || item.baseName
                 if (!name) continue
-                const price  = item.unitPriceWithDiscount != null ? item.unitPriceWithDiscount / 100 : null
-                const imgUrl = item.imageUrl || item.image
-                // Get restaurant id to link menu item
-                const { rows: [restRow] } = await pool.query(
-                  `SELECT id FROM restaurants WHERE wolt_slug = $1 LIMIT 1`, [v.slug]
-                )
-                if (!restRow) continue
-                await pool.query(`
-                  INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
-                  VALUES ($1, $2, $3, $4, 'wolt_menu')
-                  ON CONFLICT DO NOTHING
-                `, [restRow.id, name, price, imgUrl])
-                job.newItems++
+                const price  = item.unitPriceWithDiscount != null
+                  ? item.unitPriceWithDiscount / 100 : null
+                const imgUrl = item.imageUrl || item.image || null
+                try {
+                  await pool.query(`
+                    INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
+                    VALUES ($1, $2, $3, $4, 'wolt_menu')
+                    ON CONFLICT (restaurant_id, LOWER(name))
+                      WHERE source = 'wolt_menu'
+                    DO NOTHING
+                  `, [restId, name, price, imgUrl])
+                  job.newItems++
+                } catch (_) {}
               }
             }
           }
         } catch (menuErr) {
-          // Menu API may not be available — that's OK, we still upserted the restaurant
+          // Wolt menu API unavailable for this venue — not a hard error
+          console.warn(`Wolt menu unavailable for ${v.slug}:`, menuErr.message)
         }
 
         job.done++
@@ -1572,7 +1608,7 @@ async function runWoltScript(districtId) {
   } finally {
     job.running = false
     job.finishedAt = new Date().toISOString()
-    console.log(`Wolt finished: ${job.done} venues processed, ${job.newItems} menu items added, ${job.errors} errors`)
+    console.log(`Wolt finished: ${job.done} venues, ${job.newItems} menu items added, ${job.errors} errors`)
     if (!job.cancelled) saveScriptStats('wolt').catch(() => {})
   }
 }
