@@ -559,15 +559,28 @@ async function runImageCacheJob() {
   _cacheJob.finishedAt = null
 
   try {
-    const { rows } = await pool.query(`
-      SELECT DISTINCT image_url FROM menu_items
-      WHERE image_url IS NOT NULL AND image_url <> ''
-        AND source = 'wolt_menu'
-        AND calories IS NOT NULL
-        AND (category IS NULL OR category != 'drink')
-    `)
+    // Collect all unique image URLs: meal photos + restaurant photos
+    const [mealsRes, restaurantsRes] = await Promise.all([
+      pool.query(`
+        SELECT DISTINCT image_url AS url FROM menu_items
+        WHERE image_url IS NOT NULL AND image_url <> ''
+          AND source = 'wolt_menu'
+          AND calories IS NOT NULL
+          AND (category IS NULL OR category != 'drink')
+      `),
+      pool.query(`
+        SELECT DISTINCT photo_url AS url FROM restaurants
+        WHERE photo_url IS NOT NULL AND photo_url <> ''
+      `),
+    ])
+    // Merge into one deduplicated list
+    const allUrls = [...new Set([
+      ...mealsRes.rows.map(r => r.url),
+      ...restaurantsRes.rows.map(r => r.url),
+    ])]
+    const rows = allUrls.map(url => ({ image_url: url }))
     _cacheJob.total = rows.length
-    console.log(`Image cache job started: ${rows.length} unique URLs`)
+    console.log(`Image cache job started: ${rows.length} unique URLs (${mealsRes.rows.length} meal + ${restaurantsRes.rows.length} restaurant photos)`)
 
     const CONCURRENCY = 8  // parallel fetches — don't overwhelm Wolt or the server
     for (let i = 0; i < rows.length; i += CONCURRENCY) {
