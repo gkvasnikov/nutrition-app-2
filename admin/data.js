@@ -15,7 +15,7 @@ const SCRIPTS = [
   { id: 'wolt', name: 'Wolt Menu Scraper', icon: 'utensils', desc: 'Discover restaurants & menus from Wolt: venue info, photos, prices.',
     lastRun: '5h ago', duration: '11m 04s', status: 'success', cost: '$0',
     coverage: 92, errors: 2,
-    includes: ['Venue name & slug', 'Coordinates', 'Address', 'Hero photo', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos'] },
+    includes: ['Venue name & slug', 'Coordinates', 'Address', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos'] },
   { id: 'gplace', name: 'Google Place Enricher', icon: 'map-pin', desc: 'Enrich Wolt restaurants with Google data. Google photo, hours, phone and website overwrite Wolt.',
     lastRun: '2h ago', duration: '4m 12s', status: 'success', cost: '$12',
     coverage: 100, errors: 0,

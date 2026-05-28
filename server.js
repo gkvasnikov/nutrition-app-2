@@ -1764,9 +1764,8 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               : v.address?.street_address
                 ? `${v.address.street_address}, ${v.address.city || 'Berlin'}`
                 : null
-            // Wolt image fields are objects like { url, blurhash } (or sometimes strings) — extract the URL
-            const pickUrl = x => typeof x === 'string' ? x : (x && typeof x === 'object' ? (x.url || x.src || null) : null)
-            const heroPhoto = pickUrl(v.brand_image) || pickUrl(v.hero_image) || pickUrl(v.profile_image) || pickUrl(v.images?.[0]) || null
+            // Note: restaurant photo is intentionally NOT taken from Wolt — Google enricher
+            // supplies it (priority). Only meal photos come from Wolt (scraped per dish).
             // Defensive type coercion — Wolt fields vary in type; DB columns are numeric.
             // rating: numeric column. Wolt uses a 0–10 scale → normalise to 0–5 to match Google.
             let rating = (typeof v.rating?.score === 'number' && isFinite(v.rating.score)) ? v.rating.score : null
@@ -1774,7 +1773,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             const reviewsCount = Number.isInteger(v.rating?.volume) ? v.rating.volume : (parseInt(v.rating?.volume, 10) || null)
             // price_level: integer column 1–4. Wolt price_range may be a string ("€€") or int → keep only valid ints.
             const priceLevel = (Number.isInteger(v.price_range) && v.price_range >= 1 && v.price_range <= 4) ? v.price_range : null
-            venuesMap.set(slug, { slug, name: v.name, lat: vLat, lng: vLng, address, heroPhoto, rating, reviewsCount, priceLevel })
+            venuesMap.set(slug, { slug, name: v.name, lat: vLat, lng: vLng, address, rating, reviewsCount, priceLevel })
           }
         }
       } catch (e) {
@@ -1836,19 +1835,18 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
           // On conflict (existing wolt_slug) the row's original id is kept and returned.
           const woltId = `wolt:${v.slug}`
           const { rows: [restRow] } = await pool.query(`
-            INSERT INTO restaurants (id, name, lat, lon, wolt_slug, address, photo_url, rating, reviews_count, price_level)
-            VALUES ($10, $1, $2, $3, $4, $5, $6, $7, $8, $9)
+            INSERT INTO restaurants (id, name, lat, lon, wolt_slug, address, rating, reviews_count, price_level)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             ON CONFLICT (wolt_slug) WHERE wolt_slug IS NOT NULL DO UPDATE SET
               name          = EXCLUDED.name,
               lat           = COALESCE(restaurants.lat,           EXCLUDED.lat),
               lon           = COALESCE(restaurants.lon,           EXCLUDED.lon),
               address       = COALESCE(restaurants.address,       EXCLUDED.address),
-              photo_url     = COALESCE(restaurants.photo_url,     EXCLUDED.photo_url),
               rating        = EXCLUDED.rating,
               reviews_count = EXCLUDED.reviews_count,
               price_level   = COALESCE(restaurants.price_level,   EXCLUDED.price_level)
             RETURNING id, (xmax = 0) AS is_new
-          `, [v.name, v.lat, v.lng, v.slug, v.address || null, v.heroPhoto || null, v.rating || null, v.reviewsCount || null, v.priceLevel || null, woltId])
+          `, [woltId, v.name, v.lat, v.lng, v.slug, v.address || null, v.rating || null, v.reviewsCount || null, v.priceLevel || null])
 
           if (!restRow) { job.done++; continue }
           const restId = restRow.id
@@ -1895,10 +1893,9 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               }
               console.log(`  ${menuAdded} items → ${v.slug}`)
 
-              // Push Wolt photos (hero + meal images) to R2 immediately so they're
-              // permanently hosted, not dependent on lazy image-proxy caching.
-              const woltPhotos = [v.heroPhoto, ...items.map(it => it.imageUrl)]
-              await cacheImagesToR2(woltPhotos)
+              // Push Wolt meal photos to R2 immediately so they're permanently hosted,
+              // not dependent on lazy image-proxy caching. (Restaurant photo comes from Google.)
+              await cacheImagesToR2(items.map(it => it.imageUrl))
             }
             job.done++
           }
