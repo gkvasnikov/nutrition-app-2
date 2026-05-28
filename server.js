@@ -8,6 +8,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import pg from 'pg'
 import session from 'express-session'
 import { timingSafeEqual, createHash } from 'crypto'
+import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 
 const app = express()
 app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
@@ -47,6 +48,29 @@ if (pool) {
   console.log('PostgreSQL pool initialised')
 } else {
   console.log('DATABASE_URL not set — PostgreSQL endpoints disabled')
+}
+
+// ── Cloudflare R2 (persistent image cache) ────────────────────────────────────
+const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && process.env.R2_ACCOUNT_ID)
+  ? new S3Client({
+      region: 'auto',
+      endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+      credentials: {
+        accessKeyId:     process.env.R2_ACCESS_KEY_ID,
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+      },
+    })
+  : null
+const R2_BUCKET = process.env.R2_BUCKET || 'nutrition-app-images'
+
+if (r2) console.log(`R2 connected → bucket: ${R2_BUCKET}`)
+else    console.log('R2 not configured — image proxy uses memory cache only')
+
+// Stable R2 key from URL: images/<md5>.<ext>
+function r2Key(url) {
+  const hash = createHash('md5').update(url).digest('hex')
+  const ext  = url.match(/\.(jpe?g|png|webp|avif|gif)(\?|$)/i)?.[1]?.replace('jpeg','jpg') || 'jpg'
+  return `images/${hash}.${ext}`
 }
 
 
@@ -404,16 +428,19 @@ Respond ONLY with valid JSON (no markdown):
 })
 
 
-// ── Image proxy — prevents canvas CORS taint ──────────────────────────────────
-// Server-side cache: each unique URL is fetched from Wolt CDN at most once per 24 h.
-// This prevents Railway's IP from hammering Wolt on every page load.
+// ── Image proxy — canvas CORS fix + R2 persistent cache ──────────────────────
+// Cache hierarchy:
+//   L1 — in-memory Map (2000 entries, 24 h TTL) — zero-latency repeat requests
+//   L2 — Cloudflare R2 (permanent)              — survives server restarts/redeploys
+//   L3 — origin (Wolt CDN / Google Maps CDN)    — first-ever fetch only
 const _proxyCache = new Map()  // url → { buf: Buffer, ct: string, ts: number }
-const _PROXY_TTL  = 24 * 60 * 60 * 1000  // 24 h in ms
-const _PROXY_MAX  = 2000                   // evict oldest when cache exceeds this many entries
+const _PROXY_TTL  = 24 * 60 * 60 * 1000  // 24 h
+const _PROXY_MAX  = 2000
 
 app.get('/api/image-proxy', async (req, res) => {
   const { url } = req.query
   if (!url) return res.status(400).send('Missing url')
+
   const allowed = ['imageproxy.wolt.com', 'maps.googleapis.com']
   let parsed
   try { parsed = new URL(url) } catch { return res.status(400).send('Invalid url') }
@@ -421,22 +448,58 @@ app.get('/api/image-proxy', async (req, res) => {
     return res.status(403).send('Disallowed domain')
   }
 
-  // Serve from cache if still fresh
+  // L1 — memory cache
   const cached = _proxyCache.get(url)
   if (cached && Date.now() - cached.ts < _PROXY_TTL) {
     res.set('Content-Type', cached.ct)
     res.set('Cache-Control', 'public, max-age=86400')
-    res.set('X-Cache', 'HIT')
+    res.set('X-Cache', 'MEM')
     return res.send(cached.buf)
   }
 
+  // L2 — R2 cache
+  if (r2) {
+    try {
+      const obj = await r2.send(new GetObjectCommand({ Bucket: R2_BUCKET, Key: r2Key(url) }))
+      const chunks = []; for await (const c of obj.Body) chunks.push(c)
+      const buf = Buffer.concat(chunks)
+      const ct  = obj.ContentType || 'image/jpeg'
+      // Warm L1 too
+      if (_proxyCache.size >= _PROXY_MAX) {
+        const oldest = [..._proxyCache.entries()].reduce((a, b) => a[1].ts < b[1].ts ? a : b)
+        _proxyCache.delete(oldest[0])
+      }
+      _proxyCache.set(url, { buf, ct, ts: Date.now() })
+      res.set('Content-Type', ct)
+      res.set('Cache-Control', 'public, max-age=86400')
+      res.set('X-Cache', 'R2')
+      return res.send(buf)
+    } catch (e) {
+      if (e.name !== 'NoSuchKey' && e.$metadata?.httpStatusCode !== 404) {
+        console.error('R2 get error:', e.message)
+      }
+      // fall through to origin fetch
+    }
+  }
+
+  // L3 — origin fetch
   try {
     const response = await fetch(url)
     if (!response.ok) return res.status(response.status).send('Upstream error')
     const ct  = response.headers.get('content-type') || 'image/jpeg'
     const buf = Buffer.from(await response.arrayBuffer())
 
-    // Evict oldest entry if cache is full
+    // Save to R2 in background (don't block the response)
+    if (r2) {
+      r2.send(new PutObjectCommand({
+        Bucket:      R2_BUCKET,
+        Key:         r2Key(url),
+        Body:        buf,
+        ContentType: ct,
+      })).catch(e => console.error('R2 put error:', e.message))
+    }
+
+    // Save to L1
     if (_proxyCache.size >= _PROXY_MAX) {
       const oldest = [..._proxyCache.entries()].reduce((a, b) => a[1].ts < b[1].ts ? a : b)
       _proxyCache.delete(oldest[0])
@@ -445,7 +508,7 @@ app.get('/api/image-proxy', async (req, res) => {
 
     res.set('Content-Type', ct)
     res.set('Cache-Control', 'public, max-age=86400')
-    res.set('X-Cache', 'MISS')
+    res.set('X-Cache', 'ORIGIN')
     res.send(buf)
   } catch (e) {
     console.error('Image proxy error:', e.message)
@@ -805,10 +868,15 @@ async function fetchAdminRestaurants() {
   const mapsKey = process.env.VITE_GOOGLE_MAPS_API_KEY || ''
   return rows.map(r => {
     const rawPhoto = (r.photo_url || '').split('&key=')[0]
-    const photo = rawPhoto
+    // Route through image-proxy so: (a) API key never reaches the browser,
+    // (b) image gets cached in R2 on first load.
+    const fullUrl = rawPhoto
       ? (rawPhoto.includes('googleapis.com') && mapsKey
           ? rawPhoto + '&key=' + mapsKey
           : rawPhoto)
+      : null
+    const photo = fullUrl
+      ? `/api/image-proxy?url=${encodeURIComponent(fullUrl)}`
       : null
     return {
       id:         String(r.id),
