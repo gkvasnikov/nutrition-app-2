@@ -1011,10 +1011,21 @@ async function fetchAdminRestaurants() {
     LIMIT 500
   `)
   const mapsKey = process.env.VITE_GOOGLE_MAPS_API_KEY || ''
+
+  // Assign each restaurant to its district using the same GeoJSON polygons
+  const geoPolygons = await loadBerlinPolygons()
+  const districtList = geoPolygons
+    ? [...geoPolygons.entries()].map(([id, rings]) => ({ id, rings }))
+    : BERLIN_DISTRICTS_FALLBACK.map(d => ({ id: d.id, rings: [d.polygon] }))
+
   return rows.map(r => {
+    const lat = r.lat ? parseFloat(r.lat) : null
+    const lng = r.lon ? parseFloat(r.lon) : null
+    const districtId = (lat && lng)
+      ? (districtList.find(d => pointInDistrict(lat, lng, d.rings))?.id || null)
+      : null
+
     const rawPhoto = (r.photo_url || '').split('&key=')[0]
-    // Route through image-proxy so: (a) API key never reaches the browser,
-    // (b) image gets cached in R2 on first load.
     const fullUrl = rawPhoto
       ? (rawPhoto.includes('googleapis.com') && mapsKey
           ? rawPhoto + '&key=' + mapsKey
@@ -1039,9 +1050,10 @@ async function fetchAdminRestaurants() {
       hours:      getHoursString(r.opening_hours) || '—',
       updated:    null,
       woltSlug:   r.wolt_slug || null,
-      lat:        r.lat  ? parseFloat(r.lat)  : null,
-      lng:        r.lon  ? parseFloat(r.lon)  : null,
+      lat,
+      lng,
       photo,
+      districtId,
     }
   })
 }

@@ -58,7 +58,7 @@ function App() {
     selectedId: districtId,
     onSelect: onDistrictSelect,
     onHover: handleHover,
-    onRestaurantPin: (id) => setRestaurantId(id),
+    onRestaurantPin: (id) => { setRestaurantId(id); },
     accent: t.accent || 'green',
     theme: t.mapTheme || 'light',
   });
@@ -80,7 +80,7 @@ function App() {
         berlinTab={berlinTab} setBerlinTab={setBerlinTab}
         districtTab={districtTab} setDistrictTab={setDistrictTab}
         onDistrictSelect={onDistrictSelect}
-        onRestaurantOpen={setRestaurantId}
+        onRestaurantOpen={(id) => { setRestaurantId(id); focusPin(id); }}
         onScriptOpen={setScriptId}
         showToast={setToast}
       />
@@ -651,7 +651,8 @@ function StatsEmpty({ d, onJumpToScripts }) {
 }
 
 function DistrictRestaurants({ d, onOpen }) {
-  return <RestaurantList title={`${d.name} · restaurants`} restaurants={RESTAURANTS} onOpen={onOpen}/>;
+  const filtered = RESTAURANTS.filter(r => r.districtId === d.id);
+  return <RestaurantList title={`${d.name} · restaurants`} restaurants={filtered} onOpen={onOpen}/>;
 }
 
 function Chip({ active, onClick, children }) {
