@@ -1742,9 +1742,13 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
                 ? `${v.address.street_address}, ${v.address.city || 'Berlin'}`
                 : null
             const heroPhoto    = v.hero_image || v.profile_image || v.images?.[0]?.url || null
-            const rating       = v.rating?.score       || null
-            const reviewsCount = v.rating?.volume      || null
-            const priceLevel   = v.price_range         || null
+            // Defensive type coercion — Wolt fields vary in type; DB columns are numeric.
+            // rating: numeric column. Wolt uses a 0–10 scale → normalise to 0–5 to match Google.
+            let rating = (typeof v.rating?.score === 'number' && isFinite(v.rating.score)) ? v.rating.score : null
+            if (rating != null && rating > 5) rating = Math.round((rating / 2) * 10) / 10
+            const reviewsCount = Number.isInteger(v.rating?.volume) ? v.rating.volume : (parseInt(v.rating?.volume, 10) || null)
+            // price_level: integer column 1–4. Wolt price_range may be a string ("€€") or int → keep only valid ints.
+            const priceLevel = (Number.isInteger(v.price_range) && v.price_range >= 1 && v.price_range <= 4) ? v.price_range : null
             venues.push({ slug, name: v.name, lat: vLat, lng: vLng, address, heroPhoto, rating, reviewsCount, priceLevel })
             inDistrictFound++
           }
@@ -1770,7 +1774,11 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
       })
-      page = await browser.newPage()
+      // Real Chrome UA (matches the original working Python scraper) — headless
+      // default UA can make Wolt serve a different/empty layout.
+      page = await browser.newPage({
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+      })
       await page.setExtraHTTPHeaders({ 'Accept-Language': 'de-DE,de;q=0.9' })
       await page.setViewportSize({ width: 1280, height: 800 })
     } catch (browserErr) {
@@ -1815,10 +1823,12 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
             [restId]
           )
+          let didScrape = false
           if (parseInt(countRow.n) > 0) {
             job.done++
           } else {
             // Scrape menu via Playwright (headless browser, same as original Python script)
+            didScrape = true
             console.log(`Wolt: scraping menu for ${v.slug}`)
             const items = await scrapeWoltMenuPlaywright(page, v.slug)
 
@@ -1853,12 +1863,18 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             console.log(`Wolt script: limit of ${limit} new restaurants reached`)
             limitReached = true
           }
+
+          // Only pause when we actually hit Wolt (Playwright scrape). Existing
+          // restaurants (already have a menu) are DB-only no-ops → no need to throttle,
+          // so re-runs of already-populated districts finish in seconds, not minutes.
+          if (didScrape && !limitReached) await new Promise(r => setTimeout(r, 1500))
         } catch (e) {
           console.error(`Wolt script venue ${v.slug}:`, e.message)
           job.errors++
           job.done++
+          // Surface the first venue error so the real cause is visible in the admin
+          if (!job.lastError) job.lastError = `Venue ${v.slug}: ${e.message}`
         }
-        await new Promise(r => setTimeout(r, 1500))  // 1.5s pause between venues (same as original)
       }
     } finally {
       await browser.close().catch(() => {})
