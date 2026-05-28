@@ -1978,7 +1978,6 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
     const woltLimit = req.body?.limit ? parseInt(req.body.limit, 10) : null
     runWoltScript(req.body?.districtId || null, req.body?.fields || [], woltLimit)
   }
-  // uber, web remain stubs for now
 
   res.json({ status: 'started', job: getScriptJob(id) })
 })
