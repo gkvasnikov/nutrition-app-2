@@ -34,8 +34,8 @@ const DISTRICT_COLORS = {
 
 const TILE_PRESETS = {
   light: {
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    attribution: '© OpenStreetMap · © CARTO',
   },
   dark: {
     url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
@@ -103,7 +103,7 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     mapRef.current = map;
     tileRef.current = L.tileLayer(TILE_PRESETS[theme].url, {
       attribution: TILE_PRESETS[theme].attribution,
-      subdomains: 'abc',   // OSM uses a/b/c; CartoCDN presets use abcd (handled on swap)
+      subdomains: 'abcd',
       maxZoom: 19,
     }).addTo(map);
 
