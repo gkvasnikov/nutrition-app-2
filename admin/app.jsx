@@ -914,23 +914,24 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
 
   return (
     <div className={`scard ${!enabled ? 'scard--disabled' : ''}`} onClick={onOpen}>
+      {/* Checkbox — left column, uses project's .check/.check--off design */}
+      <label className="scard__check" onClick={e => e.stopPropagation()} title={enabled ? 'Disable script' : 'Enable script'}>
+        <input type="checkbox" checked={enabled} onChange={onToggle} className="checklist__input"/>
+        <span className={`check ${enabled ? '' : 'check--off'}`} style={{ width: 22, height: 22, borderRadius: 7 }}>
+          {enabled && <Icon name="check" size={11}/>}
+        </span>
+      </label>
+
+      {/* Icon */}
       <div className="scard__icon"><Icon name={s.icon} size={18}/></div>
+
+      {/* Name + meta + progress bar */}
       <div style={{ minWidth: 0 }}>
         <div className="scard__name">{s.name}</div>
         <div className="scard__meta">
           <span>{metaTime}</span>
-          {s.coverage > 0 && (
-            <>
-              <span>·</span>
-              <span className="num">{s.coverage}% cov.</span>
-            </>
-          )}
-          {s.duration && s.duration !== '—' && (
-            <>
-              <span>·</span>
-              <span className="num">{s.duration}</span>
-            </>
-          )}
+          {s.coverage > 0 && <><span>·</span><span className="num">{s.coverage}% cov.</span></>}
+          {s.duration && s.duration !== '—' && <><span>·</span><span className="num">{s.duration}</span></>}
         </div>
         {job?.running && job?.total > 0 && (
           <div className="scard__progress">
@@ -945,18 +946,13 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
           </div>
         )}
       </div>
+
+      {/* Status pill + run button */}
       <div className="scard__right">
-        <label className="scard__check" onClick={e => e.stopPropagation()} title={enabled ? 'Disable script' : 'Enable script'}>
-          <input type="checkbox" checked={enabled} onChange={onToggle} style={{ width: 14, height: 14, accentColor: 'var(--color-text)', cursor: 'pointer' }}/>
-        </label>
         {st.v === 'default'
           ? <Pill dot>{st.label}</Pill>
           : <Pill variant={st.v} dot>{running ? 'running' : st.label}</Pill>}
-        <button
-          className="scard__run"
-          onClick={onRun}
-          title={running ? 'Running…' : 'Run this script'}
-        >
+        <button className="scard__run" onClick={onRun} title={running ? 'Running…' : 'Run this script'}>
           <Icon name={running ? 'pause' : 'play'} size={14}/>
         </button>
       </div>

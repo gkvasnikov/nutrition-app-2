@@ -440,7 +440,7 @@ svg { display: block; }
 .scards { display: flex; flex-direction: column; gap: 8px; }
 .scard {
   display: grid;
-  grid-template-columns: 40px 1fr auto;
+  grid-template-columns: 24px 40px 1fr auto;
   gap: 12px;
   align-items: center;
   padding: 14px 16px;
@@ -1012,9 +1012,14 @@ svg { display: block; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ScriptCard: disabled state, checkbox, progress bar */
+/* Script card — checkbox + disabled state + progress bar */
 .scard--disabled { opacity: 0.4; pointer-events: none; }
-.scard--disabled .scard__check { pointer-events: all; opacity: 1; }
-.scard__check { display: flex; align-items: center; margin-right: 4px; }
+.scard__check {
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: all;   /* always clickable even when card is disabled */
+  cursor: pointer;
+}
+.scard--disabled .scard__check { pointer-events: all; }
 .scard__progress { margin-top: 8px; }
 .scard__progress__bar {
   height: 3px; background: var(--color-surface-2); border-radius: 2px; overflow: hidden;
