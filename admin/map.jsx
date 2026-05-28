@@ -260,7 +260,10 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     map.flyTo(adjustedLatLng, TARGET_ZOOM, { duration: 0.6 });
   }, []);
 
-  return { mapRef, zoomTo, focusPin };
+  const zoomIn  = React.useCallback(() => { const m = mapRef.current; if (m) m.zoomIn();  }, []);
+  const zoomOut = React.useCallback(() => { const m = mapRef.current; if (m) m.zoomOut(); }, []);
+
+  return { mapRef, zoomTo, focusPin, zoomIn, zoomOut };
 }
 
 function computeStyle(id, districts, selectedId, accent) {

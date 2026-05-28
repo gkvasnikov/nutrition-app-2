@@ -544,6 +544,7 @@ svg { display: block; }
   transition: background 120ms ease;
 }
 .mapbtn:hover { background: var(--color-surface-3); }
+.mapbtn-sep { height: 1px; background: var(--color-stroke); margin: 2px 6px; }
 
 /* District tooltip card (floating bottom-left) — large rounded card matching app overlays */
 .mapcard {

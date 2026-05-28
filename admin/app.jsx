@@ -52,7 +52,7 @@ function App() {
     setDistrictTab(d.status === 'covered' ? 'restaurants' : 'scripts');
   }, [districts]);
 
-  const { zoomTo, focusPin } = window.useBerlinMap({
+  const { zoomTo, focusPin, zoomIn, zoomOut } = window.useBerlinMap({
     districts,
     restaurants: RESTAURANTS,
     selectedId: districtId,
@@ -118,9 +118,10 @@ function App() {
 
         {/* Map right controls */}
         <div className="mapright">
-          <button className="mapbtn" title="Zoom in" onClick={() => zoomTo(districtId)}><Icon name="plus" size={16}/></button>
-          <button className="mapbtn" title="Reset" onClick={() => zoomTo(null)}><Icon name="refresh" size={14}/></button>
-          <button className="mapbtn" title="Layers"><Icon name="layers" size={16}/></button>
+          <button className="mapbtn" title="Zoom in"  onClick={zoomIn}><Icon name="plus" size={16}/></button>
+          <button className="mapbtn" title="Zoom out" onClick={zoomOut}><Icon name="minus" size={16}/></button>
+          <div className="mapbtn-sep"/>
+          <button className="mapbtn" title="Reset view" onClick={() => zoomTo(null)}><Icon name="refresh" size={14}/></button>
         </div>
 
         {/* Hovered district floating card */}

@@ -7,6 +7,7 @@ import fs from 'fs'
 import Anthropic from '@anthropic-ai/sdk'
 import pg from 'pg'
 import session from 'express-session'
+import connectPgSimple from 'connect-pg-simple'
 import { timingSafeEqual, createHash } from 'crypto'
 import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3'
 
@@ -18,15 +19,30 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 app.use(compression())   // gzip all responses — reduces JSON payload ~70%
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+// Session store: PostgreSQL in production so sessions survive redeploys,
+// in-memory fallback for local dev (no DATABASE_URL set).
+const PgSession = connectPgSimple(session)
+const SESSION_MAX_AGE = 30 * 24 * 60 * 60 * 1000  // 30 days
 app.use(session({
+  store: process.env.DATABASE_URL
+    ? new PgSession({
+        conString: process.env.DATABASE_URL,
+        tableName: 'admin_sessions',
+        createTableIfMissing: true,
+        pruneSessionInterval: 60 * 60,  // prune expired rows every hour
+        ssl: { rejectUnauthorized: false },
+      })
+    : undefined,  // in-memory store for local dev
   secret: process.env.SESSION_SECRET || 'dev-secret-change-in-production',
   resave: false,
   saveUninitialized: false,
+  rolling: true,   // refresh cookie expiry on every request while active
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    maxAge: 8 * 60 * 60 * 1000,  // 8 hours
+    maxAge: SESSION_MAX_AGE,
   },
 }))
 app.use(express.static(path.join(__dirname, 'frontend/dist')))
