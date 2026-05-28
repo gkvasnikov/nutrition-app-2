@@ -1353,16 +1353,21 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   };
   const enabledCount = itemsChecked.filter(Boolean).length;
 
+  // Limit field (gplace only)
+  const [limitInput, setLimitInput] = useState('');
+
   const runIt = () => {
     if (!data || isRunning) return;
     // Send enabled field names so server can build a targeted API request
     const enabledFields = items.filter((_, i) => itemsChecked[i]);
+    const limitVal = limitInput.trim() ? parseInt(limitInput, 10) : null;
     fetch(`/admin/api/scripts/${data.id}/run`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         districtId: district?.id || null,
         fields: enabledFields,
+        ...(limitVal ? { limit: limitVal } : {}),
       }),
     })
       .then(r => r.json())
@@ -1390,8 +1395,9 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       ? 'running now'
       : data.lastRun;
 
-  // Cost calculations (Google Place Scraper only)
-  const isGplace = data.id === 'gplace';
+  // Cost calculations (Google Place Scraper)
+  const isGplace  = data.id === 'gplace';
+  const isMacros  = data.id === 'macros';
   const enabledFieldNames = items.filter((_, i) => itemsChecked[i]);
   const detailCostPer = isGplace ? calcDetailCost(enabledFieldNames) : 0;
   const estPer100 = isGplace ? `~$${(100 * detailCostPer).toFixed(2)}` : null;
@@ -1400,10 +1406,19 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       : enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'contact')  ? 'Contact tier'
       : 'Basic tier'
     : null;
-  // Actual cost after run: Details calls + Nearby Search calls
+  // Actual cost after gplace run
   const actualCost = isGplace && job?.detailsCalls > 0
     ? `~$${(job.detailsCalls * calcDetailCost(job.enabledFields || enabledFieldNames) + (job.nearbySearchCalls || 0) * GPLACE_COST.NEARBY).toFixed(2)}`
     : null;
+
+  // Macros cost (Claude Haiku 4.5: $0.80/MTok input, $4.00/MTok output)
+  const HAIKU_IN  = 0.0000008;  // $ per token
+  const HAIKU_OUT = 0.000004;
+  const macrosActualCost = isMacros && (job?.inputTokens > 0 || job?.outputTokens > 0)
+    ? `$${((job.inputTokens * HAIKU_IN) + (job.outputTokens * HAIKU_OUT)).toFixed(3)}`
+    : null;
+  // ~$0.11 per 1000 meals (estimate: 9k input + 25k output tokens per 1000 meals)
+  const macrosEstPer1k = `~$${(9000 * HAIKU_IN + 25000 * HAIKU_OUT).toFixed(2)}`;
 
   return (
     <div className={`detail detail--narrow ${open?'detail--open':''}`}>
@@ -1489,6 +1504,46 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                   <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>({tierLabel})</span>
                 </span>
                 <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>{estPer100}</span>
+              </div>
+            )}
+            {isMacros && (
+              <div style={{ marginTop: 10, padding: '8px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
+                  {macrosActualCost ? 'Actual cost (last run)' : 'Est. per 1,000 meals'}
+                  <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>(Haiku)</span>
+                </span>
+                <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>
+                  {macrosActualCost || macrosEstPer1k}
+                </span>
+              </div>
+            )}
+            {isGplace && (
+              <div style={{ marginTop: 12 }}>
+                <h3 className="h-section" style={{ marginBottom: 8 }}>
+                  <span>Limit</span>
+                  <span className="muted" style={{ fontWeight: 400, fontSize: 11 }}>optional</span>
+                </h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="No limit"
+                    value={limitInput}
+                    onChange={e => setLimitInput(e.target.value)}
+                    disabled={isRunning}
+                    style={{
+                      width: 120, padding: '6px 10px', fontSize: 13,
+                      border: '1px solid var(--color-surface-2)',
+                      borderRadius: 'var(--radius-md)',
+                      background: 'var(--color-surface)',
+                      color: 'var(--color-text)',
+                      fontFamily: 'inherit',
+                    }}
+                  />
+                  <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
+                    {limitInput ? `Stop after ${limitInput} new restaurants` : 'Run until all discovered'}
+                  </span>
+                </div>
               </div>
             )}
           </div>

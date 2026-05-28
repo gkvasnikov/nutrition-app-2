@@ -1015,6 +1015,8 @@ function getScriptJob(id) {
       startedAt: null, finishedAt: null, cancelled: false, districtId: null,
       // Google Place Scraper specific
       nearbySearchCalls: 0, detailsCalls: 0, enabledFields: [],
+      // Macros script specific
+      inputTokens: 0, outputTokens: 0,
     }
   }
   return _scriptJobs[id]
@@ -1069,16 +1071,18 @@ async function runMacrosScript(districtId) {
   const job = getScriptJob('macros')
   if (job.running) return
 
-  job.running    = true
-  job.cancelled  = false
-  job.done       = 0
-  job.errors     = 0
-  job.skipped    = 0
-  job.newItems   = 0
-  job.total      = 0
-  job.startedAt  = new Date().toISOString()
-  job.finishedAt = null
-  job.districtId = districtId || null
+  job.running      = true
+  job.cancelled    = false
+  job.done         = 0
+  job.errors       = 0
+  job.skipped      = 0
+  job.newItems     = 0
+  job.total        = 0
+  job.inputTokens  = 0
+  job.outputTokens = 0
+  job.startedAt    = new Date().toISOString()
+  job.finishedAt   = null
+  job.districtId   = districtId || null
 
   try {
     // Query meals needing processing
@@ -1124,6 +1128,8 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
           max_tokens: 2048,
           messages: [{ role: 'user', content: prompt }],
         })
+        job.inputTokens  += message.usage?.input_tokens  || 0
+        job.outputTokens += message.usage?.output_tokens || 0
 
         const raw = message.content[0].text.replace(/```json\n?|\n?```/g, '').trim()
         const results = JSON.parse(raw)
@@ -1292,7 +1298,7 @@ const GPLACE_FIELDS_BASE = 'place_id,name,geometry'
 // After the run, stamps google_enriched_at = NOW() for every restaurant in the district
 // so future runs can implement a freshness check (e.g. skip if < 30 days old).
 // enabledFields: array of UI label strings (from checkboxes). If empty → fetch all.
-async function runGooglePlaceScript(districtId, enabledFields = []) {
+async function runGooglePlaceScript(districtId, enabledFields = [], limit = null) {
   const job = getScriptJob('gplace')
   if (job.running) return
   const apiKey = process.env.GOOGLE_PLACES_API_KEY || process.env.VITE_GOOGLE_MAPS_API_KEY
@@ -1426,6 +1432,12 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
               r.place_id,
             ])
             job.newItems++
+
+            // Stop early if limit reached
+            if (limit && job.newItems >= limit) {
+              console.log(`Google Place script: limit of ${limit} new restaurants reached`)
+              job.running = false
+            }
 
             await new Promise(resolve => setTimeout(resolve, 100))
           } catch (e) {
@@ -1803,7 +1815,7 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
   } else if (id === 'dedup') {
     runDedupScript(req.body?.districtId || null)
   } else if (id === 'gplace') {
-    runGooglePlaceScript(req.body?.districtId || null, req.body?.fields || [])
+    runGooglePlaceScript(req.body?.districtId || null, req.body?.fields || [], req.body?.limit || null)
   } else if (id === 'wolt') {
     runWoltScript(req.body?.districtId || null)
   }
