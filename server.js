@@ -1628,12 +1628,10 @@ async function ensureWoltSchema() {
       CREATE UNIQUE INDEX IF NOT EXISTS restaurants_wolt_slug_idx
         ON restaurants (wolt_slug) WHERE wolt_slug IS NOT NULL
     `)
-    // 3. Unique index on menu_items to prevent duplicate dishes on re-runs
-    await pool.query(`
-      CREATE UNIQUE INDEX IF NOT EXISTS menu_items_rest_name_wolt_idx
-        ON menu_items (restaurant_id, LOWER(name))
-        WHERE source = 'wolt_menu'
-    `)
+    // Note: we deliberately do NOT create a unique index on menu_items
+    // (restaurant_id, LOWER(name)) — existing imported data contains duplicate
+    // dishes, so the index can't be built. The menu insert uses an idempotent
+    // INSERT ... WHERE NOT EXISTS guard instead (see runWoltScript).
   } catch (e) {
     console.warn('ensureWoltSchema:', e.message)
   }
@@ -1649,9 +1647,8 @@ ensureWoltSchema().catch(() => {})
 async function scrapeWoltMenuPlaywright(page, slug) {
   const url = `https://wolt.com/de/deu/berlin/restaurant/${slug}`
   try {
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 })
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
   } catch {
-    // Partial load is fine — some restaurants have analytics that never settle
     await page.waitForTimeout(3000)
   }
 
@@ -1661,7 +1658,10 @@ async function scrapeWoltMenuPlaywright(page, slug) {
       .forEach(el => el.remove())
   }).catch(() => {})
 
-  await page.waitForTimeout(1000)
+  // Wait for the menu cards to actually render (Wolt loads them via XHR; relying on
+  // networkidle alone is unreliable in a datacenter where the socket never settles).
+  await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => {})
+  await page.waitForTimeout(500)
 
   return page.$$eval("[data-test-id='horizontal-item-card']", cards =>
     cards.map(card => {
@@ -1874,14 +1874,22 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               let menuAdded = 0
               for (const item of items) {
                 try {
+                  // Idempotent insert without a unique-index dependency: the partial
+                  // unique index can't be built over the existing duplicate dishes, so
+                  // we guard with NOT EXISTS instead of ON CONFLICT.
                   const { rowCount } = await pool.query(`
                     INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
-                    VALUES ($1, $2, $3, $4, 'wolt_menu')
-                    ON CONFLICT (restaurant_id, LOWER(name)) WHERE source = 'wolt_menu'
-                    DO NOTHING
+                    SELECT $1, $2, $3, $4, 'wolt_menu'
+                    WHERE NOT EXISTS (
+                      SELECT 1 FROM menu_items
+                      WHERE restaurant_id = $1 AND LOWER(name) = LOWER($2) AND source = 'wolt_menu'
+                    )
                   `, [restId, item.name, item.price, item.imageUrl || null])
                   if (rowCount > 0) menuAdded++
-                } catch (_) {}
+                } catch (e) {
+                  // Surface the first menu-insert error instead of swallowing it silently
+                  if (!job.lastError) job.lastError = `Menu insert (${v.slug} / "${item.name}"): ${e.message}`
+                }
               }
               console.log(`  ${menuAdded} items → ${v.slug}`)
 
