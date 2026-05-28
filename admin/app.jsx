@@ -26,9 +26,21 @@ function App() {
   const [hoverDistrict, setHoverDistrict]     = useState(null);
   const [feedOpen, setFeedOpen]               = useState(true);
   const [toast, setToast]                     = useState(null);
+  const hoverTimerRef                         = useRef(null);
 
   const districts = DISTRICTS;
   const district  = districts.find(d => d.id === districtId);
+
+  // Debounced hover handler — delays hiding by 180ms so moving mouse
+  // from polygon onto the floating card doesn't cause flicker.
+  const handleHover = useCallback((id) => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    if (id) {
+      setHoverDistrict(id);
+    } else {
+      hoverTimerRef.current = setTimeout(() => setHoverDistrict(null), 180);
+    }
+  }, []);
 
   // Sync map -> drill-down when a district polygon is clicked
   const onDistrictSelect = useCallback((id) => {
@@ -45,7 +57,7 @@ function App() {
     restaurants: RESTAURANTS,
     selectedId: districtId,
     onSelect: onDistrictSelect,
-    onHover: setHoverDistrict,
+    onHover: handleHover,
     onRestaurantPin: (id) => setRestaurantId(id),
     accent: t.accent || 'green',
     theme: t.mapTheme || 'light',
@@ -111,7 +123,12 @@ function App() {
         </div>
 
         {/* Hovered district floating card */}
-        <DistrictHoverCard data={hoverData} onOpen={() => onDistrictSelect(hoverDistrict)}/>
+        <DistrictHoverCard
+          data={hoverData}
+          onOpen={() => onDistrictSelect(hoverDistrict)}
+          onMouseEnter={() => { if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current); }}
+          onMouseLeave={() => { hoverTimerRef.current = setTimeout(() => setHoverDistrict(null), 180); }}
+        />
 
         {/* Activity feed */}
         <ActivityFeed open={feedOpen} onToggle={() => setFeedOpen(v => !v)}/>
@@ -817,10 +834,10 @@ function DistrictMiniStats({ d }) {
 }
 
 /* ─── Floating district hover card on map ─── */
-function DistrictHoverCard({ data, onOpen }) {
+function DistrictHoverCard({ data, onOpen, onMouseEnter, onMouseLeave }) {
   const show = !!data;
   return (
-    <div className={`mapcard ${show?'mapcard--show':''}`}>
+    <div className={`mapcard ${show?'mapcard--show':''}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {data && (
         <>
           <div className="mapcard__head">
