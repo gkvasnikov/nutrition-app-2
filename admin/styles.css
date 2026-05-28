@@ -350,8 +350,27 @@ svg { display: block; }
   margin-top: 4px;
   font-weight: 400;
 }
-.irow__meta__dot { width: 2px; height: 2px; border-radius: 50%; background: var(--color-text-2); }
+.irow__meta__dot { width: 2px; height: 2px; border-radius: 50%; background: var(--color-text-2); flex-shrink: 0; }
 .irow__meta strong { color: var(--color-text); font-weight: 700; }
+.irow__addr {
+  font-size: var(--fs-micro);
+  color: var(--color-text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 2px;
+  font-weight: 400;
+}
+.irow__status {
+  font-size: var(--fs-micro);
+  color: var(--color-text-2);
+  display: flex; gap: 6px; align-items: center;
+  margin-top: 3px;
+  font-weight: 400;
+  white-space: nowrap; overflow: hidden;
+}
+.irow__chev {
+  color: var(--color-text-3);
+  flex-shrink: 0;
+}
 
 /* Status pill — small label */
 .pill {

@@ -80,6 +80,7 @@ function App() {
         berlinTab={berlinTab} setBerlinTab={setBerlinTab}
         districtTab={districtTab} setDistrictTab={setDistrictTab}
         onDistrictSelect={onDistrictSelect}
+        selectedRestaurantId={selectedRestaurantId}
         onRestaurantOpen={(id) => { setRestaurantId(id); focusPin(id); }}
         onScriptOpen={setScriptId}
         showToast={setToast}
@@ -235,7 +236,7 @@ function BerlinHeader({ berlinTab, setBerlinTab }) {
           Neighbourhoods <span className="tab__count">12</span>
         </button>
         <button className={`tab ${berlinTab==='restaurants'?'tab--active':''}`} onClick={() => setBerlinTab('restaurants')}>
-          All Restaurants <span className="tab__count">30</span>
+          All Restaurants <span className="tab__count">{RESTAURANTS.length}</span>
         </button>
         <button className={`tab ${berlinTab==='stats'?'tab--active':''}`} onClick={() => setBerlinTab('stats')}>
           Stats
@@ -260,7 +261,7 @@ function BerlinBody(props) {
   return (
     <div className="sidebar__body fade-in" key={berlinTab}>
       {berlinTab === 'neighbourhoods' && <NeighbourhoodsList onSelect={onDistrictSelect}/>}
-      {berlinTab === 'restaurants' && <AllRestaurants onOpen={props.onRestaurantOpen}/>}
+      {berlinTab === 'restaurants' && <AllRestaurants onOpen={props.onRestaurantOpen} selectedId={props.selectedRestaurantId}/>}
       {berlinTab === 'stats' && <BerlinStats/>}
     </div>
   );
@@ -329,14 +330,17 @@ function DistrictRow({ d, onSelect, variant }) {
   );
 }
 
-function AllRestaurants({ onOpen }) {
-  return <RestaurantList title="All restaurants · Berlin" restaurants={RESTAURANTS} onOpen={onOpen}/>;
+function AllRestaurants({ onOpen, selectedId }) {
+  return <RestaurantList title="All restaurants · Berlin" restaurants={RESTAURANTS} onOpen={onOpen} selectedId={selectedId}/>;
 }
 
 /* Shared filterable restaurant list — used by Berlin overview "All Restaurants"
    tab AND district drill-down Restaurants tab */
-function RestaurantList({ title, restaurants, onOpen }) {
+function RestaurantList({ title, restaurants, onOpen, selectedId }) {
   const [filter, setFilter] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(30);
+  const sentinelRef = useRef(null);
+
   const filtered = useMemo(() => {
     let r = restaurants;
     if (filter === 'open')     r = r.filter(x => x.open);
@@ -345,6 +349,23 @@ function RestaurantList({ title, restaurants, onOpen }) {
     if (filter === 'partners') r = r.filter(x => x.partner);
     return r;
   }, [filter, restaurants]);
+
+  // Reset visible count when filter or dataset changes
+  useEffect(() => { setVisibleCount(30); }, [filter, restaurants]);
+
+  // IntersectionObserver — auto-loads next 30 when sentinel scrolls into view
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) setVisibleCount(v => v + 30);
+    }, { threshold: 0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [filtered.length, visibleCount]);
+
+  const visible = filtered.slice(0, visibleCount);
+  const remaining = filtered.length - visibleCount;
 
   return (
     <>
@@ -365,36 +386,47 @@ function RestaurantList({ title, restaurants, onOpen }) {
           </button>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {filtered.map(r => <RestaurantRow key={r.id} r={r} onOpen={onOpen}/>)}
+          {visible.map(r => <RestaurantRow key={r.id} r={r} onOpen={onOpen} active={r.id === selectedId}/>)}
         </div>
+        {remaining > 0 && (
+          <div ref={sentinelRef} style={{ textAlign: 'center', padding: '12px 0', fontSize: 12, color: 'var(--color-text-3)' }}>
+            {remaining} more…
+          </div>
+        )}
       </div>
     </>
   );
 }
 
 function RestaurantRow({ r, onOpen, active }) {
+  const priceEl = r.priceLevel
+    ? Array.from({ length: 4 }, (_, i) => (
+        <span key={i} style={{ opacity: i < r.priceLevel ? 1 : 0.2 }}>€</span>
+      ))
+    : null;
+
   return (
-    <div className={`irow ${active?'irow--active':''}`} onClick={() => onOpen?.(r.id)}>
+    <div className={`irow ${active ? 'irow--active' : ''}`} onClick={() => onOpen?.(r.id)}>
       <div className="irow__img" style={r.photo ? {} : { background: `linear-gradient(135deg, oklch(0.85 0.06 ${(r.id.charCodeAt(1)*7)%360}), oklch(0.75 0.10 ${(r.id.charCodeAt(1)*11)%360}))` }}>
         {r.photo && <img src={r.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
       </div>
       <div className="irow__main">
         <div className="irow__name">{r.name}</div>
-        <div className="irow__meta">
-          <span>{r.cuisine}</span>
-          <span className="irow__meta__dot"/>
-          <span className="num">{r.meals} meals</span>
-          <span className="irow__meta__dot"/>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
-            <Icon name="star" size={11} style={{ color: 'var(--color-rating-star)' }}/>
-            <span className="num">{r.rating}</span>
-          </span>
+        {r.address && <div className="irow__addr">{r.address}</div>}
+        <div className="irow__status">
+          {r.open != null && (
+            <span style={{ color: r.open ? 'var(--color-rating-green)' : 'var(--color-text-3)', fontWeight: 600 }}>
+              {r.open ? 'Open' : 'Closed'}
+            </span>
+          )}
+          {r.hours && <><span className="irow__meta__dot"/><span>{r.hours}</span></>}
+          {priceEl && <><span className="irow__meta__dot"/><span>{priceEl}</span></>}
+          {r.rating != null && (
+            <><span className="irow__meta__dot"/><span><span style={{ color: 'var(--color-rating-star)' }}>★</span><span className="num"> {r.rating}</span>{r.reviews ? <span className="muted"> ({r.reviews})</span> : null}</span></>
+          )}
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-end' }}>
-        {r.open ? <Pill variant="success" dot>Open</Pill> : <Pill dot>Closed</Pill>}
-        {r.partner && <Pill variant="info">Partner</Pill>}
-      </div>
+      <Icon name="chevron-right" size={14} className="irow__chev"/>
     </div>
   );
 }
@@ -585,14 +617,14 @@ function DistrictHeader({ districtId, setDistrictId, setView, districtTab, setDi
   );
 }
 
-function DistrictBody({ districtId, districtTab, setDistrictTab, onRestaurantOpen, onScriptOpen, showToast }) {
+function DistrictBody({ districtId, districtTab, setDistrictTab, onRestaurantOpen, onScriptOpen, showToast, selectedRestaurantId }) {
   const d = DISTRICTS.find(x => x.id === districtId);
   if (!d) return null;
   return (
     <div className="sidebar__body" key={districtTab}>
       {districtTab === 'restaurants' && (
         d.restaurants > 0
-          ? <DistrictRestaurants d={d} onOpen={onRestaurantOpen}/>
+          ? <DistrictRestaurants d={d} onOpen={onRestaurantOpen} selectedId={selectedRestaurantId}/>
           : <RestaurantsEmpty d={d} onJumpToScripts={() => setDistrictTab('scripts')}/>
       )}
       {districtTab === 'scripts' && <DistrictScripts d={d} onOpen={onScriptOpen} showToast={showToast}/>}
@@ -650,9 +682,9 @@ function StatsEmpty({ d, onJumpToScripts }) {
   );
 }
 
-function DistrictRestaurants({ d, onOpen }) {
+function DistrictRestaurants({ d, onOpen, selectedId }) {
   const filtered = RESTAURANTS.filter(r => r.districtId === d.id);
-  return <RestaurantList title={`${d.name} · restaurants`} restaurants={filtered} onOpen={onOpen}/>;
+  return <RestaurantList title={`${d.name} · restaurants`} restaurants={filtered} onOpen={onOpen} selectedId={selectedId}/>;
 }
 
 function Chip({ active, onClick, children }) {
