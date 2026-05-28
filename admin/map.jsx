@@ -60,23 +60,27 @@ function makeDotIcon() {
   });
 }
 
-function makePhotoIcon(photoUrl, mealCount) {
+function makePhotoIcon(photoUrl, mealCount, size = 32) {
   const L = window.L;
   const src = photoUrl || '';
+  const badgeSize = size <= 32 ? 18 : 22;
+  const badgeFontSize = size <= 32 ? 10 : 11;
   const badge = mealCount > 1
-    ? `<div style="position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;background:#212121;color:#fff;font-size:10px;font-weight:700;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:Inter,sans-serif;line-height:1;border:1.5px solid #fff;pointer-events:none">${mealCount > 99 ? '99+' : mealCount}</div>`
+    ? `<div style="position:absolute;top:-5px;right:-5px;min-width:${badgeSize}px;height:${badgeSize}px;background:#212121;color:#fff;font-size:${badgeFontSize}px;font-weight:700;border-radius:${badgeSize/2}px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:Inter,sans-serif;line-height:1;border:1.5px solid #fff;pointer-events:none">${mealCount > 99 ? '99+' : mealCount}</div>`
     : '';
+  const border = size <= 32 ? '2px' : '3px';
   const img = src
     ? `<img src="${src}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentNode.style.background='#ccc'"/>`
     : '';
-  const html = `<div style="position:relative;width:32px;height:32px">
-    <div style="width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);background:#d0d0d0">${img}</div>
+  const html = `<div style="position:relative;width:${size}px;height:${size}px">
+    <div style="width:${size}px;height:${size}px;border-radius:50%;overflow:hidden;border:${border} solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);background:#d0d0d0">${img}</div>
     ${badge}
   </div>`;
+  const pad = size + 10;
   return L.divIcon({
     html,
-    iconSize: [42, 42],
-    iconAnchor: [16, 16],
+    iconSize: [pad, pad],
+    iconAnchor: [size / 2, size / 2],
     className: '',
   });
 }
@@ -88,6 +92,7 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
   const pinLayerRef = React.useRef(null); // Leaflet LayerGroup for restaurant markers
   const markersRef = React.useRef({}); // restaurantId -> marker
   const photoModeRef = React.useRef(false);
+  const selectedPinRef = React.useRef(null); // currently enlarged pin id
 
   // Initialise map once
   React.useEffect(() => {
@@ -184,8 +189,9 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     restaurants.forEach(r => {
       if (!r.lat || !r.lng) return;
 
-      const dotIcon   = makeDotIcon();
-      const photoIcon = makePhotoIcon(r.photo, r.meals);
+      const dotIcon       = makeDotIcon();
+      const photoIcon     = makePhotoIcon(r.photo, r.meals, 32);
+      const photoIconLarge = makePhotoIcon(r.photo, r.meals, 48);
 
       const marker = L.marker([r.lat, r.lng], {
         icon: photoMode ? photoIcon : dotIcon,
@@ -193,9 +199,10 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
         zIndexOffset: 10,
       });
 
-      // Store both icons on the marker for fast toggling
-      marker._adminDotIcon   = dotIcon;
-      marker._adminPhotoIcon = photoIcon;
+      // Store all icon variants on the marker for fast toggling
+      marker._adminDotIcon        = dotIcon;
+      marker._adminPhotoIcon      = photoIcon;
+      marker._adminPhotoIconLarge = photoIconLarge;
 
       marker.bindTooltip(
         `<strong>${r.name}</strong><br><span style="color:#888;font-size:11px">${r.meals} meals</span>`,
@@ -224,11 +231,33 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     map.flyToBounds(layer.getBounds().pad(0.15), { duration: 0.8 });
   }, []);
 
-  // Highlight / pan to a specific restaurant pin
+  // Focus & highlight a restaurant pin:
+  //  - zooms to level 16
+  //  - offsets centre left to account for the 580px right detail panel
+  //  - enlarges selected pin to 48px, resets the previous one
+  const DETAIL_PANEL_WIDTH = 580;
   const focusPin = React.useCallback((restaurantId) => {
     const map = mapRef.current; if (!map) return;
     const marker = markersRef.current[restaurantId]; if (!marker) return;
-    map.flyTo(marker.getLatLng(), Math.max(map.getZoom(), 14), { duration: 0.6 });
+
+    // Deselect previously selected pin
+    if (selectedPinRef.current && selectedPinRef.current !== restaurantId) {
+      const prev = markersRef.current[selectedPinRef.current];
+      if (prev) prev.setIcon(prev._adminPhotoIcon);
+    }
+    selectedPinRef.current = restaurantId;
+
+    // Enlarge selected pin
+    marker.setIcon(marker._adminPhotoIconLarge);
+
+    // Fly to pin, compensating for detail panel: shift map centre right by panelWidth/2
+    // so the pin appears centred in the visible (left) portion of the map.
+    const TARGET_ZOOM = 16;
+    const latlng = marker.getLatLng();
+    const targetPoint = map.project(latlng, TARGET_ZOOM);
+    const adjusted = targetPoint.add([DETAIL_PANEL_WIDTH / 2, 0]);
+    const adjustedLatLng = map.unproject(adjusted, TARGET_ZOOM);
+    map.flyTo(adjustedLatLng, TARGET_ZOOM, { duration: 0.6 });
   }, []);
 
   return { mapRef, zoomTo, focusPin };
