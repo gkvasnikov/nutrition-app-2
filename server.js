@@ -1012,6 +1012,8 @@ function getScriptJob(id) {
     _scriptJobs[id] = {
       running: false, total: 0, done: 0, errors: 0, skipped: 0, newItems: 0,
       startedAt: null, finishedAt: null, cancelled: false, districtId: null,
+      // Google Place Scraper specific
+      nearbySearchCalls: 0, detailsCalls: 0, enabledFields: [],
     }
   }
   return _scriptJobs[id]
@@ -1301,6 +1303,8 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
   job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
+  job.nearbySearchCalls = 0; job.detailsCalls = 0
+  job.enabledFields = enabledFields.length > 0 ? enabledFields : Object.keys(GPLACE_FIELD_MAP)
 
   // Build Place Details fields string from enabled checkboxes
   // If nothing specified → fetch everything
@@ -1351,6 +1355,7 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
           `https://maps.googleapis.com/maps/api/place/nearbysearch/json` +
           `?location=${pt.lat},${pt.lng}&radius=400&type=restaurant&key=${apiKey}`
         const nearbyRes  = await fetch(nearbyUrl)
+        job.nearbySearchCalls++
         const nearbyData = await nearbyRes.json()
 
         if (nearbyData.status === 'REQUEST_DENIED') {
@@ -1389,6 +1394,7 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
               `&fields=${detailFields}` +
               `&key=${apiKey}`
             const detailRes  = await fetch(detailUrl)
+            job.detailsCalls++
             const detailData = await detailRes.json()
             const r = detailData.result
             if (!r) continue

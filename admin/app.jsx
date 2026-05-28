@@ -1228,6 +1228,27 @@ function RestaurantDetail({ restaurantId, onClose }) {
   );
 }
 
+// Google Places API pricing (per request, legacy Places API)
+// Details cost is additive: Basic always + Contact if any contact field + Atmosphere if any atmosphere field
+const GPLACE_FIELD_TIER = {
+  'Working hours':    'contact',     // opening_hours
+  'Rating & reviews': 'atmosphere',  // rating, user_ratings_total
+  'Price level':      'atmosphere',  // price_level
+  'Address':          'basic',       // formatted_address (Basic tier — no extra charge)
+  'Photo':            'basic',       // photos (Basic tier)
+  'Phone number':     'contact',     // formatted_phone_number
+  'Website':          'contact',     // website
+};
+const GPLACE_COST = { NEARBY: 0.032, BASE: 0.017, CONTACT: 0.003, ATMOSPHERE: 0.005 };
+
+function calcDetailCost(fields) {
+  const tiers = new Set(fields.map(f => GPLACE_FIELD_TIER[f]).filter(Boolean));
+  let cost = GPLACE_COST.BASE;
+  if (tiers.has('contact'))    cost += GPLACE_COST.CONTACT;
+  if (tiers.has('atmosphere')) cost += GPLACE_COST.ATMOSPHERE;
+  return cost;
+}
+
 /* ─── Script detail overlay ─── */
 function ScriptDetail({ scriptId, district, onClose, showToast }) {
   const s = SCRIPTS.find(x => x.id === scriptId);
@@ -1317,6 +1338,21 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       ? 'running now'
       : data.lastRun;
 
+  // Cost calculations (Google Place Scraper only)
+  const isGplace = data.id === 'gplace';
+  const enabledFieldNames = items.filter((_, i) => itemsChecked[i]);
+  const detailCostPer = isGplace ? calcDetailCost(enabledFieldNames) : 0;
+  const estPer100 = isGplace ? `~$${(100 * detailCostPer).toFixed(2)}` : null;
+  const tierLabel = isGplace
+    ? enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'atmosphere') ? 'Atmosphere tier'
+      : enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'contact')  ? 'Contact tier'
+      : 'Basic tier'
+    : null;
+  // Actual cost after run: Details calls + Nearby Search calls
+  const actualCost = isGplace && job?.detailsCalls > 0
+    ? `~$${(job.detailsCalls * calcDetailCost(job.enabledFields || enabledFieldNames) + (job.nearbySearchCalls || 0) * GPLACE_COST.NEARBY).toFixed(2)}`
+    : null;
+
   return (
     <div className={`detail detail--narrow ${open?'detail--open':''}`}>
       <div className="detail__head">
@@ -1353,12 +1389,14 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             <span className="sdetail__cell__v num">{job ? `${job.done} / ${job.total}` : '—'}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Updated</span>
+            <span className="sdetail__cell__l">Added</span>
             <span className="sdetail__cell__v num">{job?.newItems ?? '—'}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Errors</span>
-            <span className="sdetail__cell__v num" style={job?.errors > 0 ? { color: 'var(--color-error, #e53)' } : {}}>{job?.errors ?? '—'}</span>
+            <span className="sdetail__cell__l">{actualCost ? 'Actual cost' : 'Errors'}</span>
+            <span className="sdetail__cell__v num" style={!actualCost && job?.errors > 0 ? { color: 'var(--color-error, #e53)' } : {}}>
+              {actualCost ?? (job?.errors ?? '—')}
+            </span>
           </div>
         </div>
 
@@ -1392,6 +1430,15 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                 );
               })}
             </div>
+            {isGplace && (
+              <div style={{ marginTop: 10, padding: '8px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
+                  Est. per 100 restaurants
+                  <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>({tierLabel})</span>
+                </span>
+                <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>{estPer100}</span>
+              </div>
+            )}
           </div>
         )}
       </div>
