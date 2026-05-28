@@ -620,75 +620,94 @@ async function runImageCacheJob() {
 
 // ── Admin panel ───────────────────────────────────────────────────────────────
 
-// Berlin borough boundaries — simplified polygons, each ring is [[lat, lng], ...]
-// Derived from official Berliner Senatsverwaltung Bezirksgrenzen (open data).
-// Replace with the full-resolution GeoJSON from https://daten.berlin.de if needed.
-const BERLIN_DISTRICTS = [
-  { id: 'mitte', name: 'Mitte', polygon: [
-    [52.558,13.337],[52.563,13.372],[52.560,13.403],[52.542,13.432],
-    [52.517,13.438],[52.499,13.418],[52.494,13.385],[52.502,13.352],[52.521,13.336],
-  ]},
-  { id: 'fhain', name: 'Friedrichshain-Kreuzberg', polygon: [
-    [52.517,13.438],[52.527,13.484],[52.512,13.494],[52.497,13.476],
-    [52.487,13.447],[52.490,13.421],[52.499,13.418],
-  ]},
-  { id: 'pankow', name: 'Pankow', polygon: [
-    [52.558,13.403],[52.563,13.370],[52.621,13.380],[52.638,13.423],
-    [52.635,13.481],[52.590,13.485],[52.565,13.465],[52.542,13.432],
-  ]},
-  { id: 'cwilm', name: 'Charlottenburg-Wilmersdorf', polygon: [
-    [52.521,13.336],[52.502,13.352],[52.494,13.320],[52.466,13.268],
-    [52.472,13.252],[52.517,13.252],[52.537,13.300],
-  ]},
-  { id: 'spandau', name: 'Spandau', polygon: [
-    [52.537,13.300],[52.517,13.252],[52.572,13.120],[52.583,13.186],
-    [52.561,13.265],[52.554,13.297],
-  ]},
-  { id: 'steglitz', name: 'Steglitz-Zehlendorf', polygon: [
-    [52.472,13.252],[52.466,13.268],[52.442,13.268],[52.384,13.206],
-    [52.382,13.156],[52.410,13.152],[52.468,13.186],[52.481,13.232],
-  ]},
-  { id: 'tempel', name: 'Tempelhof-Schöneberg', polygon: [
-    [52.494,13.385],[52.490,13.421],[52.487,13.447],[52.461,13.442],
-    [52.444,13.425],[52.440,13.374],[52.444,13.330],[52.462,13.315],
-    [52.480,13.320],[52.494,13.352],
-  ]},
-  { id: 'neuk', name: 'Neukölln', polygon: [
-    [52.490,13.421],[52.497,13.476],[52.487,13.490],[52.459,13.483],
-    [52.444,13.468],[52.438,13.443],[52.444,13.425],[52.461,13.442],
-  ]},
-  { id: 'treptow', name: 'Treptow-Köpenick', polygon: [
-    [52.487,13.447],[52.497,13.476],[52.512,13.494],[52.517,13.560],
-    [52.490,13.680],[52.416,13.708],[52.382,13.616],[52.384,13.490],
-    [52.432,13.454],[52.444,13.468],[52.459,13.483],
-  ]},
-  { id: 'marzahn', name: 'Marzahn-Hellersdorf', polygon: [
-    [52.565,13.465],[52.590,13.485],[52.582,13.660],[52.519,13.658],
-    [52.499,13.584],[52.510,13.527],[52.517,13.560],[52.512,13.494],
-    [52.527,13.484],[52.542,13.432],[52.560,13.450],
-  ]},
-  { id: 'lich', name: 'Lichtenberg', polygon: [
-    [52.542,13.432],[52.560,13.450],[52.560,13.528],[52.519,13.570],
-    [52.517,13.560],[52.512,13.494],[52.527,13.484],
-  ]},
-  { id: 'rein', name: 'Reinickendorf', polygon: [
-    [52.563,13.372],[52.558,13.337],[52.554,13.297],[52.561,13.265],
-    [52.583,13.186],[52.641,13.210],[52.641,13.340],[52.638,13.423],
-    [52.621,13.380],
-  ]},
-]
+// District id ↔ GeoJSON Gemeinde_name mapping (same as admin/map.jsx)
+const GEO_NAME_MAP = {
+  'Mitte':                      'mitte',
+  'Friedrichshain-Kreuzberg':   'fhain',
+  'Pankow':                     'pankow',
+  'Charlottenburg-Wilmersdorf': 'cwilm',
+  'Spandau':                    'spandau',
+  'Steglitz-Zehlendorf':        'steglitz',
+  'Tempelhof-Schöneberg':       'tempel',
+  'Neukölln':                   'neuk',
+  'Treptow-Köpenick':           'treptow',
+  'Marzahn-Hellersdorf':        'marzahn',
+  'Lichtenberg':                'lich',
+  'Reinickendorf':              'rein',
+}
+const DISTRICT_NAMES = Object.fromEntries(Object.entries(GEO_NAME_MAP).map(([k,v]) => [v,k]))
 
-// Ray-casting point-in-polygon (lat/lng, polygon = [[lat,lng],...])
-function pointInPolygon(lat, lng, polygon) {
+// District polygon cache — loaded once from official Berlin GeoJSON.
+// Falls back to simplified hardcoded polygons if fetch fails.
+let _berlinPolygons = null  // Map<id, [[lat,lng][]]> — each value is array of rings
+
+async function loadBerlinPolygons() {
+  if (_berlinPolygons) return _berlinPolygons
+  try {
+    const res = await fetch('https://cdn.jsdelivr.net/gh/funkeinteraktiv/Berlin-Geodaten@master/berlin_bezirke.geojson')
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const gj = await res.json()
+    _berlinPolygons = new Map()
+    for (const feature of gj.features) {
+      const geoName = feature.properties.Gemeinde_name || feature.properties.name
+      const id = GEO_NAME_MAP[geoName]
+      if (!id) continue
+      const geom = feature.geometry
+      const rings = []
+      if (geom.type === 'Polygon') {
+        // GeoJSON: [[[lng,lat],...]] — use outer ring only, convert to [lat,lng]
+        rings.push(geom.coordinates[0].map(([lng, lat]) => [lat, lng]))
+      } else if (geom.type === 'MultiPolygon') {
+        // GeoJSON: [[[[lng,lat],...],...]] — outer ring of each sub-polygon
+        for (const poly of geom.coordinates) {
+          rings.push(poly[0].map(([lng, lat]) => [lat, lng]))
+        }
+      }
+      _berlinPolygons.set(id, rings)
+    }
+    console.log(`Berlin GeoJSON loaded: ${_berlinPolygons.size} district polygons`)
+    return _berlinPolygons
+  } catch (e) {
+    console.error('Berlin GeoJSON fetch failed, using simplified fallback:', e.message)
+    return null
+  }
+}
+
+// Warm up polygon cache at startup
+loadBerlinPolygons().catch(() => {})
+
+// Ray-casting point-in-polygon (lat/lng, ring = [[lat,lng],...])
+function pointInPolygon(lat, lng, ring) {
   let inside = false
-  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-    const [yi, xi] = polygon[i]
-    const [yj, xj] = polygon[j]
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [yi, xi] = ring[i]
+    const [yj, xj] = ring[j]
     if (((yi > lat) !== (yj > lat)) && (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi))
       inside = !inside
   }
   return inside
 }
+
+// Check if point is inside any of the district's polygon rings (handles MultiPolygon)
+function pointInDistrict(lat, lng, rings) {
+  return rings.some(ring => pointInPolygon(lat, lng, ring))
+}
+
+// Fallback simplified polygons used only when GeoJSON fetch fails
+const BERLIN_DISTRICTS_FALLBACK = [
+  { id: 'mitte',    name: 'Mitte',                      polygon: [[52.558,13.337],[52.563,13.372],[52.560,13.403],[52.542,13.432],[52.517,13.438],[52.499,13.418],[52.494,13.385],[52.502,13.352],[52.521,13.336]] },
+  { id: 'fhain',    name: 'Friedrichshain-Kreuzberg',   polygon: [[52.517,13.438],[52.527,13.484],[52.512,13.494],[52.497,13.476],[52.487,13.447],[52.490,13.421],[52.499,13.418]] },
+  { id: 'pankow',   name: 'Pankow',                     polygon: [[52.558,13.403],[52.563,13.370],[52.621,13.380],[52.638,13.423],[52.635,13.481],[52.590,13.485],[52.565,13.465],[52.542,13.432]] },
+  { id: 'cwilm',    name: 'Charlottenburg-Wilmersdorf', polygon: [[52.521,13.336],[52.502,13.352],[52.494,13.320],[52.466,13.268],[52.472,13.252],[52.517,13.252],[52.537,13.300]] },
+  { id: 'spandau',  name: 'Spandau',                    polygon: [[52.537,13.300],[52.517,13.252],[52.572,13.120],[52.583,13.186],[52.561,13.265],[52.554,13.297]] },
+  { id: 'steglitz', name: 'Steglitz-Zehlendorf',        polygon: [[52.472,13.252],[52.466,13.268],[52.442,13.268],[52.384,13.206],[52.382,13.156],[52.410,13.152],[52.468,13.186],[52.481,13.232]] },
+  { id: 'tempel',   name: 'Tempelhof-Schöneberg',       polygon: [[52.494,13.385],[52.490,13.421],[52.487,13.447],[52.461,13.442],[52.444,13.425],[52.440,13.374],[52.444,13.330],[52.462,13.315],[52.480,13.320],[52.494,13.352]] },
+  { id: 'neuk',     name: 'Neukölln',                   polygon: [[52.490,13.421],[52.497,13.476],[52.487,13.490],[52.459,13.483],[52.444,13.468],[52.438,13.443],[52.444,13.425],[52.461,13.442]] },
+  { id: 'treptow',  name: 'Treptow-Köpenick',           polygon: [[52.487,13.447],[52.497,13.476],[52.512,13.494],[52.517,13.560],[52.490,13.680],[52.416,13.708],[52.382,13.616],[52.384,13.490],[52.432,13.454],[52.444,13.468],[52.459,13.483]] },
+  { id: 'marzahn',  name: 'Marzahn-Hellersdorf',        polygon: [[52.565,13.465],[52.590,13.485],[52.582,13.660],[52.519,13.658],[52.499,13.584],[52.510,13.527],[52.517,13.560],[52.512,13.494],[52.527,13.484],[52.542,13.432],[52.560,13.450]] },
+  { id: 'lich',     name: 'Lichtenberg',                polygon: [[52.542,13.432],[52.560,13.450],[52.560,13.528],[52.519,13.570],[52.517,13.560],[52.512,13.494],[52.527,13.484]] },
+  { id: 'rein',     name: 'Reinickendorf',              polygon: [[52.563,13.372],[52.558,13.337],[52.554,13.297],[52.561,13.265],[52.583,13.186],[52.641,13.210],[52.641,13.340],[52.638,13.423],[52.621,13.380]] },
+]
 
 // ── Admin auth helpers ────────────────────────────────────────────────────────
 
@@ -946,8 +965,15 @@ async function fetchAdminDistricts() {
     GROUP BY r.id, r.lat, r.lon
   `)
 
-  return BERLIN_DISTRICTS.map(d => {
-    const inDistrict = rows.filter(r => pointInPolygon(parseFloat(r.lat), parseFloat(r.lon), d.polygon))
+  // Use official GeoJSON polygons; fall back to simplified hardcoded ones if unavailable
+  const geoPolygons = await loadBerlinPolygons()
+
+  const districts = geoPolygons
+    ? [...geoPolygons.entries()].map(([id, rings]) => ({ id, name: DISTRICT_NAMES[id] || id, rings }))
+    : BERLIN_DISTRICTS_FALLBACK.map(d => ({ id: d.id, name: d.name, rings: [d.polygon] }))
+
+  return districts.map(d => {
+    const inDistrict = rows.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), d.rings))
     const totalMeals = inDistrict.reduce((s, r) => s + parseInt(r.meals), 0)
     const highConf   = inDistrict.reduce((s, r) => s + parseInt(r.high_conf), 0)
     return {
