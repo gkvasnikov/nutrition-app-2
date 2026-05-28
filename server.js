@@ -59,6 +59,7 @@ const r2 = (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY && 
         accessKeyId:     process.env.R2_ACCESS_KEY_ID,
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
       },
+      forcePathStyle: true,  // R2 requires path-style URLs (not virtual-hosted)
     })
   : null
 const R2_BUCKET = process.env.R2_BUCKET || 'nutrition-app-images'
