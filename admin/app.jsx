@@ -1223,24 +1223,6 @@ function RestaurantDetail({ restaurantId, onClose }) {
           )}
         </div>
 
-        <div>
-          <h3 className="h-section">Pipeline runs · last 4</h3>
-          <div>
-            {['2h ago · Macros Estimator', '5h ago · Google Place', '5h ago · Wolt Menu', '1d ago · Restaurant Website'].map((t,i) => {
-              const ok = i !== 3;
-              return (
-                <div key={i} className="runrow">
-                  <span style={{ color: ok ? 'var(--color-accent)' : 'var(--color-rating-star)' }}>
-                    <Icon name={ok ? 'check-circle' : 'x-circle'} size={14}/>
-                  </span>
-                  <span>{t}</span>
-                  <span className="runrow__time">{ok ? `+${Math.floor(Math.random()*32)+4} fields` : '502 Bad Gateway'}</span>
-                  <span className="runrow__dur">{ok ? `${Math.floor(Math.random()*8)+1}m ${(Math.random()*60).toFixed(0)}s` : 'retry'}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -1253,10 +1235,38 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   const [cache, setCache] = useState(s);
   useEffect(() => { if (s) setCache(s); }, [s]);
   const data = s || cache;
-  const [progress, setProgress] = useState(0);
-  const [running, setRunning] = useState(false);
 
-  // Per-script interactive checklist state — which collected fields are enabled
+  // Real job state from server polling
+  const [job, setJob] = useState(null);
+  const pollRef = useRef(null);
+
+  const fetchJob = useCallback(() => {
+    if (!data?.id) return;
+    fetch('/admin/api/scripts/status')
+      .then(r => r.json())
+      .then(d => setJob(d.jobs?.[data.id] || null))
+      .catch(() => {});
+  }, [data?.id]);
+
+  useEffect(() => {
+    if (!open) return;
+    fetchJob();
+  }, [open, fetchJob]);
+
+  // Poll every 2s while running
+  useEffect(() => {
+    if (job?.running) {
+      pollRef.current = setInterval(fetchJob, 2000);
+    } else {
+      clearInterval(pollRef.current);
+    }
+    return () => clearInterval(pollRef.current);
+  }, [job?.running, fetchJob]);
+
+  const isRunning = !!job?.running;
+  const progress = job?.total > 0 ? Math.round(job.done / job.total * 100) : 0;
+
+  // Per-script interactive checklist state
   const [checked, setChecked] = useState({});
   const items = data?.includes || [];
   const itemsChecked = checked[data?.id] || items.map(() => true);
@@ -1270,23 +1280,37 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   };
   const enabledCount = itemsChecked.filter(Boolean).length;
 
-  // Trigger script via API, animate progress bar locally
   const runIt = () => {
-    if (!data) return;
-    setRunning(true); setProgress(0);
-    fetch(`/admin/api/scripts/${data.id}/run`, { method: 'POST' })
+    if (!data || isRunning) return;
+    fetch(`/admin/api/scripts/${data.id}/run`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ districtId: district?.id || null }),
+    })
       .then(r => r.json())
-      .then(res => showToast({ text: res.message || `${data.name} started for ${district?.name || 'Berlin'}` }))
+      .then(res => {
+        if (res.job) setJob(res.job);
+        showToast({ text: res.message || `${data.name} started for ${district?.name || 'Berlin'}` });
+        fetchJob();
+      })
       .catch(() => showToast({ text: `Failed to start ${data.name}` }));
-    let p = 0;
-    const interval = setInterval(() => {
-      p += Math.random() * 8 + 3;
-      if (p >= 100) { p = 100; clearInterval(interval); setTimeout(() => setRunning(false), 600); }
-      setProgress(p);
-    }, 220);
+  };
+
+  const stopIt = () => {
+    if (!data || !isRunning) return;
+    fetch(`/admin/api/scripts/${data.id}/stop`, { method: 'POST' })
+      .then(r => r.json())
+      .then(res => { if (res.job) setJob(res.job); })
+      .catch(() => {});
   };
 
   if (!data) return <div className="detail detail--narrow"></div>;
+
+  const lastRun = job?.finishedAt
+    ? msToRelative(Date.now() - new Date(job.finishedAt).getTime()) + ' ago'
+    : job?.startedAt && !job?.finishedAt
+      ? 'running now'
+      : data.lastRun;
 
   return (
     <div className={`detail detail--narrow ${open?'detail--open':''}`}>
@@ -1296,7 +1320,6 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
           Script
         </span>
         <div style={{ display: 'flex', gap: 8 }}>
-          <Btn variant="secondary" icon="settings">Configure</Btn>
           <button className="detail__close" onClick={onClose}><Icon name="x" size={18}/></button>
         </div>
       </div>
@@ -1307,8 +1330,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             <div className="sdetail__name">{data.name}</div>
             <div className="sdetail__desc">{data.desc}</div>
             <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
-              <Pill variant={data.status === 'success' ? 'success' : data.status === 'warning' ? 'warn' : 'danger'} dot>
-                {data.status === 'success' ? 'healthy' : data.status === 'warning' ? 'partial' : 'failing'}
+              <Pill variant={isRunning ? 'warn' : job?.errors > 0 ? 'danger' : job?.done > 0 ? 'success' : 'default'} dot>
+                {isRunning ? 'running' : job?.errors > 0 ? 'errors' : job?.done > 0 ? 'healthy' : 'idle'}
               </Pill>
               <Pill>scope: {district?.name || 'Berlin'}</Pill>
             </div>
@@ -1318,93 +1341,67 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
         <div className="sdetail__bigrow">
           <div className="sdetail__cell">
             <span className="sdetail__cell__l">Last run</span>
-            <span className="sdetail__cell__v">{data.lastRun}</span>
+            <span className="sdetail__cell__v">{lastRun}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Duration</span>
-            <span className="sdetail__cell__v num">{data.duration}</span>
+            <span className="sdetail__cell__l">Processed</span>
+            <span className="sdetail__cell__v num">{job ? `${job.done} / ${job.total}` : '—'}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Coverage</span>
-            <span className="sdetail__cell__v num">{data.coverage}%</span>
+            <span className="sdetail__cell__l">Updated</span>
+            <span className="sdetail__cell__v num">{job?.newItems ?? '—'}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Cost / run</span>
-            <span className="sdetail__cell__v num">{data.cost}</span>
+            <span className="sdetail__cell__l">Errors</span>
+            <span className="sdetail__cell__v num" style={job?.errors > 0 ? { color: 'var(--color-error, #e53)' } : {}}>{job?.errors ?? '—'}</span>
           </div>
         </div>
 
-        <div>
-          <h3 className="h-section">
-            <span>What it collects</span>
-            <span className="muted" style={{ fontWeight: 500, fontSize: 'var(--fs-secondary)' }}>{enabledCount} / {items.length}</span>
-          </h3>
-          <div className="checklist">
-            {items.map((it, i) => {
-              const on = itemsChecked[i];
-              return (
-                <label key={i} className={`checklist__item ${on ? '' : 'checklist__item--off'}`}>
-                  <input
-                    type="checkbox"
-                    checked={on}
-                    onChange={() => toggleItem(i)}
-                    className="checklist__input"
-                  />
-                  <span className={`check ${on ? '' : 'check--off'}`}>
-                    {on && <Icon name="check" size={11}/>}
-                  </span>
-                  <span style={{ flex: 1 }}>{it}</span>
-                </label>
-              );
-            })}
+        {isRunning && (
+          <div style={{ marginBottom: 16 }}>
+            <div className="progress"><div className="progress__fill" style={{ width: `${progress}%` }}/></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginTop: 4, color: 'var(--color-text-2)' }}>
+              <span>Running… {job.done} / {job.total}</span>
+              <span className="num">{progress}%</span>
+            </div>
           </div>
-        </div>
+        )}
 
-        <div>
-          <h3 className="h-section">Recent runs</h3>
+        {items.length > 0 && (
           <div>
-            {Array.from({ length: 5 }).map((_, i) => {
-              const failed = (data.status === 'error' && i === 0);
-              const ago = ['2h', '12h', '1d', '2d', '3d'][i];
-              return (
-                <div key={i} className="runrow">
-                  <span style={{ color: failed ? 'var(--color-rating-star)' : 'var(--color-accent)' }}>
-                    <Icon name={failed ? 'x-circle' : 'check-circle'} size={14}/>
-                  </span>
-                  <span>{failed ? 'Failed — 502 Bad Gateway' : `${Math.floor(Math.random()*30)+10} records updated`}</span>
-                  <span className="runrow__time">{ago} ago</span>
-                  <span className="runrow__dur num">{failed ? '—' : `${Math.floor(Math.random()*10)+2}m ${(Math.random()*59).toFixed(0)}s`}</span>
-                </div>
-              );
-            })}
+            <h3 className="h-section">
+              <span>What it collects</span>
+              <span className="muted" style={{ fontWeight: 500, fontSize: 'var(--fs-secondary)' }}>{enabledCount} / {items.length}</span>
+            </h3>
+            <div className="checklist">
+              {items.map((it, i) => {
+                const on = itemsChecked[i];
+                return (
+                  <label key={i} className={`checklist__item ${on ? '' : 'checklist__item--off'}`}>
+                    <input type="checkbox" checked={on} onChange={() => toggleItem(i)} className="checklist__input"/>
+                    <span className={`check ${on ? '' : 'check--off'}`}>
+                      {on && <Icon name="check" size={11}/>}
+                    </span>
+                    <span style={{ flex: 1 }}>{it}</span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Sticky bottom action bar */}
       <div className="drawer">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, marginBottom: 10 }}>
-          <div>
-            <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600 }}>Estimated cost</div>
-            <div className="num" style={{ fontSize: 22, fontWeight: 700 }}>{data.cost}</div>
-          </div>
-          <div>
-            <div className="muted" style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, textAlign: 'right' }}>~ Duration</div>
-            <div className="num" style={{ fontSize: 14, fontWeight: 600 }}>{data.duration}</div>
-          </div>
-        </div>
-        {running && (
-          <div style={{ marginBottom: 10 }}>
-            <div className="progress"><div className="progress__fill" style={{ width: `${progress}%` }}/></div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginTop: 4, color: 'var(--color-text-2)' }}>
-              <span>Running…</span>
-              <span className="num">{Math.floor(progress)}%</span>
-            </div>
-          </div>
+        {isRunning ? (
+          <Btn variant="secondary" size="lg" block icon="pause" onClick={stopIt}>
+            Stop script
+          </Btn>
+        ) : (
+          <Btn variant="primary" size="lg" block icon="refresh" onClick={runIt}>
+            Run {data.name}
+          </Btn>
         )}
-        <Btn variant="primary" size="lg" block icon={running ? 'pause' : 'refresh'} onClick={runIt} disabled={running}>
-          {running ? 'Running…' : `Re-run ${data.name}`}
-        </Btn>
       </div>
     </div>
   );

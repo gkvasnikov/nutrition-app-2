@@ -1171,6 +1171,301 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
   }
 }
 
+// ── Dedup script (pure SQL — no external APIs) ────────────────────────────────
+async function runDedupScript(districtId) {
+  const job = getScriptJob('dedup')
+  if (job.running) return
+  job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
+  job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
+  job.finishedAt = null; job.districtId = districtId || null
+
+  try {
+    // Find duplicate groups: same restaurant + same name (case-insensitive)
+    // ids sorted: best confidence first, then highest id (most recent wins)
+    const { rows: groups } = await pool.query(`
+      SELECT restaurant_id,
+             array_agg(id ORDER BY
+               CASE confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+               id DESC
+             ) AS ids
+      FROM menu_items
+      WHERE source = 'wolt_menu'
+      GROUP BY restaurant_id, LOWER(name)
+      HAVING COUNT(*) > 1
+    `)
+
+    let filteredGroups = groups
+    if (districtId) {
+      const polygons = await loadBerlinPolygons()
+      if (polygons && polygons.has(districtId)) {
+        const rings = polygons.get(districtId)
+        const { rows: rests } = await pool.query(
+          `SELECT id, lat, lon FROM restaurants WHERE lat IS NOT NULL AND lon IS NOT NULL`
+        )
+        const inDistrict = new Set(
+          rests
+            .filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), rings))
+            .map(r => r.id)
+        )
+        filteredGroups = groups.filter(g => inDistrict.has(g.restaurant_id))
+      }
+    }
+
+    // Collect ids to delete (keep ids[0] = best; delete the rest)
+    const toDelete = []
+    for (const g of filteredGroups) toDelete.push(...g.ids.slice(1))
+    job.total = toDelete.length
+
+    console.log(`Dedup script: ${toDelete.length} duplicates to remove${districtId ? ` in ${districtId}` : ''}`)
+
+    const BATCH = 500
+    for (let i = 0; i < toDelete.length; i += BATCH) {
+      if (!job.running) { job.cancelled = true; break }
+      const batch = toDelete.slice(i, i + BATCH)
+      try {
+        const { rowCount } = await pool.query(
+          `DELETE FROM menu_items WHERE id = ANY($1::int[])`,
+          [batch]
+        )
+        job.done += rowCount
+        job.newItems += rowCount
+      } catch (e) {
+        console.error('Dedup batch error:', e.message)
+        job.errors += batch.length
+        job.done += batch.length
+      }
+    }
+  } catch (e) {
+    console.error('Dedup script error:', e.message)
+    job.errors++
+  } finally {
+    job.running = false
+    job.finishedAt = new Date().toISOString()
+    console.log(`Dedup finished: ${job.newItems} duplicates removed, ${job.errors} errors`)
+    if (!job.cancelled) saveScriptStats('dedup').catch(() => {})
+  }
+}
+
+// ── Google Place enricher (HTTP-only, no Playwright) ──────────────────────────
+// Enriches existing restaurants with Google Place data: hours, rating, etc.
+async function runGooglePlaceScript(districtId) {
+  const job = getScriptJob('gplace')
+  if (job.running) return
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY || process.env.VITE_GOOGLE_MAPS_API_KEY
+  if (!apiKey) {
+    console.error('Google Place script: GOOGLE_PLACES_API_KEY not set')
+    job.errors = 1; job.finishedAt = new Date().toISOString(); return
+  }
+
+  job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
+  job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
+  job.finishedAt = null; job.districtId = districtId || null
+
+  try {
+    // Get restaurants needing enrichment (missing hours or rating)
+    const { rows: rests } = await pool.query(`
+      SELECT id, name, lat, lon
+      FROM restaurants
+      WHERE lat IS NOT NULL AND lon IS NOT NULL
+        AND (opening_hours IS NULL OR rating IS NULL)
+    `)
+
+    let filtered = rests
+    if (districtId) {
+      const polygons = await loadBerlinPolygons()
+      if (polygons && polygons.has(districtId)) {
+        const rings = polygons.get(districtId)
+        filtered = rests.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), rings))
+      }
+    }
+
+    job.total = filtered.length
+    console.log(`Google Place script: enriching ${filtered.length} restaurants${districtId ? ` in ${districtId}` : ''}`)
+
+    for (const rest of filtered) {
+      if (!job.running) { job.cancelled = true; break }
+      try {
+        // Find Place by name + location bias
+        const findUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(rest.name)}&inputtype=textquery&locationbias=circle:300@${rest.lat},${rest.lon}&fields=place_id&key=${apiKey}`
+        const findRes  = await fetch(findUrl)
+        const findData = await findRes.json()
+        const placeId  = findData.candidates?.[0]?.place_id
+        if (!placeId) { job.done++; continue }
+
+        // Get full details
+        const detailUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,formatted_address,rating,user_ratings_total,price_level,opening_hours,formatted_phone_number,website&key=${apiKey}`
+        const detailRes  = await fetch(detailUrl)
+        const detailData = await detailRes.json()
+        const r = detailData.result
+        if (!r) { job.done++; continue }
+
+        // Update restaurant row with whatever fields we got
+        const { rowCount } = await pool.query(`
+          UPDATE restaurants SET
+            address       = COALESCE(address,       $2),
+            rating        = COALESCE(rating,        $3),
+            reviews_count = COALESCE(reviews_count, $4),
+            price_level   = COALESCE(price_level,   $5),
+            opening_hours = COALESCE(opening_hours, $6)
+          WHERE id = $1
+        `, [
+          rest.id,
+          r.formatted_address   || null,
+          r.rating              || null,
+          r.user_ratings_total  || null,
+          r.price_level         || null,
+          r.opening_hours       ? JSON.stringify(r.opening_hours) : null,
+        ])
+
+        if (rowCount > 0) job.newItems++
+        job.done++
+      } catch (e) {
+        console.error(`Google Place script restaurant ${rest.id}:`, e.message)
+        job.errors++
+        job.done++
+      }
+
+      await new Promise(r => setTimeout(r, 120))  // ~8 req/s — well under quota
+    }
+  } catch (e) {
+    console.error('Google Place script error:', e.message)
+    job.errors++
+  } finally {
+    job.running = false
+    job.finishedAt = new Date().toISOString()
+    console.log(`Google Place finished: ${job.done} processed, ${job.newItems} updated, ${job.errors} errors`)
+    if (!job.cancelled) saveScriptStats('gplace').catch(() => {})
+  }
+}
+
+// ── Wolt venue discovery + menu scrape (REST API, no Playwright) ──────────────
+async function runWoltScript(districtId) {
+  const job = getScriptJob('wolt')
+  if (job.running) return
+  job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
+  job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
+  job.finishedAt = null; job.districtId = districtId || null
+
+  try {
+    // Get bounding box and polygon rings for the district (or all Berlin)
+    let rings = null
+    let centerLat = 52.520, centerLng = 13.405
+    if (districtId) {
+      const polygons = await loadBerlinPolygons()
+      if (polygons && polygons.has(districtId)) {
+        rings = polygons.get(districtId)
+        // Compute centroid
+        const allPts = rings.flat()
+        centerLat = allPts.reduce((s, p) => s + p[0], 0) / allPts.length
+        centerLng = allPts.reduce((s, p) => s + p[1], 0) / allPts.length
+      }
+    }
+
+    // Discover venues via Wolt API (paginated, 50 per page)
+    const venues = []
+    const seen = new Set()
+    let skip = 0
+    const headers = { 'User-Agent': 'Mozilla/5.0 (compatible; NutritionAdmin/1.0)', 'Accept': 'application/json' }
+
+    while (true) {
+      if (!job.running) { job.cancelled = true; break }
+      try {
+        const url = `https://consumer-api.wolt.com/v1/pages/restaurants?lat=${centerLat}&lon=${centerLng}&limit=50&skip=${skip}`
+        const res  = await fetch(url, { headers })
+        if (!res.ok) break
+        const data = await res.json()
+        const sections = data.sections || []
+        let found = 0
+        for (const section of sections) {
+          for (const item of (section.items || [])) {
+            const v = item.venue || item
+            const slug  = v.slug  || v.wolt_slug
+            const vLat  = v.location?.coordinates?.[1] ?? v.lat
+            const vLng  = v.location?.coordinates?.[0] ?? v.lon
+            if (!slug || seen.has(slug)) continue
+            // Filter by district polygon
+            if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
+            seen.add(slug)
+            venues.push({ slug, name: v.name, lat: vLat, lng: vLng })
+            found++
+          }
+        }
+        if (found === 0) break
+        skip += 50
+        await new Promise(r => setTimeout(r, 300))
+      } catch (e) {
+        console.error('Wolt discovery page error:', e.message)
+        break
+      }
+    }
+
+    job.total = venues.length
+    console.log(`Wolt script: ${venues.length} venues discovered${districtId ? ` in ${districtId}` : ''}`)
+
+    for (const v of venues) {
+      if (!job.running) { job.cancelled = true; break }
+      try {
+        // Upsert restaurant (wolt_slug is unique key)
+        await pool.query(`
+          INSERT INTO restaurants (name, lat, lon, wolt_slug)
+          VALUES ($1, $2, $3, $4)
+          ON CONFLICT (wolt_slug) DO UPDATE SET
+            name = EXCLUDED.name,
+            lat  = COALESCE(restaurants.lat,  EXCLUDED.lat),
+            lon  = COALESCE(restaurants.lon,  EXCLUDED.lon)
+          WHERE restaurants.wolt_slug IS NOT NULL
+        `, [v.name, v.lat, v.lng, v.slug])
+
+        // Try to fetch menu items via Wolt API
+        try {
+          const menuUrl = `https://consumer-api.wolt.com/v4/venue/slug/${v.slug}/menu`
+          const menuRes = await fetch(menuUrl, { headers })
+          if (menuRes.ok) {
+            const menuData = await menuRes.json()
+            const categories = menuData.categories || menuData.menu?.items || []
+            for (const cat of categories) {
+              for (const item of (cat.items || [])) {
+                const name = item.name || item.baseName
+                if (!name) continue
+                const price  = item.unitPriceWithDiscount != null ? item.unitPriceWithDiscount / 100 : null
+                const imgUrl = item.imageUrl || item.image
+                // Get restaurant id to link menu item
+                const { rows: [restRow] } = await pool.query(
+                  `SELECT id FROM restaurants WHERE wolt_slug = $1 LIMIT 1`, [v.slug]
+                )
+                if (!restRow) continue
+                await pool.query(`
+                  INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
+                  VALUES ($1, $2, $3, $4, 'wolt_menu')
+                  ON CONFLICT DO NOTHING
+                `, [restRow.id, name, price, imgUrl])
+                job.newItems++
+              }
+            }
+          }
+        } catch (menuErr) {
+          // Menu API may not be available — that's OK, we still upserted the restaurant
+        }
+
+        job.done++
+      } catch (e) {
+        console.error(`Wolt script venue ${v.slug}:`, e.message)
+        job.errors++
+        job.done++
+      }
+      await new Promise(r => setTimeout(r, 150))
+    }
+  } catch (e) {
+    console.error('Wolt script error:', e.message)
+    job.errors++
+  } finally {
+    job.running = false
+    job.finishedAt = new Date().toISOString()
+    console.log(`Wolt finished: ${job.done} venues processed, ${job.newItems} menu items added, ${job.errors} errors`)
+    if (!job.cancelled) saveScriptStats('wolt').catch(() => {})
+  }
+}
+
 // ── Script API endpoints ───────────────────────────────────────────────────────
 
 app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
@@ -1182,11 +1477,17 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
     return res.json({ status: 'already_running', job })
   }
 
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
   if (id === 'macros') {
-    if (!pool) return res.status(503).json({ error: 'Database not configured' })
-    runMacrosScript(req.body?.districtId || null)  // fire and forget
+    runMacrosScript(req.body?.districtId || null)
+  } else if (id === 'dedup') {
+    runDedupScript(req.body?.districtId || null)
+  } else if (id === 'gplace') {
+    runGooglePlaceScript(req.body?.districtId || null)
+  } else if (id === 'wolt') {
+    runWoltScript(req.body?.districtId || null)
   }
-  // other ids remain stubs — no-op fire
+  // uber, web remain stubs for now
 
   res.json({ status: 'started', job: getScriptJob(id) })
 })
