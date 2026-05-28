@@ -16,10 +16,26 @@ const GEO_NAME_MAP = {
   'Reinickendorf': 'rein',
 };
 
+// Per-district accent colors (from Figma design)
+const DISTRICT_COLORS = {
+  mitte:    '#e63022',
+  fhain:    '#a0181a',
+  pankow:   '#3355aa',
+  cwilm:    '#e8458c',
+  spandau:  '#9933cc',
+  steglitz: '#4a7c3f',
+  tempel:   '#a0a020',
+  neuk:     '#e07820',
+  treptow:  '#4488cc',
+  marzahn:  '#6688aa',
+  lich:     '#cc3333',
+  rein:     '#20a0a0',
+};
+
 const TILE_PRESETS = {
   light: {
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution: '© OpenStreetMap · © CARTO',
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
   dark: {
     url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
@@ -87,7 +103,7 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     mapRef.current = map;
     tileRef.current = L.tileLayer(TILE_PRESETS[theme].url, {
       attribution: TILE_PRESETS[theme].attribution,
-      subdomains: 'abcd',
+      subdomains: 'abc',   // OSM uses a/b/c; CartoCDN presets use abcd (handled on swap)
       maxZoom: 19,
     }).addTo(map);
 
@@ -222,31 +238,26 @@ function computeStyle(id, districts, selectedId, accent) {
   const d = districts.find(x => x.id === id);
   const status = d?.status || 'none';
 
-  // Accent palette
-  const accents = {
-    green:  { color: '#52eb00', light: '#52eb00' },  // design system accent
-    blue:   { color: '#0080ff', light: '#0080ff' },
-    black:  { color: '#212121', light: '#212121' },
-  };
-  const a = accents[accent] || accents.green;
+  // Per-district color for covered/active; fallback to accent for unknown ids
+  const districtColor = DISTRICT_COLORS[id] || '#52eb00';
   const isSelected = selectedId === id;
 
   const base = {
-    color: a.color,
+    color: districtColor,
     weight: 1,
     opacity: 0.7,
-    fillColor: a.color,
+    fillColor: districtColor,
     fillOpacity: 0,
   };
 
   if (status === 'covered') {
-    return { ...base, weight: isSelected ? 3 : 1.5, fillOpacity: isSelected ? 0.55 : 0.40, opacity: 0.95, color: a.color };
+    return { ...base, weight: isSelected ? 3 : 1.5, fillOpacity: isSelected ? 0.55 : 0.40, opacity: 0.95 };
   }
   if (status === 'active') {
-    // warning (Pankow being scraped)
-    return { ...base, color: '#e0a900', fillColor: '#e0a900', weight: isSelected ? 3 : 1.5, fillOpacity: 0.32, opacity: 0.9, dashArray: '4,4' };
+    // dashed gold border while scraping is in progress
+    return { ...base, color: districtColor, fillColor: districtColor, weight: isSelected ? 3 : 1.5, fillOpacity: 0.32, opacity: 0.9, dashArray: '4,4' };
   }
-  // none
+  // none — covered districts not yet scraped
   return { ...base, color: '#9A9A9A', fillColor: '#000000', fillOpacity: isSelected ? 0.08 : 0.04, opacity: 0.4, dashArray: '2,3' };
 }
 

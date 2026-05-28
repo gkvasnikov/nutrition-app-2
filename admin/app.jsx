@@ -1007,7 +1007,7 @@ function RestaurantDetail({ restaurantId, onClose }) {
               {meals.map((m, i) => (
                 <div key={m.id || i} className="meal">
                   <div className="meal__img" style={{ background: 'var(--color-surface-3)' }}>
-                    {m.image_url && <img src={`/api/image-proxy?url=${encodeURIComponent(m.image_url)}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
+                    {m.photo && <img src={`/api/image-proxy?url=${encodeURIComponent(m.photo)}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
                   </div>
                   <div>
                     <div className="meal__name">{m.name}</div>
