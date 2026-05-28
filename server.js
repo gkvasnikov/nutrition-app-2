@@ -119,7 +119,7 @@ function r2Key(url) {
 // Stores under r2Key(url) so a later /api/image-proxy?url=<url> request is an instant R2 hit.
 // No-op if R2 is unconfigured or the object already exists.
 async function cacheImageToR2(url) {
-  if (!r2 || !url) return
+  if (!r2 || typeof url !== 'string' || !url) return  // skip non-string/empty defensively
   const key = r2Key(url)
   try {
     await r2.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
@@ -1764,7 +1764,9 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               : v.address?.street_address
                 ? `${v.address.street_address}, ${v.address.city || 'Berlin'}`
                 : null
-            const heroPhoto = v.brand_image || v.hero_image || v.profile_image || v.images?.[0]?.url || null
+            // Wolt image fields are objects like { url, blurhash } (or sometimes strings) — extract the URL
+            const pickUrl = x => typeof x === 'string' ? x : (x && typeof x === 'object' ? (x.url || x.src || null) : null)
+            const heroPhoto = pickUrl(v.brand_image) || pickUrl(v.hero_image) || pickUrl(v.profile_image) || pickUrl(v.images?.[0]) || null
             // Defensive type coercion — Wolt fields vary in type; DB columns are numeric.
             // rating: numeric column. Wolt uses a 0–10 scale → normalise to 0–5 to match Google.
             let rating = (typeof v.rating?.score === 'number' && isFinite(v.rating.score)) ? v.rating.score : null
