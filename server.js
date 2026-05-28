@@ -10,6 +10,7 @@ import session from 'express-session'
 import connectPgSimple from 'connect-pg-simple'
 import { timingSafeEqual, createHash } from 'crypto'
 import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { chromium } from 'playwright'
 
 const app = express()
 app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
@@ -1507,9 +1508,50 @@ ensureWoltSchema().catch(() => {})
 
 // ── Wolt Scraper ──────────────────────────────────────────────────────────────
 // 1. Discovers venues in the district via Wolt API (paginated from centre outward)
+// ── Wolt menu scraper (Playwright) ────────────────────────────────────────────
+// Mirrors the original Python wolt_scanner.py approach:
+//   open wolt.com/de/deu/berlin/restaurant/{slug} in headless Chromium,
+//   wait for page to settle, then query DOM card elements.
+async function scrapeWoltMenuPlaywright(page, slug) {
+  const url = `https://wolt.com/de/deu/berlin/restaurant/${slug}`
+  try {
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 })
+  } catch {
+    // Partial load is fine — some restaurants have analytics that never settle
+    await page.waitForTimeout(3000)
+  }
+
+  // Dismiss cookie / consent banner if present
+  await page.evaluate(() => {
+    document.querySelectorAll("[data-test-id='consents-banner-overlay']")
+      .forEach(el => el.remove())
+  }).catch(() => {})
+
+  await page.waitForTimeout(1000)
+
+  return page.$$eval("[data-test-id='horizontal-item-card']", cards =>
+    cards.map(card => {
+      const nameEl  = card.querySelector("[data-test-id='horizontal-item-card-header']")
+      const priceEl = card.querySelector("[data-test-id='horizontal-item-card-price']")
+      const imgEl   = card.querySelector('img')
+
+      const name     = nameEl?.innerText?.trim() || ''
+      const priceRaw = (priceEl?.getAttribute('aria-label') || priceEl?.innerText || '').replace(',', '.')
+      const imageUrl = imgEl?.getAttribute('src') || imgEl?.getAttribute('data-src') || ''
+
+      const m = priceRaw.match(/\d+[.,]?\d*/)
+      const price = m ? parseFloat(m[0]) : null
+
+      return { name, price, imageUrl }
+    }).filter(i => i.name)
+  ).catch(() => [])
+}
+
+// ── Wolt scraper ──────────────────────────────────────────────────────────────
+// 1. Discovers venues via consumer-api.wolt.com (grid-based, same as original Python script)
 // 2. Upserts each venue into restaurants by wolt_slug
 // 3. Skips menu fetch entirely if the restaurant already has menu items in the DB
-// 4. For restaurants without menus: fetches via Wolt v4 menu API and inserts items
+// 4. For restaurants without menus: scrapes menu via Playwright (headless Chromium)
 async function runWoltScript(districtId) {
   const job = getScriptJob('wolt')
   if (job.running) return
@@ -1574,68 +1616,81 @@ async function runWoltScript(districtId) {
     job.total = venues.length
     console.log(`Wolt script: ${venues.length} venues in district${districtId ? ` ${districtId}` : ''}`)
 
-    // ── Phase 2: upsert restaurants + fetch menus only for those without items ──
-    for (const v of venues) {
-      if (!job.running) { job.cancelled = true; break }
-      try {
-        // Upsert by wolt_slug (unique index now exists), get DB id
-        const { rows: [restRow] } = await pool.query(`
-          INSERT INTO restaurants (name, lat, lon, wolt_slug)
-          VALUES ($1, $2, $3, $4)
-          ON CONFLICT (wolt_slug) DO UPDATE SET
-            name = EXCLUDED.name,
-            lat  = COALESCE(restaurants.lat, EXCLUDED.lat),
-            lon  = COALESCE(restaurants.lon, EXCLUDED.lon)
-          RETURNING id
-        `, [v.name, v.lat, v.lng, v.slug])
+    // ── Phase 2: upsert restaurants + scrape menus with Playwright ──────────────
+    // One browser for the entire run (same pattern as original Python script)
+    let browser, page
+    try {
+      browser = await chromium.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      })
+      page = await browser.newPage()
+      await page.setExtraHTTPHeaders({ 'Accept-Language': 'de-DE,de;q=0.9' })
+      await page.setViewportSize({ width: 1280, height: 800 })
+    } catch (browserErr) {
+      console.error('Wolt: could not launch Playwright browser:', browserErr.message)
+      job.errors++
+      return
+    }
 
-        if (!restRow) { job.done++; continue }
-        const restId = restRow.id
-
-        // Skip if restaurant already has menu items
-        const { rows: [countRow] } = await pool.query(
-          `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
-          [restId]
-        )
-        if (parseInt(countRow.n) > 0) { job.done++; continue }
-
-        // No menu yet — fetch from restaurant-api.wolt.com (correct endpoint)
+    try {
+      for (const v of venues) {
+        if (!job.running) { job.cancelled = true; break }
         try {
-          const menuUrl = `https://restaurant-api.wolt.com/v4/venues/slug/${v.slug}/menu/data?unit_prices=true`
-          const menuRes = await fetch(menuUrl, { headers })
-          if (menuRes.ok) {
-            const menuData   = await menuRes.json()
-            // Response: { items: [ { name, baseprice, images:[{url}], category, ... } ] }
-            const items = menuData.items || []
+          // Upsert by wolt_slug (unique index exists), get DB id
+          const { rows: [restRow] } = await pool.query(`
+            INSERT INTO restaurants (name, lat, lon, wolt_slug)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT (wolt_slug) DO UPDATE SET
+              name = EXCLUDED.name,
+              lat  = COALESCE(restaurants.lat, EXCLUDED.lat),
+              lon  = COALESCE(restaurants.lon, EXCLUDED.lon)
+            RETURNING id
+          `, [v.name, v.lat, v.lng, v.slug])
+
+          if (!restRow) { job.done++; continue }
+          const restId = restRow.id
+
+          // Skip if restaurant already has menu items
+          const { rows: [countRow] } = await pool.query(
+            `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
+            [restId]
+          )
+          if (parseInt(countRow.n) > 0) { job.done++; continue }
+
+          // Scrape menu via Playwright (headless browser, same as original Python script)
+          console.log(`Wolt: scraping menu for ${v.slug}`)
+          const items = await scrapeWoltMenuPlaywright(page, v.slug)
+
+          if (items.length === 0) {
+            console.log(`  — no items found for ${v.slug}`)
+          } else {
             for (const item of items) {
-              const name   = item.name
-              if (!name) continue
-              // baseprice is in cents (e.g. 1290 = €12.90)
-              const price  = item.baseprice != null ? item.baseprice / 100 : null
-              const imgUrl = item.images?.[0]?.url || null
               try {
                 await pool.query(`
                   INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
                   VALUES ($1, $2, $3, $4, 'wolt_menu')
                   ON CONFLICT (restaurant_id, LOWER(name)) WHERE source = 'wolt_menu'
                   DO NOTHING
-                `, [restId, name, price, imgUrl])
+                `, [restId, item.name, item.price, item.imageUrl || null])
                 job.newItems++
               } catch (_) {}
             }
+            console.log(`  ${items.length} items → ${v.slug}`)
           }
-        } catch (menuErr) {
-          console.warn(`Wolt menu unavailable for ${v.slug}:`, menuErr.message)
-        }
 
-        job.done++
-      } catch (e) {
-        console.error(`Wolt script venue ${v.slug}:`, e.message)
-        job.errors++
-        job.done++
+          job.done++
+        } catch (e) {
+          console.error(`Wolt script venue ${v.slug}:`, e.message)
+          job.errors++
+          job.done++
+        }
+        await new Promise(r => setTimeout(r, 1500))  // 1.5s pause between venues (same as original)
       }
-      await new Promise(r => setTimeout(r, 150))
+    } finally {
+      await browser.close().catch(() => {})
     }
+
   } catch (e) {
     console.error('Wolt script error:', e.message)
     job.errors++
