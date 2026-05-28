@@ -845,12 +845,14 @@ function DistrictScripts({ d, onOpen, showToast }) {
   };
 
   const PIPELINE_STEPS = ['gplace', 'wolt', 'macros', 'dedup'];
+  const [pipelineLimit, setPipelineLimit] = useState('');
 
   const runPipeline = () => {
+    const limitVal = pipelineLimit.trim() ? parseInt(pipelineLimit, 10) : null;
     fetch('/admin/api/scripts/pipeline/run', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ districtId: d.id }),
+      body: JSON.stringify({ districtId: d.id, ...(limitVal ? { gplaceLimit: limitVal } : {}) }),
     })
       .then(r => r.json())
       .then(data => {
@@ -934,6 +936,31 @@ function DistrictScripts({ d, onOpen, showToast }) {
         </div>
       </div>
       <div className="section">
+        {!pipelineRunning && enabled['gplace'] !== false && (
+          <div style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <label style={{ fontSize: 12, color: 'var(--color-text-2)', whiteSpace: 'nowrap' }}>
+              Google limit
+            </label>
+            <input
+              type="number"
+              min="1"
+              placeholder="No limit"
+              value={pipelineLimit}
+              onChange={e => setPipelineLimit(e.target.value)}
+              style={{
+                width: 100, padding: '5px 8px', fontSize: 12,
+                border: '1px solid var(--color-surface-2)',
+                borderRadius: 'var(--radius-md)',
+                background: 'var(--color-surface)',
+                color: 'var(--color-text)',
+                fontFamily: 'inherit',
+              }}
+            />
+            <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>
+              {pipelineLimit ? `Google stops after ${pipelineLimit} new restaurants` : 'all restaurants'}
+            </span>
+          </div>
+        )}
         <Btn variant={runAllVariant} size="lg" block icon={runAllIcon}
           onClick={pipelineRunning ? stopPipeline : runPipeline}
         >{runAllLabel}</Btn>

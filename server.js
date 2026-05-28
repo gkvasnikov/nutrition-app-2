@@ -1728,7 +1728,7 @@ const _pipeline = {
   finishedAt: null,
 }
 
-async function runPipeline(districtId) {
+async function runPipeline(districtId, gplaceLimit = null) {
   if (_pipeline.running) return
   _pipeline.running    = true
   _pipeline.cancelled  = false
@@ -1758,7 +1758,7 @@ async function runPipeline(districtId) {
       _pipeline.step = id
       console.log(`[pipeline] Starting step: ${id}`)
       try {
-        if (id === 'gplace')  await runGooglePlaceScript(districtId, [])
+        if (id === 'gplace')  await runGooglePlaceScript(districtId, [], gplaceLimit)
         else if (id === 'wolt')   await runWoltScript(districtId)
         else if (id === 'macros') await runMacrosScript(districtId)
         else if (id === 'dedup')  await runDedupScript(districtId)
@@ -1783,8 +1783,9 @@ async function runPipeline(districtId) {
 app.post('/admin/api/scripts/pipeline/run', requireAdminAuth, (req, res) => {
   if (_pipeline.running) return res.json({ status: 'already_running', pipeline: _pipeline })
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
-  const districtId = req.body?.districtId || null
-  runPipeline(districtId)
+  const districtId   = req.body?.districtId   || null
+  const gplaceLimit  = req.body?.gplaceLimit  || null
+  runPipeline(districtId, gplaceLimit)
   res.json({ status: 'started', pipeline: _pipeline })
 })
 
