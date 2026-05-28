@@ -1669,9 +1669,13 @@ async function scrapeWoltMenuPlaywright(page, slug) {
 
   // Up to 2 attempts — Wolt occasionally serves a slow/empty page to datacenter IPs,
   // leaving a restaurant with 0 menu items. Reload once before giving up.
+  // Returns { items, diag } so the caller can distinguish throttle (no cards ever / error page)
+  // from timing (cards appear only on the 2nd attempt).
+  let sawCard = false, status = null
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+      const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+      if (resp) status = resp.status()
     } catch {
       await page.waitForTimeout(3000)
     }
@@ -1680,14 +1684,21 @@ async function scrapeWoltMenuPlaywright(page, slug) {
       document.querySelectorAll("[data-test-id='consents-banner-overlay']").forEach(el => el.remove())
     }).catch(() => {})
     // Wait for the menu cards to actually render (loaded via XHR; networkidle is unreliable here)
-    await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => {})
+    const sel = await page.waitForSelector("[data-test-id='horizontal-item-card']", { timeout: 20000 }).catch(() => null)
+    if (sel) sawCard = true
     await page.waitForTimeout(500)
 
     const items = await extract()
-    if (items.length > 0 || attempt === 2) return items
+    if (items.length > 0) {
+      return { items, diag: { sawCard, status, recovered: attempt === 2 } }
+    }
+    if (attempt === 2) {
+      const title = await page.title().catch(() => '')
+      return { items: [], diag: { sawCard, status, title, recovered: false } }
+    }
     await page.waitForTimeout(2000)  // brief backoff, then one retry
   }
-  return []
+  return { items: [], diag: { sawCard, status, recovered: false } }
 }
 
 // ── Wolt scraper ──────────────────────────────────────────────────────────────
@@ -1708,6 +1719,8 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
   job.lastError = null
+  // Scrape diagnostics (persisted via saveScriptStats → admin_settings.script_wolt_last_run)
+  job.scrapeEmpty = 0; job.scrapeRecovered = 0; job.emptySamples = []
 
   try {
     await ensureWoltSchema()
@@ -1883,10 +1896,17 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             // Scrape menu via Playwright (headless browser, same as original Python script)
             didScrape = true
             console.log(`Wolt: scraping menu for ${v.slug}`)
-            const items = await scrapeWoltMenuPlaywright(page, v.slug)
+            const { items, diag } = await scrapeWoltMenuPlaywright(page, v.slug)
+            if (diag.recovered) job.scrapeRecovered = (job.scrapeRecovered || 0) + 1
 
             if (items.length === 0) {
-              console.log(`  — no items found for ${v.slug}`)
+              // Diagnostic: record why the menu came back empty (throttle vs timing)
+              job.scrapeEmpty = (job.scrapeEmpty || 0) + 1
+              if (!job.emptySamples) job.emptySamples = []
+              if (job.emptySamples.length < 8) {
+                job.emptySamples.push({ slug: v.slug, title: diag.title || '', sawCard: !!diag.sawCard, status: diag.status })
+              }
+              console.log(`  — no items for ${v.slug} (sawCard=${diag.sawCard}, status=${diag.status}, title="${diag.title || ''}")`)
             } else {
               let menuAdded = 0
               for (const item of items) {
