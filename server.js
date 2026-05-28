@@ -631,8 +631,56 @@ async function runImageCacheJob() {
     _cacheJob.running    = false
     _cacheJob.finishedAt = new Date().toISOString()
     console.log(`Image cache job finished: ${_cacheJob.done - _cacheJob.errors} saved, ${_cacheJob.errors} errors`)
+    // Persist completed stats to DB so they survive server restarts
+    saveR2SyncStats().catch(e => console.warn('Could not persist R2 sync stats:', e.message))
   }
 }
+
+// ── R2 sync stats persistence ─────────────────────────────────────────────────
+const R2_SYNC_INTERVAL_DAYS = 7
+
+async function saveR2SyncStats() {
+  if (!pool) return
+  const stats = { total: _cacheJob.total, done: _cacheJob.done, errors: _cacheJob.errors, finishedAt: _cacheJob.finishedAt }
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS admin_settings (
+      key TEXT PRIMARY KEY,
+      value JSONB NOT NULL,
+      updated_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `)
+  await pool.query(`
+    INSERT INTO admin_settings (key, value, updated_at)
+    VALUES ('r2_last_sync', $1, NOW())
+    ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = NOW()
+  `, [JSON.stringify(stats)])
+}
+
+async function loadR2SyncStats() {
+  if (!pool) return
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS admin_settings (
+        key TEXT PRIMARY KEY,
+        value JSONB NOT NULL,
+        updated_at TIMESTAMPTZ DEFAULT NOW()
+      )
+    `)
+    const { rows } = await pool.query(`SELECT value FROM admin_settings WHERE key = 'r2_last_sync'`)
+    if (rows.length) {
+      const s = rows[0].value
+      _cacheJob.total      = s.total      || 0
+      _cacheJob.done       = s.done       || 0
+      _cacheJob.errors     = s.errors     || 0
+      _cacheJob.finishedAt = s.finishedAt || null
+      console.log(`R2 sync stats loaded from DB: ${s.total} total, finished ${s.finishedAt}`)
+    }
+  } catch (e) {
+    console.warn('Could not load R2 sync stats:', e.message)
+  }
+}
+// Warm up on startup
+loadR2SyncStats().catch(() => {})
 
 // ── Admin panel ───────────────────────────────────────────────────────────────
 
@@ -957,7 +1005,24 @@ app.post('/admin/api/cache-images/stop', requireAdminAuth, (req, res) => {
 })
 
 app.get('/admin/api/cache-images/status', requireAdminAuth, (req, res) => {
-  res.json({ job: _cacheJob, r2Enabled: !!r2 })
+  const cachedCount = Math.max(0, _cacheJob.done - _cacheJob.errors)
+  const coveragePct = _cacheJob.total > 0 ? Math.round(cachedCount / _cacheJob.total * 10) / 10 : null
+  const nextSyncAt  = _cacheJob.finishedAt
+    ? new Date(new Date(_cacheJob.finishedAt).getTime() + R2_SYNC_INTERVAL_DAYS * 86400_000).toISOString()
+    : null
+  res.json({
+    job: _cacheJob,
+    r2Enabled: !!r2,
+    stats: {
+      cachedCount,
+      totalCount:  _cacheJob.total,
+      errorCount:  _cacheJob.errors,
+      coveragePct,
+      lastSyncAt:  _cacheJob.finishedAt,
+      nextSyncAt,
+      syncIntervalDays: R2_SYNC_INTERVAL_DAYS,
+    },
+  })
 })
 
 // ── Admin main page (dynamic — injects real DB data) ─────────────────────────

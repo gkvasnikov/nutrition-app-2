@@ -343,12 +343,8 @@ function RestaurantList({ title, restaurants, onOpen, selectedId }) {
   const sentinelRef = useRef(null);
 
   const filtered = useMemo(() => {
-    let r = restaurants;
-    if (filter === 'open')     r = r.filter(x => x.open);
-    if (filter === 'closed')   r = r.filter(x => !x.open);
-    if (filter === 'photos')   r = r.filter(x => x.photos);
-    if (filter === 'partners') r = r.filter(x => x.partner);
-    return r;
+    if (filter === 'partners') return restaurants.filter(x => x.partner);
+    return restaurants;
   }, [filter, restaurants]);
 
   // Reset visible count when filter or dataset changes
@@ -374,9 +370,6 @@ function RestaurantList({ title, restaurants, onOpen, selectedId }) {
         <div className="chips">
           <Chip active={filter==='all'}      onClick={() => setFilter('all')}>All <span className="num">{restaurants.length}</span></Chip>
           <Chip active={filter==='partners'} onClick={() => setFilter('partners')}>Partners</Chip>
-          <Chip active={filter==='open'}     onClick={() => setFilter('open')}>Open now</Chip>
-          <Chip active={filter==='closed'}   onClick={() => setFilter('closed')}>Closed</Chip>
-          <Chip active={filter==='photos'}   onClick={() => setFilter('photos')}>Has photos</Chip>
         </div>
       </div>
       <div className="section">
@@ -433,86 +426,143 @@ function RestaurantRow({ r, onOpen, active }) {
 }
 
 function R2CachePanel() {
-  const [job, setJob] = useState(null);
+  const [job, setJob]         = useState(null);
+  const [stats, setStats]     = useState(null);
   const [r2Enabled, setR2Enabled] = useState(false);
   const pollRef = useRef(null);
 
   const fetchStatus = useCallback(() => {
     fetch('/admin/api/cache-images/status')
       .then(r => r.json())
-      .then(d => { setJob(d.job); setR2Enabled(d.r2Enabled); })
+      .then(d => { setJob(d.job); setR2Enabled(d.r2Enabled); setStats(d.stats); })
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    fetchStatus();
-  }, []);
+  useEffect(() => { fetchStatus(); }, []);
 
-  // Poll every 2s while running
   useEffect(() => {
-    if (job?.running) {
-      pollRef.current = setInterval(fetchStatus, 2000);
-    } else {
-      clearInterval(pollRef.current);
-    }
+    if (job?.running) { pollRef.current = setInterval(fetchStatus, 2000); }
+    else { clearInterval(pollRef.current); }
     return () => clearInterval(pollRef.current);
   }, [job?.running]);
 
-  const start = () => {
-    fetch('/admin/api/cache-images/start', { method: 'POST' })
-      .then(r => r.json()).then(d => setJob(d.job)).catch(() => {});
-  };
-  const stop = () => {
-    fetch('/admin/api/cache-images/stop', { method: 'POST' })
-      .then(r => r.json()).then(d => setJob(d.job)).catch(() => {});
-  };
+  const start = () => fetch('/admin/api/cache-images/start', { method: 'POST' })
+    .then(r => r.json()).then(d => { setJob(d.job); setStats(d.stats); }).catch(() => {});
+  const stop  = () => fetch('/admin/api/cache-images/stop',  { method: 'POST' })
+    .then(r => r.json()).then(d => { setJob(d.job); setStats(d.stats); }).catch(() => {});
 
-  const pct   = job?.total > 0 ? Math.round((job.done / job.total) * 100) : 0;
-  const done  = job?.done  || 0;
-  const total = job?.total || 0;
-  const errs  = job?.errors || 0;
+  // While a job is running use live progress pct; otherwise use persisted coverage
+  const activePct = job?.running && job?.total > 0
+    ? Math.round(job.done / job.total * 10) / 10
+    : null;
+  const coveragePct = activePct ?? stats?.coveragePct ?? null;
+  const pctDisplay  = coveragePct !== null ? coveragePct.toFixed(1) : '—';
+
+  const now           = Date.now();
+  const lastSyncAgo   = stats?.lastSyncAt  ? msToRelative(now - new Date(stats.lastSyncAt).getTime())  : null;
+  const nextSyncDate  = stats?.nextSyncAt  ? new Date(stats.nextSyncAt)  : null;
+  const nextSyncAgo   = nextSyncDate       ? msToRelative(now - nextSyncDate.getTime())                : null;
+  const syncOverdue   = nextSyncDate && nextSyncDate.getTime() < now;
+
+  // Status pill
+  const statusPill = !r2Enabled
+    ? <Pill variant="warn"    dot>R2 not configured</Pill>
+    : job?.running
+      ? <Pill variant="warn"  dot>syncing…</Pill>
+      : syncOverdue
+        ? <Pill variant="warn" dot>sync overdue</Pill>
+        : stats?.lastSyncAt
+          ? <Pill variant="success" dot>up to date</Pill>
+          : <Pill dot>never synced</Pill>;
 
   return (
     <div className="section">
       <div className="section__head">
         <span className="section__title">R2 Image Cache</span>
-        {!r2Enabled
-          ? <Pill variant="warn" dot>R2 not configured</Pill>
-          : job?.running
-            ? <Pill variant="warn" dot>running</Pill>
-            : job?.finishedAt
-              ? <Pill variant="success" dot>done</Pill>
-              : <Pill dot>idle</Pill>}
+        {statusPill}
       </div>
-      <div style={{ padding: '14px 16px', border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)' }}>
-        <div style={{ fontSize: 13, color: 'var(--color-text-2)', marginBottom: 12 }}>
-          Downloads all Wolt meal photos to Cloudflare R2 so the app is independent of Wolt CDN.
-          {total > 0 && <span className="num" style={{ color: 'var(--color-text)', marginLeft: 6 }}>{total.toLocaleString()} photos total</span>}
+      <div style={{ border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', overflow: 'hidden' }}>
+
+        {/* Coverage hero */}
+        <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'flex-end', gap: 10 }}>
+          <span className="num" style={{ fontSize: 36, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1 }}>{pctDisplay}%</span>
+          <span style={{ fontSize: 13, color: 'var(--color-text-2)', paddingBottom: 3 }}>photos cached in R2</span>
         </div>
-        {total > 0 && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 6 }}>
-              <span className="muted">{done.toLocaleString()} / {total.toLocaleString()} processed</span>
-              <span className="num" style={{ fontWeight: 600 }}>{pct}%{errs > 0 ? ` · ${errs} errors` : ''}</span>
+
+        {/* Progress bar */}
+        {coveragePct !== null && (
+          <div style={{ margin: '0 16px 12px' }}>
+            <div className="progress">
+              <div className="progress__fill" style={{
+                width: `${Math.min(coveragePct, 100)}%`,
+                background: coveragePct >= 95 ? 'var(--color-accent)' : coveragePct >= 80 ? 'var(--color-rating-star)' : '#e53',
+                transition: 'width 0.4s ease',
+              }}/>
             </div>
-            <div className="progress" style={{ marginBottom: 12 }}>
-              <div className="progress__fill" style={{ width: `${pct}%`, background: errs > 0 ? 'var(--color-rating-star)' : 'var(--color-accent)', transition: 'width 0.4s ease' }}/>
-            </div>
-          </>
+          </div>
         )}
-        {job?.running
-          ? <Btn variant="secondary" block icon="pause" onClick={stop}>Stop</Btn>
-          : <Btn variant="primary" block icon="zap" onClick={start} disabled={!r2Enabled}>
-              {job?.finishedAt ? 'Re-run' : 'Download all photos to R2'}
-            </Btn>}
-        {job?.finishedAt && !job?.running && (
-          <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-3)', textAlign: 'center' }}>
-            Finished · {new Date(job.finishedAt).toLocaleString()}
+
+        {/* Counts */}
+        {stats?.totalCount > 0 && (
+          <div style={{ padding: '0 16px 12px', display: 'flex', gap: 16, fontSize: 12, color: 'var(--color-text-2)', flexWrap: 'wrap' }}>
+            <span><span className="num" style={{ color: 'var(--color-text)', fontWeight: 700 }}>{stats.cachedCount.toLocaleString()}</span> cached</span>
+            <span><span className="num" style={{ color: 'var(--color-text)', fontWeight: 700 }}>{stats.totalCount.toLocaleString()}</span> total</span>
+            {stats.errorCount > 0 && <span style={{ color: 'var(--color-text-3)' }}><span className="num">{stats.errorCount.toLocaleString()}</span> dead links</span>}
+          </div>
+        )}
+
+        {/* Sync dates */}
+        {(stats?.lastSyncAt || stats?.nextSyncAt) && (
+          <div style={{ margin: '0 16px 12px', padding: '10px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', fontSize: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {stats.lastSyncAt && (
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--color-text-2)' }}>Last sync</span>
+                <span style={{ color: 'var(--color-text)' }}>
+                  {new Date(stats.lastSyncAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  <span className="muted"> · {lastSyncAgo}</span>
+                </span>
+              </div>
+            )}
+            {nextSyncDate && (
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--color-text-2)' }}>Next sync</span>
+                <span style={{ color: syncOverdue ? '#e53' : 'var(--color-text)' }}>
+                  {nextSyncDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  <span className="muted"> · {syncOverdue ? `${nextSyncAgo} overdue` : `in ${nextSyncAgo}`}</span>
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Run button */}
+        <div style={{ padding: '0 12px 12px' }}>
+          {job?.running
+            ? <Btn variant="secondary" block icon="pause" onClick={stop}>Stop sync</Btn>
+            : <Btn variant="primary" block icon="zap" onClick={start} disabled={!r2Enabled}>
+                {stats?.lastSyncAt ? (syncOverdue ? 'Sync now (overdue)' : 'Re-sync') : 'Download all photos to R2'}
+              </Btn>}
+        </div>
+
+        {/* Live progress while running */}
+        {job?.running && job?.total > 0 && (
+          <div style={{ padding: '0 16px 12px', fontSize: 12, color: 'var(--color-text-3)', textAlign: 'center' }}>
+            {job.done.toLocaleString()} / {job.total.toLocaleString()} processed · {job.errors} errors
           </div>
         )}
       </div>
     </div>
   );
+}
+
+// Converts milliseconds to a human-readable relative string ("2 days", "3 hours", etc.)
+function msToRelative(ms) {
+  const abs = Math.abs(ms);
+  if (abs < 60_000)              return 'just now';
+  if (abs < 3_600_000)           return `${Math.round(abs / 60_000)}m`;
+  if (abs < 86_400_000)          return `${Math.round(abs / 3_600_000)}h`;
+  if (abs < 7 * 86_400_000)      return `${Math.round(abs / 86_400_000)}d`;
+  return `${Math.round(abs / (7 * 86_400_000))}w`;
 }
 
 function BerlinStats() {
