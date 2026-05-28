@@ -18,6 +18,9 @@ COPY . .
 RUN npx playwright install chromium
 
 # 4. Build the frontend (Vite). Runs before NODE_ENV=production so dev deps install.
+# VITE_ vars must be available at build time — declare as ARG so Railway passes them in.
+ARG VITE_GOOGLE_MAPS_API_KEY
+ENV VITE_GOOGLE_MAPS_API_KEY=$VITE_GOOGLE_MAPS_API_KEY
 RUN cd frontend && npm ci && npm run build
 
 ENV NODE_ENV=production
