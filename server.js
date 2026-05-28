@@ -1679,11 +1679,12 @@ async function scrapeWoltMenuPlaywright(page, slug) {
 
 // ── Wolt scraper ──────────────────────────────────────────────────────────────
 // Primary discovery source: discovers venues + extracts full venue data from Wolt API.
-// 1. Discovers venues via consumer-api.wolt.com (paginated from district centre)
-//    Extracts: address, hero photo, rating, reviews count, price range
-// 2. Upserts each venue into restaurants by wolt_slug (COALESCE — Google enricher overwrites later)
+// 1. Discovers venues via consumer-api.wolt.com (district centroid + 4 bbox corners,
+//    deduped by slug, filtered to the district polygon). Extracts: address, brand photo,
+//    rating, reviews count, price range.
+// 2. Skips venues that already have a Wolt menu — processes only new / menu-less ones.
+// 3. Upserts each venue into restaurants by wolt_slug (COALESCE — Google enricher overwrites later)
 //    Uses xmax = 0 to count genuinely new inserts (for limit tracking)
-// 3. Skips menu fetch entirely if the restaurant already has menu items in the DB
 // 4. For restaurants without menus: scrapes menu via Playwright (headless Chromium)
 // enabledFields: reserved for future per-field toggling (currently all fields always extracted)
 // limit: stop after this many genuinely new restaurant inserts
@@ -1698,50 +1699,68 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
   try {
     await ensureWoltSchema()
 
-    // District polygon + centroid
+    // District polygon + bounding box
     let rings = null
-    let centerLat = 52.520, centerLng = 13.405
+    let bbox = { minLat: 52.338, maxLat: 52.675, minLng: 13.088, maxLng: 13.761 }  // all Berlin fallback
     if (districtId) {
       const polygons = await loadBerlinPolygons()
       if (polygons?.has(districtId)) {
         rings = polygons.get(districtId)
-        const allPts = rings.flat()
-        centerLat = allPts.reduce((s, p) => s + p[0], 0) / allPts.length
-        centerLng = allPts.reduce((s, p) => s + p[1], 0) / allPts.length
+        let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
+        for (const ring of rings) for (const [lat, lng] of ring) {
+          if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat
+          if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng
+        }
+        bbox = { minLat, maxLat, minLng, maxLng }
       }
     }
 
-    // ── Phase 1: discover venues (paginate until no more in-district results) ──
-    const venues = []
-    const seen   = new Set()
-    let skip = 0
-    let emptyPages = 0
-    const headers = { 'User-Agent': 'Mozilla/5.0 (compatible; NutritionAdmin/1.0)', 'Accept': 'application/json' }
+    // ── Phase 1: discover venues ────────────────────────────────────────────
+    // Wolt's API takes a POINT (lat/lon), not a region, and returns ~2000 venues
+    // across a wide radius — a single query from the district centroid already
+    // covers a compact district. We query the centroid + the 4 bbox corners
+    // (insurance for geographically large districts), dedupe by slug, then keep
+    // only venues whose coordinates fall inside the district polygon.
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+      'Accept': 'application/json',
+      'Accept-Language': 'de-DE,de;q=0.9',
+      'Referer': 'https://wolt.com/',
+    }
+    const cLat = (bbox.minLat + bbox.maxLat) / 2
+    const cLng = (bbox.minLng + bbox.maxLng) / 2
+    const queryPoints = [
+      { lat: cLat, lng: cLng },               // centroid
+      { lat: bbox.minLat, lng: bbox.minLng }, // SW corner
+      { lat: bbox.minLat, lng: bbox.maxLng }, // SE corner
+      { lat: bbox.maxLat, lng: bbox.minLng }, // NW corner
+      { lat: bbox.maxLat, lng: bbox.maxLng }, // NE corner
+    ]
 
-    while (emptyPages < 2) {
+    const venuesMap = new Map()  // slug → venue data (dedup across query points)
+    for (const pt of queryPoints) {
       if (!job.running) { job.cancelled = true; break }
       try {
-        const url = `https://consumer-api.wolt.com/v1/pages/restaurants?lat=${centerLat}&lon=${centerLng}&limit=50&skip=${skip}`
-        const res  = await fetch(url, { headers })
-        if (!res.ok) break
+        const url = `https://consumer-api.wolt.com/v1/pages/restaurants?lat=${pt.lat}&lon=${pt.lng}`
+        const res = await fetch(url, { headers })
+        if (!res.ok) { await new Promise(r => setTimeout(r, 300)); continue }
         const data = await res.json()
-        let inDistrictFound = 0
         for (const section of (data.sections || [])) {
           for (const item of (section.items || [])) {
             const v    = item.venue || item
             const slug = v.slug || v.wolt_slug
+            if (!slug || venuesMap.has(slug)) continue
             // Wolt returns location as plain [lng, lat] array (GeoJSON order)
             const vLat = Array.isArray(v.location) ? v.location[1] : (v.location?.coordinates?.[1] ?? v.lat)
             const vLng = Array.isArray(v.location) ? v.location[0] : (v.location?.coordinates?.[0] ?? v.lon)
-            if (!slug || seen.has(slug)) continue
-            seen.add(slug)
+            // Keep only venues inside the selected district polygon
             if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
             // Extract full venue data from API response
             const address = typeof v.address === 'string' ? v.address
               : v.address?.street_address
                 ? `${v.address.street_address}, ${v.address.city || 'Berlin'}`
                 : null
-            const heroPhoto    = v.hero_image || v.profile_image || v.images?.[0]?.url || null
+            const heroPhoto = v.brand_image || v.hero_image || v.profile_image || v.images?.[0]?.url || null
             // Defensive type coercion — Wolt fields vary in type; DB columns are numeric.
             // rating: numeric column. Wolt uses a 0–10 scale → normalise to 0–5 to match Google.
             let rating = (typeof v.rating?.score === 'number' && isFinite(v.rating.score)) ? v.rating.score : null
@@ -1749,21 +1768,31 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             const reviewsCount = Number.isInteger(v.rating?.volume) ? v.rating.volume : (parseInt(v.rating?.volume, 10) || null)
             // price_level: integer column 1–4. Wolt price_range may be a string ("€€") or int → keep only valid ints.
             const priceLevel = (Number.isInteger(v.price_range) && v.price_range >= 1 && v.price_range <= 4) ? v.price_range : null
-            venues.push({ slug, name: v.name, lat: vLat, lng: vLng, address, heroPhoto, rating, reviewsCount, priceLevel })
-            inDistrictFound++
+            venuesMap.set(slug, { slug, name: v.name, lat: vLat, lng: vLng, address, heroPhoto, rating, reviewsCount, priceLevel })
           }
         }
-        emptyPages = inDistrictFound === 0 ? emptyPages + 1 : 0
-        skip += 50
-        await new Promise(r => setTimeout(r, 300))
       } catch (e) {
-        console.error('Wolt discovery page error:', e.message)
-        break
+        console.error(`Wolt discovery point (${pt.lat.toFixed(3)},${pt.lng.toFixed(3)}) error:`, e.message)
       }
+      await new Promise(r => setTimeout(r, 350))  // gentle throttle between query points
     }
 
+    const allVenues = [...venuesMap.values()]
+    console.log(`Wolt discovery: ${allVenues.length} unique venues inside ${districtLabel(districtId)}`)
+
+    // Skip restaurants that already have a Wolt menu — focus only on NEW / incomplete
+    // ones, so the run doesn't churn through everything already in the DB.
+    const { rows: completeRows } = await pool.query(`
+      SELECT DISTINCT r.wolt_slug AS slug
+      FROM restaurants r
+      JOIN menu_items m ON m.restaurant_id = r.id AND m.source = 'wolt_menu'
+      WHERE r.wolt_slug IS NOT NULL
+    `)
+    const completeSlugs = new Set(completeRows.map(r => r.slug))
+    const venues = allVenues.filter(v => !completeSlugs.has(v.slug))
+
     job.total = venues.length
-    console.log(`Wolt script: ${venues.length} venues in district${districtId ? ` ${districtId}` : ''}`)
+    console.log(`Wolt script: ${allVenues.length} venues found, ${venues.length} new/incomplete to process${districtId ? ` in ${districtId}` : ''}`)
     logActivity('info', 'Wolt Menu Scraper started', `${districtLabel(districtId)} · ${venues.length} venues${limit ? ` · limit ${limit}` : ''}`)
 
     // ── Phase 2: upsert restaurants + scrape menus with Playwright ──────────────
