@@ -12,14 +12,14 @@ const MEALS_SAMPLE = [
 ];
 
 const SCRIPTS = [
-  { id: 'gplace', name: 'Google Place Scraper', icon: 'map-pin', desc: 'Hours, address, ratings, photos, coordinates.',
+  { id: 'wolt', name: 'Wolt Menu Scraper', icon: 'utensils', desc: 'Discover restaurants & menus from Wolt: venue info, photos, prices.',
+    lastRun: '5h ago', duration: '11m 04s', status: 'success', cost: '$0',
+    coverage: 92, errors: 2,
+    includes: ['Venue name & slug', 'Coordinates', 'Address', 'Hero photo', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos'] },
+  { id: 'gplace', name: 'Google Place Enricher', icon: 'map-pin', desc: 'Enrich Wolt restaurants with Google data. Google photo, hours, phone and website overwrite Wolt.',
     lastRun: '2h ago', duration: '4m 12s', status: 'success', cost: '$12',
     coverage: 100, errors: 0,
-    includes: ['Working hours', 'Rating & reviews', 'Price level', 'Address', 'Photo', 'Phone number', 'Website'] },
-  { id: 'wolt', name: 'Wolt Menu Scraper', icon: 'utensils', desc: 'Menu items, prices, photos from Wolt CDN.',
-    lastRun: '5h ago', duration: '11m 04s', status: 'success', cost: '$8',
-    coverage: 92, errors: 2,
-    includes: ['Venue discovery', 'Wolt slug', 'Menu items', 'Prices', 'Photos'] },
+    includes: ['Phone number', 'Website', 'Opening hours (dine-in)', 'Google photo → R2'] },
   { id: 'uber', name: 'Uber Eats Scraper', icon: 'utensils', desc: 'Cross-check menu vs Uber Eats.',
     lastRun: '3d ago', duration: '7m 38s', status: 'warning', cost: '$6',
     coverage: 64, errors: 18,

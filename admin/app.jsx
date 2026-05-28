@@ -844,20 +844,20 @@ function DistrictScripts({ d, onOpen, showToast }) {
       .catch(() => {});
   };
 
-  const PIPELINE_STEPS = ['gplace', 'wolt', 'macros', 'dedup'];
-  const [pipelineLimit, setPipelineLimit] = useState('');
+  const PIPELINE_STEPS = ['wolt', 'gplace', 'macros', 'dedup'];
 
   const runPipeline = () => {
-    const limitVal = pipelineLimit.trim() ? parseInt(pipelineLimit, 10) : null;
+    // Read wolt limit from already-polled job state (persisted configLimit)
+    const woltLimit = jobs.wolt?.configLimit || null;
     fetch('/admin/api/scripts/pipeline/run', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ districtId: d.id, ...(limitVal ? { gplaceLimit: limitVal } : {}) }),
+      body: JSON.stringify({ districtId: d.id, ...(woltLimit ? { woltLimit } : {}) }),
     })
       .then(r => r.json())
       .then(data => {
         if (data.pipeline) setPipeline(data.pipeline);
-        showToast({ text: `Pipeline started for ${d.name}` });
+        showToast({ text: `Pipeline started for ${d.name}${woltLimit ? ` (Wolt limit: ${woltLimit})` : ''}` });
         fetchStatus();
       })
       .catch(() => showToast({ text: `Failed to start pipeline` }));
@@ -888,7 +888,7 @@ function DistrictScripts({ d, onOpen, showToast }) {
   const runAllVariant = pipelineRunning ? 'secondary' : 'primary';
 
   // Pipeline step progress row
-  const pipelineStepNames = { gplace: 'Google', wolt: 'Wolt', macros: 'Macros', dedup: 'Dedup' };
+  const pipelineStepNames = { wolt: 'Wolt', gplace: 'Google', macros: 'Macros', dedup: 'Dedup' };
   const showPipelineProgress = pipelineRunning || (pipeline.finishedAt && pipeline.stepsDone?.length > 0);
 
   return (
@@ -936,29 +936,9 @@ function DistrictScripts({ d, onOpen, showToast }) {
         </div>
       </div>
       <div className="section">
-        {!pipelineRunning && enabled['gplace'] !== false && (
-          <div style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <label style={{ fontSize: 12, color: 'var(--color-text-2)', whiteSpace: 'nowrap' }}>
-              Google limit
-            </label>
-            <input
-              type="number"
-              min="1"
-              placeholder="No limit"
-              value={pipelineLimit}
-              onChange={e => setPipelineLimit(e.target.value)}
-              style={{
-                width: 100, padding: '5px 8px', fontSize: 12,
-                border: '1px solid var(--color-surface-2)',
-                borderRadius: 'var(--radius-md)',
-                background: 'var(--color-surface)',
-                color: 'var(--color-text)',
-                fontFamily: 'inherit',
-              }}
-            />
-            <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>
-              {pipelineLimit ? `Google stops after ${pipelineLimit} new restaurants` : 'all restaurants'}
-            </span>
+        {!pipelineRunning && jobs.wolt?.configLimit && (
+          <div style={{ marginBottom: 8, fontSize: 12, color: 'var(--color-text-2)' }}>
+            Wolt limit: <strong className="num">{jobs.wolt.configLimit}</strong> new restaurants
           </div>
         )}
         <Btn variant={runAllVariant} size="lg" block icon={runAllIcon}
@@ -1309,22 +1289,20 @@ function RestaurantDetail({ restaurantId, onClose }) {
 
 // Google Places API pricing (per request, legacy Places API)
 // Details cost is additive: Basic always + Contact if any contact field + Atmosphere if any atmosphere field
+// Base fields always include rating (Atmosphere tier) + formatted_address (Basic tier)
 const GPLACE_FIELD_TIER = {
-  'Working hours':    'contact',     // opening_hours
-  'Rating & reviews': 'atmosphere',  // rating, user_ratings_total
-  'Price level':      'atmosphere',  // price_level
-  'Address':          'basic',       // formatted_address (Basic tier — no extra charge)
-  'Photo':            'basic',       // photos (Basic tier)
-  'Phone number':     'contact',     // formatted_phone_number
-  'Website':          'contact',     // website
+  'Phone number':            'contact',    // formatted_phone_number
+  'Website':                 'contact',    // website
+  'Opening hours (dine-in)': 'contact',    // opening_hours
+  'Google photo → R2':       'basic',      // photos (Basic tier)
 };
-const GPLACE_COST = { NEARBY: 0.032, BASE: 0.017, CONTACT: 0.003, ATMOSPHERE: 0.005 };
+const GPLACE_COST = { FIND_PLACE: 0.017, BASE: 0.017, CONTACT: 0.003, ATMOSPHERE: 0.005 };
 
 function calcDetailCost(fields) {
+  // Base always requests rating (Atmosphere tier) + formatted_address (Basic tier)
+  let cost = GPLACE_COST.BASE + GPLACE_COST.ATMOSPHERE;
   const tiers = new Set(fields.map(f => GPLACE_FIELD_TIER[f]).filter(Boolean));
-  let cost = GPLACE_COST.BASE;
-  if (tiers.has('contact'))    cost += GPLACE_COST.CONTACT;
-  if (tiers.has('atmosphere')) cost += GPLACE_COST.ATMOSPHERE;
+  if (tiers.has('contact')) cost += GPLACE_COST.CONTACT;
   return cost;
 }
 
@@ -1380,14 +1358,37 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   };
   const enabledCount = itemsChecked.filter(Boolean).length;
 
-  // Limit field (gplace only)
+  // Limit field (wolt only — persisted to server)
   const [limitInput, setLimitInput] = useState('');
+
+  // Sync wolt limitInput from job.configLimit when script opens or configLimit changes
+  useEffect(() => {
+    if (data?.id === 'wolt') {
+      setLimitInput(job?.configLimit != null ? String(job.configLimit) : '');
+    } else {
+      setLimitInput('');
+    }
+  }, [data?.id, job?.configLimit]);
+
+  const saveLimitConfig = () => {
+    if (data?.id !== 'wolt') return;
+    const limitVal = limitInput.trim() ? parseInt(limitInput, 10) : null;
+    fetch('/admin/api/scripts/wolt/config', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ limit: limitVal }),
+    })
+      .then(r => r.json())
+      .then(res => { if (res.configLimit !== undefined) setJob(prev => prev ? { ...prev, configLimit: res.configLimit } : prev); })
+      .catch(() => {});
+  };
 
   const runIt = () => {
     if (!data || isRunning) return;
     // Send enabled field names so server can build a targeted API request
     const enabledFields = items.filter((_, i) => itemsChecked[i]);
-    const limitVal = limitInput.trim() ? parseInt(limitInput, 10) : null;
+    const isWoltRun = data.id === 'wolt';
+    const limitVal = isWoltRun && limitInput.trim() ? parseInt(limitInput, 10) : null;
     fetch(`/admin/api/scripts/${data.id}/run`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1422,20 +1423,21 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       ? 'running now'
       : data.lastRun;
 
-  // Cost calculations (Google Place Scraper)
+  // Cost calculations (Google Place Enricher)
   const isGplace  = data.id === 'gplace';
+  const isWolt    = data.id === 'wolt';
   const isMacros  = data.id === 'macros';
   const enabledFieldNames = items.filter((_, i) => itemsChecked[i]);
   const detailCostPer = isGplace ? calcDetailCost(enabledFieldNames) : 0;
-  const estPer100 = isGplace ? `~$${(100 * detailCostPer).toFixed(2)}` : null;
+  // Per 100 enrichments: FindPlace + Details (both called per restaurant)
+  const estPer100 = isGplace ? `~$${(100 * (GPLACE_COST.FIND_PLACE + detailCostPer)).toFixed(2)}` : null;
   const tierLabel = isGplace
-    ? enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'atmosphere') ? 'Atmosphere tier'
-      : enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'contact')  ? 'Contact tier'
+    ? enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'contact') ? 'Contact tier'
       : 'Basic tier'
     : null;
   // Actual cost after gplace run
-  const actualCost = isGplace && job?.detailsCalls > 0
-    ? `~$${(job.detailsCalls * calcDetailCost(job.enabledFields || enabledFieldNames) + (job.nearbySearchCalls || 0) * GPLACE_COST.NEARBY).toFixed(2)}`
+  const actualCost = isGplace && (job?.detailsCalls > 0 || job?.findPlaceCalls > 0)
+    ? `~$${((job.findPlaceCalls || 0) * GPLACE_COST.FIND_PLACE + (job.detailsCalls || 0) * calcDetailCost(job.enabledFields || enabledFieldNames)).toFixed(2)}`
     : null;
 
   // Macros cost (Claude Haiku 4.5: $0.80/MTok input, $4.00/MTok output)
@@ -1527,7 +1529,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             {isGplace && (
               <div style={{ marginTop: 10, padding: '8px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
-                  Est. per 100 restaurants
+                  Est. per 100 enrichments
                   <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>({tierLabel})</span>
                 </span>
                 <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>{estPer100}</span>
@@ -1544,11 +1546,11 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                 </span>
               </div>
             )}
-            {isGplace && (
+            {isWolt && (
               <div style={{ marginTop: 12 }}>
                 <h3 className="h-section" style={{ marginBottom: 8 }}>
                   <span>Limit</span>
-                  <span className="muted" style={{ fontWeight: 400, fontSize: 11 }}>optional</span>
+                  <span className="muted" style={{ fontWeight: 400, fontSize: 11 }}>optional · saved</span>
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <input
@@ -1557,6 +1559,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                     placeholder="No limit"
                     value={limitInput}
                     onChange={e => setLimitInput(e.target.value)}
+                    onBlur={saveLimitConfig}
                     disabled={isRunning}
                     style={{
                       width: 120, padding: '6px 10px', fontSize: 13,
