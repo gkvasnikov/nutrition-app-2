@@ -1796,6 +1796,14 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     const completeSlugs = new Set(completeRows.map(r => r.slug))
     const venues = allVenues.filter(v => !completeSlugs.has(v.slug))
 
+    // Finish restaurants that already have a row but no menu BEFORE discovering new ones,
+    // so the new-restaurant limit can't starve them (they don't count toward the limit).
+    const { rows: existingRows } = await pool.query(
+      `SELECT wolt_slug AS slug FROM restaurants WHERE wolt_slug IS NOT NULL`
+    )
+    const existingSlugs = new Set(existingRows.map(r => r.slug))
+    venues.sort((a, b) => (existingSlugs.has(b.slug) ? 1 : 0) - (existingSlugs.has(a.slug) ? 1 : 0))
+
     job.total = venues.length
     console.log(`Wolt script: ${allVenues.length} venues found, ${venues.length} new/incomplete to process${districtId ? ` in ${districtId}` : ''}`)
     logActivity('info', 'Wolt Menu Scraper started', `${districtLabel(districtId)} · ${venues.length} venues${limit ? ` · limit ${limit}` : ''}`)
