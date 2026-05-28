@@ -1476,21 +1476,34 @@ async function runGooglePlaceScript(districtId, enabledFields = []) {
   }
 }
 
-// ── Wolt schema migration ─────────────────────────────────────────────────────
-async function ensureWoltMenuIndex() {
+// ── Wolt schema migrations ────────────────────────────────────────────────────
+async function ensureWoltSchema() {
   if (!pool) return
   try {
-    // Unique index prevents duplicate menu items from repeated scrapes
+    // 1. Remove any duplicate wolt_slug rows (keep highest id = most recent)
+    await pool.query(`
+      DELETE FROM restaurants a
+      USING restaurants b
+      WHERE a.wolt_slug IS NOT NULL
+        AND a.wolt_slug = b.wolt_slug
+        AND a.id < b.id
+    `)
+    // 2. Unique index on wolt_slug so ON CONFLICT works correctly
+    await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS restaurants_wolt_slug_idx
+        ON restaurants (wolt_slug) WHERE wolt_slug IS NOT NULL
+    `)
+    // 3. Unique index on menu_items to prevent duplicate dishes on re-runs
     await pool.query(`
       CREATE UNIQUE INDEX IF NOT EXISTS menu_items_rest_name_wolt_idx
         ON menu_items (restaurant_id, LOWER(name))
         WHERE source = 'wolt_menu'
     `)
   } catch (e) {
-    console.warn('ensureWoltMenuIndex:', e.message)
+    console.warn('ensureWoltSchema:', e.message)
   }
 }
-ensureWoltMenuIndex().catch(() => {})
+ensureWoltSchema().catch(() => {})
 
 // ── Wolt Scraper ──────────────────────────────────────────────────────────────
 // 1. Discovers venues in the district via Wolt API (paginated from centre outward)
@@ -1505,7 +1518,7 @@ async function runWoltScript(districtId) {
   job.finishedAt = null; job.districtId = districtId || null
 
   try {
-    await ensureWoltMenuIndex()
+    await ensureWoltSchema()
 
     // District polygon + centroid
     let rings = null
@@ -1539,8 +1552,9 @@ async function runWoltScript(districtId) {
           for (const item of (section.items || [])) {
             const v    = item.venue || item
             const slug = v.slug || v.wolt_slug
-            const vLat = v.location?.coordinates?.[1] ?? v.lat
-            const vLng = v.location?.coordinates?.[0] ?? v.lon
+            // Wolt returns location as plain [lng, lat] array (GeoJSON order)
+            const vLat = Array.isArray(v.location) ? v.location[1] : (v.location?.coordinates?.[1] ?? v.lat)
+            const vLng = Array.isArray(v.location) ? v.location[0] : (v.location?.coordinates?.[0] ?? v.lon)
             if (!slug || seen.has(slug)) continue
             seen.add(slug)
             if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
@@ -1548,7 +1562,6 @@ async function runWoltScript(districtId) {
             inDistrictFound++
           }
         }
-        // Stop if we got an empty page twice in a row (API exhausted or moved far from district)
         emptyPages = inDistrictFound === 0 ? emptyPages + 1 : 0
         skip += 50
         await new Promise(r => setTimeout(r, 300))
@@ -1565,7 +1578,7 @@ async function runWoltScript(districtId) {
     for (const v of venues) {
       if (!job.running) { job.cancelled = true; break }
       try {
-        // Upsert restaurant, get its DB id in one query
+        // Upsert by wolt_slug (unique index now exists), get DB id
         const { rows: [restRow] } = await pool.query(`
           INSERT INTO restaurants (name, lat, lon, wolt_slug)
           VALUES ($1, $2, $3, $4)
@@ -1579,45 +1592,39 @@ async function runWoltScript(districtId) {
         if (!restRow) { job.done++; continue }
         const restId = restRow.id
 
-        // Check if this restaurant already has menu items → skip if so
+        // Skip if restaurant already has menu items
         const { rows: [countRow] } = await pool.query(
           `SELECT COUNT(*) AS n FROM menu_items WHERE restaurant_id = $1 AND source = 'wolt_menu'`,
           [restId]
         )
-        if (parseInt(countRow.n) > 0) {
-          job.done++
-          continue  // already has a menu — skip, no Wolt API call
-        }
+        if (parseInt(countRow.n) > 0) { job.done++; continue }
 
-        // No menu yet — fetch from Wolt
+        // No menu yet — fetch from restaurant-api.wolt.com (correct endpoint)
         try {
-          const menuUrl = `https://consumer-api.wolt.com/v4/venue/slug/${v.slug}/menu`
+          const menuUrl = `https://restaurant-api.wolt.com/v4/venues/slug/${v.slug}/menu/data?unit_prices=true`
           const menuRes = await fetch(menuUrl, { headers })
           if (menuRes.ok) {
-            const menuData  = await menuRes.json()
-            const categories = menuData.categories || menuData.menu?.items || []
-            for (const cat of categories) {
-              for (const item of (cat.items || [])) {
-                const name = item.name || item.baseName
-                if (!name) continue
-                const price  = item.unitPriceWithDiscount != null
-                  ? item.unitPriceWithDiscount / 100 : null
-                const imgUrl = item.imageUrl || item.image || null
-                try {
-                  await pool.query(`
-                    INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
-                    VALUES ($1, $2, $3, $4, 'wolt_menu')
-                    ON CONFLICT (restaurant_id, LOWER(name))
-                      WHERE source = 'wolt_menu'
-                    DO NOTHING
-                  `, [restId, name, price, imgUrl])
-                  job.newItems++
-                } catch (_) {}
-              }
+            const menuData   = await menuRes.json()
+            // Response: { items: [ { name, baseprice, images:[{url}], category, ... } ] }
+            const items = menuData.items || []
+            for (const item of items) {
+              const name   = item.name
+              if (!name) continue
+              // baseprice is in cents (e.g. 1290 = €12.90)
+              const price  = item.baseprice != null ? item.baseprice / 100 : null
+              const imgUrl = item.images?.[0]?.url || null
+              try {
+                await pool.query(`
+                  INSERT INTO menu_items (restaurant_id, name, price, image_url, source)
+                  VALUES ($1, $2, $3, $4, 'wolt_menu')
+                  ON CONFLICT (restaurant_id, LOWER(name)) WHERE source = 'wolt_menu'
+                  DO NOTHING
+                `, [restId, name, price, imgUrl])
+                job.newItems++
+              } catch (_) {}
             }
           }
         } catch (menuErr) {
-          // Wolt menu API unavailable for this venue — not a hard error
           console.warn(`Wolt menu unavailable for ${v.slug}:`, menuErr.message)
         }
 
@@ -1640,7 +1647,91 @@ async function runWoltScript(districtId) {
   }
 }
 
+// ── Pipeline (sequential run: gplace → wolt → macros → dedup) ─────────────────
+
+const PIPELINE_STEPS = ['gplace', 'wolt', 'macros', 'dedup']
+
+const _pipeline = {
+  running:    false,
+  districtId: null,
+  step:       null,   // id of currently running step
+  stepsDone:  [],     // ids of completed steps
+  cancelled:  false,
+  startedAt:  null,
+  finishedAt: null,
+}
+
+async function runPipeline(districtId) {
+  if (_pipeline.running) return
+  _pipeline.running    = true
+  _pipeline.cancelled  = false
+  _pipeline.districtId = districtId
+  _pipeline.stepsDone  = []
+  _pipeline.step       = null
+  _pipeline.startedAt  = new Date().toISOString()
+  _pipeline.finishedAt = null
+
+  // Load enabled flags from DB
+  let enabledMap = {}
+  if (pool) {
+    try {
+      const { rows } = await pool.query(`SELECT key, value FROM admin_settings WHERE key LIKE 'script_%_enabled'`)
+      for (const row of rows) {
+        const m = row.key.match(/^script_(.+)_enabled$/)
+        if (m) enabledMap[m[1]] = row.value !== false && row.value !== 'false'
+      }
+    } catch (e) { /* ignore, run all */ }
+  }
+
+  try {
+    for (const id of PIPELINE_STEPS) {
+      if (_pipeline.cancelled) break
+      if (enabledMap[id] === false) continue  // skip disabled scripts
+
+      _pipeline.step = id
+      console.log(`[pipeline] Starting step: ${id}`)
+      try {
+        if (id === 'gplace')  await runGooglePlaceScript(districtId, [])
+        else if (id === 'wolt')   await runWoltScript(districtId)
+        else if (id === 'macros') await runMacrosScript(districtId)
+        else if (id === 'dedup')  await runDedupScript(districtId)
+      } catch (e) {
+        console.error(`[pipeline] Step ${id} threw:`, e.message)
+        // Continue to next step even if one fails
+      }
+      _pipeline.stepsDone.push(id)
+      _pipeline.step = null
+    }
+  } finally {
+    _pipeline.running    = false
+    _pipeline.step       = null
+    _pipeline.finishedAt = new Date().toISOString()
+    console.log(`[pipeline] Done. Steps completed: ${_pipeline.stepsDone.join(' → ')}`)
+  }
+}
+
 // ── Script API endpoints ───────────────────────────────────────────────────────
+
+// Pipeline routes MUST be registered before /:id routes to avoid being swallowed
+app.post('/admin/api/scripts/pipeline/run', requireAdminAuth, (req, res) => {
+  if (_pipeline.running) return res.json({ status: 'already_running', pipeline: _pipeline })
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  const districtId = req.body?.districtId || null
+  runPipeline(districtId)
+  res.json({ status: 'started', pipeline: _pipeline })
+})
+
+app.post('/admin/api/scripts/pipeline/stop', requireAdminAuth, (req, res) => {
+  if (!_pipeline.running) return res.json({ status: 'not_running' })
+  _pipeline.cancelled = true
+  // Also stop whichever individual script is currently running
+  if (_pipeline.step) {
+    const job = getScriptJob(_pipeline.step)
+    job.running   = false
+    job.cancelled = true
+  }
+  res.json({ status: 'stopping', pipeline: _pipeline })
+})
 
 app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
   const { id } = req.params
@@ -1715,7 +1806,7 @@ app.get('/admin/api/scripts/status', requireAdminAuth, async (req, res) => {
       }
     } catch (e) { /* ignore */ }
   }
-  res.json({ jobs: _scriptJobs, enabled })
+  res.json({ jobs: _scriptJobs, enabled, pipeline: _pipeline })
 })
 
 app.patch('/admin/api/scripts/:id/enabled', requireAdminAuth, async (req, res) => {

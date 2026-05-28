@@ -789,29 +789,34 @@ function DistrictScripts({ d, onOpen, showToast }) {
   }, [d.status]);
 
   // Real job status from server
-  const [jobs, setJobs]       = useState({});
-  const [enabled, setEnabled] = useState({});
-  const pollRef               = useRef(null);
+  const [jobs, setJobs]         = useState({});
+  const [enabled, setEnabled]   = useState({});
+  const [pipeline, setPipeline] = useState({});
+  const pollRef                 = useRef(null);
 
   const fetchStatus = useCallback(() => {
     fetch('/admin/api/scripts/status')
       .then(r => r.json())
-      .then(data => { setJobs(data.jobs || {}); setEnabled(data.enabled || {}); })
+      .then(data => {
+        setJobs(data.jobs || {});
+        setEnabled(data.enabled || {});
+        setPipeline(data.pipeline || {});
+      })
       .catch(() => {});
   }, []);
 
   useEffect(() => { fetchStatus(); }, [fetchStatus]);
 
-  // Poll every 2s while any script is running
+  // Poll every 2s while any script or pipeline is running
   useEffect(() => {
-    const anyRunning = Object.values(jobs).some(j => j.running);
+    const anyRunning = Object.values(jobs).some(j => j.running) || pipeline.running;
     if (anyRunning) {
       pollRef.current = setInterval(fetchStatus, 2000);
     } else {
       clearInterval(pollRef.current);
     }
     return () => clearInterval(pollRef.current);
-  }, [jobs, fetchStatus]);
+  }, [jobs, pipeline, fetchStatus]);
 
   const runOne = (s) => {
     fetch(`/admin/api/scripts/${s.id}/run`, {
@@ -839,21 +844,50 @@ function DistrictScripts({ d, onOpen, showToast }) {
       .catch(() => {});
   };
 
-  const headerStatus = d.status === 'covered'
-    ? <Pill variant="success" dot>last sync {d.lastSync}</Pill>
-    : d.status === 'active'
-      ? <Pill variant="warn" dot>pipeline running</Pill>
+  const PIPELINE_STEPS = ['gplace', 'wolt', 'macros', 'dedup'];
+
+  const runPipeline = () => {
+    fetch('/admin/api/scripts/pipeline/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ districtId: d.id }),
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.pipeline) setPipeline(data.pipeline);
+        showToast({ text: `Pipeline started for ${d.name}` });
+        fetchStatus();
+      })
+      .catch(() => showToast({ text: `Failed to start pipeline` }));
+  };
+
+  const stopPipeline = () => {
+    fetch('/admin/api/scripts/pipeline/stop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(r => r.json())
+      .then(() => {
+        showToast({ text: `Pipeline cancelled for ${d.name}` });
+        fetchStatus();
+      })
+      .catch(() => {});
+  };
+
+  const pipelineRunning = pipeline.running;
+  const headerStatus = pipelineRunning
+    ? <Pill variant="warn" dot>pipeline running</Pill>
+    : d.status === 'covered'
+      ? <Pill variant="success" dot>last sync {d.lastSync}</Pill>
       : <Pill dot>never run</Pill>;
 
-  const totalCost = d.status === 'covered' ? '$54' : '$48 — $62';
-  const totalDur  = d.status === 'covered' ? '~ 45 min' : '~ 38 min';
-  const runAllLabel = d.status === 'covered'
-    ? 'Re-run all scripts'
-    : d.status === 'active'
-      ? 'Cancel pipeline'
-      : 'Start full pipeline';
-  const runAllIcon = d.status === 'active' ? 'pause' : 'refresh';
-  const runAllVariant = d.status === 'active' ? 'secondary' : 'primary';
+  const runAllLabel   = pipelineRunning ? 'Cancel pipeline' : (d.status === 'covered' ? 'Re-run all scripts' : 'Start full pipeline');
+  const runAllIcon    = pipelineRunning ? 'pause' : 'refresh';
+  const runAllVariant = pipelineRunning ? 'secondary' : 'primary';
+
+  // Pipeline step progress row
+  const pipelineStepNames = { gplace: 'Google', wolt: 'Wolt', macros: 'Macros', dedup: 'Dedup' };
+  const showPipelineProgress = pipelineRunning || (pipeline.finishedAt && pipeline.stepsDone?.length > 0);
 
   return (
     <>
@@ -862,6 +896,28 @@ function DistrictScripts({ d, onOpen, showToast }) {
           <span className="section__title">Pipeline · {d.name}</span>
           {headerStatus}
         </div>
+        {showPipelineProgress && (
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center', padding: '0 0 12px', flexWrap: 'wrap' }}>
+            {PIPELINE_STEPS.filter(id => enabled[id] !== false).map((id, i, arr) => {
+              const isDone    = pipeline.stepsDone?.includes(id);
+              const isCurrent = pipeline.step === id;
+              const isPending = !isDone && !isCurrent;
+              return (
+                <React.Fragment key={id}>
+                  <span style={{
+                    fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 100,
+                    background: isDone ? 'var(--color-success-bg, #e6f9e6)' : isCurrent ? 'var(--color-warn-bg, #fff3cd)' : 'var(--color-surface-2)',
+                    color: isDone ? 'var(--color-success, #1a7a1a)' : isCurrent ? 'var(--color-warn, #856404)' : 'var(--color-text-3)',
+                    opacity: isPending && !pipelineRunning ? 0.5 : 1,
+                  }}>
+                    {isDone ? '✓ ' : isCurrent ? '⟳ ' : ''}{pipelineStepNames[id]}
+                  </span>
+                  {i < arr.length - 1 && <span style={{ fontSize: 10, color: 'var(--color-text-3)' }}>→</span>}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        )}
         <div className="scards">
           {scripts.map(s => (
             <ScriptCard
@@ -871,23 +927,19 @@ function DistrictScripts({ d, onOpen, showToast }) {
               enabled={enabled[s.id] !== false}
               onToggle={() => toggleEnabled(s.id)}
               onOpen={() => onOpen(s.id)}
-              running={jobs[s.id]?.running || s.status === 'running'}
+              running={jobs[s.id]?.running || (pipeline.running && pipeline.step === s.id)}
               onRun={(e) => { e.stopPropagation(); runOne(s); }}
             />
           ))}
         </div>
       </div>
       <div className="section">
-        <Btn variant={runAllVariant} size="lg" block icon={runAllIcon} onClick={() => {
-          showToast({ text: d.status === 'covered'
-            ? `Re-running 6 scripts for ${d.name}…`
-            : d.status === 'active'
-              ? `Cancelled pipeline for ${d.name}`
-              : `Started full pipeline for ${d.name}…` });
-        }}>{runAllLabel}</Btn>
+        <Btn variant={runAllVariant} size="lg" block icon={runAllIcon}
+          onClick={pipelineRunning ? stopPipeline : runPipeline}
+        >{runAllLabel}</Btn>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontSize: 12, color: 'var(--color-text-2)' }}>
-          <span>Estimated cost: <strong className="num" style={{ color: 'var(--color-text)' }}>{totalCost}</strong></span>
-          <span>{totalDur}</span>
+          <span>Estimated cost: <strong className="num" style={{ color: 'var(--color-text)' }}>$48 — $62</strong></span>
+          <span>~ 45 min</span>
         </div>
       </div>
     </>
