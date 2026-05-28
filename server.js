@@ -1607,34 +1607,14 @@ async function runGooglePlaceScript(districtId, enabledFields = [], limit = null
   }
 }
 
-// Ensure a table's `id` column auto-increments. The original data was bulk-imported
-// with explicit ids and no sequence default, so app-side INSERTs without an id fail
-// with "null value in column id violates not-null constraint". This attaches a
-// sequence (aligned past the current max id) as the column default. Idempotent.
-async function ensureIdSequence(table) {
-  if (!pool) return
-  const { rows } = await pool.query(`
-    SELECT pg_get_expr(d.adbin, d.adrelid) AS def
-    FROM pg_attribute a
-    LEFT JOIN pg_attrdef d ON d.adrelid = a.attrelid AND d.adnum = a.attnum
-    WHERE a.attrelid = $1::regclass AND a.attname = 'id'
-  `, [table])
-  if (rows[0]?.def) return  // already has a default — nothing to do
-  const seq = `${table}_id_seq`  // table is a hardcoded literal — no injection
-  await pool.query(`CREATE SEQUENCE IF NOT EXISTS ${seq}`)
-  await pool.query(`SELECT setval('${seq}', COALESCE((SELECT MAX(id) FROM ${table}), 0) + 1, false)`)
-  await pool.query(`ALTER TABLE ${table} ALTER COLUMN id SET DEFAULT nextval('${seq}')`)
-  await pool.query(`ALTER SEQUENCE ${seq} OWNED BY ${table}.id`)
-  console.log(`Attached id sequence "${seq}" to ${table}`)
-}
-
 // ── Wolt schema migrations ────────────────────────────────────────────────────
+// Note on identity: restaurants.id is a TEXT primary key that historically held the
+// Google Place ID (the original data was Google-first). Wolt-discovered restaurants
+// have no Google id, so runWoltScript supplies a synthetic text id ('wolt:' + slug).
+// menu_items.id already has its own integer sequence default — nothing to migrate.
 async function ensureWoltSchema() {
   if (!pool) return
   try {
-    // 0. Ensure restaurants.id / menu_items.id auto-increment (bulk import had no sequence)
-    await ensureIdSequence('restaurants')
-    await ensureIdSequence('menu_items')
     // 1. Remove any duplicate wolt_slug rows (keep highest id = most recent)
     await pool.query(`
       DELETE FROM restaurants a
@@ -1848,11 +1828,14 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
         if (!job.running) { job.cancelled = true; break }
         if (limitReached) break  // limit hit on previous iteration — stop (not cancelled, stats persist)
         try {
-          // Upsert by wolt_slug — Wolt data as baseline (Google enricher overwrites later)
-          // COALESCE: keep existing lat/lon/address/photo if already set (Google may be better)
+          // Upsert by wolt_slug — Wolt data as baseline (Google enricher overwrites later).
+          // restaurants.id is a TEXT primary key (historically the Google Place ID); a new
+          // Wolt restaurant has no Google id, so we supply a synthetic 'wolt:'+slug id.
+          // On conflict (existing wolt_slug) the row's original id is kept and returned.
+          const woltId = `wolt:${v.slug}`
           const { rows: [restRow] } = await pool.query(`
-            INSERT INTO restaurants (name, lat, lon, wolt_slug, address, photo_url, rating, reviews_count, price_level)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            INSERT INTO restaurants (id, name, lat, lon, wolt_slug, address, photo_url, rating, reviews_count, price_level)
+            VALUES ($10, $1, $2, $3, $4, $5, $6, $7, $8, $9)
             ON CONFLICT (wolt_slug) WHERE wolt_slug IS NOT NULL DO UPDATE SET
               name          = EXCLUDED.name,
               lat           = COALESCE(restaurants.lat,           EXCLUDED.lat),
@@ -1863,7 +1846,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               reviews_count = EXCLUDED.reviews_count,
               price_level   = COALESCE(restaurants.price_level,   EXCLUDED.price_level)
             RETURNING id, (xmax = 0) AS is_new
-          `, [v.name, v.lat, v.lng, v.slug, v.address || null, v.heroPhoto || null, v.rating || null, v.reviewsCount || null, v.priceLevel || null])
+          `, [v.name, v.lat, v.lng, v.slug, v.address || null, v.heroPhoto || null, v.rating || null, v.reviewsCount || null, v.priceLevel || null, woltId])
 
           if (!restRow) { job.done++; continue }
           const restId = restRow.id
