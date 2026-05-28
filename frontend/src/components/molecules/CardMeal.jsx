@@ -3,6 +3,7 @@ import PillMacro from '../atoms/PillMacro'
 import { useLocation } from '../../contexts/LocationContext'
 import { useAppData } from '../../contexts/DataContext'
 import { distanceTo } from '../../utils/distance'
+import { proxyImg } from '../../utils/photoUrl'
 import styles from './CardMeal.module.css'
 
 export default function CardMeal({
@@ -44,7 +45,7 @@ export default function CardMeal({
       {/* Dish row */}
       <div className={styles.dish}>
         <div className={styles.photoWrap}>
-          {photo && <img src={photo} alt={name} className={styles.photo} />}
+          {photo && <img src={proxyImg(photo)} alt={name} className={styles.photo} />}
         </div>
         <div className={styles.content}>
           <div className={styles.info}>

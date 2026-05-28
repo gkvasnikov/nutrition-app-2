@@ -8,7 +8,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import pg from 'pg'
 import session from 'express-session'
 import { timingSafeEqual, createHash } from 'crypto'
-import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3'
 
 const app = express()
 app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
@@ -518,6 +518,69 @@ app.get('/api/image-proxy', async (req, res) => {
 })
 
 
+// ── R2 bulk image cache job ───────────────────────────────────────────────────
+// Downloads every Wolt meal photo to R2 so the app is fully independent of Wolt CDN.
+// Runs in the background; progress tracked in _cacheJob.
+
+const _cacheJob = { running: false, total: 0, done: 0, errors: 0, startedAt: null, finishedAt: null }
+
+async function runImageCacheJob() {
+  if (!r2 || !pool)  return
+  if (_cacheJob.running) return  // already running
+
+  _cacheJob.running   = true
+  _cacheJob.done      = 0
+  _cacheJob.errors    = 0
+  _cacheJob.startedAt = new Date().toISOString()
+  _cacheJob.finishedAt = null
+
+  try {
+    const { rows } = await pool.query(`
+      SELECT DISTINCT image_url FROM menu_items
+      WHERE image_url IS NOT NULL AND image_url <> ''
+        AND source = 'wolt_menu'
+        AND calories IS NOT NULL
+        AND (category IS NULL OR category != 'drink')
+    `)
+    _cacheJob.total = rows.length
+    console.log(`Image cache job started: ${rows.length} unique URLs`)
+
+    const CONCURRENCY = 8  // parallel fetches — don't overwhelm Wolt or the server
+    for (let i = 0; i < rows.length; i += CONCURRENCY) {
+      if (!_cacheJob.running) break  // allow cancellation
+      await Promise.all(rows.slice(i, i + CONCURRENCY).map(async ({ image_url: url }) => {
+        try {
+          const key = r2Key(url)
+          // Skip if already in R2
+          try {
+            await r2.send(new HeadObjectCommand({ Bucket: R2_BUCKET, Key: key }))
+            _cacheJob.done++
+            return  // already cached
+          } catch (e) {
+            if (e.$metadata?.httpStatusCode !== 404 && e.name !== 'NotFound' && e.name !== 'NoSuchKey') throw e
+          }
+          // Fetch from Wolt and save to R2
+          const res = await fetch(url, { signal: AbortSignal.timeout(15_000) })
+          if (!res.ok) throw new Error(`HTTP ${res.status}`)
+          const buf = Buffer.from(await res.arrayBuffer())
+          const ct  = res.headers.get('content-type') || 'image/jpeg'
+          await r2.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: buf, ContentType: ct }))
+          _cacheJob.done++
+        } catch {
+          _cacheJob.errors++
+          _cacheJob.done++
+        }
+      }))
+    }
+  } catch (e) {
+    console.error('Image cache job error:', e.message)
+  } finally {
+    _cacheJob.running    = false
+    _cacheJob.finishedAt = new Date().toISOString()
+    console.log(`Image cache job finished: ${_cacheJob.done - _cacheJob.errors} saved, ${_cacheJob.errors} errors`)
+  }
+}
+
 // ── Admin panel ───────────────────────────────────────────────────────────────
 
 // Berlin borough boundaries — simplified polygons, each ring is [[lat, lng], ...]
@@ -805,6 +868,24 @@ app.get('/admin/api/restaurants/:id', requireAdminAuth, async (req, res) => {
 app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
   console.log(`[admin] Script run requested: ${req.params.id}`)
   res.json({ status: 'started', scriptId: req.params.id, message: 'Script stub — not yet connected to a real process.' })
+})
+
+// Image cache job endpoints
+app.post('/admin/api/cache-images/start', requireAdminAuth, (req, res) => {
+  if (!r2)   return res.status(503).json({ error: 'R2 not configured' })
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  if (_cacheJob.running) return res.json({ status: 'already_running', job: _cacheJob })
+  runImageCacheJob()  // fire and forget
+  res.json({ status: 'started', job: _cacheJob })
+})
+
+app.post('/admin/api/cache-images/stop', requireAdminAuth, (req, res) => {
+  _cacheJob.running = false
+  res.json({ status: 'stopping', job: _cacheJob })
+})
+
+app.get('/admin/api/cache-images/status', requireAdminAuth, (req, res) => {
+  res.json({ job: _cacheJob, r2Enabled: !!r2 })
 })
 
 // ── Admin main page (dynamic — injects real DB data) ─────────────────────────

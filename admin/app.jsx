@@ -382,6 +382,89 @@ function RestaurantRow({ r, onOpen, active }) {
   );
 }
 
+function R2CachePanel() {
+  const [job, setJob] = useState(null);
+  const [r2Enabled, setR2Enabled] = useState(false);
+  const pollRef = useRef(null);
+
+  const fetchStatus = useCallback(() => {
+    fetch('/admin/api/cache-images/status')
+      .then(r => r.json())
+      .then(d => { setJob(d.job); setR2Enabled(d.r2Enabled); })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetchStatus();
+  }, []);
+
+  // Poll every 2s while running
+  useEffect(() => {
+    if (job?.running) {
+      pollRef.current = setInterval(fetchStatus, 2000);
+    } else {
+      clearInterval(pollRef.current);
+    }
+    return () => clearInterval(pollRef.current);
+  }, [job?.running]);
+
+  const start = () => {
+    fetch('/admin/api/cache-images/start', { method: 'POST' })
+      .then(r => r.json()).then(d => setJob(d.job)).catch(() => {});
+  };
+  const stop = () => {
+    fetch('/admin/api/cache-images/stop', { method: 'POST' })
+      .then(r => r.json()).then(d => setJob(d.job)).catch(() => {});
+  };
+
+  const pct   = job?.total > 0 ? Math.round((job.done / job.total) * 100) : 0;
+  const done  = job?.done  || 0;
+  const total = job?.total || 0;
+  const errs  = job?.errors || 0;
+
+  return (
+    <div className="section">
+      <div className="section__head">
+        <span className="section__title">R2 Image Cache</span>
+        {!r2Enabled
+          ? <Pill variant="warn" dot>R2 not configured</Pill>
+          : job?.running
+            ? <Pill variant="warn" dot>running</Pill>
+            : job?.finishedAt
+              ? <Pill variant="success" dot>done</Pill>
+              : <Pill dot>idle</Pill>}
+      </div>
+      <div style={{ padding: '14px 16px', border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)' }}>
+        <div style={{ fontSize: 13, color: 'var(--color-text-2)', marginBottom: 12 }}>
+          Downloads all Wolt meal photos to Cloudflare R2 so the app is independent of Wolt CDN.
+          {total > 0 && <span className="num" style={{ color: 'var(--color-text)', marginLeft: 6 }}>{total.toLocaleString()} photos total</span>}
+        </div>
+        {total > 0 && (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 6 }}>
+              <span className="muted">{done.toLocaleString()} / {total.toLocaleString()} processed</span>
+              <span className="num" style={{ fontWeight: 600 }}>{pct}%{errs > 0 ? ` · ${errs} errors` : ''}</span>
+            </div>
+            <div className="progress" style={{ marginBottom: 12 }}>
+              <div className="progress__fill" style={{ width: `${pct}%`, background: errs > 0 ? 'var(--color-rating-star)' : 'var(--color-accent)', transition: 'width 0.4s ease' }}/>
+            </div>
+          </>
+        )}
+        {job?.running
+          ? <Btn variant="secondary" block icon="pause" onClick={stop}>Stop</Btn>
+          : <Btn variant="primary" block icon="zap" onClick={start} disabled={!r2Enabled}>
+              {job?.finishedAt ? 'Re-run' : 'Download all photos to R2'}
+            </Btn>}
+        {job?.finishedAt && !job?.running && (
+          <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-3)', textAlign: 'center' }}>
+            Finished · {new Date(job.finishedAt).toLocaleString()}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function BerlinStats() {
   const months = ['Jan','Feb','Mar','Apr','May','Jun'];
   const mapsUsage = [120, 165, 190, 142, 178, 210];
@@ -389,6 +472,7 @@ function BerlinStats() {
   const maxA = Math.max(...mapsUsage), maxB = Math.max(...claudeUsage);
   return (
     <>
+      <R2CachePanel/>
       <div className="section">
         <div className="section__head">
           <span className="section__title">Cost-to-date · This month</span>
@@ -923,7 +1007,7 @@ function RestaurantDetail({ restaurantId, onClose }) {
               {meals.map((m, i) => (
                 <div key={m.id || i} className="meal">
                   <div className="meal__img" style={{ background: 'var(--color-surface-3)' }}>
-                    {m.image_url && <img src={m.image_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
+                    {m.image_url && <img src={`/api/image-proxy?url=${encodeURIComponent(m.image_url)}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)', display: 'block' }} loading="lazy"/>}
                   </div>
                   <div>
                     <div className="meal__name">{m.name}</div>

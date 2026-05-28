@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { CloseIcon, HeartOutlineIcon, HeartFilledIcon, ShareUpIcon, DirectionIcon, WoltIcon, WalkIcon } from '../atoms/icons'
 import { useAppData } from '../../contexts/DataContext'
 import PriceLevel from '../atoms/PriceLevel'
-import { withKey } from '../../utils/photoUrl'
+import { withKey, proxyImg } from '../../utils/photoUrl'
 import { useLocation } from '../../contexts/LocationContext'
 import { distanceTo, mapsDirectionUrl } from '../../utils/distance'
 import styles from './MealDescriptionOverlay.module.css'
@@ -190,7 +190,7 @@ export default function MealDescriptionOverlay({ meal, zIndex = 300, onClose, on
           {/* Photo area — scrolls with content */}
           <div className={styles.photoArea}>
             {meal.photo && (
-              <img src={meal.photo} alt={meal.name} className={styles.photo} />
+              <img src={proxyImg(meal.photo)} alt={meal.name} className={styles.photo} />
             )}
             <div className={styles.photoGradient} />
           </div>
