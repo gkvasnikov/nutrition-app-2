@@ -1282,10 +1282,15 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
 
   const runIt = () => {
     if (!data || isRunning) return;
+    // Send enabled field names so server can build a targeted API request
+    const enabledFields = items.filter((_, i) => itemsChecked[i]);
     fetch(`/admin/api/scripts/${data.id}/run`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ districtId: district?.id || null }),
+      body: JSON.stringify({
+        districtId: district?.id || null,
+        fields: enabledFields,
+      }),
     })
       .then(r => r.json())
       .then(res => {

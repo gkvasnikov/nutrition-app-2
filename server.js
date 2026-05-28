@@ -1269,13 +1269,27 @@ async function ensureGooglePlacesColumns() {
 }
 ensureGooglePlacesColumns().catch(() => {})
 
+// Maps UI checkbox labels → Google Place Details API field names
+const GPLACE_FIELD_MAP = {
+  'Working hours':    'opening_hours',
+  'Rating & reviews': 'rating,user_ratings_total',
+  'Price level':      'price_level',
+  'Address':          'formatted_address',
+  'Photo':            'photos',
+  'Phone number':     'formatted_phone_number',
+  'Website':          'website',
+}
+// These are always requested — needed to identify and locate the place
+const GPLACE_FIELDS_BASE = 'place_id,name,geometry'
+
 // ── Google Place Scraper (grid-based discovery — new restaurants only) ────────
 // Scans district with a grid of Nearby Search requests.
 // Skips any place already in the DB (matched by google_place_id or name+proximity).
 // Only inserts genuinely new restaurants.
 // After the run, stamps google_enriched_at = NOW() for every restaurant in the district
 // so future runs can implement a freshness check (e.g. skip if < 30 days old).
-async function runGooglePlaceScript(districtId) {
+// enabledFields: array of UI label strings (from checkboxes). If empty → fetch all.
+async function runGooglePlaceScript(districtId, enabledFields = []) {
   const job = getScriptJob('gplace')
   if (job.running) return
   const apiKey = process.env.GOOGLE_PLACES_API_KEY || process.env.VITE_GOOGLE_MAPS_API_KEY
@@ -1287,6 +1301,14 @@ async function runGooglePlaceScript(districtId) {
   job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
+
+  // Build Place Details fields string from enabled checkboxes
+  // If nothing specified → fetch everything
+  const requestedApiFields = enabledFields.length > 0
+    ? enabledFields.flatMap(label => (GPLACE_FIELD_MAP[label] || '').split(',').filter(Boolean))
+    : Object.values(GPLACE_FIELD_MAP).flatMap(f => f.split(','))
+  const detailFields = [GPLACE_FIELDS_BASE, ...new Set(requestedApiFields)].join(',')
+  console.log(`Google Place script: requesting fields: ${detailFields}`)
 
   try {
     await ensureGooglePlacesColumns()
@@ -1364,8 +1386,7 @@ async function runGooglePlaceScript(districtId) {
             const detailUrl =
               `https://maps.googleapis.com/maps/api/place/details/json` +
               `?place_id=${place.place_id}` +
-              `&fields=place_id,name,formatted_address,geometry,rating,user_ratings_total,` +
-              `price_level,opening_hours,photos,formatted_phone_number,website` +
+              `&fields=${detailFields}` +
               `&key=${apiKey}`
             const detailRes  = await fetch(detailUrl)
             const detailData = await detailRes.json()
@@ -1630,7 +1651,7 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
   } else if (id === 'dedup') {
     runDedupScript(req.body?.districtId || null)
   } else if (id === 'gplace') {
-    runGooglePlaceScript(req.body?.districtId || null)
+    runGooglePlaceScript(req.body?.districtId || null, req.body?.fields || [])
   } else if (id === 'wolt') {
     runWoltScript(req.body?.districtId || null)
   }
