@@ -9,7 +9,7 @@ import pg from 'pg'
 import session from 'express-session'
 import connectPgSimple from 'connect-pg-simple'
 import { timingSafeEqual, createHash } from 'crypto'
-import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 
 const app = express()
 app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
@@ -1048,6 +1048,57 @@ app.get('/admin/api/cache-images/status', requireAdminAuth, (req, res) => {
       syncIntervalDays: R2_SYNC_INTERVAL_DAYS,
     },
   })
+})
+
+// Counts actual objects in R2 (paginated ListObjectsV2) and updates persisted stats.
+// Fast — ~1s per 1000 objects. With 18K objects takes ~18 pages ≈ 3-5s total.
+app.post('/admin/api/r2-recount', requireAdminAuth, async (req, res) => {
+  if (!r2) return res.status(503).json({ error: 'R2 not configured' })
+  if (_cacheJob.running) return res.status(409).json({ error: 'Sync job is running — wait for it to finish' })
+  try {
+    // Page through R2 to count all objects
+    let objectCount = 0
+    let continuationToken = undefined
+    do {
+      const cmd = new ListObjectsV2Command({
+        Bucket: R2_BUCKET,
+        MaxKeys: 1000,
+        ContinuationToken: continuationToken,
+      })
+      const page = await r2.send(cmd)
+      objectCount += page.KeyCount || 0
+      continuationToken = page.IsTruncated ? page.NextContinuationToken : undefined
+    } while (continuationToken)
+
+    // Get total URL count from DB for coverage %
+    let totalCount = _cacheJob.total
+    if (pool && totalCount === 0) {
+      const [mealsRes, restaurantsRes] = await Promise.all([
+        pool.query(`SELECT COUNT(DISTINCT image_url) AS n FROM menu_items WHERE image_url IS NOT NULL AND image_url <> '' AND source='wolt_menu' AND calories IS NOT NULL AND (category IS NULL OR category != 'drink')`),
+        pool.query(`SELECT COUNT(DISTINCT photo_url)  AS n FROM restaurants WHERE photo_url IS NOT NULL AND photo_url <> ''`),
+      ])
+      // rough upper bound (some URLs may appear in both tables, so deduplicated count is slightly lower)
+      totalCount = parseInt(mealsRes.rows[0].n) + parseInt(restaurantsRes.rows[0].n)
+    }
+
+    // Update in-memory job state with verified counts
+    _cacheJob.total       = totalCount
+    _cacheJob.done        = objectCount
+    _cacheJob.skipped     = objectCount
+    _cacheJob.newlyCached = 0
+    _cacheJob.errors      = Math.max(0, totalCount - objectCount)
+    _cacheJob.finishedAt  = _cacheJob.finishedAt || new Date().toISOString()
+    _cacheJob.cancelled   = false
+
+    await saveR2SyncStats()
+
+    const coveragePct = totalCount > 0 ? Math.round(objectCount / totalCount * 1000) / 10 : null
+    console.log(`R2 recount complete: ${objectCount} objects in R2 / ${totalCount} total = ${coveragePct}%`)
+    res.json({ objectCount, totalCount, coveragePct })
+  } catch (e) {
+    console.error('R2 recount error:', e.message)
+    res.status(500).json({ error: e.message })
+  }
 })
 
 // ── Admin main page (dynamic — injects real DB data) ─────────────────────────

@@ -426,9 +426,10 @@ function RestaurantRow({ r, onOpen, active }) {
 }
 
 function R2CachePanel() {
-  const [job, setJob]         = useState(null);
-  const [stats, setStats]     = useState(null);
+  const [job, setJob]             = useState(null);
+  const [stats, setStats]         = useState(null);
   const [r2Enabled, setR2Enabled] = useState(false);
+  const [recounting, setRecounting] = useState(false);
   const pollRef = useRef(null);
 
   const fetchStatus = useCallback(() => {
@@ -437,6 +438,15 @@ function R2CachePanel() {
       .then(d => { setJob(d.job); setR2Enabled(d.r2Enabled); setStats(d.stats); })
       .catch(() => {});
   }, []);
+
+  const recount = useCallback(() => {
+    setRecounting(true);
+    fetch('/admin/api/r2-recount', { method: 'POST' })
+      .then(r => r.json())
+      .then(() => fetchStatus())
+      .catch(() => {})
+      .finally(() => setRecounting(false));
+  }, [fetchStatus]);
 
   useEffect(() => { fetchStatus(); }, []);
 
@@ -487,7 +497,18 @@ function R2CachePanel() {
         {/* Coverage hero */}
         <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'flex-end', gap: 10 }}>
           <span className="num" style={{ fontSize: 36, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1 }}>{pctDisplay}%</span>
-          <span style={{ fontSize: 13, color: 'var(--color-text-2)', paddingBottom: 3 }}>photos cached in R2</span>
+          <span style={{ fontSize: 13, color: 'var(--color-text-2)', paddingBottom: 3, flex: 1 }}>photos cached in R2</span>
+          {r2Enabled && !job?.running && (
+            <button
+              onClick={recount}
+              disabled={recounting}
+              title="Count actual objects in R2 to verify coverage"
+              style={{ height: 28, padding: '0 10px', fontSize: 12, borderRadius: 'var(--radius-full)', border: '1px solid var(--color-stroke)', background: 'var(--color-surface-2)', color: 'var(--color-text-2)', cursor: recounting ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0, marginBottom: 3 }}
+            >
+              <Icon name="refresh" size={11} style={{ animation: recounting ? 'spin 1s linear infinite' : 'none' }}/>
+              {recounting ? 'Counting…' : 'Verify'}
+            </button>
+          )}
         </div>
 
         {/* Progress bar */}
