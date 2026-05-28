@@ -1004,10 +1004,260 @@ app.get('/admin/api/restaurants/:id', requireAdminAuth, async (req, res) => {
   }
 })
 
-// Stub: run a scraping script — real scripts can be wired here later
+// ── Script job tracker ────────────────────────────────────────────────────────
+const _scriptJobs = {}  // id → job object
+
+function getScriptJob(id) {
+  if (!_scriptJobs[id]) {
+    _scriptJobs[id] = {
+      running: false, total: 0, done: 0, errors: 0, skipped: 0, newItems: 0,
+      startedAt: null, finishedAt: null, cancelled: false, districtId: null,
+    }
+  }
+  return _scriptJobs[id]
+}
+
+async function saveScriptStats(id) {
+  if (!pool) return
+  const job = getScriptJob(id)
+  try {
+    await pool.query(`
+      INSERT INTO admin_settings (key, value, updated_at)
+      VALUES ($1, $2, NOW())
+      ON CONFLICT (key) DO UPDATE SET value = $2, updated_at = NOW()
+    `, [`script_${id}_last_run`, JSON.stringify(job)])
+  } catch (e) {
+    console.warn(`Could not persist script stats for ${id}:`, e.message)
+  }
+}
+
+async function loadScriptStats() {
+  if (!pool) return
+  try {
+    const { rows } = await pool.query(`SELECT key, value FROM admin_settings WHERE key LIKE 'script_%_last_run'`)
+    for (const row of rows) {
+      const match = row.key.match(/^script_(.+)_last_run$/)
+      if (!match) continue
+      const id = match[1]
+      const s = row.value
+      _scriptJobs[id] = {
+        running:     false,
+        total:       s.total       || 0,
+        done:        s.done        || 0,
+        errors:      s.errors      || 0,
+        skipped:     s.skipped     || 0,
+        newItems:    s.newItems    || 0,
+        startedAt:   s.startedAt   || null,
+        finishedAt:  s.finishedAt  || null,
+        cancelled:   false,
+        districtId:  s.districtId  || null,
+      }
+    }
+    console.log(`Script stats loaded from DB for: ${Object.keys(_scriptJobs).join(', ') || '(none)'}`)
+  } catch (e) {
+    console.warn('Could not load script stats:', e.message)
+  }
+}
+// Warm up on startup
+loadScriptStats().catch(() => {})
+
+// ── Macros + Meal Type script (real Claude-powered implementation) ─────────────
+async function runMacrosScript(districtId) {
+  const job = getScriptJob('macros')
+  if (job.running) return
+
+  job.running    = true
+  job.cancelled  = false
+  job.done       = 0
+  job.errors     = 0
+  job.skipped    = 0
+  job.newItems   = 0
+  job.total      = 0
+  job.startedAt  = new Date().toISOString()
+  job.finishedAt = null
+  job.districtId = districtId || null
+
+  try {
+    // Query meals needing processing
+    const { rows: meals } = await pool.query(`
+      SELECT m.id, m.name, r.lat, r.lon
+      FROM menu_items m
+      JOIN restaurants r ON r.id = m.restaurant_id
+      WHERE m.source = 'wolt_menu'
+        AND (m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL)
+        AND r.lat IS NOT NULL AND r.lon IS NOT NULL
+    `)
+
+    // Filter by district if requested
+    let filtered = meals
+    if (districtId) {
+      const polygons = await loadBerlinPolygons()
+      if (polygons && polygons.has(districtId)) {
+        const rings = polygons.get(districtId)
+        filtered = meals.filter(m => pointInDistrict(parseFloat(m.lat), parseFloat(m.lon), rings))
+      }
+    }
+
+    job.total = filtered.length
+    console.log(`Macros script started: ${filtered.length} meals to process${districtId ? ` in ${districtId}` : ''}`)
+
+    const BATCH_SIZE = 20
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+    for (let i = 0; i < filtered.length; i += BATCH_SIZE) {
+      if (!job.running) { job.cancelled = true; break }
+
+      const batch = filtered.slice(i, i + BATCH_SIZE)
+      try {
+        const prompt = `You are a nutrition expert. Estimate macros per serving and classify meal type for these dishes.
+Return ONLY a valid JSON array, no markdown, no explanation. One object per dish in order:
+[{"i":1,"cal":480,"pro":28.5,"fat":18.0,"carb":42.0,"conf":"high","mt":"lunch"}, ...]
+Fields: i=1-based index, cal=calories(kcal integer), pro=protein(g,1dp), fat=fat(g,1dp), carb=carbs(g,1dp), conf="high"|"medium"|"low", mt="breakfast"|"lunch"|"dinner"|"snack"|"all_day"
+Dishes:
+${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
+
+        const message = await client.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 2048,
+          messages: [{ role: 'user', content: prompt }],
+        })
+
+        const raw = message.content[0].text.replace(/```json\n?|\n?```/g, '').trim()
+        const results = JSON.parse(raw)
+
+        for (const res of results) {
+          if (!job.running) { job.cancelled = true; break }
+          const idx = (res.i || 1) - 1
+          if (idx < 0 || idx >= batch.length) continue
+          const meal = batch[idx]
+
+          const mealTimesArr = res.mt === 'all_day'
+            ? ['breakfast', 'lunch', 'dinner', 'snack']
+            : [res.mt]
+
+          const { rowCount } = await pool.query(`
+            UPDATE menu_items SET
+              calories   = COALESCE(calories,   $2),
+              protein    = COALESCE(protein,    $3),
+              fat        = COALESCE(fat,        $4),
+              carbs      = COALESCE(carbs,      $5),
+              confidence = COALESCE(confidence, $6),
+              meal_times = COALESCE(meal_times, $7)
+            WHERE id = $1
+          `, [meal.id, res.cal, res.pro, res.fat, res.carb, res.conf, mealTimesArr])
+
+          if (rowCount > 0) job.newItems++
+          job.done++
+        }
+      } catch (e) {
+        console.error(`Macros script batch error (offset ${i}):`, e.message)
+        job.errors += batch.length
+        job.done   += batch.length
+      }
+
+      if (job.running && i + BATCH_SIZE < filtered.length) {
+        await new Promise(r => setTimeout(r, 150))
+      }
+    }
+  } catch (e) {
+    console.error('Macros script error:', e.message)
+  } finally {
+    job.running    = false
+    job.finishedAt = new Date().toISOString()
+    console.log(`Macros script finished: ${job.done} processed, ${job.newItems} updated, ${job.errors} errors`)
+    if (!job.cancelled) {
+      saveScriptStats('macros').catch(e => console.warn('Could not persist macros stats:', e.message))
+    }
+  }
+}
+
+// ── Script API endpoints ───────────────────────────────────────────────────────
+
 app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
-  console.log(`[admin] Script run requested: ${req.params.id}`)
-  res.json({ status: 'started', scriptId: req.params.id, message: 'Script stub — not yet connected to a real process.' })
+  const { id } = req.params
+  const job = getScriptJob(id)
+  console.log(`[admin] Script run requested: ${id}`)
+
+  if (job.running) {
+    return res.json({ status: 'already_running', job })
+  }
+
+  if (id === 'macros') {
+    if (!pool) return res.status(503).json({ error: 'Database not configured' })
+    runMacrosScript(req.body?.districtId || null)  // fire and forget
+  }
+  // other ids remain stubs — no-op fire
+
+  res.json({ status: 'started', job: getScriptJob(id) })
+})
+
+app.post('/admin/api/scripts/:id/stop', requireAdminAuth, (req, res) => {
+  const job = getScriptJob(req.params.id)
+  job.running = false
+  res.json({ status: 'stopping', job })
+})
+
+let _scriptCoverageCache = null
+let _scriptCoverageTs    = 0
+const SCRIPT_COVERAGE_TTL = 60_000
+
+app.get('/admin/api/scripts/macros/coverage', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  if (_scriptCoverageCache && Date.now() - _scriptCoverageTs < SCRIPT_COVERAGE_TTL) {
+    return res.json(_scriptCoverageCache)
+  }
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        COUNT(*) FILTER (WHERE source='wolt_menu') AS total,
+        COUNT(*) FILTER (WHERE source='wolt_menu' AND calories IS NOT NULL) AS with_macros,
+        COUNT(*) FILTER (WHERE source='wolt_menu' AND meal_times IS NOT NULL AND array_length(meal_times,1) > 0) AS with_meal_type
+      FROM menu_items
+    `)
+    const r = rows[0]
+    _scriptCoverageCache = {
+      total:         parseInt(r.total)         || 0,
+      withMacros:    parseInt(r.with_macros)   || 0,
+      withMealType:  parseInt(r.with_meal_type)|| 0,
+    }
+    _scriptCoverageTs = Date.now()
+    res.json(_scriptCoverageCache)
+  } catch (e) {
+    console.error('/admin/api/scripts/macros/coverage error:', e.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+})
+
+app.get('/admin/api/scripts/status', requireAdminAuth, async (req, res) => {
+  // Load enabled flags from admin_settings
+  let enabled = {}
+  if (pool) {
+    try {
+      const { rows } = await pool.query(`SELECT key, value FROM admin_settings WHERE key LIKE 'script_%_enabled'`)
+      for (const row of rows) {
+        const match = row.key.match(/^script_(.+)_enabled$/)
+        if (match) enabled[match[1]] = row.value !== false && row.value !== 'false'
+      }
+    } catch (e) { /* ignore */ }
+  }
+  res.json({ jobs: _scriptJobs, enabled })
+})
+
+app.patch('/admin/api/scripts/:id/enabled', requireAdminAuth, async (req, res) => {
+  const { id } = req.params
+  const { enabled } = req.body
+  if (pool) {
+    try {
+      await pool.query(`
+        INSERT INTO admin_settings (key, value, updated_at)
+        VALUES ($1, $2, NOW())
+        ON CONFLICT (key) DO UPDATE SET value = $2, updated_at = NOW()
+      `, [`script_${id}_enabled`, JSON.stringify(enabled)])
+    } catch (e) {
+      console.warn(`Could not persist enabled flag for ${id}:`, e.message)
+    }
+  }
+  res.json({ id, enabled })
 })
 
 // Image cache job endpoints

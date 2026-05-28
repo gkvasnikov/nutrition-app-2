@@ -788,15 +788,55 @@ function DistrictScripts({ d, onOpen, showToast }) {
     return SCRIPTS.map(s => ({ ...s, status: 'idle', lastRun: 'never', duration: '—', coverage: 0 }));
   }, [d.status]);
 
-  // Local "running this script" state for the play buttons on each card
-  const [runningId, setRunningId] = useState(null);
-  const runOne = (s) => {
-    setRunningId(s.id);
-    fetch(`/admin/api/scripts/${s.id}/run`, { method: 'POST' })
+  // Real job status from server
+  const [jobs, setJobs]       = useState({});
+  const [enabled, setEnabled] = useState({});
+  const pollRef               = useRef(null);
+
+  const fetchStatus = useCallback(() => {
+    fetch('/admin/api/scripts/status')
       .then(r => r.json())
-      .then(data => showToast({ text: data.message || `${s.name} started for ${d.name}` }))
-      .catch(() => showToast({ text: `Failed to start ${s.name}` }))
-      .finally(() => setTimeout(() => setRunningId(null), 2400));
+      .then(data => { setJobs(data.jobs || {}); setEnabled(data.enabled || {}); })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => { fetchStatus(); }, [fetchStatus]);
+
+  // Poll every 2s while any script is running
+  useEffect(() => {
+    const anyRunning = Object.values(jobs).some(j => j.running);
+    if (anyRunning) {
+      pollRef.current = setInterval(fetchStatus, 2000);
+    } else {
+      clearInterval(pollRef.current);
+    }
+    return () => clearInterval(pollRef.current);
+  }, [jobs, fetchStatus]);
+
+  const runOne = (s) => {
+    fetch(`/admin/api/scripts/${s.id}/run`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ districtId: d.id }),
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.job) setJobs(prev => ({ ...prev, [s.id]: data.job }));
+        showToast({ text: `${s.name} started for ${d.name}` });
+      })
+      .catch(() => showToast({ text: `Failed to start ${s.name}` }));
+  };
+
+  const toggleEnabled = (id) => {
+    const newVal = enabled[id] !== false ? false : true;
+    fetch(`/admin/api/scripts/${id}/enabled`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ enabled: newVal }),
+    })
+      .then(r => r.json())
+      .then(data => setEnabled(prev => ({ ...prev, [id]: data.enabled })))
+      .catch(() => {});
   };
 
   const headerStatus = d.status === 'covered'
@@ -827,8 +867,11 @@ function DistrictScripts({ d, onOpen, showToast }) {
             <ScriptCard
               key={s.id}
               s={s}
+              job={jobs[s.id]}
+              enabled={enabled[s.id] !== false}
+              onToggle={() => toggleEnabled(s.id)}
               onOpen={() => onOpen(s.id)}
-              running={runningId === s.id || s.status === 'running'}
+              running={jobs[s.id]?.running || s.status === 'running'}
               onRun={(e) => { e.stopPropagation(); runOne(s); }}
             />
           ))}
@@ -851,7 +894,7 @@ function DistrictScripts({ d, onOpen, showToast }) {
   );
 }
 
-function ScriptCard({ s, onOpen, running, onRun }) {
+function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
   const statusMap = {
     success: { v: 'success', label: 'OK' },
     warning: { v: 'warn',    label: 'partial' },
@@ -860,14 +903,22 @@ function ScriptCard({ s, onOpen, running, onRun }) {
     idle:    { v: 'default', label: 'never run' },
   };
   const st = statusMap[s.status] || statusMap.success;
-  const showRunBtn = !running;
+
+  // Derive meta text: show live status when running, or format finishedAt
+  let metaTime = s.lastRun;
+  if (job?.running) {
+    metaTime = 'running…';
+  } else if (job?.finishedAt) {
+    metaTime = 'just now';
+  }
+
   return (
-    <div className="scard" onClick={onOpen}>
+    <div className={`scard ${!enabled ? 'scard--disabled' : ''}`} onClick={onOpen}>
       <div className="scard__icon"><Icon name={s.icon} size={18}/></div>
-      <div>
+      <div style={{ minWidth: 0 }}>
         <div className="scard__name">{s.name}</div>
         <div className="scard__meta">
-          <span>{s.lastRun}</span>
+          <span>{metaTime}</span>
           {s.coverage > 0 && (
             <>
               <span>·</span>
@@ -881,11 +932,26 @@ function ScriptCard({ s, onOpen, running, onRun }) {
             </>
           )}
         </div>
+        {job?.running && job?.total > 0 && (
+          <div className="scard__progress">
+            <div className="scard__progress__bar">
+              <div className="scard__progress__fill" style={{ width: `${Math.min(job.done / job.total * 100, 100)}%` }}/>
+            </div>
+            <div className="scard__progress__label">
+              {job.done.toLocaleString()} / {job.total.toLocaleString()}
+              {job.newItems > 0 && <span style={{ color: 'var(--color-accent)' }}> · {job.newItems} updated</span>}
+              {job.errors > 0 && <span style={{ color: '#e53' }}> · {job.errors} errors</span>}
+            </div>
+          </div>
+        )}
       </div>
       <div className="scard__right">
+        <label className="scard__check" onClick={e => e.stopPropagation()} title={enabled ? 'Disable script' : 'Enable script'}>
+          <input type="checkbox" checked={enabled} onChange={onToggle} style={{ width: 14, height: 14, accentColor: 'var(--color-text)', cursor: 'pointer' }}/>
+        </label>
         {st.v === 'default'
           ? <Pill dot>{st.label}</Pill>
-          : <Pill variant={st.v} dot>{st.label}</Pill>}
+          : <Pill variant={st.v} dot>{running ? 'running' : st.label}</Pill>}
         <button
           className="scard__run"
           onClick={onRun}
