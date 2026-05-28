@@ -1693,6 +1693,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
   job.running = true; job.cancelled = false; job.done = 0; job.errors = 0
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
+  job.lastError = null
 
   try {
     await ensureWoltSchema()
@@ -1775,6 +1776,8 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     } catch (browserErr) {
       console.error('Wolt: could not launch Playwright browser:', browserErr.message)
       job.errors++
+      job.lastError = `Chromium launch failed: ${browserErr.message}`
+      logActivity('error', 'Wolt scraper failed to start', `Chromium launch failed: ${(browserErr.message || '').slice(0, 160)}`)
       return
     }
 

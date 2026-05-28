@@ -1526,6 +1526,12 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
           </div>
         )}
 
+        {!isRunning && job?.lastError && (
+          <div style={{ marginBottom: 16, padding: '10px 12px', background: 'var(--color-error-bg, #fff4eb)', border: '1px solid var(--color-error-border, #fde8cc)', borderRadius: 'var(--radius-md)', fontSize: 12, color: 'var(--color-error, #b04a00)', wordBreak: 'break-word' }}>
+            <strong>Last error:</strong> {job.lastError}
+          </div>
+        )}
+
         {items.length > 0 && (
           <div>
             <h3 className="h-section">
