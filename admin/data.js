@@ -15,7 +15,7 @@ const SCRIPTS = [
   { id: 'gplace', name: 'Google Place Scraper', icon: 'map-pin', desc: 'Hours, address, ratings, photos, coordinates.',
     lastRun: '2h ago', duration: '4m 12s', status: 'success', cost: '$12',
     coverage: 100, errors: 0,
-    includes: ['Working hours', 'Rating & reviews', 'Price level', 'Address', 'Phone number', 'Website'] },
+    includes: ['Working hours', 'Rating & reviews', 'Price level', 'Address', 'Photo', 'Phone number', 'Website'] },
   { id: 'wolt', name: 'Wolt Menu Scraper', icon: 'utensils', desc: 'Menu items, prices, photos from Wolt CDN.',
     lastRun: '5h ago', duration: '11m 04s', status: 'success', cost: '$8',
     coverage: 92, errors: 2,

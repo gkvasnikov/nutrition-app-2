@@ -1248,6 +1248,32 @@ async function runDedupScript(districtId) {
 
 // ── Google Place enricher (HTTP-only, no Playwright) ──────────────────────────
 // Enriches existing restaurants with Google Place data: hours, rating, etc.
+// ── Google Places schema migration (runs once at startup) ────────────────────
+async function ensureGooglePlacesColumns() {
+  if (!pool) return
+  try {
+    await pool.query(`
+      ALTER TABLE restaurants
+        ADD COLUMN IF NOT EXISTS google_place_id TEXT,
+        ADD COLUMN IF NOT EXISTS website          TEXT,
+        ADD COLUMN IF NOT EXISTS phone            TEXT
+    `)
+    await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS restaurants_google_place_id_idx
+        ON restaurants (google_place_id) WHERE google_place_id IS NOT NULL
+    `)
+  } catch (e) {
+    console.warn('ensureGooglePlacesColumns:', e.message)
+  }
+}
+ensureGooglePlacesColumns().catch(() => {})
+
+// ── Google Place Scraper (grid-based discovery + upsert) ──────────────────────
+// Grid search within district polygon → Nearby Search → Place Details.
+// Match strategy:
+//   1. Existing row with same google_place_id → update all fields
+//   2. Existing row within 150 m with similar name → link + update
+//   3. No match → insert new restaurant
 async function runGooglePlaceScript(districtId) {
   const job = getScriptJob('gplace')
   if (job.running) return
@@ -1262,70 +1288,174 @@ async function runGooglePlaceScript(districtId) {
   job.finishedAt = null; job.districtId = districtId || null
 
   try {
-    // Get restaurants needing enrichment (missing hours or rating)
-    const { rows: rests } = await pool.query(`
-      SELECT id, name, lat, lon
-      FROM restaurants
-      WHERE lat IS NOT NULL AND lon IS NOT NULL
-        AND (opening_hours IS NULL OR rating IS NULL)
-    `)
+    // Ensure columns exist (idempotent)
+    await ensureGooglePlacesColumns()
 
-    let filtered = rests
+    // Determine bounding box and polygon rings for the district
+    let rings = null
+    let bbox = { minLat: 52.338, maxLat: 52.675, minLng: 13.088, maxLng: 13.761 }  // Berlin
     if (districtId) {
       const polygons = await loadBerlinPolygons()
-      if (polygons && polygons.has(districtId)) {
-        const rings = polygons.get(districtId)
-        filtered = rests.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), rings))
+      if (polygons?.has(districtId)) {
+        rings = polygons.get(districtId)
+        let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
+        for (const ring of rings) for (const [lat, lng] of ring) {
+          if (lat < minLat) minLat = lat;  if (lat > maxLat) maxLat = lat
+          if (lng < minLng) minLng = lng;  if (lng > maxLng) maxLng = lng
+        }
+        bbox = { minLat, maxLat, minLng, maxLng }
       }
     }
 
-    job.total = filtered.length
-    console.log(`Google Place script: enriching ${filtered.length} restaurants${districtId ? ` in ${districtId}` : ''}`)
+    // Build search grid — 400 m step, 400 m search radius
+    // 1° lat ≈ 111 km; 1° lng ≈ 72 km at Berlin's latitude
+    const LAT_STEP = 400 / 111_000
+    const LNG_STEP = 400 /  72_000
+    const gridPoints = []
+    for (let lat = bbox.minLat; lat <= bbox.maxLat + LAT_STEP * 0.5; lat += LAT_STEP) {
+      for (let lng = bbox.minLng; lng <= bbox.maxLng + LNG_STEP * 0.5; lng += LNG_STEP) {
+        if (!rings || pointInDistrict(lat, lng, rings)) gridPoints.push({ lat, lng })
+      }
+    }
 
-    for (const rest of filtered) {
+    job.total = gridPoints.length
+    console.log(`Google Place script: ${gridPoints.length} grid points${districtId ? ` in ${districtId}` : ''}`)
+
+    const seenPlaceIds = new Set()  // avoid processing the same place twice
+
+    for (let gi = 0; gi < gridPoints.length; gi++) {
       if (!job.running) { job.cancelled = true; break }
+      const pt = gridPoints[gi]
+
       try {
-        // Find Place by name + location bias
-        const findUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(rest.name)}&inputtype=textquery&locationbias=circle:300@${rest.lat},${rest.lon}&fields=place_id&key=${apiKey}`
-        const findRes  = await fetch(findUrl)
-        const findData = await findRes.json()
-        const placeId  = findData.candidates?.[0]?.place_id
-        if (!placeId) { job.done++; continue }
+        const nearbyUrl =
+          `https://maps.googleapis.com/maps/api/place/nearbysearch/json` +
+          `?location=${pt.lat},${pt.lng}&radius=400&type=restaurant&key=${apiKey}`
+        const nearbyRes  = await fetch(nearbyUrl)
+        const nearbyData = await nearbyRes.json()
 
-        // Get full details
-        const detailUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,formatted_address,rating,user_ratings_total,price_level,opening_hours,formatted_phone_number,website&key=${apiKey}`
-        const detailRes  = await fetch(detailUrl)
-        const detailData = await detailRes.json()
-        const r = detailData.result
-        if (!r) { job.done++; continue }
+        if (nearbyData.status === 'REQUEST_DENIED') {
+          console.error('Google Places API denied:', nearbyData.error_message)
+          job.errors++
+          break  // bad key — stop immediately
+        }
 
-        // Update restaurant row with whatever fields we got
-        const { rowCount } = await pool.query(`
-          UPDATE restaurants SET
-            address       = COALESCE(address,       $2),
-            rating        = COALESCE(rating,        $3),
-            reviews_count = COALESCE(reviews_count, $4),
-            price_level   = COALESCE(price_level,   $5),
-            opening_hours = COALESCE(opening_hours, $6)
-          WHERE id = $1
-        `, [
-          rest.id,
-          r.formatted_address   || null,
-          r.rating              || null,
-          r.user_ratings_total  || null,
-          r.price_level         || null,
-          r.opening_hours       ? JSON.stringify(r.opening_hours) : null,
-        ])
+        for (const place of (nearbyData.results || [])) {
+          if (!job.running) { job.cancelled = true; break }
+          if (seenPlaceIds.has(place.place_id)) continue
+          seenPlaceIds.add(place.place_id)
 
-        if (rowCount > 0) job.newItems++
-        job.done++
+          const pLat = place.geometry?.location?.lat
+          const pLng = place.geometry?.location?.lng
+          if (!pLat || !pLng) continue
+          if (rings && !pointInDistrict(pLat, pLng, rings)) continue
+
+          try {
+            // Fetch full details (photos included for photo_url)
+            const detailUrl =
+              `https://maps.googleapis.com/maps/api/place/details/json` +
+              `?place_id=${place.place_id}` +
+              `&fields=place_id,name,formatted_address,geometry,rating,user_ratings_total,` +
+              `price_level,opening_hours,photos,formatted_phone_number,website` +
+              `&key=${apiKey}`
+            const detailRes  = await fetch(detailUrl)
+            const detailData = await detailRes.json()
+            const r = detailData.result
+            if (!r) continue
+
+            const lat  = r.geometry?.location?.lat ?? pLat
+            const lng  = r.geometry?.location?.lng ?? pLng
+            const photoRef = r.photos?.[0]?.photo_reference
+            const photoUrl = photoRef
+              ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=${photoRef}&key=${apiKey}`
+              : null
+            const openingJson = r.opening_hours ? JSON.stringify(r.opening_hours) : null
+
+            // ── Step 1: try update by google_place_id ──────────────────────
+            const { rowCount: rc1 } = await pool.query(`
+              UPDATE restaurants SET
+                name          = $2,
+                lat           = $3,
+                lon           = $4,
+                address       = $5,
+                rating        = $6,
+                reviews_count = $7,
+                price_level   = $8,
+                opening_hours = $9,
+                photo_url     = COALESCE(photo_url, $10),
+                website       = $11,
+                phone         = $12
+              WHERE google_place_id = $1
+            `, [r.place_id, r.name, lat, lng,
+                r.formatted_address || null,
+                r.rating || null, r.user_ratings_total || null, r.price_level || null,
+                openingJson, photoUrl,
+                r.website || null, r.formatted_phone_number || null])
+
+            if (rc1 > 0) { job.newItems++; job.done++; continue }
+
+            // ── Step 2: match existing row by name + proximity (≤150 m) ───
+            // 150 m ≈ 0.00135° lat / 0.00208° lng at Berlin latitude
+            const { rows: nearby } = await pool.query(`
+              SELECT id FROM restaurants
+              WHERE google_place_id IS NULL
+                AND LOWER(name) = LOWER($1)
+                AND lat BETWEEN $2 - 0.00135 AND $2 + 0.00135
+                AND lon BETWEEN $3 - 0.00208 AND $3 + 0.00208
+              LIMIT 1
+            `, [r.name, lat, lng])
+
+            if (nearby.length > 0) {
+              await pool.query(`
+                UPDATE restaurants SET
+                  google_place_id = $2,
+                  address         = COALESCE(address,       $3),
+                  rating          = COALESCE(rating,        $4),
+                  reviews_count   = COALESCE(reviews_count, $5),
+                  price_level     = COALESCE(price_level,   $6),
+                  opening_hours   = COALESCE(opening_hours, $7),
+                  photo_url       = COALESCE(photo_url,     $8),
+                  website         = COALESCE(website,       $9),
+                  phone           = COALESCE(phone,         $10)
+                WHERE id = $1
+              `, [nearby[0].id, r.place_id,
+                  r.formatted_address || null,
+                  r.rating || null, r.user_ratings_total || null, r.price_level || null,
+                  openingJson, photoUrl,
+                  r.website || null, r.formatted_phone_number || null])
+              job.newItems++; job.done++; continue
+            }
+
+            // ── Step 3: insert new restaurant ─────────────────────────────
+            await pool.query(`
+              INSERT INTO restaurants
+                (name, lat, lon, address, rating, reviews_count, price_level,
+                 opening_hours, photo_url, website, phone, google_place_id)
+              VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+              ON CONFLICT (google_place_id) DO NOTHING
+            `, [r.name, lat, lng,
+                r.formatted_address || null,
+                r.rating || null, r.user_ratings_total || null, r.price_level || null,
+                openingJson, photoUrl,
+                r.website || null, r.formatted_phone_number || null, r.place_id])
+            job.newItems++
+            job.done++
+
+            await new Promise(resolve => setTimeout(resolve, 100))  // Details API rate limit
+          } catch (e) {
+            console.error(`gplace details error (${place.place_id}):`, e.message)
+            job.errors++
+          }
+        }
       } catch (e) {
-        console.error(`Google Place script restaurant ${rest.id}:`, e.message)
+        console.error(`gplace grid point error:`, e.message)
         job.errors++
-        job.done++
       }
 
-      await new Promise(r => setTimeout(r, 120))  // ~8 req/s — well under quota
+      // Progress = grid points completed (regardless of restaurant count)
+      job.done = gi + 1
+
+      await new Promise(resolve => setTimeout(resolve, 200))  // Nearby Search rate limit
     }
   } catch (e) {
     console.error('Google Place script error:', e.message)
@@ -1333,7 +1463,7 @@ async function runGooglePlaceScript(districtId) {
   } finally {
     job.running = false
     job.finishedAt = new Date().toISOString()
-    console.log(`Google Place finished: ${job.done} processed, ${job.newItems} updated, ${job.errors} errors`)
+    console.log(`Google Place finished: ${seenPlaceIds?.size ?? '?'} places seen, ${job.newItems} added/updated, ${job.errors} errors`)
     if (!job.cancelled) saveScriptStats('gplace').catch(() => {})
   }
 }
