@@ -1829,7 +1829,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
           const { rows: [restRow] } = await pool.query(`
             INSERT INTO restaurants (name, lat, lon, wolt_slug, address, photo_url, rating, reviews_count, price_level)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-            ON CONFLICT (wolt_slug) DO UPDATE SET
+            ON CONFLICT (wolt_slug) WHERE wolt_slug IS NOT NULL DO UPDATE SET
               name          = EXCLUDED.name,
               lat           = COALESCE(restaurants.lat,           EXCLUDED.lat),
               lon           = COALESCE(restaurants.lon,           EXCLUDED.lon),
