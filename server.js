@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import express from 'express'
 import compression from 'compression'
 import { fileURLToPath } from 'url'
@@ -11,6 +11,20 @@ import connectPgSimple from 'connect-pg-simple'
 import { timingSafeEqual, createHash } from 'crypto'
 import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { chromium } from 'playwright'
+
+// override:true so .env wins over any empty/stale vars already in the environment
+// (e.g. a blank ANTHROPIC_API_KEY exported by the shell). On Railway there is no .env
+// file (gitignored + .dockerignore), so this is a no-op there and real env vars are used.
+dotenv.config({ override: true })
+
+// Survive transient faults (e.g. a brief DNS/network blip dropping the DB connection, or a rejected
+// session-store query). Log loudly but don't exit — long-running scrape/macros jobs shouldn't die.
+process.on('unhandledRejection', (reason) => {
+  console.error('UnhandledRejection:', reason?.stack || reason?.message || reason)
+})
+process.on('uncaughtException', (err) => {
+  console.error('UncaughtException:', err?.stack || err?.message || err)
+})
 
 const app = express()
 app.set('trust proxy', 1)  // Railway/Heroku HTTPS proxy — required for secure session cookies
@@ -196,9 +210,15 @@ const _MENU_NUM_RE = /^\d+\.\s*/
 // ── /api/restaurant-summaries — macro ranges per restaurant for low-zoom filter ─
 // ~1 700 rows × ~60 bytes = ~100 KB gzip. Used to show/hide dot-pins at zoom < 13
 // without loading full meal data.
+// Optional bbox: ?swLat=&swLng=&neLat=&neLng= to restrict to a geographic area.
 app.get('/api/restaurant-summaries', async (req, res) => {
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
   try {
+    const { swLat, swLng, neLat, neLng } = req.query
+    const hasBbox = swLat && swLng && neLat && neLng
+    const bboxWhere = hasBbox ? `AND r.lat BETWEEN $1 AND $2 AND r.lon BETWEEN $3 AND $4` : ''
+    const params    = hasBbox ? [parseFloat(swLat), parseFloat(neLat), parseFloat(swLng), parseFloat(neLng)] : []
+
     const { rows } = await pool.query(`
       SELECT
         r.id,
@@ -212,8 +232,9 @@ app.get('/api/restaurant-summaries', async (req, res) => {
         AND m.calories IS NOT NULL
         AND (m.category IS NULL OR m.category != 'drink')
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
+        ${bboxWhere}
       GROUP BY r.id
-    `)
+    `, params)
 
     const summaries = rows.map(r => ({
       id:      r.id,
@@ -290,10 +311,16 @@ app.get('/api/area-meals', async (req, res) => {
 
 
 // ── /api/pins — lightweight map data (restaurants with meal counts) ───────────
-// Used by Discover.jsx to show pins immediately; ~200-400 KB for full Berlin
+// Used by Discover.jsx to show pins immediately; ~200-400 KB for full Berlin.
+// Optional bbox: ?swLat=&swLng=&neLat=&neLng= to restrict to a geographic area.
 app.get('/api/pins', async (req, res) => {
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
   try {
+    const { swLat, swLng, neLat, neLng } = req.query
+    const hasBbox = swLat && swLng && neLat && neLng
+    const bboxWhere = hasBbox ? `AND r.lat BETWEEN $1 AND $2 AND r.lon BETWEEN $3 AND $4` : ''
+    const params    = hasBbox ? [parseFloat(swLat), parseFloat(neLat), parseFloat(swLng), parseFloat(neLng)] : []
+
     const { rows } = await pool.query(`
       SELECT
         r.id, r.name, r.lat, r.lon AS lng, r.wolt_slug,
@@ -310,10 +337,11 @@ app.get('/api/pins', async (req, res) => {
         AND m.image_url IS NOT NULL AND m.image_url <> ''
         AND (m.category IS NULL OR m.category != 'drink')
       WHERE r.lat IS NOT NULL AND r.lon IS NOT NULL
+        ${bboxWhere}
       GROUP BY r.id
       HAVING COUNT(m.id) > 0
       ORDER BY r.reviews_count DESC NULLS LAST
-    `)
+    `, params)
 
     const pins = rows.map(r => ({
       id: r.id,
@@ -1184,15 +1212,20 @@ async function runMacrosScript(districtId) {
   job.startedAt    = new Date().toISOString()
   job.finishedAt   = null
   job.districtId   = districtId || null
+  // Run statistics for the completion summary
+  job.statMacros   = 0   // items that newly received calories
+  job.statDrinks   = 0   // items newly tagged as drinks
+  job.statMeals    = { breakfast: 0, lunch: 0, dinner: 0, snack: 0, all_day: 0 }
 
   try {
-    // Query meals needing processing
+    // Items needing processing: missing macros/meal_times OR not yet drink-classified (category NULL).
+    // prev_cal/prev_cat let us count what's newly filled for the stats summary.
     const { rows: meals } = await pool.query(`
-      SELECT m.id, m.name, r.lat, r.lon
+      SELECT m.id, m.name, m.description, m.calories AS prev_cal, m.category AS prev_cat, r.lat, r.lon
       FROM menu_items m
       JOIN restaurants r ON r.id = m.restaurant_id
       WHERE m.source = 'wolt_menu'
-        AND (m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL)
+        AND (m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL OR m.category IS NULL)
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
     `)
 
@@ -1218,12 +1251,12 @@ async function runMacrosScript(districtId) {
 
       const batch = filtered.slice(i, i + BATCH_SIZE)
       try {
-        const prompt = `You are a nutrition expert. Estimate macros per serving and classify meal type for these dishes.
-Return ONLY a valid JSON array, no markdown, no explanation. One object per dish in order:
-[{"i":1,"cal":480,"pro":28.5,"fat":18.0,"carb":42.0,"conf":"high","mt":"lunch"}, ...]
-Fields: i=1-based index, cal=calories(kcal integer), pro=protein(g,1dp), fat=fat(g,1dp), carb=carbs(g,1dp), conf="high"|"medium"|"low", mt="breakfast"|"lunch"|"dinner"|"snack"|"all_day"
-Dishes:
-${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
+        const prompt = `You are a nutrition expert. For each menu item: estimate macros per serving, classify meal type, and decide whether it is a DRINK (beverage) using the name AND description for context.
+Return ONLY a valid JSON array, no markdown, no explanation. One object per item in order:
+[{"i":1,"cal":480,"pro":28.5,"fat":18.0,"carb":42.0,"conf":"high","mt":"lunch","drink":false}, ...]
+Fields: i=1-based index, cal=calories(kcal integer), pro=protein(g,1dp), fat=fat(g,1dp), carb=carbs(g,1dp), conf="high"|"medium"|"low", mt="breakfast"|"lunch"|"dinner"|"snack"|"all_day", drink=true ONLY if the item is a beverage you drink (soft drink, juice, smoothie, coffee, tea, water, beer, wine, cocktail, lemonade, etc.) — judge from name and description, including cases where it isn't obvious from the name alone; otherwise false.
+Items (name — description):
+${batch.map((r, idx) => `${idx + 1}. "${r.name}"${r.description ? ` — ${String(r.description).slice(0, 160)}` : ''}`).join('\n')}`
 
         const message = await client.messages.create({
           model: 'claude-haiku-4-5-20251001',
@@ -1245,6 +1278,7 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
           const mealTimesArr = res.mt === 'all_day'
             ? ['breakfast', 'lunch', 'dinner', 'snack']
             : [res.mt]
+          const isDrink = res.drink === true || res.drink === 'true'
 
           const { rowCount } = await pool.query(`
             UPDATE menu_items SET
@@ -1253,9 +1287,15 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
               fat        = COALESCE(fat,        $4),
               carbs      = COALESCE(carbs,      $5),
               confidence = COALESCE(confidence, $6),
-              meal_times = COALESCE(meal_times, $7)
+              meal_times = COALESCE(meal_times, $7),
+              category   = COALESCE(category,   $8)
             WHERE id = $1
-          `, [meal.id, res.cal, res.pro, res.fat, res.carb, res.conf, mealTimesArr])
+          `, [meal.id, res.cal, res.pro, res.fat, res.carb, res.conf, mealTimesArr, isDrink ? 'drink' : 'food'])
+
+          // Stats for the completion summary
+          if (meal.prev_cal == null && res.cal != null) job.statMacros++
+          if (isDrink && meal.prev_cat == null) job.statDrinks++
+          if (job.statMeals[res.mt] != null) job.statMeals[res.mt]++
 
           if (rowCount > 0) job.newItems++
           job.done++
@@ -1275,11 +1315,17 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"`).join('\n')}`
   } finally {
     job.running    = false
     job.finishedAt = new Date().toISOString()
-    console.log(`Macros script finished: ${job.done} processed, ${job.newItems} updated, ${job.errors} errors`)
+    // Build the completion summary, e.g.
+    // "Mitte · 1239 macros · 128 drinks · breakfast 128, lunch 2400, dinner 2573, snack 374"
+    const sm = job.statMeals || { breakfast: 0, lunch: 0, dinner: 0, snack: 0, all_day: 0 }
+    const allDayNote = sm.all_day ? `, all-day ${sm.all_day}` : ''
+    const summary = `${districtLabel(job.districtId)} · ${job.statMacros || 0} macros · ${job.statDrinks || 0} drinks · `
+      + `breakfast ${sm.breakfast}, lunch ${sm.lunch}, dinner ${sm.dinner}, snack ${sm.snack}${allDayNote}`
+      + (job.errors ? ` · ${job.errors} errors` : '')
+    console.log(`Macros script finished: ${summary}`)
     if (!job.cancelled) {
       saveScriptStats('macros').catch(e => console.warn('Could not persist macros stats:', e.message))
-      logActivity(job.errors > 0 ? 'error' : 'success', 'Macros Estimator completed',
-        `${districtLabel(job.districtId)} · ${job.newItems} meals scored${job.errors ? ` · ${job.errors} errors` : ''}`)
+      logActivity(job.errors > 0 ? 'error' : 'success', 'Macros Estimator completed', summary)
     }
   }
 }

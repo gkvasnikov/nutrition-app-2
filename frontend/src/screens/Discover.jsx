@@ -36,12 +36,13 @@ export default function Discover({
     summaryById,
     restaurantById,
     loading: dataLoading,
+    loadMorePins,
   } = useAppData()
 
-  // O(1) restaurant lookup — rebuilt once when data arrives
+  // O(1) restaurant lookup — updated incrementally as new pins load
   const restaurantByIdRef = useRef(new Map())
-  if (apiRestaurants.length && !restaurantByIdRef.current.size) {
-    restaurantByIdRef.current = new Map(apiRestaurants.map(r => [r.id, r]))
+  for (const r of apiRestaurants) {
+    if (!restaurantByIdRef.current.has(r.id)) restaurantByIdRef.current.set(r.id, r)
   }
 
   // ── Map / pin state ───────────────────────────────────────────────────────────
@@ -54,6 +55,11 @@ export default function Discover({
   // Area meal loading: tracks which restaurant IDs have had meals loaded
   const loadedAreaIds  = useRef(new Set())
   const loadAreaMealsRef = useRef(null)
+
+  // Pin loading: tracks the union bbox of all loaded pin areas
+  const loadedPinBoundsRef  = useRef(null)  // { swLat, swLng, neLat, neLng } | null
+  const loadingMorePinsRef  = useRef(false)
+  const loadMorePinsForViewportRef = useRef(null)
 
   // ── Sheet / UI state ──────────────────────────────────────────────────────────
   const [isExpanded,    setIsExpanded]    = useState(false)
@@ -443,10 +449,20 @@ export default function Discover({
     initMap()
   }, [mapsScriptReady]) // eslint-disable-line
 
-  // Step 3 — add pins once restaurant data arrives
+  // Step 3 — add pins once restaurant data arrives; handle incremental additions
   useEffect(() => {
-    if (dataLoading || !apiRestaurants.length || !mapInstanceRef.current || markersRef.current.length > 0) return
-    addMealPins(mapInstanceRef.current)
+    if (dataLoading || !apiRestaurants.length || !mapInstanceRef.current) return
+    if (markersRef.current.length === 0) {
+      // Initial load
+      addMealPins(mapInstanceRef.current)
+    } else {
+      // Incremental: add only genuinely new restaurants
+      const existingIds = new Set(markersRef.current.map(({ cfg }) => cfg.id))
+      const newRests = apiRestaurants.filter(
+        r => !existingIds.has(r.id) && r.mealCount > 0 && r.lat != null && r.lng != null
+      )
+      if (newRests.length > 0) addNewPins(mapInstanceRef.current, newRests)
+    }
   }, [dataLoading, apiRestaurants.length]) // eslint-disable-line
 
   // Resize map after tab becomes visible.
@@ -577,6 +593,80 @@ export default function Discover({
     requestAnimationFrame(step)
   }
 
+  // ── createMarker — shared marker factory used by addMealPins + addNewPins ─────
+  function createMarker(map, cfg) {
+    const isPhoto = zoomLevelRef.current >= PHOTO_ZOOM_THRESHOLD
+    const marker  = new window.google.maps.Marker({
+      position: { lat: cfg.lat, lng: cfg.lng },
+      map,
+      icon: isPhoto
+        ? createPinIcon(null, 40, 'single', cfg.count)
+        : createDotIcon(),
+    })
+    marker.addListener('click', () => {
+      if (zoomLevelRef.current < PHOTO_ZOOM_THRESHOLD) {
+        mapInstanceRef.current?.setZoom(PHOTO_ZOOM_THRESHOLD)
+        mapInstanceRef.current?.panTo({ lat: cfg.lat, lng: cfg.lng })
+        return
+      }
+      if (activeMarkerRef.current && activeMarkerRef.current !== marker) {
+        animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
+      }
+      const selecting = activeMarkerRef.current !== marker
+      animatePin(marker, cfg, selecting ? 40 : 48, selecting ? 48 : 40)
+      activeMarkerRef.current = selecting ? marker : null
+      selectPinRef.current(selecting ? cfg : null)
+    })
+    marker._cfg = cfg
+    markersRef.current.push({ marker, cfg })
+    return marker
+  }
+
+  // ── addNewPins — incremental: add markers for restaurants not yet on the map ─
+  function addNewPins(map, newRests) {
+    const newPinData = newRests.map(r => ({
+      id: r.id, lat: r.lat, lng: r.lng,
+      type: 'group', photo: null, photoUrl: null, img: null,
+      count: r.mealCount, meals: [], allMeals: [],
+    }))
+    pinDataRef.current = [...pinDataRef.current, ...newPinData]
+    newPinData.forEach(cfg => createMarker(map, cfg))
+    updatePinFiltersRef.current?.()
+  }
+
+  // ── loadMorePinsForViewport — called from idle to fetch pins for new areas ───
+  async function loadMorePinsForViewport() {
+    if (!mapInstanceRef.current || loadingMorePinsRef.current) return
+    const bounds = mapInstanceRef.current.getBounds()
+    if (!bounds) return
+    const sw = bounds.getSouthWest(), ne = bounds.getNorthEast()
+    const swLat = sw.lat(), swLng = sw.lng(), neLat = ne.lat(), neLng = ne.lng()
+
+    // Skip if viewport is fully within already-loaded bounds (with small margin)
+    if (loadedPinBoundsRef.current) {
+      const lb = loadedPinBoundsRef.current
+      const margin = 0.02  // ~2 km buffer
+      if (swLat >= lb.swLat - margin && swLng >= lb.swLng - margin &&
+          neLat <= lb.neLat + margin && neLng <= lb.neLng + margin) return
+    }
+
+    loadingMorePinsRef.current = true
+    await loadMorePins(swLat, swLng, neLat, neLng)
+
+    // Expand stored bounds to union of all loaded areas
+    if (!loadedPinBoundsRef.current) {
+      loadedPinBoundsRef.current = { swLat, swLng, neLat, neLng }
+    } else {
+      const lb = loadedPinBoundsRef.current
+      loadedPinBoundsRef.current = {
+        swLat: Math.min(lb.swLat, swLat), swLng: Math.min(lb.swLng, swLng),
+        neLat: Math.max(lb.neLat, neLat), neLng: Math.max(lb.neLng, neLng),
+      }
+    }
+    loadingMorePinsRef.current = false
+  }
+  loadMorePinsForViewportRef.current = loadMorePinsForViewport
+
   // ── addMealPins ───────────────────────────────────────────────────────────────
   function addMealPins(map) {
     const initialZoom = map.getZoom() ?? 12
@@ -625,12 +715,13 @@ export default function Discover({
       }
     })
 
-    // ── Map idle: update visible meals, load area meals if zoomed in ──────────
+    // ── Map idle: update visible meals, load area meals, load new pins ──────────
     map.addListener('idle', () => {
       updateVisibleMealsRef.current()
       if (zoomLevelRef.current >= PHOTO_ZOOM_THRESHOLD) {
         loadAreaMealsRef.current?.()
       }
+      loadMorePinsForViewportRef.current?.()
     })
 
     // ── Click on empty map: deselect ──────────────────────────────────────────
@@ -643,39 +734,21 @@ export default function Discover({
     })
 
     // ── Create markers ────────────────────────────────────────────────────────
-    PIN_DATA.forEach(cfg => {
-      const isPhoto = initialZoom >= PHOTO_ZOOM_THRESHOLD
-      const marker  = new window.google.maps.Marker({
-        position: { lat: cfg.lat, lng: cfg.lng },
-        map,
-        icon: isPhoto
-          ? createPinIcon(null, 40, 'single', cfg.count)
-          : createDotIcon(),
-      })
-
-      marker.addListener('click', () => {
-        if (zoomLevelRef.current < PHOTO_ZOOM_THRESHOLD) {
-          // Dot mode: clicking zooms in to the restaurant's area
-          mapInstanceRef.current?.setZoom(PHOTO_ZOOM_THRESHOLD)
-          mapInstanceRef.current?.panTo({ lat: cfg.lat, lng: cfg.lng })
-          return
-        }
-        // Photo mode: select / deselect pin
-        if (activeMarkerRef.current && activeMarkerRef.current !== marker) {
-          animatePin(activeMarkerRef.current, activeMarkerRef.current._cfg, 48, 40)
-        }
-        const selecting = activeMarkerRef.current !== marker
-        animatePin(marker, cfg, selecting ? 40 : 48, selecting ? 48 : 40)
-        activeMarkerRef.current = selecting ? marker : null
-        selectPinRef.current(selecting ? cfg : null)
-      })
-
-      marker._cfg = cfg
-      markersRef.current.push({ marker, cfg })
-    })
+    PIN_DATA.forEach(cfg => createMarker(map, cfg))
 
     // Initial filter sync
     updatePinFiltersRef.current()
+
+    // Record initial loaded bounds from the current map viewport so the idle
+    // handler knows whether to fetch more pins when the user pans.
+    const initBounds = map.getBounds()
+    if (initBounds) {
+      const sw = initBounds.getSouthWest(), ne = initBounds.getNorthEast()
+      loadedPinBoundsRef.current = {
+        swLat: sw.lat(), swLng: sw.lng(),
+        neLat: ne.lat(), neLng: ne.lng(),
+      }
+    }
 
     // If already in photo mode (locateMe ran before data arrived and the map
     // settled at zoom ≥ 15 before the idle listener was added), load area meals
