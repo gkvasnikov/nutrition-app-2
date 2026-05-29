@@ -23,7 +23,7 @@ const SCRIPTS = [
   { id: 'macros', name: 'Macros + Meal Type (Claude)', icon: 'brain', desc: 'Estimate kcal/protein/fat/carbs and classify meal type per dish.',
     lastRun: '2h ago', duration: '23m 12s', status: 'success', cost: '$28',
     coverage: 96, errors: 0,
-    includes: ['Calories', 'Protein', 'Fat', 'Carbs', 'Confidence score', 'Meal type'] },
+    includes: ['Calories', 'Protein', 'Fat', 'Carbs', 'Confidence score', 'Meal type', 'Drink detection'] },
   { id: 'dedup', name: 'Detect Duplicate Meals', icon: 'copy', desc: 'Group near-identical dishes across menus.',
     lastRun: '1d ago', duration: '1m 56s', status: 'success', cost: '$0',
     coverage: 100, errors: 0,

@@ -1196,7 +1196,9 @@ function msToRelativeServer(ms) {
 }
 
 // ── Macros + Meal Type script (real Claude-powered implementation) ─────────────
-async function runMacrosScript(districtId) {
+// reimprove=false (default): estimate items missing macros/meal_times/category.
+// reimprove=true: re-estimate low/medium-confidence items with the richer prompt, OVERWRITING macros.
+async function runMacrosScript(districtId, reimprove = false) {
   const job = getScriptJob('macros')
   if (job.running) return
 
@@ -1218,14 +1220,17 @@ async function runMacrosScript(districtId) {
   job.statMeals    = { breakfast: 0, lunch: 0, dinner: 0, snack: 0, all_day: 0 }
 
   try {
-    // Items needing processing: missing macros/meal_times OR not yet drink-classified (category NULL).
-    // prev_cal/prev_cat let us count what's newly filled for the stats summary.
+    // Work set. Default: items missing macros/meal_times/category. Re-improve: low/medium-confidence
+    // items (re-estimated with the richer prompt). `reimprove` is a boolean → safe to interpolate.
+    const workFilter = reimprove
+      ? `m.confidence IN ('low','medium')`
+      : `(m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL OR m.category IS NULL)`
     const { rows: meals } = await pool.query(`
-      SELECT m.id, m.name, m.description, m.calories AS prev_cal, m.category AS prev_cat, r.lat, r.lon
+      SELECT m.id, m.name, m.description, m.price, m.calories AS prev_cal, m.category AS prev_cat, r.lat, r.lon
       FROM menu_items m
       JOIN restaurants r ON r.id = m.restaurant_id
       WHERE m.source = 'wolt_menu'
-        AND (m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL OR m.category IS NULL)
+        AND ${workFilter}
         AND r.lat IS NOT NULL AND r.lon IS NOT NULL
     `)
 
@@ -1240,8 +1245,8 @@ async function runMacrosScript(districtId) {
     }
 
     job.total = filtered.length
-    console.log(`Macros script started: ${filtered.length} meals to process${districtId ? ` in ${districtId}` : ''}`)
-    logActivity('info', 'Macros Estimator started', `${districtLabel(districtId)} · ${filtered.length} meals queued`)
+    console.log(`Macros script started${reimprove ? ' (re-estimate low/medium)' : ''}: ${filtered.length} meals${districtId ? ` in ${districtId}` : ''}`)
+    logActivity('info', `Macros Estimator started${reimprove ? ' (re-estimate)' : ''}`, `${districtLabel(districtId)} · ${filtered.length} meals queued`)
 
     const BATCH_SIZE = 20
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
@@ -1251,12 +1256,12 @@ async function runMacrosScript(districtId) {
 
       const batch = filtered.slice(i, i + BATCH_SIZE)
       try {
-        const prompt = `You are a nutrition expert. For each menu item: estimate macros per serving, classify meal type, and decide whether it is a DRINK (beverage) using the name AND description for context.
+        const prompt = `You are a nutrition expert. For each menu item: estimate macros per serving, classify meal type, and decide whether it is a DRINK (beverage). Use the name, description AND price (a rough portion-size indicator) for context.
 Return ONLY a valid JSON array, no markdown, no explanation. One object per item in order:
 [{"i":1,"cal":480,"pro":28.5,"fat":18.0,"carb":42.0,"conf":"high","mt":"lunch","drink":false}, ...]
-Fields: i=1-based index, cal=calories(kcal integer), pro=protein(g,1dp), fat=fat(g,1dp), carb=carbs(g,1dp), conf="high"|"medium"|"low", mt="breakfast"|"lunch"|"dinner"|"snack"|"all_day", drink=true ONLY if the item is a beverage you drink (soft drink, juice, smoothie, coffee, tea, water, beer, wine, cocktail, lemonade, etc.) — judge from name and description, including cases where it isn't obvious from the name alone; otherwise false.
-Items (name — description):
-${batch.map((r, idx) => `${idx + 1}. "${r.name}"${r.description ? ` — ${String(r.description).slice(0, 160)}` : ''}`).join('\n')}`
+Fields: i=1-based index, cal=calories(kcal integer), pro=protein(g,1dp), fat=fat(g,1dp), carb=carbs(g,1dp), conf="high"|"medium"|"low" (use "high" only when name+description give enough detail), mt="breakfast"|"lunch"|"dinner"|"snack"|"all_day", drink=true ONLY if the item is a beverage you drink (soft drink, juice, smoothie, coffee, tea, water, beer, wine, cocktail, lemonade, etc.) — judge from name and description, including cases where it isn't obvious from the name alone; otherwise false.
+Items (name — description [price]):
+${batch.map((r, idx) => `${idx + 1}. "${r.name}"${r.description ? ` — ${String(r.description).slice(0, 180)}` : ''}${r.price != null ? ` [€${r.price}]` : ''}`).join('\n')}`
 
         const message = await client.messages.create({
           model: 'claude-haiku-4-5-20251001',
@@ -1280,20 +1285,21 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"${r.description ? ` — ${String
             : [res.mt]
           const isDrink = res.drink === true || res.drink === 'true'
 
+          // Re-improve OVERWRITES macros + confidence; default fill uses COALESCE (keep existing).
+          // meal_times/category always COALESCE (keep what's there).
+          const setMacros = reimprove
+            ? `calories = $2, protein = $3, fat = $4, carbs = $5, confidence = $6`
+            : `calories = COALESCE(calories, $2), protein = COALESCE(protein, $3), fat = COALESCE(fat, $4), carbs = COALESCE(carbs, $5), confidence = COALESCE(confidence, $6)`
           const { rowCount } = await pool.query(`
             UPDATE menu_items SET
-              calories   = COALESCE(calories,   $2),
-              protein    = COALESCE(protein,    $3),
-              fat        = COALESCE(fat,        $4),
-              carbs      = COALESCE(carbs,      $5),
-              confidence = COALESCE(confidence, $6),
+              ${setMacros},
               meal_times = COALESCE(meal_times, $7),
               category   = COALESCE(category,   $8)
             WHERE id = $1
           `, [meal.id, res.cal, res.pro, res.fat, res.carb, res.conf, mealTimesArr, isDrink ? 'drink' : 'food'])
 
           // Stats for the completion summary
-          if (meal.prev_cal == null && res.cal != null) job.statMacros++
+          if (res.cal != null && (reimprove || meal.prev_cal == null)) job.statMacros++
           if (isDrink && meal.prev_cat == null) job.statDrinks++
           if (job.statMeals[res.mt] != null) job.statMeals[res.mt]++
 
@@ -1789,11 +1795,12 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     }
 
     // ── Phase 1: discover venues ────────────────────────────────────────────
-    // Wolt's API takes a POINT (lat/lon), not a region, and returns ~2000 venues
-    // across a wide radius — a single query from the district centroid already
-    // covers a compact district. We query the centroid + the 4 bbox corners
-    // (insurance for geographically large districts), dedupe by slug, then keep
-    // only venues whose coordinates fall inside the district polygon.
+    // Wolt's API takes a POINT (lat/lon), not a region, and returns the ~2000 venues
+    // nearest that point. A single point misses zone-bound venues in far corners, so we
+    // query a modest ~2.5 km grid over the district bbox (in-polygon points + centroid),
+    // dedupe by slug, then keep only venues inside the district polygon.
+    // 2.5 km is calibrated: ~full coverage (175 vs 168 for Reinickendorf) at ~10–15 calls,
+    // well below the ~45-rapid-calls point where Wolt starts throttling.
     const headers = {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
       'Accept': 'application/json',
@@ -1802,13 +1809,14 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
     }
     const cLat = (bbox.minLat + bbox.maxLat) / 2
     const cLng = (bbox.minLng + bbox.maxLng) / 2
-    const queryPoints = [
-      { lat: cLat, lng: cLng },               // centroid
-      { lat: bbox.minLat, lng: bbox.minLng }, // SW corner
-      { lat: bbox.minLat, lng: bbox.maxLng }, // SE corner
-      { lat: bbox.maxLat, lng: bbox.minLng }, // NW corner
-      { lat: bbox.maxLat, lng: bbox.maxLng }, // NE corner
-    ]
+    const STEP = 2500  // metres between grid points (calibrated)
+    const LAT_STEP = STEP / 111_000
+    const LNG_STEP = STEP / (111_000 * Math.cos(cLat * Math.PI / 180))
+    const queryPoints = []
+    for (let lat = bbox.minLat; lat <= bbox.maxLat; lat += LAT_STEP)
+      for (let lng = bbox.minLng; lng <= bbox.maxLng; lng += LNG_STEP)
+        if (!rings || pointInDistrict(lat, lng, rings)) queryPoints.push({ lat, lng })
+    queryPoints.push({ lat: cLat, lng: cLng })  // centroid safety net (covers tiny polygons)
 
     const venuesMap = new Map()  // slug → venue data (dedup across query points)
     for (const pt of queryPoints) {
@@ -1848,7 +1856,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
       } catch (e) {
         console.error(`Wolt discovery point (${pt.lat.toFixed(3)},${pt.lng.toFixed(3)}) error:`, e.message)
       }
-      await new Promise(r => setTimeout(r, 350))  // gentle throttle between query points
+      await new Promise(r => setTimeout(r, 300))  // gentle throttle between grid points
     }
 
     const allVenues = [...venuesMap.values()]
@@ -2122,7 +2130,7 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
 
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
   if (id === 'macros') {
-    runMacrosScript(req.body?.districtId || null)
+    runMacrosScript(req.body?.districtId || null, !!req.body?.reimprove)
   } else if (id === 'dedup') {
     runDedupScript(req.body?.districtId || null)
   } else if (id === 'gplace') {
@@ -2402,7 +2410,6 @@ async function fetchAdminRestaurants() {
     GROUP BY r.id
     HAVING COUNT(m.id) > 0
     ORDER BY r.reviews_count DESC NULLS LAST
-    LIMIT 500
   `)
   const mapsKey = process.env.VITE_GOOGLE_MAPS_API_KEY || ''
 

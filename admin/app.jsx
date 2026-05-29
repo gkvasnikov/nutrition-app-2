@@ -1379,6 +1379,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
 
   // Limit field (wolt only — persisted to server)
   const [limitInput, setLimitInput] = useState('');
+  const [reimprove, setReimprove] = useState(false);  // macros: re-estimate low/medium
 
   // Sync wolt limitInput from job.configLimit when script opens or configLimit changes
   useEffect(() => {
@@ -1415,6 +1416,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
         districtId: district?.id || null,
         fields: enabledFields,
         ...(limitVal ? { limit: limitVal } : {}),
+        ...(data.id === 'macros' && reimprove ? { reimprove: true } : {}),
       }),
     })
       .then(r => r.json())
@@ -1505,7 +1507,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             <span className="sdetail__cell__v num">{job ? `${job.done} / ${job.total}` : '—'}</span>
           </div>
           <div className="sdetail__cell">
-            <span className="sdetail__cell__l">Added</span>
+            <span className="sdetail__cell__l">{data.id === 'dedup' ? 'Removed' : 'Added'}</span>
             <span className="sdetail__cell__v num">{job?.newItems ?? '—'}</span>
           </div>
           <div className="sdetail__cell">
@@ -1529,6 +1531,19 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
         {!isRunning && job?.lastError && (
           <div style={{ marginBottom: 16, padding: '10px 12px', background: 'var(--color-error-bg, #fff4eb)', border: '1px solid var(--color-error-border, #fde8cc)', borderRadius: 'var(--radius-md)', fontSize: 12, color: 'var(--color-error, #b04a00)', wordBreak: 'break-word' }}>
             <strong>Last error:</strong> {job.lastError}
+          </div>
+        )}
+
+        {isMacros && job?.statMeals && (job.statMacros > 0 || job.statDrinks > 0 || Object.values(job.statMeals).some(v => v > 0)) && (
+          <div style={{ marginBottom: 16, padding: '10px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', fontSize: 12, color: 'var(--color-text-2)', lineHeight: 1.6 }}>
+            <strong style={{ color: 'var(--color-text)' }}>Last run:</strong>{' '}
+            <span className="num">{job.statMacros || 0}</span> got macros ·{' '}
+            <span className="num">{job.statDrinks || 0}</span> drinks sorted ·{' '}
+            breakfast <span className="num">{job.statMeals.breakfast || 0}</span>,{' '}
+            lunch <span className="num">{job.statMeals.lunch || 0}</span>,{' '}
+            dinner <span className="num">{job.statMeals.dinner || 0}</span>,{' '}
+            snack <span className="num">{job.statMeals.snack || 0}</span>
+            {job.statMeals.all_day ? <>, all-day <span className="num">{job.statMeals.all_day}</span></> : null}
           </div>
         )}
 
@@ -1571,6 +1586,16 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                   {macrosActualCost || macrosEstPer1k}
                 </span>
               </div>
+            )}
+            {isMacros && (
+              <label style={{ marginTop: 10, display: 'flex', gap: 8, alignItems: 'flex-start', cursor: 'pointer', fontSize: 12, color: 'var(--color-text-2)' }}>
+                <input type="checkbox" checked={reimprove} onChange={e => setReimprove(e.target.checked)} disabled={isRunning} style={{ marginTop: 1 }}/>
+                <span>
+                  <strong style={{ color: 'var(--color-text)' }}>Re-estimate low/medium</strong> — re-run only
+                  low/medium-confidence dishes with the richer prompt (name + description + price) and
+                  overwrite their macros. Use to raise coverage on already-scored districts.
+                </span>
+              </label>
             )}
             {isWolt && (
               <div style={{ marginTop: 12 }}>
