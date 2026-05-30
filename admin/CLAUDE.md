@@ -96,13 +96,28 @@ wolt), or all via `POST /admin/api/scripts/pipeline/run` (reads the persisted Wo
    rendering. The menu (`horizontal-item-card` markup) is **server-rendered into the HTML**, so we
    fetch it directly and parse it; no waiting for hydration/XHR. Captures name, description (`<p>`),
    price, image. (This is why scraping must run from a residential IP — see §0/§4.)
-5. **Limit** = stop after N genuinely *new* restaurant inserts (`xmax = 0`). Persisted via
+5. **Opening hours** are also parsed from the same page HTML: `parseWoltHoursFromHtml` extracts the
+   embedded `"opening_times_schedule":[{day, formatted_times}]` JSON and converts it **mechanically**
+   (no AI — the data is fully structured) to Google's `opening_hours` shape (`periods` with day
+   0=Sun..6=Sat + `weekday_text` Monday-first), so `getIsOpen`/`getHoursString` work unchanged.
+   Cross-midnight ranges (e.g. `11:00–02:00`) set `close.day` to the next day; closed days → "Geschlossen".
+   Written fill-only (`COALESCE`). Only available during a menu scrape, so already-scraped rows
+   (skipped) don't backfill hours without a re-scrape.
+6. **Restaurant photo** now comes **from the Wolt page** (`parseWoltPhotoFromHtml` → `og:image` meta,
+   fallback JSON-LD `"image"`), NOT the discovery feed — `brand_image` is present for only ~23% of
+   venues there, whereas the page hero image exists for ~all of them. URL is on imageproxy.wolt.com
+   (same CDN as meal photos, already R2-cached + proxy-whitelisted). Parsed during the menu scrape,
+   written fill-only (`COALESCE`), pushed to R2. Like hours, it only fills on a scrape (so skipped
+   already-scraped rows don't backfill a photo). **MVP strategy: Wolt is now the primary source for
+   photo + hours + rating/price; Google is fallback.**
+7. **Limit** = stop after N genuinely *new* restaurant inserts (`xmax = 0`). Persisted via
    `PATCH /admin/api/scripts/wolt/config` (`admin_settings.script_wolt_config_limit`).
-6. Restaurant photo is **NOT** taken from Wolt (Google supplies it). Only meal photos come from Wolt.
-   ⚠️ Consequence: a restaurant Google can't photo ends up with **no** restaurant photo (no fallback).
-   A discussed-but-unimplemented option: fall back to Wolt `brand_image` / first meal photo.
+8. **Field gating** now also covers `Opening hours` and `Restaurant photo` checkboxes (in
+   `WOLT_ALL_FIELDS`); empty selection → all on.
 
-### gplace — `runGooglePlaceScript(districtId, enabledFields=[], limit=null)` → **enricher**
+### gplace — `runGooglePlaceScript(districtId, enabledFields=[], limit=null)` → **fallback enricher**
+- **Role (MVP)**: Wolt now fills photo/hours/rating/price, so Google is a **fallback** — run it
+  manually only for restaurants Wolt couldn't fill (e.g. no `brand_image`, no `opening_times`).
 - Selects Wolt restaurants in the district **`WHERE google_enriched_at IS NULL`** (skips already-done
   ones), `ORDER BY id DESC` (newest first), optional limit (pipeline passes the Wolt limit).
 - Per restaurant: **FindPlace** by `name + address` (+ locationbias), then **Place Details**, then

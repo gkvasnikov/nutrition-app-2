@@ -1486,7 +1486,7 @@ const GPLACE_FIELDS_BASE = 'place_id,name,geometry,formatted_address,rating,user
 // Wolt UI checkbox labels (mirror admin/data.js). Name/slug, coordinates, menu items and prices
 // are mandatory (the row/menu can't exist without them); only Address, Rating & reviews,
 // Price range and Menu photos are actually gateable. Empty selection → all of these enabled.
-const WOLT_ALL_FIELDS = ['Venue name & slug', 'Coordinates', 'Address', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos']
+const WOLT_ALL_FIELDS = ['Venue name & slug', 'Coordinates', 'Address', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos', 'Opening hours', 'Restaurant photo']
 
 // ── Google Place Enricher ──────────────────────────────────────────────────────
 // Enriches existing Wolt restaurants with Google data. Google data is PRIORITY:
@@ -1828,7 +1828,7 @@ async function scrapeWoltMenuPlaywright(page, slug) {
     'Accept-Language': 'de-DE,de;q=0.9',
     'Referer': 'https://wolt.com/',
   }
-  let status = null, htmlLen = 0, sawCard = false
+  let status = null, htmlLen = 0, sawCard = false, hours = null, photo = null
   for (let attempt = 1; attempt <= 2; attempt++) {
     let html = ''
     try {
@@ -1840,18 +1840,85 @@ async function scrapeWoltMenuPlaywright(page, slug) {
     } catch { /* network error — retry */ }
 
     if (html) {
+      // Opening hours + restaurant hero photo are both embedded in the page (JSON / meta tags).
+      if (!hours) hours = parseWoltHoursFromHtml(html)
+      if (!photo) photo = parseWoltPhotoFromHtml(html)
       await page.setContent(html, { waitUntil: 'domcontentloaded' }).catch(() => {})
       const items = await extract()
       if (items.length > 0) {
-        return { items, diag: { sawCard, status, htmlLen, recovered: attempt === 2 } }
+        return { items, hours, photo, diag: { sawCard, status, htmlLen, recovered: attempt === 2 } }
       }
     }
     if (attempt === 2) {
-      return { items: [], diag: { sawCard, status, htmlLen, recovered: false } }
+      return { items: [], hours, photo, diag: { sawCard, status, htmlLen, recovered: false } }
     }
     await page.waitForTimeout(1500)  // brief backoff, then one retry
   }
-  return { items: [], diag: { sawCard, status, htmlLen, recovered: false } }
+  return { items: [], hours, photo, diag: { sawCard, status, htmlLen, recovered: false } }
+}
+
+// Restaurant hero photo from the page: brand_image is in the discovery feed for only ~23% of venues,
+// but the venue page exposes a hero image for ~all of them via og:image (and a JSON-LD "image"). Both
+// live on imageproxy.wolt.com (already proxy-whitelisted + R2-cached, same as meal photos).
+function parseWoltPhotoFromHtml(html) {
+  try {
+    const og = html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["'](https:\/\/imageproxy\.wolt\.com\/[^"']+)["']/i)
+      || html.match(/<meta[^>]*content=["'](https:\/\/imageproxy\.wolt\.com\/[^"']+)["'][^>]*property=["']og:image["']/i)
+    if (og) return og[1]
+    const ld = html.match(/"image":\s*\[\s*"(https:\/\/imageproxy\.wolt\.com\/[^"]+)"/)
+    return ld ? ld[1] : null
+  } catch {
+    return null
+  }
+}
+
+// Wolt's restaurant page embeds opening hours as JSON: "opening_times_schedule":[{day,formatted_times}].
+// We convert it (mechanically — the data is fully structured, no AI needed) into the same shape Google
+// Places returns, so getIsOpen (periods) and getHoursString (weekday_text) work unchanged.
+// Google convention: day 0=Sunday..6=Saturday; time as "HHMM"; weekday_text is Monday-first.
+const WOLT_DAY_TO_GOOGLE = { Sonntag: 0, Montag: 1, Dienstag: 2, Mittwoch: 3, Donnerstag: 4, Freitag: 5, Samstag: 6 }
+const WOLT_WEEKDAY_ORDER = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
+function parseWoltHoursFromHtml(html) {
+  try {
+    const idx = html.indexOf('opening_times_schedule')
+    if (idx < 0) return null
+    // The JSON is backslash-escaped inside the page's JS (e.g. \"day\"); unescape a generous window.
+    let seg = html.slice(idx, idx + 4000).replace(/\\"/g, '"').replace(/\\u002F/g, '/')
+    const m = seg.match(/opening_times_schedule":\s*(\[[^\]]*\])/)
+    if (!m) return null
+    const schedule = JSON.parse(m[1])  // [{ day:"Montag", formatted_times:"11:00–23:59" }, ...]
+    if (!Array.isArray(schedule) || schedule.length === 0) return null
+
+    const byDay = new Map()  // German day → formatted_times string
+    for (const s of schedule) if (s && s.day) byDay.set(s.day, (s.formatted_times || '').trim())
+
+    const periods = []
+    const weekday_text = []
+    for (const day of WOLT_WEEKDAY_ORDER) {
+      const gday = WOLT_DAY_TO_GOOGLE[day]
+      const ft = byDay.get(day) || ''
+      // Closed: empty or "Geschlossen"
+      if (!ft || /geschlossen/i.test(ft)) { weekday_text.push(`${day}: Geschlossen`); continue }
+      weekday_text.push(`${day}: ${ft}`)
+      // One or more ranges, comma-separated. Range separator is an en-dash (–) or hyphen.
+      for (const range of ft.split(',')) {
+        const rm = range.trim().match(/(\d{1,2}):(\d{2})\s*[–\-]\s*(\d{1,2}):(\d{2})/)
+        if (!rm) continue
+        const openT = rm[1].padStart(2, '0') + rm[2]
+        const closeT = rm[3].padStart(2, '0') + rm[4]
+        // Close <= open → the range crosses midnight, so close lands on the next day.
+        const crosses = parseInt(closeT) <= parseInt(openT)
+        periods.push({
+          open:  { day: gday, time: openT },
+          close: { day: crosses ? (gday + 1) % 7 : gday, time: closeT },
+        })
+      }
+    }
+    if (periods.length === 0) return null
+    return { periods, weekday_text }
+  } catch {
+    return null
+  }
 }
 
 // ── Wolt scraper ──────────────────────────────────────────────────────────────
@@ -1877,10 +1944,12 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
   // Optional-field gating (mandatory fields are always captured). Empty selection → all on.
   const ef = enabledFields.length > 0 ? enabledFields : WOLT_ALL_FIELDS
   job.enabledFields = ef
-  const wantAddr   = ef.includes('Address')
-  const wantRating = ef.includes('Rating & reviews')
-  const wantPrice  = ef.includes('Price range')
-  const wantPhotos = ef.includes('Menu photos')
+  const wantAddr      = ef.includes('Address')
+  const wantRating    = ef.includes('Rating & reviews')
+  const wantPrice     = ef.includes('Price range')
+  const wantPhotos    = ef.includes('Menu photos')
+  const wantHours     = ef.includes('Opening hours')
+  const wantRestPhoto = ef.includes('Restaurant photo')
   // Scrape diagnostics (persisted via saveScriptStats → admin_settings.script_wolt_last_run)
   job.scrapeEmpty = 0; job.scrapeRecovered = 0; job.emptySamples = []
 
@@ -1950,8 +2019,9 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               : v.address?.street_address
                 ? `${v.address.street_address}, ${v.address.city || 'Berlin'}`
                 : null
-            // Note: restaurant photo is intentionally NOT taken from Wolt — Google enricher
-            // supplies it (priority). Only meal photos come from Wolt (scraped per dish).
+            // Restaurant photo is NOT taken from the discovery feed: brand_image is present for only
+            // ~23% of venues there. The restaurant's own page (fetched during the menu scrape) carries
+            // a hero image (og:image / JSON-LD) for ~all venues, so we extract it there instead.
             // Defensive type coercion — Wolt fields vary in type; DB columns are numeric.
             // rating: numeric column. Wolt uses a 0–10 scale → normalise to 0–5 to match Google.
             let rating = (typeof v.rating?.score === 'number' && isFinite(v.rating.score)) ? v.rating.score : null
@@ -2042,10 +2112,10 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             RETURNING id, (xmax = 0) AS is_new
           `, [
             woltId, v.name, v.lat, v.lng, v.slug,
-            wantAddr   ? (v.address      || null) : null,
-            wantRating ? (v.rating       || null) : null,
-            wantRating ? (v.reviewsCount || null) : null,
-            wantPrice  ? (v.priceLevel   || null) : null,
+            wantAddr      ? (v.address      || null) : null,
+            wantRating    ? (v.rating       || null) : null,
+            wantRating    ? (v.reviewsCount || null) : null,
+            wantPrice     ? (v.priceLevel   || null) : null,
           ])
 
           if (!restRow) { job.done++; continue }
@@ -2067,8 +2137,27 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
             // Scrape menu via Playwright (headless browser, same as original Python script)
             didScrape = true
             console.log(`Wolt: scraping menu for ${v.slug}`)
-            const { items, diag } = await scrapeWoltMenuPlaywright(page, v.slug)
+            const { items, hours, photo, diag } = await scrapeWoltMenuPlaywright(page, v.slug)
             if (diag.recovered) job.scrapeRecovered = (job.scrapeRecovered || 0) + 1
+
+            // Opening hours come from the page JSON (parsed in the scraper), converted to Google's
+            // shape. Fill-only (COALESCE) so we never clobber hours Google already provided.
+            if (wantHours && hours) {
+              await pool.query(
+                `UPDATE restaurants SET opening_hours = COALESCE(opening_hours, $2::jsonb) WHERE id = $1`,
+                [restId, JSON.stringify(hours)]
+              )
+            }
+
+            // Restaurant hero photo from the page. Fill-only (COALESCE) so an existing photo (e.g.
+            // one Google supplied) is kept. Pushed to R2 like meal photos (imageproxy.wolt.com).
+            if (wantRestPhoto && photo) {
+              await pool.query(
+                `UPDATE restaurants SET photo_url = COALESCE(photo_url, $2) WHERE id = $1`,
+                [restId, photo]
+              )
+              cacheImagesToR2([photo]).catch(() => {})
+            }
 
             if (items.length === 0) {
               // Diagnostic: record why the menu came back empty (throttle vs timing)
@@ -2102,7 +2191,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               console.log(`  ${menuAdded} items → ${v.slug}`)
 
               // Push Wolt meal photos to R2 immediately so they're permanently hosted, not
-              // dependent on lazy image-proxy caching. (Restaurant photo comes from Google.)
+              // dependent on lazy image-proxy caching. (Restaurant photo is handled at the upsert.)
               // image_url is always stored (the app needs it for pins); this checkbox only
               // controls whether photos are also pushed to permanent R2 hosting.
               if (wantPhotos) await cacheImagesToR2(items.map(it => it.imageUrl))
