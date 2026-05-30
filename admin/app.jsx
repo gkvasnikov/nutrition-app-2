@@ -1070,13 +1070,22 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
 
   return (
     <div className={`scard ${!enabled ? 'scard--disabled' : ''}`} onClick={onOpen}>
-      {/* Checkbox — left column, uses project's .check/.check--off design */}
-      <label className="scard__check" onClick={e => e.stopPropagation()} title={enabled ? 'Disable script' : 'Enable script'}>
-        <input type="checkbox" checked={enabled} onChange={onToggle} className="checklist__input"/>
+      {/* Checkbox — left column. The whole box is one click target that toggles directly;
+          relying on a hidden <input> + <label> forwarding was unreliable (a click on the visible
+          square didn't always reach the input), so users couldn't uncheck a script. */}
+      <div
+        className="scard__check"
+        role="checkbox"
+        aria-checked={enabled}
+        tabIndex={0}
+        title={enabled ? 'Disable script' : 'Enable script'}
+        onClick={e => { e.stopPropagation(); onToggle(); }}
+        onKeyDown={e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); onToggle(); } }}
+      >
         <span className={`check ${enabled ? '' : 'check--off'}`} style={{ width: 22, height: 22, borderRadius: 7 }}>
           {enabled && <Icon name="check" size={11}/>}
         </span>
-      </label>
+      </div>
 
       {/* Icon */}
       <div className="scard__icon"><Icon name={s.icon} size={18}/></div>
