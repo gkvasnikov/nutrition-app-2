@@ -1036,6 +1036,13 @@ svg { display: block; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* New restaurant pin appearing live during a scrape/Macros run */
+.admin-pin-enter { animation: adminPinEnter 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes adminPinEnter {
+  0%   { opacity: 0; transform: scale(0.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* ScriptCard: disabled state, checkbox, progress bar */
 /* Script card — checkbox + disabled state + progress bar */
 .scard--disabled { opacity: 0.4; pointer-events: none; }

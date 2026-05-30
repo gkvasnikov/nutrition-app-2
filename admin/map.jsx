@@ -171,26 +171,28 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
     tileRef.current.setUrl(TILE_PRESETS[theme].url);
   }, [theme]);
 
-  // Build / rebuild restaurant markers when restaurants list changes
+  // Sync restaurant markers with the list. INCREMENTAL: existing markers are left untouched,
+  // only newly-added restaurants get a marker (with a fade-in), and removed ones are dropped.
+  // This lets pins pop in one-by-one as a live scrape/Macros run marks restaurants ready,
+  // instead of clearing + rebuilding the whole layer (which would flash every pin).
   React.useEffect(() => {
     const map = mapRef.current;
     const group = pinLayerRef.current;
     if (!map || !group || !restaurants?.length) return;
 
-    // Clear old markers
-    group.clearLayers();
-    markersRef.current = {};
-
     const L = window.L;
-    const zoom = map.getZoom();
-    const photoMode = zoom >= PIN_PHOTO_ZOOM;
-    photoModeRef.current = photoMode;
+    const photoMode = photoModeRef.current;
+    const seen = new Set();
+    // Animate only true live additions, not the initial bulk load (would fire ~hundreds at once).
+    const isIncremental = Object.keys(markersRef.current).length > 0;
 
     restaurants.forEach(r => {
       if (!r.lat || !r.lng) return;
+      seen.add(r.id);
+      if (markersRef.current[r.id]) return;  // already on the map → keep as-is (incremental)
 
-      const dotIcon       = makeDotIcon();
-      const photoIcon     = makePhotoIcon(r.photo, r.meals, 32);
+      const dotIcon        = makeDotIcon();
+      const photoIcon      = makePhotoIcon(r.photo, r.meals, 32);
       const photoIconLarge = makePhotoIcon(r.photo, r.meals, 48);
 
       const marker = L.marker([r.lat, r.lng], {
@@ -216,6 +218,20 @@ function useBerlinMap({ districts, restaurants, selectedId, onSelect, onHover, o
 
       marker.addTo(group);
       markersRef.current[r.id] = marker;
+
+      // Fade/scale the new pin in (only for live additions, not the initial bulk load)
+      if (isIncremental) {
+        const el = marker.getElement();
+        if (el) el.classList.add('admin-pin-enter');
+      }
+    });
+
+    // Drop markers for restaurants no longer in the list
+    Object.keys(markersRef.current).forEach(id => {
+      if (!seen.has(id)) {
+        group.removeLayer(markersRef.current[id]);
+        delete markersRef.current[id];
+      }
     });
   }, [restaurants]);
 

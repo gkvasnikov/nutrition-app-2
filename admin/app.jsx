@@ -89,6 +89,7 @@ function App() {
   const [hoverDistrict, setHoverDistrict]     = useState(null);
   const [feedOpen, setFeedOpen]               = useState(true);
   const [toast, setToast]                     = useState(null);
+  const [liveRestaurants, setLiveRestaurants] = useState(RESTAURANTS);
   const hoverTimerRef                         = useRef(null);
 
   const districts = DISTRICTS;
@@ -116,9 +117,31 @@ function App() {
     setDistrictTab(d.status === 'covered' ? 'restaurants' : 'scripts');
   }, [districts]);
 
+  // Live map pins: while a script job (Wolt/Macros/pipeline) is running, poll the uncached admin
+  // restaurants endpoint so newly-ready restaurants pop onto the map without a reload. Idle → slow
+  // heartbeat only. A run flips wasRunning, so the first idle tick after a run does a final refresh.
+  useEffect(() => {
+    let timer = null, stopped = false, wasRunning = false;
+    const poll = async () => {
+      let anyRunning = false;
+      try {
+        const st = await (await fetch('/admin/api/scripts/status')).json();
+        anyRunning = Object.values(st.jobs || {}).some(j => j.running) || !!st.pipeline?.running;
+        if (anyRunning || wasRunning) {
+          const rs = await (await fetch('/admin/api/restaurants')).json();
+          if (Array.isArray(rs) && !stopped) setLiveRestaurants(rs);
+        }
+        wasRunning = anyRunning;
+      } catch { /* ignore transient errors */ }
+      if (!stopped) timer = setTimeout(poll, anyRunning ? 4000 : 10000);
+    };
+    poll();
+    return () => { stopped = true; if (timer) clearTimeout(timer); };
+  }, []);
+
   const { zoomTo, focusPin, zoomIn, zoomOut } = window.useBerlinMap({
     districts,
-    restaurants: RESTAURANTS,
+    restaurants: liveRestaurants,
     selectedId: districtId,
     onSelect: onDistrictSelect,
     onHover: handleHover,
