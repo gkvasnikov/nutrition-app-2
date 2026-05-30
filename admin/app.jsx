@@ -860,8 +860,8 @@ function DistrictHeader({ districtId, setDistrictId, setView, districtTab, setDi
       </div>
       <Search placeholder={`Search restaurants in ${d.name}…`}/>
       <div className="statsrow">
-        <Cell label="Total restaurants" value={(d.restaurants || 0).toLocaleString('en-US')} sub={d.restaurants ? 'partners' : '—'}/>
-        <Cell label="Meals indexed" value={(d.meals || 0).toLocaleString('en-US')} sub={d.meals ? `${Math.round(d.meals/d.restaurants)} avg/rest.` : '—'}/>
+        <Cell label="Restaurants" value={(d.restaurants || 0).toLocaleString('en-US')}/>
+        <Cell label="Meals indexed" value={(d.meals || 0).toLocaleString('en-US')}/>
         <Cell label="Oldest update" value={daysAgoLabel(d.oldestUpdate)} sub={d.oldestUpdate ? 'Wolt / Google' : '—'}/>
       </div>
       <div className="tabs" style={{ marginLeft: -24, marginRight: -24, paddingLeft: 24, paddingRight: 24 }}>
