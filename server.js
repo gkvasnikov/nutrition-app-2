@@ -2651,7 +2651,7 @@ async function fetchAdminDistricts() {
   // Single query — only restaurants that have at least one scraped meal
   const { rows } = await pool.query(`
     SELECT
-      r.id, r.lat, r.lon,
+      r.id, r.lat, r.lon, r.wolt_scraped_at, r.google_enriched_at,
       COUNT(m.id)                                          AS meals,
       COUNT(m.id) FILTER (WHERE m.confidence = 'high')    AS high_conf
     FROM restaurants r
@@ -2675,12 +2675,22 @@ async function fetchAdminDistricts() {
     const inDistrict = rows.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), d.rings))
     const totalMeals = inDistrict.reduce((s, r) => s + parseInt(r.meals), 0)
     const highConf   = inDistrict.reduce((s, r) => s + parseInt(r.high_conf), 0)
+    // Oldest update = earliest Wolt scrape / Google enrich timestamp among this district's restaurants
+    let oldest = null
+    for (const r of inDistrict) {
+      for (const ts of [r.wolt_scraped_at, r.google_enriched_at]) {
+        if (!ts) continue
+        const t = new Date(ts).getTime()
+        if (oldest === null || t < oldest) oldest = t
+      }
+    }
     return {
       id: d.id, name: d.name,
       status:      inDistrict.length > 0 ? 'covered' : 'none',
       restaurants: inDistrict.length,
       meals:       totalMeals,
       coverage:    totalMeals > 0 ? Math.round((highConf / totalMeals) * 100) : 0,
+      oldestUpdate: oldest ? new Date(oldest).toISOString() : null,
       lastSync:    null, cost: null,
     }
   })

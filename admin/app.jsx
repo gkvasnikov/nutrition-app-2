@@ -709,6 +709,15 @@ function R2CachePanel() {
 }
 
 // Converts milliseconds to a human-readable relative string ("2 days", "3 hours", etc.)
+// "N days ago" from an ISO timestamp (district "oldest update" stat)
+function daysAgoLabel(iso) {
+  if (!iso) return '—';
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000);
+  if (days <= 0) return 'today';
+  if (days === 1) return '1 day ago';
+  return `${days} days ago`;
+}
+
 function msToRelative(ms) {
   const abs = Math.abs(ms);
   if (abs < 60_000)              return 'just now';
@@ -802,9 +811,9 @@ function DistrictHeader({ districtId, setDistrictId, setView, districtTab, setDi
       </div>
       <Search placeholder={`Search restaurants in ${d.name}…`}/>
       <div className="statsrow">
-        <Cell label="Restaurants" value={d.restaurants || 0} sub={d.restaurants ? 'partners' : '—'}/>
+        <Cell label="Total restaurants" value={(d.restaurants || 0).toLocaleString('en-US')} sub={d.restaurants ? 'partners' : '—'}/>
         <Cell label="Meals indexed" value={(d.meals || 0).toLocaleString('en-US')} sub={d.meals ? `${Math.round(d.meals/d.restaurants)} avg/rest.` : '—'}/>
-        <Cell label="Coverage" value={`${d.coverage || 0}%`} sub={d.cost ? `${d.cost} spent` : '—'}/>
+        <Cell label="Oldest update" value={daysAgoLabel(d.oldestUpdate)} sub={d.oldestUpdate ? 'Wolt / Google' : '—'}/>
       </div>
       <div className="tabs" style={{ marginLeft: -24, marginRight: -24, paddingLeft: 24, paddingRight: 24 }}>
         <button className={`tab ${districtTab==='restaurants'?'tab--active':''}`} onClick={() => setDistrictTab('restaurants')}>
