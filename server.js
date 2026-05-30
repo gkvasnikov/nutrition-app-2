@@ -1198,7 +1198,16 @@ function msToRelativeServer(ms) {
 // ── Macros + Meal Type script (real Claude-powered implementation) ─────────────
 // reimprove=false (default): estimate items missing macros/meal_times/category.
 // reimprove=true: re-estimate low/medium-confidence items with the richer prompt, OVERWRITING macros.
-async function runMacrosScript(districtId, reimprove = false) {
+// Macros UI checkbox labels (mirror admin/data.js). The 5 macro fields are estimated jointly.
+const MACROS_MACRO_FIELDS = ['Calories', 'Protein', 'Fat', 'Carbs', 'Confidence score']
+const MACROS_ALL_FIELDS = [...MACROS_MACRO_FIELDS, 'Meal type', 'Drink detection']
+
+// enabledFields: UI checkbox labels. The 5 macro fields (Calories/Protein/Fat/Carbs/Confidence
+//   score) are estimated jointly by one Claude call, so they're treated as one group; Meal type
+//   and Drink detection gate independently. Empty selection → all enabled. NOTE: the Claude call
+//   always returns every field (cost is identical regardless of checkboxes); the boxes only
+//   control which columns are written back.
+async function runMacrosScript(districtId, reimprove = false, enabledFields = []) {
   const job = getScriptJob('macros')
   if (job.running) return
 
@@ -1219,12 +1228,29 @@ async function runMacrosScript(districtId, reimprove = false) {
   job.statDrinks   = 0   // items newly tagged as drinks
   job.statMeals    = { breakfast: 0, lunch: 0, dinner: 0, snack: 0, all_day: 0 }
 
+  // Field gating. Empty selection → everything on. Macro columns move as a group.
+  const ef = enabledFields.length > 0 ? enabledFields : MACROS_ALL_FIELDS
+  job.enabledFields = ef
+  const wantMacros   = reimprove || MACROS_MACRO_FIELDS.some(f => ef.includes(f))
+  const wantMealType = ef.includes('Meal type')
+  const wantDrink    = ef.includes('Drink detection')
+  if (!wantMacros && !wantMealType && !wantDrink) {
+    job.running = false; job.finishedAt = new Date().toISOString()
+    console.log('Macros script: no fields enabled — nothing to do')
+    return
+  }
+
   try {
-    // Work set. Default: items missing macros/meal_times/category. Re-improve: low/medium-confidence
-    // items (re-estimated with the richer prompt). `reimprove` is a boolean → safe to interpolate.
+    // Work set. Default: items still missing one of the ENABLED outputs. Re-improve:
+    // low/medium-confidence items (re-estimated). Only NULL-checks for enabled groups are
+    // included, so a disabled column never keeps an item perpetually "incomplete".
+    const nullParts = []
+    if (wantMacros)   nullParts.push('m.calories IS NULL')
+    if (wantMealType) nullParts.push('(m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL)')
+    if (wantDrink)    nullParts.push('m.category IS NULL')
     const workFilter = reimprove
       ? `m.confidence IN ('low','medium')`
-      : `(m.calories IS NULL OR m.meal_times IS NULL OR array_length(m.meal_times, 1) IS NULL OR m.category IS NULL)`
+      : `(${nullParts.join(' OR ')})`
     const { rows: meals } = await pool.query(`
       SELECT m.id, m.name, m.description, m.price, m.calories AS prev_cal, m.category AS prev_cat, r.lat, r.lon
       FROM menu_items m
@@ -1285,23 +1311,32 @@ ${batch.map((r, idx) => `${idx + 1}. "${r.name}"${r.description ? ` — ${String
             : [res.mt]
           const isDrink = res.drink === true || res.drink === 'true'
 
-          // Re-improve OVERWRITES macros + confidence; default fill uses COALESCE (keep existing).
-          // meal_times/category always COALESCE (keep what's there).
-          const setMacros = reimprove
-            ? `calories = $2, protein = $3, fat = $4, carbs = $5, confidence = $6`
-            : `calories = COALESCE(calories, $2), protein = COALESCE(protein, $3), fat = COALESCE(fat, $4), carbs = COALESCE(carbs, $5), confidence = COALESCE(confidence, $6)`
-          const { rowCount } = await pool.query(`
-            UPDATE menu_items SET
-              ${setMacros},
-              meal_times = COALESCE(meal_times, $7),
-              category   = COALESCE(category,   $8)
-            WHERE id = $1
-          `, [meal.id, res.cal, res.pro, res.fat, res.carb, res.conf, mealTimesArr, isDrink ? 'drink' : 'food'])
+          // Build the SET clause from enabled groups only. Re-improve OVERWRITES macros +
+          // confidence; default fill uses COALESCE (keep existing). meal_times/category always
+          // COALESCE (keep what's there). Disabled groups are not written at all.
+          const sets = []
+          const params = [meal.id]
+          let p = 2
+          if (wantMacros) {
+            sets.push(reimprove
+              ? `calories = $${p}, protein = $${p + 1}, fat = $${p + 2}, carbs = $${p + 3}, confidence = $${p + 4}`
+              : `calories = COALESCE(calories, $${p}), protein = COALESCE(protein, $${p + 1}), fat = COALESCE(fat, $${p + 2}), carbs = COALESCE(carbs, $${p + 3}), confidence = COALESCE(confidence, $${p + 4})`)
+            params.push(res.cal, res.pro, res.fat, res.carb, res.conf); p += 5
+          }
+          if (wantMealType) { sets.push(`meal_times = COALESCE(meal_times, $${p})`); params.push(mealTimesArr); p += 1 }
+          if (wantDrink)    { sets.push(`category   = COALESCE(category,   $${p})`); params.push(isDrink ? 'drink' : 'food'); p += 1 }
 
-          // Stats for the completion summary
-          if (res.cal != null && (reimprove || meal.prev_cal == null)) job.statMacros++
-          if (isDrink && meal.prev_cat == null) job.statDrinks++
-          if (job.statMeals[res.mt] != null) job.statMeals[res.mt]++
+          let rowCount = 0
+          if (sets.length > 0) {
+            ;({ rowCount } = await pool.query(
+              `UPDATE menu_items SET ${sets.join(', ')} WHERE id = $1`, params
+            ))
+          }
+
+          // Stats for the completion summary (only count fields we actually wrote)
+          if (wantMacros && res.cal != null && (reimprove || meal.prev_cal == null)) job.statMacros++
+          if (wantDrink && isDrink && meal.prev_cat == null) job.statDrinks++
+          if (wantMealType && job.statMeals[res.mt] != null) job.statMeals[res.mt]++
 
           if (rowCount > 0) job.newItems++
           job.done++
@@ -1448,6 +1483,11 @@ const GPLACE_FIELD_MAP = {
 // Always requested: identity + coordinates + address + rating (always useful, small Atmosphere tier cost)
 const GPLACE_FIELDS_BASE = 'place_id,name,geometry,formatted_address,rating,user_ratings_total'
 
+// Wolt UI checkbox labels (mirror admin/data.js). Name/slug, coordinates, menu items and prices
+// are mandatory (the row/menu can't exist without them); only Address, Rating & reviews,
+// Price range and Menu photos are actually gateable. Empty selection → all of these enabled.
+const WOLT_ALL_FIELDS = ['Venue name & slug', 'Coordinates', 'Address', 'Rating & reviews', 'Price range', 'Menu items', 'Prices', 'Menu photos']
+
 // ── Google Place Enricher ──────────────────────────────────────────────────────
 // Enriches existing Wolt restaurants with Google data. Google data is PRIORITY:
 //   - photo (downloaded → R2 → stored as permanent URL, overwrites Wolt)
@@ -1468,6 +1508,7 @@ async function runGooglePlaceScript(districtId, enabledFields = [], limit = null
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
   job.nearbySearchCalls = 0; job.detailsCalls = 0; job.findPlaceCalls = 0
+  job.skipped = 0
   job.enabledFields = enabledFields.length > 0 ? enabledFields : Object.keys(GPLACE_FIELD_MAP)
 
   // Build Place Details fields string from enabled checkboxes
@@ -1527,6 +1568,24 @@ async function runGooglePlaceScript(districtId, enabledFields = [], limit = null
     if (limit && restaurants.length > limit) restaurants = restaurants.slice(0, limit)
 
     job.total = restaurants.length
+    // Count already-enriched (skipped) restaurants for display
+    try {
+      let skipCountQuery
+      if (districtId && bbox) {
+        const { rows: [sc] } = await pool.query(`
+          SELECT COUNT(*) AS n FROM restaurants
+          WHERE wolt_slug IS NOT NULL AND google_enriched_at IS NOT NULL
+            AND lat IS NOT NULL AND lon IS NOT NULL
+            AND lat BETWEEN $1 AND $2 AND lon BETWEEN $3 AND $4
+        `, [bbox.minLat, bbox.maxLat, bbox.minLng, bbox.maxLng])
+        job.skipped = parseInt(sc.n) || 0
+      } else {
+        const { rows: [sc] } = await pool.query(
+          `SELECT COUNT(*) AS n FROM restaurants WHERE wolt_slug IS NOT NULL AND google_enriched_at IS NOT NULL`
+        )
+        job.skipped = parseInt(sc.n) || 0
+      }
+    } catch (_) {}
     console.log(`Google Place enricher: ${restaurants.length} Wolt restaurants to enrich${districtId ? ` in ${districtId}` : ''}${limit ? ` (limit ${limit})` : ''}`)
     logActivity('info', 'Google Place Enricher started', `${districtLabel(districtId)} · ${restaurants.length} restaurants to enrich`)
 
@@ -1538,27 +1597,54 @@ async function runGooglePlaceScript(districtId, enabledFields = [], limit = null
 
         // ── Step 2: FindPlace by name + address (skip if place_id already known) ──
         if (!placeId) {
-          const query = r.address
-            ? `${r.name}, ${r.address}`
-            : `${r.name}, Berlin`
-          const fpUrl =
-            `https://maps.googleapis.com/maps/api/place/findplacefromtext/json` +
-            `?input=${encodeURIComponent(query)}&inputtype=textquery` +
-            `&locationbias=circle:200@${r.lat},${r.lng}` +
-            `&fields=place_id&key=${apiKey}`
-          const fpRes = await fetch(fpUrl)
-          job.findPlaceCalls++
-          const fpData = await fpRes.json()
+          const findPlace = async (q) => {
+            const fpUrl =
+              `https://maps.googleapis.com/maps/api/place/findplacefromtext/json` +
+              `?input=${encodeURIComponent(q)}&inputtype=textquery` +
+              `&locationbias=circle:200@${r.lat},${r.lng}` +
+              `&fields=place_id&key=${apiKey}`
+            job.findPlaceCalls++
+            return (await fetch(fpUrl)).json()
+          }
 
-          if (fpData.status === 'REQUEST_DENIED') {
-            console.error('Google Places API denied:', fpData.error_message)
+          let fpData = await findPlace(r.address ? `${r.name}, ${r.address}` : `${r.name}, Berlin`)
+
+          // Hard failures (bad key / quota exhausted): STOP the run without stamping anyone, so
+          // the unprocessed rows stay google_enriched_at = NULL and are retried on the next run.
+          // Previously a transient OVER_QUERY_LIMIT was mis-read as "not found" and the restaurant
+          // was permanently stamped → it never got Google hours/photo even though it exists.
+          if (fpData.status === 'REQUEST_DENIED' || fpData.status === 'OVER_QUERY_LIMIT') {
+            console.error(`Google FindPlace ${fpData.status}:`, fpData.error_message || '')
             job.errors++
+            job.lastError = `FindPlace ${fpData.status}${fpData.error_message ? ': ' + fpData.error_message : ''} — stopped, rerun to retry`
             break
+          }
+          // Other transient errors (UNKNOWN_ERROR / INVALID_REQUEST): skip WITHOUT stamping so this
+          // single restaurant is retried next run rather than being written off.
+          if (fpData.status !== 'OK' && fpData.status !== 'ZERO_RESULTS') {
+            console.warn(`FindPlace ${fpData.status} for "${r.name}" — skipping (will retry next run)`)
+            job.errors++; job.done++; continue
           }
 
           placeId = fpData.candidates?.[0]?.place_id || null
+
+          // Fallback: messy/virtual addresses (e.g. "virtuelles Restaurant", missing city) make the
+          // address query return ZERO_RESULTS. Retry once with the name alone (locationbias still
+          // anchors it to the right area).
+          if (!placeId && r.address) {
+            const fb = await findPlace(`${r.name}, Berlin`)
+            if (fb.status === 'REQUEST_DENIED' || fb.status === 'OVER_QUERY_LIMIT') {
+              console.error(`Google FindPlace ${fb.status} (fallback):`, fb.error_message || '')
+              job.errors++
+              job.lastError = `FindPlace ${fb.status} — stopped, rerun to retry`
+              break
+            }
+            placeId = fb.candidates?.[0]?.place_id || null
+          }
+
           if (!placeId) {
-            // Not found on Google — stamp as processed so we don't retry, keep Wolt data
+            // Genuinely not found (ZERO_RESULTS on both queries) — stamp so we don't retry a
+            // hopeless query forever. Keep Wolt data.
             await pool.query(`UPDATE restaurants SET google_enriched_at = NOW() WHERE id = $1`, [r.id])
             job.done++; continue
           }
@@ -1680,6 +1766,20 @@ async function ensureWoltSchema() {
       CREATE UNIQUE INDEX IF NOT EXISTS restaurants_wolt_slug_idx
         ON restaurants (wolt_slug) WHERE wolt_slug IS NOT NULL
     `)
+    // 3. Per-restaurant Wolt scrape timestamp (mirrors google_enriched_at). The scraper
+    //    stamps NOW() whenever it actually scrapes a menu; restaurants never scraped stay NULL.
+    await pool.query(`
+      ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS wolt_scraped_at TIMESTAMPTZ
+    `)
+    // 3a. One-time backfill for restaurants scraped before this column existed. The row's
+    //     updated_at carries DEFAULT now() and is not touched by the upsert's DO UPDATE, so for a
+    //     'wolt:'-discovered row it equals the original insert (≈ first scrape) time — the best
+    //     available proxy. Idempotent: only fills NULLs for rows that already have a Wolt menu.
+    await pool.query(`
+      UPDATE restaurants r SET wolt_scraped_at = updated_at
+      WHERE wolt_slug IS NOT NULL AND wolt_scraped_at IS NULL
+        AND EXISTS (SELECT 1 FROM menu_items m WHERE m.restaurant_id = r.id AND m.source = 'wolt_menu')
+    `)
     // Note: we deliberately do NOT create a unique index on menu_items
     // (restaurant_id, LOWER(name)) — existing imported data contains duplicate
     // dishes, so the index can't be built. The menu insert uses an idempotent
@@ -1763,7 +1863,8 @@ async function scrapeWoltMenuPlaywright(page, slug) {
 // 3. Upserts each venue into restaurants by wolt_slug (COALESCE — Google enricher overwrites later)
 //    Uses xmax = 0 to count genuinely new inserts (for limit tracking)
 // 4. For restaurants without menus: scrapes menu via Playwright (headless Chromium)
-// enabledFields: reserved for future per-field toggling (currently all fields always extracted)
+// enabledFields: UI checkbox labels. Mandatory fields (name/slug, coordinates, menu items,
+//   prices) are always captured; the optional ones below are gated. Empty array → all enabled.
 // limit: stop after this many genuinely new restaurant inserts
 async function runWoltScript(districtId, enabledFields = [], limit = null) {
   const job = getScriptJob('wolt')
@@ -1772,6 +1873,14 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
   job.newItems = 0; job.total = 0; job.startedAt = new Date().toISOString()
   job.finishedAt = null; job.districtId = districtId || null
   job.lastError = null
+  job.skipped = 0; job.newDishes = 0
+  // Optional-field gating (mandatory fields are always captured). Empty selection → all on.
+  const ef = enabledFields.length > 0 ? enabledFields : WOLT_ALL_FIELDS
+  job.enabledFields = ef
+  const wantAddr   = ef.includes('Address')
+  const wantRating = ef.includes('Rating & reviews')
+  const wantPrice  = ef.includes('Price range')
+  const wantPhotos = ef.includes('Menu photos')
   // Scrape diagnostics (persisted via saveScriptStats → admin_settings.script_wolt_last_run)
   job.scrapeEmpty = 0; job.scrapeRecovered = 0; job.emptySamples = []
 
@@ -1927,11 +2036,17 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               lat           = COALESCE(restaurants.lat,           EXCLUDED.lat),
               lon           = COALESCE(restaurants.lon,           EXCLUDED.lon),
               address       = COALESCE(restaurants.address,       EXCLUDED.address),
-              rating        = EXCLUDED.rating,
-              reviews_count = EXCLUDED.reviews_count,
+              rating        = COALESCE(EXCLUDED.rating,        restaurants.rating),
+              reviews_count = COALESCE(EXCLUDED.reviews_count, restaurants.reviews_count),
               price_level   = COALESCE(restaurants.price_level,   EXCLUDED.price_level)
             RETURNING id, (xmax = 0) AS is_new
-          `, [woltId, v.name, v.lat, v.lng, v.slug, v.address || null, v.rating || null, v.reviewsCount || null, v.priceLevel || null])
+          `, [
+            woltId, v.name, v.lat, v.lng, v.slug,
+            wantAddr   ? (v.address      || null) : null,
+            wantRating ? (v.rating       || null) : null,
+            wantRating ? (v.reviewsCount || null) : null,
+            wantPrice  ? (v.priceLevel   || null) : null,
+          ])
 
           if (!restRow) { job.done++; continue }
           const restId = restRow.id
@@ -1946,6 +2061,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
           )
           let didScrape = false
           if (parseInt(countRow.n) > 0) {
+            job.skipped++
             job.done++
           } else {
             // Scrape menu via Playwright (headless browser, same as original Python script)
@@ -1977,7 +2093,7 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
                       WHERE restaurant_id = $1 AND LOWER(name) = LOWER($2) AND source = 'wolt_menu'
                     )
                   `, [restId, item.name, item.description || null, item.price, item.imageUrl || null])
-                  if (rowCount > 0) menuAdded++
+                  if (rowCount > 0) { menuAdded++; job.newDishes++ }
                 } catch (e) {
                   // Surface the first menu-insert error instead of swallowing it silently
                   if (!job.lastError) job.lastError = `Menu insert (${v.slug} / "${item.name}"): ${e.message}`
@@ -1985,10 +2101,16 @@ async function runWoltScript(districtId, enabledFields = [], limit = null) {
               }
               console.log(`  ${menuAdded} items → ${v.slug}`)
 
-              // Push Wolt meal photos to R2 immediately so they're permanently hosted,
-              // not dependent on lazy image-proxy caching. (Restaurant photo comes from Google.)
-              await cacheImagesToR2(items.map(it => it.imageUrl))
+              // Push Wolt meal photos to R2 immediately so they're permanently hosted, not
+              // dependent on lazy image-proxy caching. (Restaurant photo comes from Google.)
+              // image_url is always stored (the app needs it for pins); this checkbox only
+              // controls whether photos are also pushed to permanent R2 hosting.
+              if (wantPhotos) await cacheImagesToR2(items.map(it => it.imageUrl))
             }
+            // Stamp the per-restaurant scrape time on every actual scrape attempt (mirrors
+            // google_enriched_at). Empty scrapes are still stamped — but, unlike Google, the
+            // re-scrape skip is keyed off menu presence, so menu-less rows are retried regardless.
+            await pool.query(`UPDATE restaurants SET wolt_scraped_at = NOW() WHERE id = $1`, [restId])
             job.done++
           }
 
@@ -2130,7 +2252,7 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
 
   if (!pool) return res.status(503).json({ error: 'Database not configured' })
   if (id === 'macros') {
-    runMacrosScript(req.body?.districtId || null, !!req.body?.reimprove)
+    runMacrosScript(req.body?.districtId || null, !!req.body?.reimprove, req.body?.fields || [])
   } else if (id === 'dedup') {
     runDedupScript(req.body?.districtId || null)
   } else if (id === 'gplace') {
@@ -2236,6 +2358,88 @@ app.patch('/admin/api/scripts/wolt/config', requireAdminAuth, async (req, res) =
     }
   }
   res.json({ configLimit: job.configLimit })
+})
+
+// Discovery-only count — runs the Wolt grid phase without scraping or DB writes.
+// Returns how many venues Wolt knows about, how many are already scraped, and how many are new.
+app.get('/admin/api/scripts/wolt/count', requireAdminAuth, async (req, res) => {
+  const districtId = req.query.districtId || null
+
+  try {
+    // Build district polygon + bbox (identical to runWoltScript)
+    let rings = null
+    let bbox = { minLat: 52.338, maxLat: 52.675, minLng: 13.088, maxLng: 13.761 }
+    if (districtId) {
+      const polygons = await loadBerlinPolygons()
+      if (polygons?.has(districtId)) {
+        rings = polygons.get(districtId)
+        let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
+        for (const ring of rings) for (const [lat, lng] of ring) {
+          if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat
+          if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng
+        }
+        bbox = { minLat, maxLat, minLng, maxLng }
+      }
+    }
+
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+      'Accept': 'application/json',
+      'Accept-Language': 'de-DE,de;q=0.9',
+      'Referer': 'https://wolt.com/',
+    }
+    const cLat = (bbox.minLat + bbox.maxLat) / 2
+    const cLng = (bbox.minLng + bbox.maxLng) / 2
+    const STEP = 2500
+    const LAT_STEP = STEP / 111_000
+    const LNG_STEP = STEP / (111_000 * Math.cos(cLat * Math.PI / 180))
+    const queryPoints = []
+    for (let lat = bbox.minLat; lat <= bbox.maxLat; lat += LAT_STEP)
+      for (let lng = bbox.minLng; lng <= bbox.maxLng; lng += LNG_STEP)
+        if (!rings || pointInDistrict(lat, lng, rings)) queryPoints.push({ lat, lng })
+    queryPoints.push({ lat: cLat, lng: cLng })  // centroid safety net
+
+    // Discovery — collect slugs only (no DB writes)
+    const venuesMap = new Map()
+    for (const pt of queryPoints) {
+      try {
+        const url = `https://consumer-api.wolt.com/v1/pages/restaurants?lat=${pt.lat}&lon=${pt.lng}`
+        const resW = await fetch(url, { headers })
+        if (!resW.ok) { await new Promise(r => setTimeout(r, 300)); continue }
+        const data = await resW.json()
+        for (const section of (data.sections || [])) {
+          for (const item of (section.items || [])) {
+            const v    = item.venue || item
+            const slug = v.slug || v.wolt_slug
+            if (!slug || venuesMap.has(slug)) continue
+            const vLat = Array.isArray(v.location) ? v.location[1] : (v.location?.coordinates?.[1] ?? v.lat)
+            const vLng = Array.isArray(v.location) ? v.location[0] : (v.location?.coordinates?.[0] ?? v.lon)
+            if (rings && vLat && vLng && !pointInDistrict(parseFloat(vLat), parseFloat(vLng), rings)) continue
+            venuesMap.set(slug, true)
+          }
+        }
+      } catch { /* ignore per-point errors */ }
+      await new Promise(r => setTimeout(r, 300))
+    }
+
+    const discovered = venuesMap.size
+
+    // Compare against already-fully-scraped slugs in DB
+    const { rows: completeRows } = await pool.query(`
+      SELECT DISTINCT r.wolt_slug AS slug
+      FROM restaurants r
+      JOIN menu_items m ON m.restaurant_id = r.id AND m.source = 'wolt_menu'
+      WHERE r.wolt_slug IS NOT NULL
+    `)
+    const completeSlugs = new Set(completeRows.map(r => r.slug))
+    const alreadyScraped = [...venuesMap.keys()].filter(s => completeSlugs.has(s)).length
+    const toScrape = discovered - alreadyScraped
+
+    res.json({ discovered, alreadyScraped, toScrape, queryPoints: queryPoints.length })
+  } catch (e) {
+    console.error('Wolt count error:', e.message)
+    res.status(500).json({ error: e.message })
+  }
 })
 
 app.patch('/admin/api/scripts/:id/enabled', requireAdminAuth, async (req, res) => {
@@ -2396,7 +2600,7 @@ async function fetchAdminRestaurants() {
   const { rows } = await pool.query(`
     SELECT
       r.id, r.name, r.address, r.rating, r.reviews_count,
-      r.price_level, r.opening_hours, r.wolt_slug,
+      r.price_level, r.opening_hours, r.wolt_slug, r.wolt_scraped_at,
       r.lat, r.lon, r.photo_url,
       COUNT(m.id) AS meals,
       AVG(CASE m.confidence WHEN 'high' THEN 1.0 WHEN 'medium' THEN 0.75 ELSE 0.5 END) AS avg_confidence
@@ -2451,6 +2655,7 @@ async function fetchAdminRestaurants() {
       address:    r.address || '',
       hours:      getHoursString(r.opening_hours) || '—',
       updated:    null,
+      addedAt:    r.wolt_scraped_at ? new Date(r.wolt_scraped_at).toISOString() : null,
       woltSlug:   r.wolt_slug || null,
       lat,
       lng,

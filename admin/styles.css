@@ -37,9 +37,9 @@
   --color-text-3:  #9a9a9a;
 
   /* Semantic & accent */
-  --color-accent:        #52eb00;   /* bright lime — covered districts */
-  --color-accent-tint:   rgba(82, 235, 0, 0.10);
-  --color-accent-soft:   rgba(82, 235, 0, 0.18);
+  --color-accent:        #6A56FD;   /* purple accent */
+  --color-accent-tint:   rgba(106, 86, 253, 0.10);
+  --color-accent-soft:   rgba(106, 86, 253, 0.18);
 
   --color-semantic-green:  #f3fdf5;
   --color-semantic-yellow: #fefbed;
@@ -271,6 +271,31 @@ svg { display: block; }
 }
 .section__count { font-size: var(--fs-secondary); color: var(--color-text-2); font-weight: 500; }
 
+/* Sort dropdown (restaurant list) */
+.sortwrap { position: relative; }
+.sortmenu__backdrop {
+  position: fixed; inset: 0; z-index: 40;
+}
+.sortmenu {
+  position: absolute; top: calc(100% + 4px); right: 0; z-index: 41;
+  min-width: 168px; padding: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-stroke);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.sortmenu__item {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  width: 100%; padding: 7px 10px;
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; color: var(--color-text); text-align: left;
+  border-radius: var(--radius-sm);
+}
+.sortmenu__item:hover { background: var(--color-surface-3); }
+.sortmenu__item--active { font-weight: 600; }
+.sortmenu__check { color: var(--color-text); font-size: 12px; }
+
 /* District list rows */
 .dlist { display: flex; flex-direction: column; }
 .drow {
@@ -410,7 +435,7 @@ svg { display: block; }
 .btn--sm { height: 32px; padding: 0 12px; font-size: var(--fs-secondary); }
 .btn--lg { height: 50px; padding: 0 20px; font-size: var(--fs-title); font-weight: 700; }
 .btn--block { width: 100%; }
-.btn--accent { background: var(--color-accent); color: var(--color-text); }
+.btn--accent { background: var(--color-accent); color: white; }
 .btn--accent:hover { filter: brightness(0.96); }
 
 /* Pill chips — matches Figma Pill/Tab (default: 1px stroke; selected: 1px text) */
@@ -623,9 +648,9 @@ svg { display: block; }
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(82, 235, 0, 0.5); }
-  70% { box-shadow: 0 0 0 8px rgba(82, 235, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(82, 235, 0, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(106, 86, 253, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(106, 86, 253, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(106, 86, 253, 0); }
 }
 .feed__list {
   overflow-y: auto;
@@ -875,7 +900,7 @@ svg { display: block; }
   width: 20px; height: 20px;
   border-radius: 6px;
   background: var(--color-accent);
-  color: var(--color-text);
+  color: white;
   display: grid; place-items: center;
   flex-shrink: 0;
   transition: background 120ms ease, border-color 120ms ease;

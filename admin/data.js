@@ -24,10 +24,10 @@ const SCRIPTS = [
     lastRun: '2h ago', duration: '23m 12s', status: 'success', cost: '$28',
     coverage: 96, errors: 0,
     includes: ['Calories', 'Protein', 'Fat', 'Carbs', 'Confidence score', 'Meal type', 'Drink detection'] },
-  { id: 'dedup', name: 'Detect Duplicate Meals', icon: 'copy', desc: 'Group near-identical dishes across menus.',
+  { id: 'dedup', name: 'Detect Duplicate Meals', icon: 'copy', desc: 'Remove exact-duplicate dishes (same name) within a single restaurant, keeping the highest-confidence copy. Does not match across restaurants or fuzzy names.',
     lastRun: '1d ago', duration: '1m 56s', status: 'success', cost: '$0',
     coverage: 100, errors: 0,
-    includes: ['Duplicate removal'] },
+    includes: ['Duplicate removal (same restaurant, exact name)'] },
 ];
 
 const ACTIVITY = [

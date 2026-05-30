@@ -3,8 +3,71 @@
    Detail panels: restaurant | script (overlay over the workspace)
 */
 
-const { useState, useEffect, useMemo, useRef, useCallback } = React;
+const { useState, useEffect, useMemo, useRef, useCallback, useReducer } = React;
 const { DISTRICTS, RESTAURANTS, MEALS_SAMPLE, SCRIPTS, ACTIVITY, COST_BREAKDOWN } = window.AdminData;
+
+// Formats elapsed seconds as "mm:ss" or "Xh Ym Zs"
+function formatElapsed(secs) {
+  if (secs < 3600) {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  return `${h}h ${m}m`;
+}
+
+// Hook: returns elapsed seconds since startedAt while running=true
+function useElapsedTime(startedAt, running) {
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    if (!running || !startedAt) { setElapsed(0); return; }
+    const start = new Date(startedAt).getTime();
+    const tick = () => setElapsed(Math.floor((Date.now() - start) / 1000));
+    tick();
+    const iv = setInterval(tick, 1000);
+    return () => clearInterval(iv);
+  }, [running, startedAt]);
+  return elapsed;
+}
+
+// localStorage helpers for accumulated spend
+function getAccumulatedSpend(scriptId) {
+  try { return parseFloat(localStorage.getItem(`admin_spent_${scriptId}`)) || 0; } catch { return 0; }
+}
+function addAccumulatedSpend(scriptId, amount) {
+  try {
+    const prev = getAccumulatedSpend(scriptId);
+    localStorage.setItem(`admin_spent_${scriptId}`, (prev + amount).toFixed(4));
+  } catch {}
+}
+
+// Per-district job snapshot — saved when a run finishes so each district
+// can show its own last-run stats even after switching to a different district.
+function saveDistrictJobStats(scriptId, districtId, job) {
+  try {
+    const key = `admin_job_${scriptId}_${districtId || 'berlin'}`;
+    localStorage.setItem(key, JSON.stringify({
+      done: job.done, total: job.total, newItems: job.newItems,
+      errors: job.errors, finishedAt: job.finishedAt, startedAt: job.startedAt,
+      // wolt
+      newDishes: job.newDishes, skipped: job.skipped,
+      // gplace
+      findPlaceCalls: job.findPlaceCalls, detailsCalls: job.detailsCalls,
+      enabledFields: job.enabledFields,
+      // macros
+      inputTokens: job.inputTokens, outputTokens: job.outputTokens,
+      statMacros: job.statMacros, statDrinks: job.statDrinks, statMeals: job.statMeals,
+    }));
+  } catch {}
+}
+function loadDistrictJobStats(scriptId, districtId) {
+  try {
+    const raw = localStorage.getItem(`admin_job_${scriptId}_${districtId || 'berlin'}`);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "green",
@@ -48,6 +111,7 @@ function App() {
     if (!d) return;
     setDistrictId(id);
     setView('district');
+    setScriptId(null);   // close script panel so each district starts fresh
     // Default to Restaurants tab for covered districts, Scripts for empty/active
     setDistrictTab(d.status === 'covered' ? 'restaurants' : 'scripts');
   }, [districts]);
@@ -337,18 +401,32 @@ function AllRestaurants({ onOpen, selectedId }) {
 
 /* Shared filterable restaurant list — used by Berlin overview "All Restaurants"
    tab AND district drill-down Restaurants tab */
+const SORT_LABELS = { recent: 'Recently added', alpha: 'Alphabetical' };
+
 function RestaurantList({ title, restaurants, onOpen, selectedId }) {
   const [filter, setFilter] = useState('all');
+  const [sort, setSort] = useState('recent');   // 'recent' | 'alpha'
+  const [sortOpen, setSortOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(30);
   const sentinelRef = useRef(null);
 
   const filtered = useMemo(() => {
-    if (filter === 'partners') return restaurants.filter(x => x.partner);
-    return restaurants;
-  }, [filter, restaurants]);
+    const list = (filter === 'partners' ? restaurants.filter(x => x.partner) : restaurants).slice();
+    if (sort === 'alpha') {
+      list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    } else {
+      // Recently added: newest wolt_scraped_at first; rows without a timestamp sink to the bottom.
+      list.sort((a, b) => {
+        const ta = a.addedAt ? Date.parse(a.addedAt) : -Infinity;
+        const tb = b.addedAt ? Date.parse(b.addedAt) : -Infinity;
+        return tb - ta;
+      });
+    }
+    return list;
+  }, [filter, sort, restaurants]);
 
-  // Reset visible count when filter or dataset changes
-  useEffect(() => { setVisibleCount(30); }, [filter, restaurants]);
+  // Reset visible count when filter, sort or dataset changes
+  useEffect(() => { setVisibleCount(30); }, [filter, sort, restaurants]);
 
   // IntersectionObserver — auto-loads next 30 when sentinel scrolls into view
   useEffect(() => {
@@ -375,9 +453,27 @@ function RestaurantList({ title, restaurants, onOpen, selectedId }) {
       <div className="section">
         <div className="section__head">
           <span className="section__title">{title}</span>
-          <button className="btn btn--ghost" style={{ height: 24, padding: '0 6px', fontSize: 12 }}>
-            <Icon name="filter" size={12}/>Sort
-          </button>
+          <div className="sortwrap">
+            <button className="btn btn--ghost" style={{ height: 24, padding: '0 6px', fontSize: 12 }} onClick={() => setSortOpen(o => !o)}>
+              <Icon name="filter" size={12}/>{SORT_LABELS[sort]}
+            </button>
+            {sortOpen && (
+              <>
+                <div className="sortmenu__backdrop" onClick={() => setSortOpen(false)}/>
+                <div className="sortmenu">
+                  {Object.entries(SORT_LABELS).map(([key, label]) => (
+                    <button
+                      key={key}
+                      className={`sortmenu__item ${sort === key ? 'sortmenu__item--active' : ''}`}
+                      onClick={() => { setSort(key); setSortOpen(false); }}
+                    >
+                      {label}{sort === key && <span className="sortmenu__check">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {visible.map(r => <RestaurantRow key={r.id} r={r} onOpen={onOpen} active={r.id === selectedId}/>)}
@@ -704,7 +800,7 @@ function DistrictBody({ districtId, districtTab, setDistrictTab, onRestaurantOpe
           ? <DistrictRestaurants d={d} onOpen={onRestaurantOpen} selectedId={selectedRestaurantId}/>
           : <RestaurantsEmpty d={d} onJumpToScripts={() => setDistrictTab('scripts')}/>
       )}
-      {districtTab === 'scripts' && <DistrictScripts d={d} onOpen={onScriptOpen} showToast={showToast}/>}
+      {districtTab === 'scripts' && <DistrictScripts key={d.id} d={d} onOpen={onScriptOpen} showToast={showToast}/>}
       {districtTab === 'stats' && (
         d.meals > 0
           ? <DistrictMiniStats d={d}/>
@@ -962,11 +1058,12 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
     idle:    { v: 'default', label: 'never run' },
   };
   const st = statusMap[s.status] || statusMap.success;
+  const elapsed = useElapsedTime(job?.startedAt, job?.running);
 
   // Derive meta text: show live status when running, or format finishedAt
   let metaTime = s.lastRun;
   if (job?.running) {
-    metaTime = 'running…';
+    metaTime = `running… ${formatElapsed(elapsed)}`;
   } else if (job?.finishedAt) {
     metaTime = 'just now';
   }
@@ -999,7 +1096,9 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
             </div>
             <div className="scard__progress__label">
               {job.done.toLocaleString()} / {job.total.toLocaleString()}
-              {job.newItems > 0 && <span style={{ color: 'var(--color-accent)' }}> · {job.newItems} updated</span>}
+              {s.id === 'wolt' && job.newDishes > 0 && <span style={{ color: 'var(--color-accent)' }}> · {job.newDishes} dishes</span>}
+              {s.id === 'wolt' && job.skipped > 0 && <span> · {job.skipped} skipped</span>}
+              {s.id !== 'wolt' && job.newItems > 0 && <span style={{ color: 'var(--color-accent)' }}> · {job.newItems} updated</span>}
               {job.errors > 0 && <span style={{ color: '#e53' }}> · {job.errors} errors</span>}
             </div>
           </div>
@@ -1316,6 +1415,8 @@ const GPLACE_FIELD_TIER = {
   'Google photo → R2':       'basic',      // photos (Basic tier)
 };
 const GPLACE_COST = { FIND_PLACE: 0.017, BASE: 0.017, CONTACT: 0.003, ATMOSPHERE: 0.005 };
+const HAIKU_IN  = 0.0000008;  // $ per token (claude-haiku-4-5)
+const HAIKU_OUT = 0.000004;
 
 function calcDetailCost(fields) {
   // Base always requests rating (Atmosphere tier) + formatted_address (Basic tier)
@@ -1336,6 +1437,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   // Real job state from server polling
   const [job, setJob] = useState(null);
   const pollRef = useRef(null);
+  const prevJobRef = useRef(null);
 
   const fetchJob = useCallback(() => {
     if (!data?.id) return;
@@ -1344,6 +1446,17 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       .then(d => setJob(d.jobs?.[data.id] || null))
       .catch(() => {});
   }, [data?.id]);
+
+  // Reset job immediately when switching scripts — prevents stale job
+  // from a different script (e.g. Wolt's progress bar) briefly showing
+  useEffect(() => {
+    setJob(null);
+  }, [scriptId]);
+
+  // Reset job when district changes so stats don't bleed between districts
+  useEffect(() => {
+    if (open) setJob(null);
+  }, [district?.id]);
 
   useEffect(() => {
     if (!open) return;
@@ -1360,8 +1473,42 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
     return () => clearInterval(pollRef.current);
   }, [job?.running, fetchJob]);
 
+  // When a job finishes: save per-district snapshot + accumulate spend
+  useEffect(() => {
+    const prev = prevJobRef.current;
+    if (prev?.running && !job?.running && data?.id) {
+      // Save per-district snapshot so each district can show its own last-run stats
+      saveDistrictJobStats(data.id, job?.districtId, job);
+
+      // gplace: add actual cost
+      if (data.id === 'gplace') {
+        const fc = job?.findPlaceCalls || 0;
+        const dc = job?.detailsCalls || 0;
+        const efNames = job?.enabledFields || [];
+        const cost = fc * GPLACE_COST.FIND_PLACE + dc * calcDetailCost(efNames);
+        if (cost > 0) addAccumulatedSpend('gplace', cost);
+      }
+      // macros: add token cost
+      if (data.id === 'macros') {
+        const cost = ((job?.inputTokens || 0) * HAIKU_IN) + ((job?.outputTokens || 0) * HAIKU_OUT);
+        if (cost > 0) addAccumulatedSpend('macros', cost);
+      }
+    }
+    prevJobRef.current = job;
+  }, [job, data?.id]);
+
   const isRunning = !!job?.running;
   const progress = job?.total > 0 ? Math.round(job.done / job.total * 100) : 0;
+  const elapsed = useElapsedTime(job?.startedAt, isRunning);
+
+  // Which job snapshot to display in the stats grid:
+  // - If currently running → always show live job (regardless of district)
+  // - If last run was for this district → show it
+  // - Otherwise → load last saved snapshot for this district from localStorage
+  const jobIsForThisDistrict = !job?.districtId || !district?.id || job.districtId === district.id;
+  const displayJob = isRunning || jobIsForThisDistrict
+    ? job
+    : loadDistrictJobStats(data?.id, district?.id);
 
   // Per-script interactive checklist state
   const [checked, setChecked] = useState({});
@@ -1380,6 +1527,14 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   // Limit field (wolt only — persisted to server)
   const [limitInput, setLimitInput] = useState('');
   const [reimprove, setReimprove] = useState(false);  // macros: re-estimate low/medium
+
+  // Wolt restaurant count (discovery dry-run)
+  const [woltCount, setWoltCount] = useState(null);   // { discovered, alreadyScraped, toScrape, queryPoints }
+  const [counting, setCounting] = useState(false);
+  const [countError, setCountError] = useState(null);
+
+  // Clear count result when district changes
+  useEffect(() => { setWoltCount(null); setCountError(null); }, [district?.id]);
 
   // Sync wolt limitInput from job.configLimit when script opens or configLimit changes
   useEffect(() => {
@@ -1436,9 +1591,27 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
       .catch(() => {});
   };
 
+  const countWolt = () => {
+    if (counting || isRunning) return;
+    setCounting(true);
+    setWoltCount(null);
+    setCountError(null);
+    const qs = district?.id ? `?districtId=${district.id}` : '';
+    fetch(`/admin/api/scripts/wolt/count${qs}`)
+      .then(r => r.json())
+      .then(res => {
+        if (res.error) { setCountError(res.error); }
+        else if (res.discovered != null) { setWoltCount(res); }
+        else { setCountError('Unexpected response from server'); }
+      })
+      .catch(e => setCountError(e.message || 'Network error'))
+      .finally(() => setCounting(false));
+  };
+
   if (!data) return <div className="detail detail--narrow"></div>;
 
-  const lastRunRel = job?.finishedAt ? msToRelative(Date.now() - new Date(job.finishedAt).getTime()) : null;
+  // lastRun derived from displayJob so it reflects the current district's last run
+  const lastRunRel = displayJob?.finishedAt ? msToRelative(Date.now() - new Date(displayJob.finishedAt).getTime()) : null;
   const lastRun = lastRunRel
     ? (lastRunRel === 'just now' ? 'just now' : lastRunRel + ' ago')
     : job?.startedAt && !job?.finishedAt
@@ -1449,6 +1622,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   const isGplace  = data.id === 'gplace';
   const isWolt    = data.id === 'wolt';
   const isMacros  = data.id === 'macros';
+  const gplaceAccumSpend = isGplace ? getAccumulatedSpend('gplace') : 0;
+  const macrosAccumSpend = isMacros ? getAccumulatedSpend('macros') : 0;
   const enabledFieldNames = items.filter((_, i) => itemsChecked[i]);
   const detailCostPer = isGplace ? calcDetailCost(enabledFieldNames) : 0;
   // Per 100 enrichments: FindPlace + Details (both called per restaurant)
@@ -1457,16 +1632,14 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
     ? enabledFieldNames.some(f => GPLACE_FIELD_TIER[f] === 'contact') ? 'Contact tier'
       : 'Basic tier'
     : null;
-  // Actual cost after gplace run
-  const actualCost = isGplace && (job?.detailsCalls > 0 || job?.findPlaceCalls > 0)
-    ? `~$${((job.findPlaceCalls || 0) * GPLACE_COST.FIND_PLACE + (job.detailsCalls || 0) * calcDetailCost(job.enabledFields || enabledFieldNames)).toFixed(2)}`
+  // Actual cost after gplace run (use displayJob so it reflects the current district)
+  const actualCost = isGplace && (displayJob?.detailsCalls > 0 || displayJob?.findPlaceCalls > 0)
+    ? `~$${((displayJob.findPlaceCalls || 0) * GPLACE_COST.FIND_PLACE + (displayJob.detailsCalls || 0) * calcDetailCost(displayJob.enabledFields || enabledFieldNames)).toFixed(2)}`
     : null;
 
   // Macros cost (Claude Haiku 4.5: $0.80/MTok input, $4.00/MTok output)
-  const HAIKU_IN  = 0.0000008;  // $ per token
-  const HAIKU_OUT = 0.000004;
-  const macrosActualCost = isMacros && (job?.inputTokens > 0 || job?.outputTokens > 0)
-    ? `$${((job.inputTokens * HAIKU_IN) + (job.outputTokens * HAIKU_OUT)).toFixed(3)}`
+  const macrosActualCost = isMacros && (displayJob?.inputTokens > 0 || displayJob?.outputTokens > 0)
+    ? `$${((displayJob.inputTokens * HAIKU_IN) + (displayJob.outputTokens * HAIKU_OUT)).toFixed(3)}`
     : null;
   // ~$0.11 per 1000 meals (estimate: 9k input + 25k output tokens per 1000 meals)
   const macrosEstPer1k = `~$${(9000 * HAIKU_IN + 25000 * HAIKU_OUT).toFixed(2)}`;
@@ -1489,8 +1662,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             <div className="sdetail__name">{data.name}</div>
             <div className="sdetail__desc">{data.desc}</div>
             <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
-              <Pill variant={isRunning ? 'warn' : job?.errors > 0 ? 'danger' : job?.done > 0 ? 'success' : 'default'} dot>
-                {isRunning ? 'running' : job?.errors > 0 ? 'errors' : job?.done > 0 ? 'healthy' : 'idle'}
+              <Pill variant={isRunning ? 'warn' : displayJob?.errors > 0 ? 'danger' : displayJob?.done > 0 ? 'success' : 'default'} dot>
+                {isRunning ? 'running' : displayJob?.errors > 0 ? 'errors' : displayJob?.done > 0 ? 'healthy' : 'idle'}
               </Pill>
               <Pill>scope: {district?.name || 'Berlin'}</Pill>
             </div>
@@ -1504,27 +1677,52 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
           </div>
           <div className="sdetail__cell">
             <span className="sdetail__cell__l">Processed</span>
-            <span className="sdetail__cell__v num">{job ? `${job.done} / ${job.total}` : '—'}</span>
+            <span className="sdetail__cell__v num">
+              {displayJob
+                ? `${displayJob.done} / ${displayJob.total}`
+                : (isWolt && woltCount)
+                  ? <span>0 / <span style={{ color: 'var(--color-accent)' }}>{woltCount.toScrape}</span></span>
+                  : '—'}
+            </span>
           </div>
           <div className="sdetail__cell">
             <span className="sdetail__cell__l">{data.id === 'dedup' ? 'Removed' : 'Added'}</span>
-            <span className="sdetail__cell__v num">{job?.newItems ?? '—'}</span>
+            <span className="sdetail__cell__v num">{displayJob?.newItems ?? '—'}</span>
           </div>
           <div className="sdetail__cell">
             <span className="sdetail__cell__l">{actualCost ? 'Actual cost' : 'Errors'}</span>
-            <span className="sdetail__cell__v num" style={!actualCost && job?.errors > 0 ? { color: 'var(--color-error, #e53)' } : {}}>
-              {actualCost ?? (job?.errors ?? '—')}
+            <span className="sdetail__cell__v num" style={!actualCost && displayJob?.errors > 0 ? { color: 'var(--color-error, #e53)' } : {}}>
+              {actualCost ?? (displayJob?.errors ?? '—')}
             </span>
           </div>
         </div>
 
         {isRunning && (
           <div style={{ marginBottom: 16 }}>
-            <div className="progress"><div className="progress__fill" style={{ width: `${progress}%` }}/></div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginTop: 4, color: 'var(--color-text-2)' }}>
-              <span>Running… {job.done} / {job.total}</span>
-              <span className="num">{progress}%</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+              <span style={{ fontSize: 12, color: 'var(--color-text-2)', fontWeight: 500 }}>
+                Running… {job.done} / {job.total}
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span className="num" style={{ fontSize: 12, color: 'var(--color-text-3)' }}>
+                  ⏱ {formatElapsed(elapsed)}
+                </span>
+                <span className="num" style={{ fontSize: 12, color: 'var(--color-text-2)', fontWeight: 600 }}>{progress}%</span>
+              </span>
             </div>
+            <div className="progress"><div className="progress__fill" style={{ width: `${progress}%` }}/></div>
+            {/* Per-script sub-stats below progress bar */}
+            {isWolt && (job.newDishes > 0 || job.skipped > 0) && (
+              <div style={{ marginTop: 5, fontSize: 11, color: 'var(--color-text-3)', display: 'flex', gap: 10 }}>
+                {job.newDishes > 0 && <span><span className="num" style={{ color: 'var(--color-accent)', fontWeight: 600 }}>{job.newDishes}</span> dishes scraped</span>}
+                {job.skipped > 0 && <span><span className="num">{job.skipped}</span> restaurants skipped (already scraped)</span>}
+              </div>
+            )}
+            {isGplace && job.skipped > 0 && (
+              <div style={{ marginTop: 5, fontSize: 11, color: 'var(--color-text-3)' }}>
+                <span className="num">{job.skipped}</span> restaurants skipped — already enriched
+              </div>
+            )}
           </div>
         )}
 
@@ -1534,16 +1732,16 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
           </div>
         )}
 
-        {isMacros && job?.statMeals && (job.statMacros > 0 || job.statDrinks > 0 || Object.values(job.statMeals).some(v => v > 0)) && (
+        {isMacros && displayJob?.statMeals && (displayJob.statMacros > 0 || displayJob.statDrinks > 0 || Object.values(displayJob.statMeals).some(v => v > 0)) && (
           <div style={{ marginBottom: 16, padding: '10px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', fontSize: 12, color: 'var(--color-text-2)', lineHeight: 1.6 }}>
             <strong style={{ color: 'var(--color-text)' }}>Last run:</strong>{' '}
-            <span className="num">{job.statMacros || 0}</span> got macros ·{' '}
-            <span className="num">{job.statDrinks || 0}</span> drinks sorted ·{' '}
-            breakfast <span className="num">{job.statMeals.breakfast || 0}</span>,{' '}
-            lunch <span className="num">{job.statMeals.lunch || 0}</span>,{' '}
-            dinner <span className="num">{job.statMeals.dinner || 0}</span>,{' '}
-            snack <span className="num">{job.statMeals.snack || 0}</span>
-            {job.statMeals.all_day ? <>, all-day <span className="num">{job.statMeals.all_day}</span></> : null}
+            <span className="num">{displayJob.statMacros || 0}</span> got macros ·{' '}
+            <span className="num">{displayJob.statDrinks || 0}</span> drinks sorted ·{' '}
+            breakfast <span className="num">{displayJob.statMeals.breakfast || 0}</span>,{' '}
+            lunch <span className="num">{displayJob.statMeals.lunch || 0}</span>,{' '}
+            dinner <span className="num">{displayJob.statMeals.dinner || 0}</span>,{' '}
+            snack <span className="num">{displayJob.statMeals.snack || 0}</span>
+            {displayJob.statMeals.all_day ? <>, all-day <span className="num">{displayJob.statMeals.all_day}</span></> : null}
           </div>
         )}
 
@@ -1568,23 +1766,39 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
               })}
             </div>
             {isGplace && (
-              <div style={{ marginTop: 10, padding: '8px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
-                  Est. per 100 enrichments
-                  <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>({tierLabel})</span>
-                </span>
-                <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>{estPer100}</span>
+              <div style={{ marginTop: 10, background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                <div style={{ padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
+                    Est. per 100 enrichments
+                    <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>({tierLabel})</span>
+                  </span>
+                  <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>{estPer100}</span>
+                </div>
+                {gplaceAccumSpend > 0 && (
+                  <div style={{ padding: '6px 12px 8px', borderTop: '1px solid var(--color-stroke)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent (all runs)</span>
+                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${gplaceAccumSpend.toFixed(3)}</span>
+                  </div>
+                )}
               </div>
             )}
             {isMacros && (
-              <div style={{ marginTop: 10, padding: '8px 12px', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
-                  {macrosActualCost ? 'Actual cost (last run)' : 'Est. per 1,000 meals'}
-                  <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>(Haiku)</span>
-                </span>
-                <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>
-                  {macrosActualCost || macrosEstPer1k}
-                </span>
+              <div style={{ marginTop: 10, background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                <div style={{ padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-2)' }}>
+                    {macrosActualCost ? 'Actual cost (last run)' : 'Est. per 1,000 meals'}
+                    <span style={{ marginLeft: 6, fontSize: 11, color: 'var(--color-text-3)', fontStyle: 'italic' }}>(Haiku)</span>
+                  </span>
+                  <span className="num" style={{ fontSize: 14, fontWeight: 700 }}>
+                    {macrosActualCost || macrosEstPer1k}
+                  </span>
+                </div>
+                {macrosAccumSpend > 0 && (
+                  <div style={{ padding: '6px 12px 8px', borderTop: '1px solid var(--color-stroke)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent (all runs)</span>
+                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${macrosAccumSpend.toFixed(3)}</span>
+                  </div>
+                )}
               </div>
             )}
             {isMacros && (
@@ -1625,6 +1839,70 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                     {limitInput ? `Stop after ${limitInput} new restaurants` : 'Run until all discovered'}
                   </span>
                 </div>
+
+                {/* Count restaurants button */}
+                <div style={{ marginTop: 12 }}>
+                  <button
+                    onClick={countWolt}
+                    disabled={counting || isRunning}
+                    style={{
+                      height: 30, padding: '0 12px', fontSize: 12,
+                      borderRadius: 'var(--radius-full)',
+                      border: '1px solid var(--color-stroke)',
+                      background: 'var(--color-surface-2)',
+                      color: counting ? 'var(--color-text-3)' : 'var(--color-text-2)',
+                      cursor: (counting || isRunning) ? 'not-allowed' : 'pointer',
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      fontFamily: 'inherit',
+                    }}
+                  >
+                    <Icon name="refresh" size={11} style={{ animation: counting ? 'spin 1s linear infinite' : 'none' }}/>
+                    {counting ? 'Discovering…' : 'Count restaurants'}
+                  </button>
+                  {counting && (
+                    <span style={{ marginLeft: 10, fontSize: 11, color: 'var(--color-text-3)' }}>
+                      Querying Wolt API… (~10–20s)
+                    </span>
+                  )}
+                  {countError && (
+                    <span style={{ marginLeft: 10, fontSize: 11, color: 'var(--color-error, #e53)' }}>
+                      {countError}
+                    </span>
+                  )}
+                </div>
+
+                {/* Count result */}
+                {woltCount && (
+                  <div style={{
+                    marginTop: 10, padding: '10px 12px',
+                    background: 'var(--color-surface-2)',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: 12, lineHeight: 1.7,
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                      <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>
+                        Discovery result
+                      </span>
+                      <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>
+                        {woltCount.queryPoints} grid point{woltCount.queryPoints !== 1 ? 's' : ''}
+                      </span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6 }}>
+                      <div style={{ textAlign: 'center', padding: '6px 0', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)' }}>
+                        <div className="num" style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text)' }}>{woltCount.discovered}</div>
+                        <div style={{ fontSize: 10, color: 'var(--color-text-3)', marginTop: 1 }}>found on Wolt</div>
+                      </div>
+                      <div style={{ textAlign: 'center', padding: '6px 0', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)' }}>
+                        <div className="num" style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-text-3)' }}>{woltCount.alreadyScraped}</div>
+                        <div style={{ fontSize: 10, color: 'var(--color-text-3)', marginTop: 1 }}>already scraped</div>
+                      </div>
+                      <div style={{ textAlign: 'center', padding: '6px 0', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)' }}>
+                        <div className="num" style={{ fontSize: 18, fontWeight: 700, color: woltCount.toScrape > 0 ? 'var(--color-accent)' : 'var(--color-text-3)' }}>{woltCount.toScrape}</div>
+                        <div style={{ fontSize: 10, color: 'var(--color-text-3)', marginTop: 1 }}>new to scrape</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
