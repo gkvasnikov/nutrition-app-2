@@ -32,16 +32,34 @@ function useElapsedTime(startedAt, running) {
   return elapsed;
 }
 
-// localStorage helpers for accumulated spend
+// localStorage helpers for accumulated spend — scoped to the CURRENT calendar month, so the
+// "Total spent this month" stat resets automatically each month (a new month → new key → starts at 0).
+function spendMonthKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
 function getAccumulatedSpend(scriptId) {
-  try { return parseFloat(localStorage.getItem(`admin_spent_${scriptId}`)) || 0; } catch { return 0; }
+  try { return parseFloat(localStorage.getItem(`admin_spent_${scriptId}_${spendMonthKey()}`)) || 0; } catch { return 0; }
 }
 function addAccumulatedSpend(scriptId, amount) {
   try {
     const prev = getAccumulatedSpend(scriptId);
-    localStorage.setItem(`admin_spent_${scriptId}`, (prev + amount).toFixed(4));
+    localStorage.setItem(`admin_spent_${scriptId}_${spendMonthKey()}`, (prev + amount).toFixed(4));
   } catch {}
 }
+// One-time migration: fold the legacy all-runs spend (admin_spent_<id>) into the current month,
+// then drop the legacy key so it isn't double-counted. (Existing spend is from this month anyway.)
+(function migrateLegacySpend() {
+  try {
+    for (const id of ['wolt', 'gplace', 'macros', 'dedup']) {
+      const legacy = localStorage.getItem(`admin_spent_${id}`);
+      if (legacy == null) continue;
+      const cur = getAccumulatedSpend(id);
+      localStorage.setItem(`admin_spent_${id}_${spendMonthKey()}`, (cur + (parseFloat(legacy) || 0)).toFixed(4));
+      localStorage.removeItem(`admin_spent_${id}`);
+    }
+  } catch {}
+})();
 
 // Per-district job snapshot — saved when a run finishes so each district
 // can show its own last-run stats even after switching to a different district.
@@ -1923,8 +1941,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                 </div>
                 {gplaceAccumSpend > 0 && (
                   <div style={{ padding: '6px 12px 8px', borderTop: '1px solid var(--color-stroke)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent (all runs)</span>
-                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${gplaceAccumSpend.toFixed(3)}</span>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent this month</span>
+                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${gplaceAccumSpend.toFixed(2)}</span>
                   </div>
                 )}
               </div>
@@ -1942,8 +1960,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
                 </div>
                 {macrosAccumSpend > 0 && (
                   <div style={{ padding: '6px 12px 8px', borderTop: '1px solid var(--color-stroke)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent (all runs)</span>
-                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${macrosAccumSpend.toFixed(3)}</span>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-3)' }}>Total spent this month</span>
+                    <span className="num" style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-2)' }}>${macrosAccumSpend.toFixed(2)}</span>
                   </div>
                 )}
               </div>
