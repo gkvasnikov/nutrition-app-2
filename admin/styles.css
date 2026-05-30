@@ -675,6 +675,17 @@ svg { display: block; }
   font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
   font-weight: 500;
+  align-self: start;
+}
+/* Clickable activity rows (resolve to a script panel) */
+.feed__item--clickable { cursor: pointer; transition: background 120ms ease; }
+.feed__item--clickable:hover { background: var(--color-surface-3); }
+/* Live progress bar inside an activity row */
+.feed__item__progress { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.feed__item__progress .progress { flex: 1; }
+.feed__item__progress__label {
+  font-size: var(--fs-micro); color: var(--color-text-3);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
 }
 
 /* Detail panel (right-hand overlay for restaurant / script) */

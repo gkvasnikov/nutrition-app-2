@@ -220,7 +220,15 @@ function App() {
         />
 
         {/* Activity feed */}
-        <ActivityFeed open={feedOpen} onToggle={() => setFeedOpen(v => !v)}/>
+        <ActivityFeed
+          open={feedOpen}
+          onToggle={() => setFeedOpen(v => !v)}
+          onOpenScript={(dId, sId) => {
+            if (dId) { setDistrictId(dId); setView('district'); setDistrictTab('scripts'); }
+            else { setDistrictId(null); }
+            setScriptId(sId);
+          }}
+        />
 
         {/* Detail panels */}
         <RestaurantDetail
@@ -995,7 +1003,13 @@ function DistrictScripts({ d, onOpen, showToast }) {
       .catch(() => {});
   };
 
-  const pipelineRunning = pipeline.running;
+  // A job/pipeline's live state belongs ONLY to the district it's actually running in (jobs are
+  // global per script id). Without this, selecting another district would falsely show the same
+  // script as "active" here. districtId == null = a Berlin-wide run, which applies everywhere.
+  const appliesHere = (did) => did == null || did === d.id;
+  const jobForDistrict = (job) => (job && appliesHere(job.districtId)) ? job : undefined;
+
+  const pipelineRunning = pipeline.running && appliesHere(pipeline.districtId);
   const headerStatus = pipelineRunning
     ? <Pill variant="warn" dot>pipeline running</Pill>
     : d.status === 'covered'
@@ -1044,11 +1058,11 @@ function DistrictScripts({ d, onOpen, showToast }) {
             <ScriptCard
               key={s.id}
               s={s}
-              job={jobs[s.id]}
+              job={jobForDistrict(jobs[s.id])}
               enabled={enabled[s.id] !== false}
               onToggle={() => toggleEnabled(s.id)}
               onOpen={() => onOpen(s.id)}
-              running={jobs[s.id]?.running || (pipeline.running && pipeline.step === s.id)}
+              running={jobForDistrict(jobs[s.id])?.running || (pipelineRunning && pipeline.step === s.id)}
               onRun={(e) => { e.stopPropagation(); runOne(s); }}
             />
           ))}
@@ -1260,21 +1274,54 @@ function DistrictHoverCard({ data, onOpen, onMouseEnter, onMouseLeave }) {
 }
 
 /* ─── Activity feed (floating, collapsible) ─── */
-function ActivityFeed({ open, onToggle }) {
+// Map an activity row's text → script id, and its sub's leading label → district id.
+function activityScriptId(text = '') {
+  if (text.includes('Wolt Menu Scraper')) return 'wolt';
+  if (text.includes('Macros Estimator')) return 'macros';
+  if (text.includes('Google Place Enricher')) return 'gplace';
+  if (text.includes('Duplicate detection') || text.includes('Detect Duplicate')) return 'dedup';
+  return null;
+}
+function activityDistrictId(sub = '') {
+  const label = sub.split('·')[0].trim();  // "Pankow · 31682 meals queued" → "Pankow"
+  const d = DISTRICTS.find(x => x.name === label);
+  return d ? d.id : null;  // null = Berlin-wide / unknown
+}
+
+function ActivityFeed({ open, onToggle, onOpenScript }) {
   const [items, setItems] = useState(null);  // null = not loaded yet
+  const [jobs, setJobs]   = useState({});    // live job status (for progress bars)
 
   useEffect(() => {
     let alive = true;
-    const load = () => {
-      fetch('/admin/api/activity')
-        .then(r => r.json())
-        .then(list => { if (alive) setItems(Array.isArray(list) ? list : []); })
-        .catch(() => { if (alive) setItems([]); });
-    };
-    load();
-    const iv = setInterval(load, 15000);  // refresh every 15s
-    return () => { alive = false; clearInterval(iv); };
+    const loadActivity = () => fetch('/admin/api/activity').then(r => r.json())
+      .then(list => { if (alive) setItems(Array.isArray(list) ? list : []); })
+      .catch(() => { if (alive) setItems([]); });
+    const loadStatus = () => fetch('/admin/api/scripts/status').then(r => r.json())
+      .then(d => { if (alive) setJobs(d.jobs || {}); })
+      .catch(() => {});
+    loadActivity(); loadStatus();
+    const a = setInterval(loadActivity, 15000);  // activity log: every 15s
+    const s = setInterval(loadStatus, 3000);     // job progress: every 3s (cheap, live-ish)
+    return () => { alive = false; clearInterval(a); clearInterval(s); };
   }, []);
+
+  // Attach a live progress bar to the NEWEST "started" row whose running job matches script + district.
+  const progressByIndex = {};
+  const usedScripts = new Set();
+  (items || []).forEach((it, i) => {
+    const sid = activityScriptId(it.text);
+    if (!sid || usedScripts.has(sid) || !/started/i.test(it.text)) return;
+    const j = jobs[sid];
+    if (!j?.running) return;
+    if ((j.districtId || null) !== activityDistrictId(it.sub)) return;  // wrong district → not this run
+    usedScripts.add(sid);
+    progressByIndex[i] = {
+      done: j.done || 0,
+      total: j.total || 0,
+      pct: j.total > 0 ? Math.min(100, Math.round((j.done / j.total) * 100)) : 0,
+    };
+  });
 
   return (
     <div className={`feed ${!open?'feed--collapsed':''}`}>
@@ -1291,16 +1338,31 @@ function ActivityFeed({ open, onToggle }) {
           <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>Loading…</div>
         ) : items.length === 0 ? (
           <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>No activity in the last 24h</div>
-        ) : items.map((it, i) => (
-          <div key={i} className="feed__item">
-            <span className={`feed__item__dot feed__item__dot--${it.kind}`}/>
-            <div>
-              <div className="feed__item__text">{it.text}</div>
-              <div className="feed__item__sub">{it.sub}</div>
+        ) : items.map((it, i) => {
+          const sid  = activityScriptId(it.text);
+          const prog = progressByIndex[i];
+          return (
+            <div
+              key={i}
+              className={`feed__item ${sid ? 'feed__item--clickable' : ''}`}
+              onClick={sid ? () => onOpenScript?.(activityDistrictId(it.sub), sid) : undefined}
+              title={sid ? 'Open script panel' : undefined}
+            >
+              <span className={`feed__item__dot feed__item__dot--${it.kind}`}/>
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div className="feed__item__text">{it.text}</div>
+                <div className="feed__item__sub">{it.sub}</div>
+                {prog && (
+                  <div className="feed__item__progress">
+                    <div className="progress"><div className="progress__fill" style={{ width: `${prog.pct}%` }}/></div>
+                    <span className="feed__item__progress__label num">{prog.done.toLocaleString()} / {prog.total.toLocaleString()} · {prog.pct}%</span>
+                  </div>
+                )}
+              </div>
+              <span className="feed__item__time">{it.time}</span>
             </div>
-            <span className="feed__item__time">{it.time}</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -1538,7 +1600,11 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
   // - If last run was for this district → show it
   // - Otherwise → load last saved snapshot for this district from localStorage
   const jobIsForThisDistrict = !job?.districtId || !district?.id || job.districtId === district.id;
-  const displayJob = isRunning || jobIsForThisDistrict
+  // Jobs are global per script id, so "running" must be scoped to the district the job actually
+  // runs in — otherwise opening this panel for any district falsely shows the job running here.
+  // (isRunning stays global: it still blocks starting a second concurrent run of the same script.)
+  const isRunningHere = isRunning && jobIsForThisDistrict;
+  const displayJob = jobIsForThisDistrict
     ? job
     : loadDistrictJobStats(data?.id, district?.id);
 
@@ -1694,8 +1760,8 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
             <div className="sdetail__name">{data.name}</div>
             <div className="sdetail__desc">{data.desc}</div>
             <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
-              <Pill variant={isRunning ? 'warn' : displayJob?.errors > 0 ? 'danger' : displayJob?.done > 0 ? 'success' : 'default'} dot>
-                {isRunning ? 'running' : displayJob?.errors > 0 ? 'errors' : displayJob?.done > 0 ? 'healthy' : 'idle'}
+              <Pill variant={isRunningHere ? 'warn' : displayJob?.errors > 0 ? 'danger' : displayJob?.done > 0 ? 'success' : 'default'} dot>
+                {isRunningHere ? 'running' : displayJob?.errors > 0 ? 'errors' : displayJob?.done > 0 ? 'healthy' : 'idle'}
               </Pill>
               <Pill>scope: {district?.name || 'Berlin'}</Pill>
             </div>
@@ -1729,7 +1795,7 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
           </div>
         </div>
 
-        {isRunning && (
+        {isRunningHere && (
           <div style={{ marginBottom: 16 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
               <span style={{ fontSize: 12, color: 'var(--color-text-2)', fontWeight: 500 }}>
@@ -1943,13 +2009,13 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
 
       {/* Sticky bottom action bar */}
       <div className="drawer">
-        {isRunning ? (
+        {isRunningHere ? (
           <Btn variant="secondary" size="lg" block icon="pause" onClick={stopIt}>
             Stop script
           </Btn>
         ) : (
-          <Btn variant="primary" size="lg" block icon="refresh" onClick={runIt}>
-            Run {data.name}
+          <Btn variant="primary" size="lg" block icon="refresh" onClick={runIt} disabled={isRunning}>
+            {isRunning ? `Running in another district…` : `Run ${data.name}`}
           </Btn>
         )}
       </div>
