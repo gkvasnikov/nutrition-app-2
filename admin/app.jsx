@@ -179,6 +179,7 @@ function App() {
 
   return (
     <div className="app">
+      <CostTracker/>
       <Sidebar
         view={view} setView={setView}
         districtId={districtId} setDistrictId={setDistrictId}
@@ -745,68 +746,97 @@ function msToRelative(ms) {
   return `${Math.round(abs / (7 * 86_400_000))}w`;
 }
 
+// Spend for a script in a given month bucket (YYYY-MM), from localStorage (written by CostTracker)
+function monthSpend(scriptId, monthKey) {
+  try { return parseFloat(localStorage.getItem(`admin_spent_${scriptId}_${monthKey}`)) || 0; } catch { return 0; }
+}
+// Last N months ending with the current one: [{ key:'2026-05', short:'May', full:'May 2026' }, …]
+function recentMonths(n) {
+  const out = [];
+  const now = new Date();
+  for (let i = n - 1; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    out.push({ key, short: d.toLocaleString('en-US', { month: 'short' }), full: d.toLocaleString('en-US', { month: 'long', year: 'numeric' }) });
+  }
+  return out;
+}
+const MONTHLY_BUDGET = 200;
+
 function BerlinStats() {
-  const months = ['Jan','Feb','Mar','Apr','May','Jun'];
-  const mapsUsage = [120, 165, 190, 142, 178, 210];
-  const claudeUsage = [620, 840, 990, 1120, 1180, 1320];
-  const maxA = Math.max(...mapsUsage), maxB = Math.max(...claudeUsage);
+  const monthsList = recentMonths(6);
+  const currentKey = monthsList[monthsList.length - 1].key;
+  // Default to the current month; resets to current on every page load (state init).
+  const [selected, setSelected] = useState(currentKey);
+
+  // Two cost sources: Anthropic Claude (macros/Haiku) + Google API (gplace). Wolt/Dedup are free.
+  const data = monthsList.map(m => {
+    const claude = monthSpend('macros', m.key);
+    const google = monthSpend('gplace', m.key);
+    return { ...m, claude, google, total: claude + google };
+  });
+  const maxTotal = Math.max(0.01, ...data.map(d => d.total));
+  const sel = data.find(d => d.key === selected) || data[data.length - 1];
+  const isCurrent = sel.key === currentKey;
+
   return (
     <>
       <R2CachePanel/>
       <div className="section">
         <div className="section__head">
-          <span className="section__title">Cost-to-date · This month</span>
-          <Pill variant="info" dot>day 27</Pill>
+          <span className="section__title">Cost-to-date · {isCurrent ? 'This month' : sel.full}</span>
+          {isCurrent && <Pill variant="info" dot>day {new Date().getDate()}</Pill>}
         </div>
         <div style={{ padding: '14px 16px', border: '1px solid var(--color-stroke)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-            <span className="num" style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em' }}>${COST_BREAKDOWN.total}</span>
-            <span className="muted">of ${COST_BREAKDOWN.budget} budget</span>
+            <span className="num" style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em' }}>${sel.total.toFixed(2)}</span>
+            <span className="muted">of ${MONTHLY_BUDGET} budget</span>
           </div>
           <div style={{ marginTop: 10, display: 'flex', height: 8, borderRadius: 4, overflow: 'hidden', background: 'var(--color-surface-3)' }}>
-            {COST_BREAKDOWN.parts.map((p, i) => (
-              <div key={i} style={{ width: `${(p.value/COST_BREAKDOWN.budget)*100}%`, background: p.color }}/>
-            ))}
+            <div style={{ width: `${Math.min(100, (sel.claude / MONTHLY_BUDGET) * 100)}%`, background: '#212121' }}/>
+            <div style={{ width: `${Math.min(100, (sel.google / MONTHLY_BUDGET) * 100)}%`, background: '#0080ff' }}/>
           </div>
           <div style={{ marginTop: 12, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-            {COST_BREAKDOWN.parts.map((p,i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12 }}>
-                <span style={{ width: 8, height: 8, borderRadius: 2, background: p.color }}/>
-                <span style={{ flex: 1 }} className="muted">{p.label}</span>
-                <span className="num" style={{ fontWeight: 600 }}>${p.value}</span>
-              </div>
-            ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12 }}>
+              <span style={{ width: 8, height: 8, borderRadius: 2, background: '#212121' }}/>
+              <span style={{ flex: 1 }} className="muted">Anthropic Claude</span>
+              <span className="num" style={{ fontWeight: 600 }}>${sel.claude.toFixed(2)}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12 }}>
+              <span style={{ width: 8, height: 8, borderRadius: 2, background: '#0080ff' }}/>
+              <span style={{ flex: 1 }} className="muted">Google API</span>
+              <span className="num" style={{ fontWeight: 600 }}>${sel.google.toFixed(2)}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="section">
         <div className="section__head">
-          <span className="section__title">Anthropic Tokens</span>
-          <span className="section__count num">1.32M this month</span>
+          <span className="section__title">Spend by month</span>
+          <span className="section__count muted">click a month</span>
         </div>
-        <div className="chart">
-          {claudeUsage.map((v,i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="chart__bar" style={{ height: `${(v/maxB)*100}%` }}/>
-              <div className="chart__label">{months[i]}</div>
-            </div>
-          ))}
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${data.length}, 1fr)`, gap: 8, alignItems: 'end', height: 120 }}>
+          {data.map(d => {
+            const px = Math.round((d.total / maxTotal) * 96);
+            const isSel = d.key === selected;
+            return (
+              <div key={d.key} onClick={() => setSelected(d.key)} title={`$${d.total.toFixed(2)}`}
+                   style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
+                <div style={{ height: Math.max(px, 3), borderRadius: '4px 4px 0 0', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: d.total > 0 ? 'transparent' : 'var(--color-surface-3)', opacity: isSel ? 1 : 0.4 }}>
+                  {d.total > 0 && <>
+                    <div style={{ height: `${(d.google / d.total) * 100}%`, background: '#0080ff' }}/>
+                    <div style={{ height: `${(d.claude / d.total) * 100}%`, background: '#212121' }}/>
+                  </>}
+                </div>
+                <div style={{ textAlign: 'center', fontSize: 11, marginTop: 8, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: isSel ? 700 : 600, color: isSel ? 'var(--color-text)' : 'var(--color-text-3)' }}>{d.short}</div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-
-      <div className="section">
-        <div className="section__head">
-          <span className="section__title">Google Maps Calls</span>
-          <span className="section__count num">210K this month</span>
-        </div>
-        <div className="chart">
-          {mapsUsage.map((v,i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="chart__bar" style={{ height: `${(v/maxA)*100}%`, background: '#0080ff' }}/>
-              <div className="chart__label">{months[i]}</div>
-            </div>
-          ))}
+        <div style={{ marginTop: 10, display: 'flex', gap: 16, fontSize: 11 }} className="muted">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 2, background: '#212121' }}/>Anthropic Claude</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 2, background: '#0080ff' }}/>Google API</span>
         </div>
       </div>
     </>
@@ -1587,6 +1617,39 @@ function calcDetailCost(fields) {
   return cost;
 }
 
+// Global spend recorder: polls job status and, the moment any script finishes (running→idle),
+// records its cost into the current month's bucket — regardless of which panel is open. This is
+// the single source of truth for spend (ScriptDetail no longer records, to avoid double counting).
+function CostTracker() {
+  const prevRef = useRef({});
+  useEffect(() => {
+    let alive = true, timer = null;
+    const tick = async () => {
+      try {
+        const d = await (await fetch('/admin/api/scripts/status')).json();
+        const jobs = d.jobs || {};
+        for (const [id, j] of Object.entries(jobs)) {
+          const was = prevRef.current[id];
+          if (was && was.running && j && !j.running) {  // just finished
+            if (id === 'macros') {
+              const cost = (j.inputTokens || 0) * HAIKU_IN + (j.outputTokens || 0) * HAIKU_OUT;
+              if (cost > 0) addAccumulatedSpend('macros', cost);
+            } else if (id === 'gplace') {
+              const cost = (j.findPlaceCalls || 0) * GPLACE_COST.FIND_PLACE + (j.detailsCalls || 0) * calcDetailCost(j.enabledFields || []);
+              if (cost > 0) addAccumulatedSpend('gplace', cost);
+            }
+          }
+        }
+        prevRef.current = jobs;
+      } catch { /* ignore */ }
+      if (alive) timer = setTimeout(tick, 4000);
+    };
+    tick();
+    return () => { alive = false; if (timer) clearTimeout(timer); };
+  }, []);
+  return null;
+}
+
 /* ─── Script detail overlay ─── */
 function ScriptDetail({ scriptId, district, onClose, showToast }) {
   const s = SCRIPTS.find(x => x.id === scriptId);
@@ -1634,26 +1697,12 @@ function ScriptDetail({ scriptId, district, onClose, showToast }) {
     return () => clearInterval(pollRef.current);
   }, [job?.running, fetchJob]);
 
-  // When a job finishes: save per-district snapshot + accumulate spend
+  // When a job finishes: save per-district snapshot. (Spend recording is handled globally by
+  // <CostTracker/> so it works even when this panel isn't open.)
   useEffect(() => {
     const prev = prevJobRef.current;
     if (prev?.running && !job?.running && data?.id) {
-      // Save per-district snapshot so each district can show its own last-run stats
       saveDistrictJobStats(data.id, job?.districtId, job);
-
-      // gplace: add actual cost
-      if (data.id === 'gplace') {
-        const fc = job?.findPlaceCalls || 0;
-        const dc = job?.detailsCalls || 0;
-        const efNames = job?.enabledFields || [];
-        const cost = fc * GPLACE_COST.FIND_PLACE + dc * calcDetailCost(efNames);
-        if (cost > 0) addAccumulatedSpend('gplace', cost);
-      }
-      // macros: add token cost
-      if (data.id === 'macros') {
-        const cost = ((job?.inputTokens || 0) * HAIKU_IN) + ((job?.outputTokens || 0) * HAIKU_OUT);
-        if (cost > 0) addAccumulatedSpend('macros', cost);
-      }
     }
     prevJobRef.current = job;
   }, [job, data?.id]);
