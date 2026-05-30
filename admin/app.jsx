@@ -1097,12 +1097,21 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
   const st = statusMap[s.status] || statusMap.success;
   const elapsed = useElapsedTime(job?.startedAt, job?.running);
 
-  // Derive meta text: show live status when running, or format finishedAt
+  // Tick every 10s so a finished job's relative time ("just now" → "3m ago" → "1h ago") stays
+  // accurate without a page reload. finishedAt is already in the job object, so no extra fetch.
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const iv = setInterval(() => setTick(t => t + 1), 10000);
+    return () => clearInterval(iv);
+  }, []);
+
+  // Derive meta text: live elapsed while running; accurate relative time once finished.
   let metaTime = s.lastRun;
   if (job?.running) {
     metaTime = `running… ${formatElapsed(elapsed)}`;
   } else if (job?.finishedAt) {
-    metaTime = 'just now';
+    const rel = msToRelative(Date.now() - new Date(job.finishedAt).getTime());
+    metaTime = rel === 'just now' ? 'just now' : `${rel} ago`;
   }
 
   return (
