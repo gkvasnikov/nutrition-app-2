@@ -2347,7 +2347,11 @@ app.post('/admin/api/scripts/:id/run', requireAdminAuth, (req, res) => {
   } else if (id === 'gplace') {
     runGooglePlaceScript(req.body?.districtId || null, req.body?.fields || [])
   } else if (id === 'wolt') {
-    const woltLimit = req.body?.limit ? parseInt(req.body.limit, 10) : null
+    // Fall back to the persisted limit (the "Limit" field, saved to script_wolt_config_limit) when
+    // the request body carries none — so the saved limit applies no matter which Run button starts
+    // the job (the pipeline-card Run button doesn't send a body limit).
+    const bodyLimit = req.body?.limit ? parseInt(req.body.limit, 10) : null
+    const woltLimit = bodyLimit ?? (getScriptJob('wolt').configLimit ?? null)
     runWoltScript(req.body?.districtId || null, req.body?.fields || [], woltLimit)
   }
 
