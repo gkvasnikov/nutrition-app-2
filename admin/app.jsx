@@ -1306,22 +1306,22 @@ function ActivityFeed({ open, onToggle, onOpenScript }) {
     return () => { alive = false; clearInterval(a); clearInterval(s); };
   }, []);
 
-  // Attach a live progress bar to the NEWEST "started" row whose running job matches script + district.
-  const progressByIndex = {};
-  const usedScripts = new Set();
-  (items || []).forEach((it, i) => {
-    const sid = activityScriptId(it.text);
-    if (!sid || usedScripts.has(sid) || !/started/i.test(it.text)) return;
-    const j = jobs[sid];
-    if (!j?.running) return;
-    if ((j.districtId || null) !== activityDistrictId(it.sub)) return;  // wrong district → not this run
-    usedScripts.add(sid);
-    progressByIndex[i] = {
+  // "Running now" rows derived straight from live server job status (NOT the activity log). This
+  // survives closing/reopening the tab: the job lives in the server process, so a fresh page load
+  // re-fetches status and immediately shows what's running, regardless of which view you're on.
+  const SCRIPT_LABELS = { wolt: 'Wolt Menu Scraper', gplace: 'Google Place Enricher', macros: 'Macros + Meal Type', dedup: 'Detect Duplicate Meals' };
+  const districtName = (did) => did ? (DISTRICTS.find(d => d.id === did)?.name || did) : 'Berlin';
+  const runningRows = Object.entries(jobs)
+    .filter(([, j]) => j && j.running)
+    .map(([id, j]) => ({
+      scriptId: id,
+      label: SCRIPT_LABELS[id] || id,
+      districtId: j.districtId || null,
+      districtName: districtName(j.districtId),
       done: j.done || 0,
       total: j.total || 0,
       pct: j.total > 0 ? Math.min(100, Math.round((j.done / j.total) * 100)) : 0,
-    };
-  });
+    }));
 
   return (
     <div className={`feed ${!open?'feed--collapsed':''}`}>
@@ -1329,18 +1329,40 @@ function ActivityFeed({ open, onToggle, onOpenScript }) {
         <span className="feed__title">
           <span className="feed__dot"/>
           Activity
-          <span className="muted" style={{ fontWeight: 500 }}>· last 24h</span>
+          {runningRows.length > 0
+            ? <span className="feed__running-count">{runningRows.length} running</span>
+            : <span className="muted" style={{ fontWeight: 500 }}>· last 24h</span>}
         </span>
         <Icon name={open ? 'chevron-down' : 'chevron-down'} size={14} style={{ transform: open ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 200ms ease', color: 'var(--color-text-3)' }}/>
       </div>
       <div className="feed__list">
+        {/* Live "running now" rows — always shown while a job runs, even right after reopening */}
+        {runningRows.map(r => (
+          <div
+            key={`run-${r.scriptId}`}
+            className="feed__item feed__item--clickable feed__item--running"
+            onClick={() => onOpenScript?.(r.districtId, r.scriptId)}
+            title="Open script panel"
+          >
+            <span className="feed__item__dot feed__item__dot--running"/>
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <div className="feed__item__text">{r.label} <span className="feed__running-tag">running</span></div>
+              <div className="feed__item__sub">{r.districtName}</div>
+              <div className="feed__item__progress">
+                <div className="progress"><div className="progress__fill" style={{ width: `${r.pct}%` }}/></div>
+                <span className="feed__item__progress__label num">{r.done.toLocaleString()} / {r.total.toLocaleString()} · {r.pct}%</span>
+              </div>
+            </div>
+            <span className="feed__item__time">live</span>
+          </div>
+        ))}
+
         {items === null ? (
           <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>Loading…</div>
-        ) : items.length === 0 ? (
+        ) : items.length === 0 && runningRows.length === 0 ? (
           <div className="feed__empty muted" style={{ padding: '16px', fontSize: 13, textAlign: 'center' }}>No activity in the last 24h</div>
-        ) : items.map((it, i) => {
-          const sid  = activityScriptId(it.text);
-          const prog = progressByIndex[i];
+        ) : (items || []).map((it, i) => {
+          const sid = activityScriptId(it.text);
           return (
             <div
               key={i}
@@ -1352,12 +1374,6 @@ function ActivityFeed({ open, onToggle, onOpenScript }) {
               <div style={{ minWidth: 0, flex: 1 }}>
                 <div className="feed__item__text">{it.text}</div>
                 <div className="feed__item__sub">{it.sub}</div>
-                {prog && (
-                  <div className="feed__item__progress">
-                    <div className="progress"><div className="progress__fill" style={{ width: `${prog.pct}%` }}/></div>
-                    <span className="feed__item__progress__label num">{prog.done.toLocaleString()} / {prog.total.toLocaleString()} · {prog.pct}%</span>
-                  </div>
-                )}
               </div>
               <span className="feed__item__time">{it.time}</span>
             </div>

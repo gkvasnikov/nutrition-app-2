@@ -687,6 +687,19 @@ svg { display: block; }
   font-size: var(--fs-micro); color: var(--color-text-3);
   white-space: nowrap; font-variant-numeric: tabular-nums;
 }
+/* Pinned "running now" rows (from live job status) */
+.feed__item--running { background: #fffaf0; }
+.feed__item__dot--running { background: #f0a020; animation: feedPulse 1.4s ease-in-out infinite; }
+@keyframes feedPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.feed__running-tag {
+  font-size: 10px; font-weight: 700; color: #b06a00;
+  background: #ffe9c2; padding: 1px 6px; border-radius: 100px; margin-left: 4px;
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+.feed__running-count {
+  font-size: 11px; font-weight: 600; color: #b06a00;
+  background: #ffe9c2; padding: 1px 8px; border-radius: 100px; margin-left: 6px;
+}
 
 /* Detail panel (right-hand overlay for restaurant / script) */
 .detail {
