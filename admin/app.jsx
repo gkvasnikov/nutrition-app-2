@@ -781,7 +781,6 @@ function BerlinStats() {
 
   return (
     <>
-      <R2CachePanel/>
       <div className="section">
         <div className="section__head">
           <span className="section__title">Cost-to-date · {isCurrent ? 'This month' : sel.full}</span>
@@ -839,6 +838,8 @@ function BerlinStats() {
           <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 2, background: '#0080ff' }}/>Google API</span>
         </div>
       </div>
+
+      <R2CachePanel/>
     </>
   );
 }
