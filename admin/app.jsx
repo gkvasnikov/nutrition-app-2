@@ -968,6 +968,16 @@ function DistrictScripts({ d, onOpen, showToast }) {
       .catch(() => showToast({ text: `Failed to start ${s.name}` }));
   };
 
+  const stopOne = (s) => {
+    fetch(`/admin/api/scripts/${s.id}/stop`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(r => r.json())
+      .then(() => { showToast({ text: `${s.name} stopped` }); fetchStatus(); })
+      .catch(() => {});
+  };
+
   const toggleEnabled = (id) => {
     const newVal = enabled[id] !== false ? false : true;
     fetch(`/admin/api/scripts/${id}/enabled`, {
@@ -1072,7 +1082,8 @@ function DistrictScripts({ d, onOpen, showToast }) {
               onToggle={() => toggleEnabled(s.id)}
               onOpen={() => onOpen(s.id)}
               running={jobForDistrict(jobs[s.id])?.running || (pipelineRunning && pipeline.step === s.id)}
-              onRun={(e) => { e.stopPropagation(); runOne(s); }}
+              onRun={() => runOne(s)}
+              onStop={() => stopOne(s)}
             />
           ))}
         </div>
@@ -1095,7 +1106,7 @@ function DistrictScripts({ d, onOpen, showToast }) {
   );
 }
 
-function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
+function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun, onStop }) {
   const statusMap = {
     success: { v: 'success', label: 'OK' },
     warning: { v: 'warn',    label: 'partial' },
@@ -1174,7 +1185,11 @@ function ScriptCard({ s, job, enabled, onToggle, onOpen, running, onRun }) {
         {st.v === 'default'
           ? <Pill dot>{st.label}</Pill>
           : <Pill variant={st.v} dot>{running ? 'running' : st.label}</Pill>}
-        <button className="scard__run" onClick={onRun} title={running ? 'Running…' : 'Run this script'}>
+        <button
+          className="scard__run"
+          onClick={(e) => { e.stopPropagation(); running ? onStop?.() : onRun?.(); }}
+          title={running ? 'Stop this script' : 'Run this script'}
+        >
           <Icon name={running ? 'pause' : 'play'} size={14}/>
         </button>
       </div>
