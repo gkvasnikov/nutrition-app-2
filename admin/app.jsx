@@ -356,6 +356,9 @@ function BerlinHeader({ berlinTab, setBerlinTab }) {
         <button className={`tab ${berlinTab==='stats'?'tab--active':''}`} onClick={() => setBerlinTab('stats')}>
           Stats
         </button>
+        <button className={`tab ${berlinTab==='presets'?'tab--active':''}`} onClick={() => setBerlinTab('presets')}>
+          Presets
+        </button>
       </div>
     </>
   );
@@ -371,13 +374,157 @@ function Cell({ label, value, sub, subClass }) {
   );
 }
 
+const DIET_LABELS = { high_protein: 'High Protein', high_carb: 'High Carb', balanced: 'Balanced', keto: 'Keto' };
+const MEAL_LABELS = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snack' };
+const MEAL_KEYS   = ['breakfast', 'lunch', 'dinner', 'snack'];
+const MACRO_KEYS  = ['kcal', 'protein', 'fat', 'carbs'];
+
+// Macro stats table (Stats tab) — distribution + % matching each preset, per district or all Berlin.
+function MacroStats() {
+  const [districtId, setDistrictId] = useState('');  // '' = all Berlin
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let alive = true;
+    setLoading(true);
+    fetch(`/admin/api/macro-stats${districtId ? `?districtId=${districtId}` : ''}`)
+      .then(r => r.json())
+      .then(d => { if (alive) { setData(d); setLoading(false); } })
+      .catch(() => { if (alive) { setData(null); setLoading(false); } });
+    return () => { alive = false; };
+  }, [districtId]);
+
+  const n = data?.count || 0;
+  const pct = (c) => n > 0 ? `${Math.round((c / n) * 100)}%` : '—';
+  const Row = ({ label, value, sub }) => (
+    <div className="mstat__row">
+      <span className="mstat__label">{label}</span>
+      <span className="mstat__val">
+        <span className="num">{value}</span>
+        {sub != null && <span className="mstat__sub num"> · {sub}</span>}
+      </span>
+    </div>
+  );
+
+  return (
+    <div className="section">
+      <div className="section__head">
+        <span className="section__title">Macro stats</span>
+        <select className="mstat__select" value={districtId} onChange={e => setDistrictId(e.target.value)}>
+          <option value="">All Berlin</option>
+          {DISTRICTS.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+        </select>
+      </div>
+      {loading ? (
+        <div className="muted" style={{ padding: 12, fontSize: 13 }}>Loading…</div>
+      ) : !data || n === 0 ? (
+        <div className="muted" style={{ padding: 12, fontSize: 13 }}>No scored meals here yet</div>
+      ) : (
+        <div className="mstat">
+          <Row label="Food items" value={n.toLocaleString('en-US')}/>
+          <Row label="Avg protein" value={`${data.avgProtein} g`}/>
+          <Row label="Avg fat" value={`${data.avgFat} g`}/>
+          <Row label="Avg carbs" value={`${data.avgCarbs} g`}/>
+          <Row label="Avg calories" value={`${data.avgCalories} kcal`}/>
+          <div className="mstat__divider"/>
+          <Row label="Protein ≥ 25 g" value={data.proteinGte25.toLocaleString('en-US')} sub={pct(data.proteinGte25)}/>
+          <Row label="Protein ≥ 30 g" value={data.proteinGte30.toLocaleString('en-US')} sub={pct(data.proteinGte30)}/>
+          <Row label="Protein ≥ 40 g" value={data.proteinGte40.toLocaleString('en-US')} sub={pct(data.proteinGte40)}/>
+          <div className="mstat__divider"/>
+          {Object.keys(DIET_LABELS).map(diet => (
+            <Row key={diet} label={`Matches ${DIET_LABELS[diet]}`} value={(data.matches?.[diet] || 0).toLocaleString('en-US')} sub={pct(data.matches?.[diet] || 0)}/>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Nutrition presets editor (Presets tab) — single source of truth; saved values drive the app + stats.
+function NutritionPresets({ showToast }) {
+  const [presets, setPresets] = useState(null);
+  const [diet, setDiet] = useState('high_protein');
+  const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/nutrition-presets').then(r => r.json()).then(p => setPresets(p)).catch(() => {});
+  }, []);
+
+  const setVal = (mt, macro, idx, raw) => {
+    setPresets(prev => {
+      const next = JSON.parse(JSON.stringify(prev));
+      if (!next[diet]) next[diet] = {};
+      if (!next[diet][mt]) next[diet][mt] = { kcal: [0, 0], protein: [0, 0], fat: [0, 0], carbs: [0, 0] };
+      next[diet][mt][macro][idx] = raw === '' ? 0 : Number(raw);
+      return next;
+    });
+    setDirty(true);
+  };
+
+  const save = () => {
+    setSaving(true);
+    fetch('/admin/api/nutrition-presets', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ presets }) })
+      .then(r => r.json())
+      .then(res => {
+        setSaving(false);
+        if (res.ok) { setDirty(false); showToast?.({ text: 'Presets saved — live on the app' }); }
+        else showToast?.({ text: 'Save failed' });
+      })
+      .catch(() => { setSaving(false); showToast?.({ text: 'Save failed' }); });
+  };
+
+  if (!presets) return <div className="sidebar__body"><div className="muted" style={{ padding: 16 }}>Loading presets…</div></div>;
+  const dp = presets[diet] || {};
+
+  return (
+    <div className="sidebar__body fade-in">
+      <div className="section">
+        <div className="section__head"><span className="section__title">Nutrition presets</span></div>
+        <div className="chips" style={{ marginBottom: 10 }}>
+          {Object.keys(DIET_LABELS).map(d => (
+            <Chip key={d} active={diet === d} onClick={() => setDiet(d)}>{DIET_LABELS[d]}</Chip>
+          ))}
+        </div>
+        {MEAL_KEYS.map(mt => {
+          const r = dp[mt] || { kcal: [0, 0], protein: [0, 0], fat: [0, 0], carbs: [0, 0] };
+          return (
+            <div key={mt} className="preset__meal">
+              <div className="preset__meal__title">{MEAL_LABELS[mt]}</div>
+              {MACRO_KEYS.map(macro => (
+                <div key={macro} className="preset__row">
+                  <span className="preset__macro">{macro}</span>
+                  <input className="preset__input num" type="number" value={(r[macro] || [0, 0])[0]} onChange={e => setVal(mt, macro, 0, e.target.value)}/>
+                  <span className="preset__dash">–</span>
+                  <input className="preset__input num" type="number" value={(r[macro] || [0, 0])[1]} onChange={e => setVal(mt, macro, 1, e.target.value)}/>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+        <div style={{ marginTop: 14 }}>
+          <Btn variant="primary" size="lg" block icon="refresh" onClick={save} disabled={saving || !dirty}>
+            {saving ? 'Saving…' : dirty ? 'Save presets' : 'Saved'}
+          </Btn>
+        </div>
+        <div className="muted" style={{ fontSize: 11, marginTop: 8, lineHeight: 1.5 }}>
+          Applies to the public app filters + Macro stats. The server must be restarted once for the
+          new endpoints, and the change pushed to deploy on the live site.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BerlinBody(props) {
   const { berlinTab, onDistrictSelect } = props;
   return (
     <div className="sidebar__body fade-in" key={berlinTab}>
       {berlinTab === 'neighbourhoods' && <NeighbourhoodsList onSelect={onDistrictSelect}/>}
       {berlinTab === 'restaurants' && <AllRestaurants onOpen={props.onRestaurantOpen} selectedId={props.selectedRestaurantId}/>}
-      {berlinTab === 'stats' && <BerlinStats/>}
+      {berlinTab === 'stats' && <><MacroStats/><BerlinStats/></>}
+      {berlinTab === 'presets' && <NutritionPresets showToast={props.showToast}/>}
     </div>
   );
 }

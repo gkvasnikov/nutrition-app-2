@@ -33,3 +33,19 @@ export function getPreset(diet, mealTime) {
   if (!dietGroup) return DEFAULT_MACROS
   return (mealTime && dietGroup[mealTime]) || DEFAULT_MACROS
 }
+
+// Presets are editable in the admin (stored server-side). Load any overrides into MACRO_PRESETS
+// in place before the app renders, so getPreset() returns the live values. Falls back to the
+// hardcoded defaults above if the API is unavailable.
+export async function loadPresetsFromServer() {
+  try {
+    const res = await fetch('/api/nutrition-presets')
+    if (!res.ok) return
+    const data = await res.json()
+    if (data && typeof data === 'object') {
+      for (const diet of Object.keys(data)) {
+        if (data[diet] && typeof data[diet] === 'object') MACRO_PRESETS[diet] = data[diet]
+      }
+    }
+  } catch { /* keep hardcoded defaults */ }
+}

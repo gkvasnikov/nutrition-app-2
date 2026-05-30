@@ -207,6 +207,65 @@ function getHoursString(openingHours) {
 
 const _MENU_NUM_RE = /^\d+\.\s*/
 
+// ── Nutrition presets (single source of truth, editable in admin) ─────────────
+// Default ranges (mirror frontend/src/utils/macroPresets.js). Stored overrides live in
+// admin_settings.nutrition_presets; the client app + admin stats both read the effective value.
+const DEFAULT_NUTRITION_PRESETS = {
+  high_protein: {
+    breakfast: { kcal: [495,  825], protein: [40, 72], fat: [14, 28], carbs: [40,  72] },
+    lunch:     { kcal: [585, 1045], protein: [40, 88], fat: [18, 39], carbs: [45,  83] },
+    dinner:    { kcal: [495,  935], protein: [40, 83], fat: [18, 39], carbs: [32,  66] },
+    snack:     { kcal: [135,  330], protein: [18, 39], fat: [5,  13], carbs: [9,   28] },
+  },
+  high_carb: {
+    breakfast: { kcal: [495,  880], protein: [23, 44], fat: [9,  22], carbs: [68,  121] },
+    lunch:     { kcal: [630, 1100], protein: [27, 55], fat: [14, 28], carbs: [90,  165] },
+    dinner:    { kcal: [495,  880], protein: [23, 44], fat: [11, 24], carbs: [68,  121] },
+    snack:     { kcal: [135,  330], protein: [5,  17], fat: [3,  11], carbs: [36,   66] },
+  },
+  balanced: {
+    breakfast: { kcal: [450,  825], protein: [23, 44], fat: [14, 28], carbs: [50,  88] },
+    lunch:     { kcal: [585,  990], protein: [32, 61], fat: [18, 33], carbs: [63, 110] },
+    dinner:    { kcal: [495,  880], protein: [27, 55], fat: [16, 31], carbs: [54,  99] },
+    snack:     { kcal: [135,  330], protein: [9,  22], fat: [5,  13], carbs: [23,  50] },
+  },
+  keto: {
+    breakfast: { kcal: [450,  825], protein: [27, 55], fat: [32, 61], carbs: [3,  11] },
+    lunch:     { kcal: [540,  990], protein: [32, 66], fat: [41, 77], carbs: [5,  17] },
+    dinner:    { kcal: [450,  880], protein: [27, 61], fat: [36, 72], carbs: [5,  13] },
+    snack:     { kcal: [90,   330], protein: [9,  28], fat: [14, 28], carbs: [1,   7] },
+  },
+}
+const NUTRITION_DIETS  = ['high_protein', 'high_carb', 'balanced', 'keto']
+const NUTRITION_MEALS  = ['breakfast', 'lunch', 'dinner', 'snack']
+let _presetsCache = null, _presetsCacheAt = 0
+
+async function getNutritionPresets() {
+  if (_presetsCache && Date.now() - _presetsCacheAt < 30_000) return _presetsCache
+  let presets = DEFAULT_NUTRITION_PRESETS
+  if (pool) {
+    try {
+      const { rows } = await pool.query(`SELECT value FROM admin_settings WHERE key = 'nutrition_presets'`)
+      if (rows[0]?.value) {
+        const v = typeof rows[0].value === 'string' ? JSON.parse(rows[0].value) : rows[0].value
+        if (v && typeof v === 'object') presets = v
+      }
+    } catch (e) { console.warn('getNutritionPresets:', e.message) }
+  }
+  _presetsCache = presets; _presetsCacheAt = Date.now()
+  return presets
+}
+
+// Public: the effective presets (client app reads these so admin edits go live)
+app.get('/api/nutrition-presets', async (req, res) => {
+  try {
+    res.set('Cache-Control', 'public, max-age=30')
+    res.json(await getNutritionPresets())
+  } catch (e) {
+    res.json(DEFAULT_NUTRITION_PRESETS)
+  }
+})
+
 // ── /api/restaurant-summaries — macro ranges per restaurant for low-zoom filter ─
 // ~1 700 rows × ~60 bytes = ~100 KB gzip. Used to show/hide dot-pins at zoom < 13
 // without loading full meal data.
@@ -2550,6 +2609,93 @@ app.patch('/admin/api/scripts/:id/enabled', requireAdminAuth, async (req, res) =
     }
   }
   res.json({ id, enabled })
+})
+
+// Save nutrition presets (admin). Validated, stored in admin_settings, cache refreshed immediately.
+app.patch('/admin/api/nutrition-presets', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const presets = req.body?.presets
+    const pair = (a) => (Array.isArray(a) && a.length === 2) ? [Number(a[0]) || 0, Number(a[1]) || 0] : null
+    const clean = {}
+    for (const diet of NUTRITION_DIETS) {
+      const src = presets?.[diet]; if (!src) continue
+      clean[diet] = {}
+      for (const mt of NUTRITION_MEALS) {
+        const r = src[mt]; if (!r) continue
+        const o = { kcal: pair(r.kcal), protein: pair(r.protein), fat: pair(r.fat), carbs: pair(r.carbs) }
+        if (o.kcal && o.protein && o.fat && o.carbs) clean[diet][mt] = o
+      }
+    }
+    if (Object.keys(clean).length === 0) return res.status(400).json({ error: 'No valid presets in payload' })
+    await pool.query(`
+      INSERT INTO admin_settings (key, value, updated_at)
+      VALUES ('nutrition_presets', $1, NOW())
+      ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = NOW()
+    `, [JSON.stringify(clean)])
+    _presetsCache = clean; _presetsCacheAt = Date.now()
+    res.json({ ok: true, presets: clean })
+  } catch (e) {
+    console.error('PATCH /admin/api/nutrition-presets:', e.message)
+    res.status(500).json({ error: 'Save failed' })
+  }
+})
+
+// Macro stats for the admin Stats tab — distribution + % matching each preset (current presets).
+// ?districtId=<id> scopes to a district; omitted = all Berlin.
+app.get('/admin/api/macro-stats', requireAdminAuth, async (req, res) => {
+  if (!pool) return res.status(503).json({ error: 'Database not configured' })
+  try {
+    const presets = await getNutritionPresets()
+    const districtId = req.query.districtId || null
+    let idFilter = '', params = []
+    if (districtId) {
+      const { rows: rs } = await pool.query(`SELECT id, lat, lon FROM restaurants WHERE lat IS NOT NULL AND lon IS NOT NULL`)
+      const polygons = await loadBerlinPolygons()
+      const rings = polygons?.get(districtId)
+      const ids = rings ? rs.filter(r => pointInDistrict(parseFloat(r.lat), parseFloat(r.lon), rings)).map(r => r.id) : []
+      if (ids.length === 0) {
+        return res.json({ districtId, count: 0, avgProtein: 0, avgFat: 0, avgCarbs: 0, avgCalories: 0, proteinGte25: 0, proteinGte30: 0, proteinGte40: 0, matches: {} })
+      }
+      idFilter = 'AND m.restaurant_id = ANY($1)'; params = [ids]
+    }
+    const num = (x) => { const v = Number(x); return Number.isFinite(v) ? v : 0 }
+    // A meal "matches" a diet if, for at least one of its meal_times, all 4 macros fall in that range.
+    const matchCols = NUTRITION_DIETS.map(diet => {
+      const ranges = presets[diet] || {}
+      const parts = NUTRITION_MEALS.map(mt => {
+        const r = ranges[mt]; if (!r || !r.kcal || !r.protein || !r.fat || !r.carbs) return null
+        return `('${mt}' = ANY(m.meal_times) AND m.calories BETWEEN ${num(r.kcal[0])} AND ${num(r.kcal[1])} AND m.protein BETWEEN ${num(r.protein[0])} AND ${num(r.protein[1])} AND m.fat BETWEEN ${num(r.fat[0])} AND ${num(r.fat[1])} AND m.carbs BETWEEN ${num(r.carbs[0])} AND ${num(r.carbs[1])})`
+      }).filter(Boolean)
+      return parts.length ? `COUNT(*) FILTER (WHERE ${parts.join(' OR ')}) AS match_${diet}` : `0 AS match_${diet}`
+    }).join(',\n        ')
+
+    const { rows: [s] } = await pool.query(`
+      SELECT
+        COUNT(*) AS n,
+        AVG(m.protein) AS avg_pro, AVG(m.fat) AS avg_fat, AVG(m.carbs) AS avg_carb, AVG(m.calories) AS avg_cal,
+        COUNT(*) FILTER (WHERE m.protein >= 25) AS p25,
+        COUNT(*) FILTER (WHERE m.protein >= 30) AS p30,
+        COUNT(*) FILTER (WHERE m.protein >= 40) AS p40,
+        ${matchCols}
+      FROM menu_items m
+      WHERE m.source = 'wolt_menu' AND m.calories IS NOT NULL AND (m.category IS NULL OR m.category != 'drink')
+        ${idFilter}
+    `, params)
+
+    const round1 = (x) => Math.round((Number(x) || 0) * 10) / 10
+    res.json({
+      districtId,
+      count: parseInt(s.n) || 0,
+      avgProtein: round1(s.avg_pro), avgFat: round1(s.avg_fat), avgCarbs: round1(s.avg_carb),
+      avgCalories: Math.round(Number(s.avg_cal) || 0),
+      proteinGte25: parseInt(s.p25) || 0, proteinGte30: parseInt(s.p30) || 0, proteinGte40: parseInt(s.p40) || 0,
+      matches: NUTRITION_DIETS.reduce((o, d) => { o[d] = parseInt(s[`match_${d}`]) || 0; return o }, {}),
+    })
+  } catch (e) {
+    console.error('/admin/api/macro-stats:', e.message)
+    res.status(500).json({ error: 'Stats query failed' })
+  }
 })
 
 // Image cache job endpoints
